@@ -1,0 +1,2671 @@
+[
+  {
+    "id": 1,
+    "question": "En C, la déclaration d'une fonction :",
+    "options": [
+      "Doit obligatoirement inclure le corps de la fonction.",
+      "Se termine toujours par une accolade.",
+      "Informe le compilateur du type de retour et des paramètres.",
+      "Est placée après la définition de la fonction."
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 2,
+    "question": "Quelle est la syntaxe correcte pour déclarer une procédure ditBonjour qui ne retourne rien et ne prend aucun paramètre?",
+    "options": [
+      "void ditBonjour() { printf(\"Bonjour\"); }",
+      "void ditBonjour();",
+      "ditBonjour(void);"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 3,
+    "question": "La définition d'une fonction en C:",
+    "options": [
+      "Se termine par un point-virgule.",
+      "Inclut le prototype et le corps de la fonction.",
+      "Est toujours placée avant le main.",
+      "Ne peut pas contenir de return."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 4,
+    "question": "Comment appeler une fonction nommée addition qui prend deux entiers en paramètres?",
+    "options": [
+      "addition;",
+      "addition[3, 5];",
+      "addition(3, 5);",
+      "return addition(3, 5);"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 5,
+    "question": "Une procédure en C :",
+    "options": [
+      "Retourne toujours une valeur.",
+      "Ne retourne pas de valeur (type de retour void).",
+      "Est appelée dans une expression pour récupérer une valeur.",
+      "Est toujours définie avant le main."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 6,
+    "question": "Quel est le type de retour d'une fonction ?",
+    "options": [
+      "Toujours void.",
+      "Un type autre que void (ex: int, float).",
+      "Uniquement int.",
+      "Aucun type de retour n'est nécessaire."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 7,
+    "question": "Où place-t-on généralement les déclarations de fonctions ?",
+    "options": [
+      "Après le main.",
+      "Avant le main.",
+      "À la fin du fichier.",
+      "Dans une bibliothèque externe."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 8,
+    "question": "Le principe DRY signifie :",
+    "options": [
+      "Do Repeat Yourself.",
+      "Don't Repeat Yourself.",
+      "Define Repeat Yield.",
+      "Declare Return Yield."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 9,
+    "question": "Le principe KISS recommande de :",
+    "options": [
+      "Créer des fonctions longues et complexes.",
+      "Créer des fonctions simples et courtes.",
+      "Éviter d'utiliser des fonctions.",
+      "Utiliser uniquement des procédures."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 10,
+    "question": "Quelle est la différence entre une fonction et une procédure ?",
+    "options": [
+      "Une procédure retourne une valeur, une fonction non.",
+      "Une fonction a des paramètres et pas une procédure.",
+      "Une fonction retourne une valeur, une procédure non.",
+      "Une procédure est toujours appelée dans une expression."
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 11,
+    "question": "Que va afficher le code suivant ?\n\nprintf(\"%06d\\n\", 42);",
+    "options": [
+      "42",
+      "000042",
+      "42.000000"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 12,
+    "question": "Quel est le résultat de l'exécution de ce code ?\n\nprintf(\"Valeur: %.3f\\n\", 3.14159265);",
+    "options": [
+      "Valeur: 3.14159265",
+      "Valeur: 3.142",
+      "Valeur: 3.1",
+      "Valeur: 3.14"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 13,
+    "question": "Qu'affiche l'exécution de ce code ?\n\nint x = 5;\nprintf(\"%d \", x++);\nprintf(\"%d \", ++x);\nprintf(\"%d \", x);",
+    "options": [
+      "6 6 7",
+      "5 6 7",
+      "5 7 7",
+      "6 7 7"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 14,
+    "question": "Que fait l'instruction break dans une boucle ?",
+    "options": [
+      "Elle passe à l'itération suivante.",
+      "Elle sort immédiatement de la boucle.",
+      "Elle arrête le programme.",
+      "Elle relance la boucle depuis le début."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 15,
+    "question": "Quelle est la sortie du code suivant ?\n\nint a = 3, b = 5;\nprintf(\"%d\", a > b ? a : b);",
+    "options": [
+      "3",
+      "5",
+      "true",
+      "false"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 16,
+    "question": "Quelle structure de contrôle est la plus adaptée pour choisir parmi plusieurs cas basés sur la valeur d'une variable ?",
+    "options": [
+      "if-else",
+      "switch",
+      "for",
+      "while"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 17,
+    "question": "Que va afficher le code suivant ?\n\nint a = 5, b = 10;\nif (a = b)\n  printf(\"Égal\\n\");\nelse\n  printf(\"Différent\\n\");",
+    "options": [
+      "Égal",
+      "Différent",
+      "Rien (erreur de compilation)",
+      "10"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 18,
+    "question": "Quel est le résultat de l'exécution de ce code ?\n\nint note = 75;\nif (note >= 50 && note < 80)\n  printf(\"Passable\\n\");\nelse if (note >= 80)\n  printf(\"Bien\\n\");\nelse\n  printf(\"Insuffisant\\n\");",
+    "options": [
+      "Insuffisant",
+      "Passable",
+      "Bien",
+      "Rien"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 19,
+    "question": "Que va afficher le code suivant ?\n\nint x = 3, y = 5;\nif (x == 3) {\n  if (y == 5)\n    printf(\"x est 3 et y est 5\\n\");\n  else\n    printf(\"x est 3 mais y n'est pas 5\\n\");\n}",
+    "options": [
+      "x est 3 et y est 5",
+      "x est 3 mais y n'est pas 5",
+      "Rien",
+      "Erreur de compilation"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 20,
+    "question": "Que fait l'instruction continue dans une boucle ?",
+    "options": [
+      "Elle passe à l'itération suivante.",
+      "Elle sort immédiatement de la boucle.",
+      "Elle arrête le programme.",
+      "Elle relance la boucle depuis le début."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 21,
+    "question": "Quel est le résultat de l'expression (5 > 3) ? 10 : 20 ?",
+    "options": [
+      "5",
+      "3",
+      "10",
+      "20"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 22,
+    "question": "Quelle est la valeur de x après l'exécution de ce code ?\n\nint x = 10;\nx = (x > 5) ? x + 5 : x - 5;",
+    "options": [
+      "5",
+      "15",
+      "10",
+      "0"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 23,
+    "question": "Quelle est la sortie du code suivant ?\n\nfor (int i = 0; i < 3; i++) {\n  if (i == 1) continue;\n  printf(\"%d \", i);\n}",
+    "options": [
+      "0 1 2",
+      "0 2",
+      "1 2",
+      "0 1"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 24,
+    "question": "Quelle structure de contrôle est la plus adaptée pour exécuter un bloc de code au moins une fois ?",
+    "options": [
+      "for",
+      "while",
+      "do-while",
+      "if-else"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 25,
+    "question": "Quel est le résultat de l'expression !(5 < 10) ?",
+    "options": [
+      "0",
+      "1",
+      "5",
+      "10"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 26,
+    "question": "Quelle fonction permet de connaître la taille d'un type de donnée en C ?",
+    "options": [
+      "length()",
+      "size()",
+      "sizeof()"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 27,
+    "question": "Quelle bibliothèque permet de connaître la plage de valeurs des types de données en C ?",
+    "options": [
+      "limits.h",
+      "stdio.h",
+      "math.h"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 28,
+    "question": "Quel est le type de donnée renvoyé par la fonction sizeof ?",
+    "options": [
+      "int",
+      "size_t",
+      "double"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 29,
+    "question": "Quel est le spécificateur printf pour afficher une valeur de type size_t ?",
+    "options": [
+      "%d",
+      "%zu",
+      "%ld"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 30,
+    "question": "Comment sont représentés les entiers signés en C ?",
+    "options": [
+      "en complément à 1",
+      "en complément à 2",
+      "en complément à 3"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 31,
+    "question": "Quel préfixe est utilisé pour écrire des entiers en binaire en C23 ?",
+    "options": [
+      "0x",
+      "0b",
+      "0"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 32,
+    "question": "Quel est le spécificateur printf pour un short int ?",
+    "options": [
+      "%d",
+      "%hd",
+      "%ld"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 33,
+    "question": "Quel est le problème principal avec les nombres à virgule en C ?",
+    "options": [
+      "La taille",
+      "La précision",
+      "La vitesse de calcul"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 34,
+    "question": "Quel suffixe doit-on utiliser pour écrire une valeur littérale de type float en C ?",
+    "options": [
+      "l",
+      "f",
+      "d",
+      "lf"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 35,
+    "question": "Comment effectue-t-on une conversion de type explicite en C ?",
+    "options": [
+      "En utilisant la fonction convert()",
+      "En utilisant la fonction sizeof()",
+      "En utilisant l'opérateur de cast (type) expression"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 36,
+    "question": "Qu'est-ce qu'un pointeur en C ?",
+    "options": [
+      "Une variable qui stocke une valeur",
+      "Une variable qui stocke une adresse mémoire",
+      "Une variable qui stocke un type de donnée"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 37,
+    "question": "Quel opérateur est utilisé pour obtenir l'adresse d'une variable en C ?",
+    "options": [
+      "*",
+      "&",
+      "%"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 38,
+    "question": "Quel spécificateur printf est utilisé pour afficher une adresse mémoire en C ?",
+    "options": [
+      "%d",
+      "%p",
+      "%s"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 39,
+    "question": "Quelle est la syntaxe correcte pour déclarer un pointeur vers un int en C ?",
+    "options": [
+      "int ptr;",
+      "int ptr*;",
+      "int* ptr;"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 40,
+    "question": "Quel opérateur est utilisé pour déréférencer un pointeur (obtenir la valeur pointée) en C ?",
+    "options": [
+      "*",
+      "&",
+      "%"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 41,
+    "question": "Quelle est la taille d'un pointeur en C sur un système 64 bits ?",
+    "options": [
+      "4 octets",
+      "8 octets",
+      "16 octets"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 42,
+    "question": "Comment affecter l'adresse de la variable a à un pointeur ptrA?",
+    "options": [
+      "int ptrA = &a;",
+      "int ptrA = a;",
+      "int ptrA* = &a;",
+      "int ptrA* = a;",
+      "int* ptrA = &a;",
+      "int* ptrA = a;"
+    ],
+    "correctIndex": 4
+  },
+  {
+    "id": 43,
+    "question": "Comment déréférencer un pointeur ptrA pour afficher la valeur de la variable a en C ?",
+    "options": [
+      "printf(\"Valeur de a: %d\\n\", *ptrA);",
+      "printf(\"Valeur de a: %d\\n\", ptrA);",
+      "printf(\"Valeur de a: %d\\n\", &ptrA);"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 44,
+    "question": "Pourquoi est-il recommandé d'initialiser un pointeur à NULL s'il n'est pas immédiatement défini ?",
+    "options": [
+      "Pour économiser de la mémoire",
+      "Pour éviter les comportements indéfinis",
+      "Pour améliorer la performance du programme"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 45,
+    "question": "Quel est le problème avec le passage par valeur des arguments dans une fonction en C ?",
+    "options": [
+      "Les modifications des arguments sont perdues après l'appel de la fonction",
+      "Les modifications des arguments sont visibles dans toutes les fonctions du programme",
+      "Les modifications des arguments sont appliquées globalement dans tout le programme"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 46,
+    "question": "Comment déclare-t-on un tableau d'entiers de taille 5 en C ?",
+    "options": [
+      "int tab[];",
+      "int[5] tab;",
+      "int tab[5];",
+      "int(5) tab;",
+      "int tab(5);"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 47,
+    "question": "Quelle est la valeur de tab[3] après l'exécution du code suivant ?\n\nint tab[5] = {10, 20, 30, 40, 50};",
+    "options": [
+      "20",
+      "30",
+      "40",
+      "50"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 48,
+    "question": "Quel indice correspond au dernier élément d'un tableau de taille 10 ?",
+    "options": [
+      "9",
+      "10",
+      "0",
+      "11"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 49,
+    "question": "Comment calcule-t-on la taille d'un tableau en C (en nombre d'éléments) ?",
+    "options": [
+      "sizeof(tab) / sizeof(int)",
+      "sizeof(tab) / sizeof(tab[0])",
+      "sizeof(tab[0])",
+      "sizeof(tab)"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 50,
+    "question": "Quelle est la taille en octets d'un tableau de 5 entiers sur une machine où un entier fait 4 octets ?",
+    "options": [
+      "5",
+      "20",
+      "4",
+      "40"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 51,
+    "question": "Que fait ce code ?\n\nint *ptr = tab;\nprintf(\"%d\", *(ptr + 3));",
+    "options": [
+      "Affiche la valeur de tab[3].",
+      "Affiche la valeur de tab[3], si le tableau est correctement dimensionné.",
+      "Affiche 0, car ptr + 3 ne pointe pas vers un élément valide.",
+      "Affiche une erreur de segmentation."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 52,
+    "question": "Quelle méthode permet de parcourir un tableau à l'aide de pointeurs ?",
+    "options": [
+      "for (int i = 0; i < taille; i++) { printf(\"%d\", *(tab + i)); }",
+      "for (int *ptr = tab; ptr <= tab + taille; ptr++) { printf(\"%d\", *ptr); }",
+      "for (int *ptr = tab; ptr < tab + taille; ptr++) { printf(\"%d\", *ptr); }",
+      "while (ptr < tab + taille) { printf(\"%d\", *ptr++); }"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 53,
+    "question": "Quelle est la sortie de ce code ?\n\nint tab[5] = {1, 2, 3, 4, 5};\nprintf(\"%d\", *(tab + 1));",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 54,
+    "question": "Quelle est la sortie de ce code ?\n\nint tab[5] = {5, 10, 15, 20, 25};\nint *ptr = &tab[2];\nprintf(\"%d\", ptr[1]);",
+    "options": [
+      "5",
+      "10",
+      "20",
+      "25"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 55,
+    "question": "Comment déclare-t-on un tableau 2D de 3 lignes et 4 colonnes en C ?",
+    "options": [
+      "int tab[4][3];",
+      "int tab[3][4];",
+      "int tab[][3];",
+      "int tab[][4];",
+      "int tab[4][];",
+      "int tab[3][];"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 56,
+    "question": "Quelle est la valeur de mat[1][2] dans le tableau suivant ?\n\nint mat[3][4] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};",
+    "options": [
+      "6",
+      "7",
+      "8"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 57,
+    "question": "Comment calcule-t-on la somme des éléments d'un tableau 2D ?",
+    "options": [
+      "for (int i = 0; i < lignes; i++) { somme += mat[i]; }",
+      "for (int i = 0; i < lignes; i++) { for (int j = 0; j < colonnes; j++) { somme += mat[i][j]; } }",
+      "for (int j = 0; j < colonnes; j++) { somme += mat[j]; }"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 58,
+    "question": "Quel est le résultat du code suivant pour afficher un tableau 2D ?\n\nint mat[2][2] = {{1, 2}, {3, 4}};\nprintf(\"%d %d\\n\", mat[0][0], mat[1][0]);",
+    "options": [
+      "1 3 2 4",
+      "1 3",
+      "2 4"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 59,
+    "question": "Comment passe-t-on un tableau 2D à une fonction en C ?",
+    "options": [
+      "void fonction(int tab[][], int nbLigne, int nbCol);",
+      "void fonction(int tab[][3], int nbLigne);",
+      "void fonction(int tab[3][], int nbLigne);",
+      "void fonction(int tab[3][], int nbCol);"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 60,
+    "question": "Quelle est la sortie du code suivant ?\n\nint mat[2][3] = {{1, 2, 3}, {4, 5, 6}};\nprintf(\"%d\", mat[1][1]);",
+    "options": [
+      "2",
+      "5",
+      "6"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 61,
+    "question": "Comment initialise-t-on un tableau 2D avec des valeurs spécifiques ?",
+    "options": [
+      "int mat[2][3] = (1, 2, 3, 4, 5, 6);",
+      "int mat[2][3] = {{1, 2, 3}, {4, 5, 6}};",
+      "int mat[][] = {1, 2, 3, 4, 5, 6};"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 62,
+    "question": "Quelle est la taille en octets d'un tableau 2D de 3 lignes et 4 colonnes d'entiers (sizeof(int) -> 4) ?",
+    "options": [
+      "12",
+      "24",
+      "48",
+      "64"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 63,
+    "question": "Comment accède-t-on au premier élément d'un tableau 2D ?",
+    "options": [
+      "mat[0]",
+      "mat[0][0]",
+      "mat[1][0]"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 64,
+    "question": "Comment passe-t-on les tailles d'un tableau 2D à une fonction ?",
+    "options": [
+      "void fonction(int tab[][], int nbLigne);",
+      "void fonction(int tab[][4], int nbLigne);",
+      "void fonction(int tab[4][], int nbColonne);"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 65,
+    "question": "Quelle est la sortie du code suivant ?\n\nvoid ajouterElement(int tab[], int taille) { tab[taille] = 100; }\n\nint main() {\n  int tab[5] = {1, 2, 3, 4};\n  ajouterElement(tab, 4);\n  printf(\"%d\", tab[4]);\n}",
+    "options": [
+      "4",
+      "100",
+      "Erreur de segmentation"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 66,
+    "question": "Quel type de système permet aux composants d'interagir avec un minimum de dépendances directes ?",
+    "options": [
+      "Un système fortement couplé",
+      "Un système faiblement couplé",
+      "Un système monolithique"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 67,
+    "question": "Cochez les symboles utilisés pour envoyer le contenu d'un fichier vers un programme, rediriger la sortie d'un programme vers un fichier, rediriger les erreurs vers un fichier de log, et rediriger la sortie d'un programme vers l'entrée d'un autre programme (pipe).",
+    "options": [
+      "< est utilisé pour envoyer le contenu d'un fichier vers un programme.",
+      "< est utilisé pour rediriger la sortie d'un programme vers un fichier.",
+      "> est utilisé pour rediriger la sortie d'un programme vers un fichier.",
+      "<2 est utilisé pour rediriger les erreurs vers un fichier de log.",
+      "2> est utilisé pour rediriger les erreurs vers un fichier de log.",
+      "> est utilisé pour rediriger la sortie d'un programme vers l'entrée d'un autre programme (pipe).",
+      "| est utilisé pour rediriger la sortie d'un programme vers l'entrée d'un autre programme (pipe)."
+    ],
+    "correctIndex": [0, 2, 4, 6]
+  },
+  {
+    "id": 68,
+    "question": "Quel est le but de la personnalisation avec des paramètres dans les programmes ?",
+    "options": [
+      "Rendre le programme plus lent",
+      "Configurer le comportement du programme",
+      "Augmenter la taille du programme"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 69,
+    "question": "Quel est l'avantage principal de l'interopérabilité entre les outils via des flux de données standardisés ?",
+    "options": [
+      "Rendre les outils plus complexes",
+      "Permettre aux outils de communiquer entre eux",
+      "Augmenter la consommation de ressources"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 70,
+    "question": "Quelle est la différence entre argc et argv dans un programme C ?",
+    "options": [
+      "argc est un tableau de chaînes de caractères représentant les arguments de la ligne de commande, tandis que argv est le nombre d'arguments.",
+      "argc est le nombre d'arguments de la ligne de commande, tandis que argv est un tableau de chaînes de caractères représentant ces arguments.",
+      "argc et argv sont interchangeables et peuvent être utilisés indifféremment pour représenter les arguments de la ligne de commande."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 71,
+    "question": "Laquelle des affirmations suivantes est correcte concernant argc et argv ?",
+    "options": [
+      "argc et argv sont toujours égaux en nombre.",
+      "argc compte les arguments passés au programme.",
+      "argv commence toujours par l'argument 0, qui est le nom du programme."
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 72,
+    "question": "Considérons la commande suivante pour exécuter un programme C : ./mon_programme 123 456 789. Quelles sont les valeurs correctes de argc et argv ?",
+    "options": [
+      "argc = 4 et argv = {\"./mon_programme\", \"123\", \"456\", \"789\"}",
+      "argc = 3 et argv = {\"./mon_programme\", \"123\", \"456\", \"789\"}",
+      "argc = 3 et argv = {\"123\", \"456\", \"789\"}",
+      "argc = 4 et argv = {\"123\", \"456\", \"789\"}"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 73,
+    "question": "En C, la gestion des erreurs s'appuie sur quels éléments ?",
+    "options": [
+      "Les exceptions",
+      "Des codes de retour 0 ou 1 et le flux de sortie dédié aux erreurs stderr",
+      "Les blocs try-catch"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 74,
+    "question": "Quel code de retour signifie succès pour un programme en C ?",
+    "options": [
+      "1",
+      "0",
+      "-1"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 75,
+    "question": "Quel code de retour signifie échec pour un programme en C ?",
+    "options": [
+      "Tout autre entier que 0",
+      "0",
+      "1"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 76,
+    "question": "Pourquoi la fonction main en C est-elle de type int et finit-elle par un return 0; ?",
+    "options": [
+      "Pour indiquer la fin du programme",
+      "Pour renvoyer un code de retour indiquant le succès",
+      "Pour initialiser les variables"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 77,
+    "question": "Quelle fonction permet de sortir du programme prématurément en dehors de la fonction main ?",
+    "options": [
+      "quit",
+      "exit",
+      "stop"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 78,
+    "question": "Que prend en paramètre la fonction exit ?",
+    "options": [
+      "Un caractère",
+      "Un entier",
+      "Une chaîne de caractères"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 79,
+    "question": "Quel flux est utilisé pour les messages d'erreur en C ?",
+    "options": [
+      "stdout",
+      "stderr",
+      "stdin"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 80,
+    "question": "Comment écrit-on un message d'erreur vers le flux stderr en C ?",
+    "options": [
+      "printf(stderr, \"Message d'erreur\")",
+      "fprintf(stderr, \"Message d'erreur\")",
+      "fprintf(\"Message d'erreur\")"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 81,
+    "question": "Qu'est-ce qu'un module permet de faire ?",
+    "options": [
+      "Regrouper les variables par domaine.",
+      "Regrouper les fonctions par domaine.",
+      "Regrouper les classes par domaine."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 82,
+    "question": "Que fait le fichier .h dans un module ?",
+    "options": [
+      "Il définit comment le module fait quelque chose.",
+      "Il expose ce que fait le module.",
+      "Il contient les tests unitaires."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 83,
+    "question": "Que fait le fichier .c dans un module ?",
+    "options": [
+      "Il définit comment le module fait quelque chose.",
+      "Il expose ce que fait le module.",
+      "Il contient la fonction main."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 84,
+    "question": "Quelle directive est une alternative plus concise aux gardes d'inclusion ?",
+    "options": [
+      "#include once",
+      "#pragma once",
+      "#define once"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 85,
+    "question": "Que garantit la directive #pragma once ?",
+    "options": [
+      "Qu'un fichier d'en-tête est inclus plusieurs fois dans une unité de compilation.",
+      "Qu'un fichier d'en-tête est inclus une seule fois dans une unité de compilation.",
+      "Qu'un fichier d'en-tête est toujours inclus."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 86,
+    "question": "Quelle est la syntaxe classique des gardes d'inclusion ?",
+    "options": [
+      "#ifdef, #define, #endif",
+      "#ifndef, #define, #endif",
+      "#pragma, #define, #endif"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 87,
+    "question": "Que fait le compilateur lorsqu'il rencontre un include ?",
+    "options": [
+      "Il ignore le contenu du fichier inclus.",
+      "Il copie-colle le contenu du fichier inclus.",
+      "Il supprime le contenu du fichier inclus."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 88,
+    "question": "Quelle est la différence entre les guillemets (\"...\") et les chevrons (<...>) pour inclure des fichiers d'en-tête ?",
+    "options": [
+      "Les guillemets sont utilisés pour les bibliothèques standards et les chevrons pour les fichiers locaux.",
+      "Les guillemets sont utilisés pour les fichiers locaux et les chevrons pour les bibliothèques standards.",
+      "Il n'y a pas de différence."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 89,
+    "question": "À qui sont destinés les commentaires dans le code source ?",
+    "options": [
+      "Aux utilisateurs du programme.",
+      "Aux développeurs du programme.",
+      "Aux deux."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 90,
+    "question": "Cocher les bonnes réponses concernant les commentaires et la documentation.",
+    "options": [
+      "Les commentaires expliquent comment et pourquoi le code fonctionne.",
+      "La documentation explique comment et pourquoi le code fonctionne.",
+      "Les commentaires décrivent comment utiliser le programme.",
+      "La documentation décrit comment utiliser le programme.",
+      "Les commentaires sont destinés aux développeurs du programme.",
+      "Les commentaires sont destinés aux utilisateurs du programme.",
+      "La documentation est destinée aux utilisateurs du programme."
+    ],
+    "correctIndex": [0, 3, 4, 6]
+  },
+  {
+    "id": 91,
+    "question": "Quels blocs de commentaire sont reconnus par Doxygen ?",
+    "options": [
+      "Les blocs de commentaire commençant par /*",
+      "Les blocs de commentaire commençant par /**",
+      "Les blocs de commentaire commençant par //"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 92,
+    "question": "Parmi les propositions suivantes, cochez les associations correctes entre les mots clés Doxygen et leur usage:",
+    "options": [
+      "@brief: Donne une courte description",
+      "@brief: Documente un paramètre de fonction/méthode",
+      "@brief: Documente les valeurs de retour d'une méthode/fonction",
+      "@param: Donne une courte description",
+      "@param: Documente un paramètre de fonction/méthode",
+      "@param: Documente les exceptions levées par une méthode/fonction",
+      "@return: Documente un paramètre de fonction/méthode",
+      "@return: Documente une note ou une remarque",
+      "@return: Documente les valeurs de retour d'une méthode/fonction"
+    ],
+    "correctIndex": [0, 4, 8]
+  },
+  {
+    "id": 93,
+    "question": "Quel type de commentaire est utile pour indiquer les hypothèses et limitations ?",
+    "options": [
+      "Commentaires redondants avec le code.",
+      "Commentaires expliquant pourquoi (pas comment).",
+      "Commentaires obsolètes."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 94,
+    "question": "Quel est le principal avantage de trier des données avant de les rechercher ?",
+    "options": [
+      "Cela rend la recherche beaucoup plus rapide.",
+      "Cela permet de réduire la taille des données.",
+      "Cela permet de supprimer les doublons."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 95,
+    "question": "Quel est le principe du tri à bulles ?",
+    "options": [
+      "Parcourt le tableau en comparant les éléments adjacents.",
+      "Trouve le minimum dans la partie non triée du tableau.",
+      "Échange les éléments s'ils sont dans le mauvais ordre."
+    ],
+    "correctIndex": [0, 2]
+  },
+  {
+    "id": 96,
+    "question": "Quelle est une optimisation possible du tri à bulles ?",
+    "options": [
+      "Utiliser un tableau temporaire.",
+      "Arrêter l'algorithme si aucun échange n'est effectué lors d'un passage complet.",
+      "Trier les éléments en utilisant une fonction de hachage."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 97,
+    "question": "Quel est le principe du tri par sélection ?",
+    "options": [
+      "Trouve le minimum dans la partie non triée du tableau.",
+      "Compare les éléments adjacents.",
+      "Échange cet élément avec le premier élément de la partie non triée."
+    ],
+    "correctIndex": [0, 2]
+  },
+  {
+    "id": 98,
+    "question": "Quel sera l'état intermédiaire du tableau après le premier passage du tri par sélection sur le tableau [7, 2, 4, 3, 0] ?",
+    "options": [
+      "[2, 4, 3, 0, 7]",
+      "[0, 2, 4, 3, 7]",
+      "[2, 7, 4, 3, 0]"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 99,
+    "question": "Quel sera l'état intermédiaire du tableau après le premier passage du tri à bulles sur le tableau [5, 3, 0, -6, -2, -3, 3] ?",
+    "options": [
+      "[-6, 3, 0, 5, -2, -3, 3]",
+      "[3, 5, 0, -6, -2, -3, 3]",
+      "[3, 0, -6, -2, -3, 3, 5]"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 100,
+    "question": "Quel sera l'état intermédiaire du tableau après le deuxième passage du tri par insertion sur le tableau [3, 8, 1, 1, 1, 5, 5, 8, 4] ?",
+    "options": [
+      "[1, 8, 3, 1, 1, 5, 5, 8, 4]",
+      "[3, 1, 1, 1, 5, 5, 8, 4, 8]",
+      "[1, 3, 8, 1, 1, 5, 5, 8, 4]"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 101,
+    "question": "Quel algorithme de tri passera par ce tableau intermédiaire [0, 4, 6, 9, 8, 5, 0, 3] après le troisième passage de boucle sur le tableau d'entrée [6, 0, 9, 4, 8, 5, 0, 3] ?",
+    "options": [
+      "tri à bulles",
+      "tri par sélection",
+      "tri par insertion"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 102,
+    "question": "Quelle est la complexité en temps du tri à bulles dans le pire des cas ?",
+    "options": [
+      "O(n)",
+      "O(n²)",
+      "O(n log n)"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 103,
+    "question": "Quelle est la complexité en temps du tri par insertion dans le meilleur des cas ?",
+    "options": [
+      "O(n²)",
+      "O(n)",
+      "O(n log n)"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 104,
+    "question": "Quelle est la complexité en temps de la recherche séquentielle dans le pire des cas ?",
+    "options": [
+      "O(1)",
+      "O(n)",
+      "O(log n)"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 105,
+    "question": "Quelle est la complexité en temps de la recherche dichotomique dans le pire des cas ?",
+    "options": [
+      "O(1)",
+      "O(n)",
+      "O(log n)"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 106,
+    "question": "Quel est le principe de la recherche dichotomique ?",
+    "options": [
+      "Parcourt le tableau élément par élément jusqu'à trouver la valeur recherchée.",
+      "Divise le tableau en deux à chaque étape pour trouver la valeur.",
+      "Utilise un tableau temporaire pour stocker les éléments trouvés."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 107,
+    "question": "Quelle est la complexité en temps du tri fusion dans le pire des cas ?",
+    "options": [
+      "O(n²)",
+      "O(n log n)",
+      "O(n)"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 108,
+    "question": "Quelle est la complexité en espace du tri fusion ?",
+    "options": [
+      "O(1)",
+      "O(n)",
+      "O(n log n)"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 109,
+    "question": "Quel algorithme de tri est le plus adapté pour des tableaux presque triés ?",
+    "options": [
+      "Tri à bulles",
+      "Tri par insertion",
+      "Tri par sélection"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 110,
+    "question": "Quel est l'avantage principal de la recherche dichotomique par rapport à la recherche séquentielle ?",
+    "options": [
+      "Elle ne nécessite pas de tableau trié.",
+      "Elle est plus rapide pour des grandes données.",
+      "Elle utilise moins de mémoire."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 111,
+    "question": "Quel est le principal inconvénient de la recherche dichotomique ?",
+    "options": [
+      "Elle est lente pour des petites données.",
+      "Elle nécessite un tableau trié.",
+      "Elle utilise beaucoup de mémoire."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 112,
+    "question": "Quel est le principal avantage du tri par insertion par rapport au tri à bulles ?",
+    "options": [
+      "Il est plus rapide dans le pire des cas.",
+      "Il est plus rapide pour des tableaux presque triés.",
+      "Il utilise moins de mémoire."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 113,
+    "question": "Quel est le principal inconvénient du tri fusion par rapport aux autres tris itératifs ?",
+    "options": [
+      "Il est plus lent dans le pire des cas.",
+      "Il nécessite de la mémoire auxiliaire.",
+      "Il est plus complexe à implémenter."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 114,
+    "question": "Quel est le type de base utilisé pour représenter une chaîne de caractères en C ?",
+    "options": [
+      "Un tableau de char.",
+      "Un tableau de int.",
+      "Un tableau de float."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 115,
+    "question": "Cochez les déclarations mutables.",
+    "options": [
+      "const char lettre = 'A';",
+      "const char *str = \"Bonjour\";",
+      "const char str[] = \"Bonjour\";",
+      "char lettre = 'A';",
+      "char str[] = \"Bonjour\";",
+      "char *str = \"Bonjour\";"
+    ],
+    "correctIndex": [3, 4]
+  },
+  {
+    "id": 116,
+    "question": "Quel caractère est ajouté automatiquement à la fin d'une chaîne de caractères en C ?",
+    "options": [
+      "' '",
+      "'\\0'",
+      "'\\n'",
+      "'\\t'"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 117,
+    "question": "Quelles sont les constructions correctes pour parcourir une chaîne de caractères en C ?",
+    "options": [
+      "for (int i = 0; i <= strlen(str); i++)",
+      "for (char *ptrStr = str; *ptrStr != ' '; ptrStr++)",
+      "for (int i = 0; str[i] != 0; i++)",
+      "int i = 0; while (str[i] != 0){i++;}",
+      "for (char *ptrStr = str; *ptrStr != '\\n'; ptrStr++)",
+      "char *ptrStr = str; while (*ptrStr != 0) { ptrStr++; }",
+      "char *ptrStr = str; while (*ptrStr < 0) { ptrStr++; }",
+      "for (char *ptrStr = str; *ptrStr != 0; ptrStr++)"
+    ],
+    "correctIndex": [2, 3, 5, 7]
+  },
+  {
+    "id": 118,
+    "question": "Quelle fonction permet de récupérer une chaîne de caractères contenant des espaces en C ?",
+    "options": [
+      "fgets",
+      "scanf",
+      "printf"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 119,
+    "question": "Quelle fonction permet de remplacer le caractère de nouvelle ligne par un caractère nul dans une chaîne de caractères en C ?",
+    "options": [
+      "strcspn",
+      "strlen",
+      "strcpy"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 120,
+    "question": "Quel est le nombre de bits utilisé par le codage ASCII ?",
+    "options": [
+      "4 bits",
+      "7 bits",
+      "8 bits",
+      "16 bits"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 121,
+    "question": "Combien de caractères peut-on représenter avec le codage ASCII ?",
+    "options": [
+      "64",
+      "128",
+      "256",
+      "512"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 122,
+    "question": "Combien de caractères peut-on représenter avec le codage Latin-1 ?",
+    "options": [
+      "128",
+      "256",
+      "512"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 123,
+    "question": "Quels types de caractères sont ajoutés par le codage Latin-1 par rapport à l'ASCII ?",
+    "options": [
+      "Seulement des caractères de contrôle",
+      "Caractères accentués, symboles, et lettres spécifiques à certaines langues européennes",
+      "Seulement des émoticônes"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 124,
+    "question": "Quel est le principe du codage UTF-8 ?",
+    "options": [
+      "Il utilise un nombre fixe de 2 octets pour chaque caractère",
+      "Il utilise un nombre variable de 1 à 4 octets selon le caractère",
+      "Il utilise un nombre fixe de 4 octets pour chaque caractère",
+      "Il utilise un nombre variable de 1 à 2 octets selon le caractère"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 125,
+    "question": "Quelle est la compatibilité entre UTF-8 et ASCII ?",
+    "options": [
+      "Aucune compatibilité",
+      "Compatibilité partielle uniquement pour les chiffres",
+      "Compatibilité totale, les 128 premiers caractères UTF-8 sont identiques à l'ASCII",
+      "Compatibilité partielle uniquement pour les lettres"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 126,
+    "question": "Considérez le code suivant :\nchar str1[] = \"Hello\";\nchar *str2 = \"Hello\";\nQue valent sizeof(str1) et sizeof(str2) ?",
+    "options": [
+      "sizeof(str1) = 5, sizeof(str2) = 5",
+      "sizeof(str1) = 6, sizeof(str2) = 6",
+      "sizeof(str1) = 6, sizeof(str2) = taille d'un pointeur",
+      "sizeof(str1) = 5, sizeof(str2) = taille d'un pointeur"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 127,
+    "question": "Quel est le nom du module contenant les fonctions de manipulation de chaînes de caractères en C ?",
+    "options": [
+      "stdio.h",
+      "stdlib.h",
+      "string.h",
+      "ctype.h"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 128,
+    "question": "Associez chaque fonction du module string.h à sa description.",
+    "options": [
+      "strcpy : Copie une chaîne dans une autre",
+      "strcat : Concatène deux chaînes",
+      "strlen : Retourne la longueur d'une chaîne",
+      "strcmp : Compare deux chaînes",
+      "strchr : Recherche un caractère dans une chaîne",
+      "strstr : Recherche une sous-chaîne dans une chaîne",
+      "strtok : Découpe une chaîne en tokens"
+    ],
+    "correctIndex": [0, 1, 2, 3, 4, 5, 6]
+  },
+  {
+    "id": 129,
+    "question": "Quel est le nom du module contenant les fonctions de manipulation de caractères en C ?",
+    "options": [
+      "stdio.h",
+      "stdlib.h",
+      "string.h",
+      "ctype.h"
+    ],
+    "correctIndex": 3
+  },
+  {
+    "id": 130,
+    "question": "Associez chaque fonction du module ctype.h à sa description.",
+    "options": [
+      "isalnum : Vérifie si le caractère est alphanumérique",
+      "isalpha : Vérifie si le caractère est alphabétique",
+      "islower : Vérifie si le caractère est en minuscule",
+      "isupper : Vérifie si le caractère est en majuscule",
+      "isdigit : Vérifie si le caractère est un chiffre",
+      "isspace : Vérifie si le caractère est un espace blanc",
+      "ispunct : Vérifie si le caractère est un signe de ponctuation",
+      "tolower : Convertit le caractère en minuscule",
+      "toupper : Convertit le caractère en majuscule"
+    ],
+    "correctIndex": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+  },
+  {
+    "id": 131,
+    "question": "Quelle est la bonne façon de déclarer un tableau de chaînes de caractères en C ?",
+    "options": [
+      "char strings[3][];",
+      "char *strings[3];",
+      "string strings[3];",
+      "char[][] strings;"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 132,
+    "question": "Quel type est utilisé pour représenter des caractères larges (wide characters) en C ?",
+    "options": [
+      "char",
+      "wchar_t",
+      "wide_char",
+      "unicode_t"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 133,
+    "question": "Quelle fonction est l'équivalent de printf pour les chaînes larges (wide strings) ?",
+    "options": [
+      "wprintf",
+      "printf_w",
+      "wide_printf",
+      "printfw"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 134,
+    "question": "Quel est le risque d'un appel récursif ?",
+    "options": [
+      "Consommation importante de mémoire si la récursivité est profonde",
+      "Consommation faible de mémoire même si la récursivité est profonde",
+      "Aucun risque"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 135,
+    "question": "Qu'est-ce que la récursion simple ?",
+    "options": [
+      "Une technique où une fonction s'appelle elle-même directement pour résoudre un problème.",
+      "Une technique où plusieurs fonctions s'appellent entre elles de manière aléatoire.",
+      "Une technique où l'appel récursif est la dernière opération dans la fonction."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 136,
+    "question": "Qu'est-ce que la récursion terminale ?",
+    "options": [
+      "Une forme de récursion où la fonction s'appelle elle-même en dernier dans le corps de la fonction.",
+      "Une forme de récursion où la fonction s'appelle elle-même en premier dans le corps de la fonction.",
+      "Une forme de récursion où l'appel récursif est la dernière opération dans la fonction, permettant une optimisation par élimination de la récursion terminale."
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 137,
+    "question": "Qu'est-ce que la récursion mutuelle (ou croisée) ?",
+    "options": [
+      "Une technique où une fonction s'appelle elle-même directement.",
+      "Une technique où plusieurs fonctions s'appellent entre elles de manière aléatoire.",
+      "Une technique où deux ou plusieurs fonctions s'appellent mutuellement."
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 138,
+    "question": "Quelle est la définition de la récursion multiple ?",
+    "options": [
+      "Une récursion est multiple quand elle n'implique aucun appel récursif.",
+      "Une récursion est multiple quand elle implique un seul appel récursif par invocation.",
+      "Une récursion est multiple quand elle implique plusieurs appels récursifs par invocation."
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 139,
+    "question": "Quel est un exemple typique de récursion multiple ?",
+    "options": [
+      "Le calcul de la factorielle.",
+      "Le calcul de la somme des entiers.",
+      "Le calcul des termes de la suite de Fibonacci."
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 140,
+    "question": "Pourquoi l'implémentation naïve de la fonction fibonacci(n) directement basée sur sa définition mathématique f_0=0, f_1=1, f_n=f_n-1+f_n-2 pour n>1 est-elle inefficace ?",
+    "options": [
+      "Elle ne fonctionne pas correctement.",
+      "Elle est trop rapide.",
+      "Elle entraîne de nombreux calculs redondants."
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 141,
+    "question": "Parmi les propositions suivantes, quels sont les cas de base dans l'algorithme de recherche dichotomique récursive ?",
+    "options": [
+      "Si indiceFin == indiceDébut, retourner milieu.",
+      "Si indiceFin < indiceDébut, retourner -1.",
+      "Si indiceFin > indiceDébut, retourner -1.",
+      "Si tableau[milieu] == valeurRecherchée, retourner milieu."
+    ],
+    "correctIndex": [1, 3]
+  },
+  {
+    "id": 142,
+    "question": "Dans l'algorithme de recherche dichotomique récursive, que se passe-t-il si tableau[milieu] < valeur ?",
+    "options": [
+      "Retourner milieu (valeur trouvée).",
+      "Effectuer un appel récursif dans la moitié gauche du tableau.",
+      "Effectuer un appel récursif dans la moitié droite du tableau."
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 143,
+    "question": "Quelles sont les trois étapes de l'appel récursif dans le tri fusion récursif ?",
+    "options": [
+      "fusionnerTriTab(tableau, gauche, milieu, droite); triFusionRecursif(tableau, gauche, milieu); triFusionRecursif(tableau, milieu + 1, droite)",
+      "triFusionRecursif(tableau, milieu, droite); triFusionRecursif(tableau, gauche, milieu); fusionnerTriTab(tableau, gauche, milieu, droite)",
+      "triFusionRecursif(tableau, gauche, milieu); triFusionRecursif(tableau, milieu + 1, droite); fusionnerTriTab(tableau, gauche, milieu, droite)",
+      "triFusionRecursif(tableau, milieu + 1, droite); fusionnerTriTab(tableau, gauche, milieu, droite); triFusionRecursif(tableau, gauche, milieu)"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 144,
+    "question": "Quelle est la syntaxe correcte pour déclarer une structure en C ?",
+    "options": [
+      "struct { int x; float y; };",
+      "struct Point { int x; float y; };",
+      "struct Point = { int x; float y; };"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 145,
+    "question": "Indique quelles affirmations sont correctes concernant les structures en C :",
+    "options": [
+      "Les structures ne peuvent contenir que des types de données primitifs.",
+      "Les structures permettent de regrouper des données hétérogènes.",
+      "Les structures sont toujours passées par valeur aux fonctions.",
+      "Les structures peuvent être imbriquées."
+    ],
+    "correctIndex": [1, 3]
+  },
+  {
+    "id": 146,
+    "question": "Comment initialise-t-on une structure en C ?",
+    "options": [
+      "struct Point p = (1, 2.5);",
+      "struct Point p = {x: 1, y: 2.5};",
+      "struct Point p = {1, 2.5};"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 147,
+    "question": "Quelle est la syntaxe correcte pour accéder à un membre de structure ?",
+    "options": [
+      "p.x",
+      "p->x",
+      "p[x]"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 148,
+    "question": "Quelle est la syntaxe correcte pour déclarer un pointeur vers une structure ?",
+    "options": [
+      "struct Point *ptrP;",
+      "struct *Point ptrP;",
+      "struct Point ptrP*;"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 149,
+    "question": "Quelle est la syntaxe correcte pour accéder à un membre de structure via un pointeur ?",
+    "options": [
+      "p.x",
+      "p->x",
+      "p[x]"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 150,
+    "question": "Quelle est l'utilité de typedef en C ?",
+    "options": [
+      "Pour définir des macros",
+      "Pour créer des alias de types",
+      "Pour allouer de la mémoire dynamiquement"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 151,
+    "question": "Indique quelles affirmations sont correctes concernant l'utilisation de typedef avec des structures :",
+    "options": [
+      "typedef peut être utilisé pour créer un alias pour une structure.",
+      "typedef est toujours plus efficace que l'utilisation directe de struct.",
+      "typedef simplifie la syntaxe pour déclarer des variables de type structure."
+    ],
+    "correctIndex": [0, 2]
+  },
+  {
+    "id": 152,
+    "question": "Quelle est la syntaxe correcte pour déclarer une énumération en C ?",
+    "options": [
+      "enum { LUNDI, MARDI, MERCREDI };",
+      "enum Jours { LUNDI, MARDI, MERCREDI };",
+      "enum Jours = { LUNDI, MARDI, MERCREDI };"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 153,
+    "question": "Quelle est l'utilité principale des unions en C ?",
+    "options": [
+      "Pour regrouper des données hétérogènes",
+      "Pour optimiser l'utilisation de la mémoire",
+      "Pour créer des alias de types"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 154,
+    "question": "Comment déclare-t-on une union en C ?",
+    "options": [
+      "union { int x; float y; };",
+      "union Data = { int x; float y; };",
+      "union Data { int x; float y; };"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 155,
+    "question": "Indique quelles affirmations sont correctes concernant les énumérations en C :",
+    "options": [
+      "Les énumérations permettent de définir des ensembles de valeurs symboliques.",
+      "Les énumérations ne peuvent contenir que des entiers positifs.",
+      "Les énumérations sont toujours passées par référence aux fonctions.",
+      "Les énumérations peuvent être utilisées pour représenter des jours de la semaine."
+    ],
+    "correctIndex": [0, 3]
+  },
+  {
+    "id": 156,
+    "question": "Quelle est la différence entre passer une structure par valeur et par pointeur à une fonction ?",
+    "options": [
+      "Passer par valeur est toujours plus efficace.",
+      "Passer par valeur permet de modifier la structure originale.",
+      "Passer par pointeur permet d'économiser de la mémoire.",
+      "Passer par pointeur permet de modifier la structure originale."
+    ],
+    "correctIndex": [2, 3]
+  },
+  {
+    "id": 157,
+    "question": "Indique quelles affirmations sont correctes concernant les structures imbriquées :",
+    "options": [
+      "Les structures imbriquées peuvent contenir d'autres structures.",
+      "Les structures imbriquées permettent de créer des relations récursives.",
+      "Les structures imbriquées ne peuvent contenir que des types primitifs.",
+      "Les structures imbriquées sont toujours passées par valeur aux fonctions."
+    ],
+    "correctIndex": [0, 1]
+  },
+  {
+    "id": 158,
+    "question": "Quelle est la syntaxe correcte pour déclarer une structure récursive en C ?",
+    "options": [
+      "struct Node { int data; Node next; };",
+      "struct Node { int data; struct Node next; };",
+      "struct Node { int data; struct Node *next; };"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 159,
+    "question": "Comment accède-t-on à la donnée data du nœud suivant d'une structure récursive Node appelé node ?",
+    "options": [
+      "node.next.data",
+      "node.next->data",
+      "node->next.data",
+      "node->next->data"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 160,
+    "question": "Quelle est la différence entre return par valeur et modification par pointeur pour les fonctions manipulant des structures ?",
+    "options": [
+      "return par valeur est toujours plus efficace.",
+      "Modification par pointeur permet de modifier la structure originale.",
+      "return par valeur permet de modifier la structure originale."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 161,
+    "question": "Comment déclare-t-on un tableau de structures en C ?",
+    "options": [
+      "struct Point points = { {1, 2.5}, {3, 4.5} };",
+      "struct[] Point points = { {1, 2.5}, {3, 4.5} };",
+      "struct Point[] points = { {1, 2.5}, {3, 4.5} };",
+      "struct Point points[] = { {1, 2.5}, {3, 4.5} };",
+      "struct Point points[2] = { {1, 2.5}, {3, 4.5} };"
+    ],
+    "correctIndex": [3, 4]
+  },
+  {
+    "id": 162,
+    "question": "Comment accède-t-on à la valeur du membre x du premier point dans un tableau de structures Point ?",
+    "options": [
+      "points.0.x",
+      "points.x[0]",
+      "points[0].x",
+      "points[0][x]"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 163,
+    "question": "Indique quelles affirmations sont correctes concernant les tableaux de structures en C :",
+    "options": [
+      "Les tableaux de structures permettent de stocker plusieurs instances de la même structure.",
+      "Les tableaux de structures ne peuvent contenir que des types primitifs.",
+      "Les tableaux de structures sont toujours passés par valeur aux fonctions.",
+      "Les tableaux de structures peuvent être initialisés lors de leur déclaration."
+    ],
+    "correctIndex": [0, 3]
+  },
+  {
+    "id": 164,
+    "question": "Quelle est la durée de vie d'une variable statique en C ?",
+    "options": [
+      "Elle est déterminée à l'exécution.",
+      "Elle est infinie.",
+      "Elle est liée au bloc où elle est déclarée."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 165,
+    "question": "Quelle est la syntaxe correcte pour initialiser un tableau statique sur la pile ?",
+    "options": [
+      "[]int tab = {1, 2, 7};",
+      "int[] tab = {1, 2, 7};",
+      "int []tab = {1, 2, 7};",
+      "int tab[] = {1, 2, 7};"
+    ],
+    "correctIndex": 3
+  },
+  {
+    "id": 166,
+    "question": "Laquelle des affirmations suivantes est correcte concernant les variables statiques en C ?",
+    "options": [
+      "Les variables statiques sont allouées sur le tas.",
+      "Les variables statiques sont allouées sur la pile.",
+      "Les variables statiques n'ont pas de durée de vie définie."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 167,
+    "question": "Laquelle des affirmations suivantes est correcte concernant les tableaux statiques en C ?",
+    "options": [
+      "Les tableaux statiques doivent avoir une taille connue à la compilation.",
+      "Les tableaux statiques peuvent être redimensionnés à l'exécution.",
+      "Les tableaux statiques sont alloués sur le tas."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 168,
+    "question": "Quelle est la principale contrainte des tableaux statiques en C ?",
+    "options": [
+      "Ils peuvent être redimensionnés à l'exécution.",
+      "Leur taille est fixe et définie à la compilation.",
+      "Ils peuvent être retournés directement par une fonction."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 169,
+    "question": "Quelle est la taille maximale typique de la pile en C ?",
+    "options": [
+      "Quelques Ko.",
+      "Quelques Mo.",
+      "Quelques Go."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 170,
+    "question": "Que se passe-t-il si vous dépassez la taille maximale de la pile en C ?",
+    "options": [
+      "Le programme continue de fonctionner normalement.",
+      "Le compilateur ajuste automatiquement la taille de la pile.",
+      "Le programme plante avec un «stack overflow»."
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 171,
+    "question": "Quelle fonction est utilisée pour libérer la mémoire allouée dynamiquement en C ?",
+    "options": [
+      "malloc()",
+      "free()",
+      "realloc()"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 172,
+    "question": "Indique quelles affirmations sont correctes concernant la mémoire tas (heap) :",
+    "options": [
+      "La mémoire tas est plus vaste mais moins rapide que la mémoire pile.",
+      "La mémoire tas est automatiquement gérée par le compilateur.",
+      "La mémoire tas peut causer de la fragmentation.",
+      "La mémoire tas est limitée à quelques mégaoctets."
+    ],
+    "correctIndex": [0, 2]
+  },
+  {
+    "id": 173,
+    "question": "Laquelle des affirmations suivantes est correcte concernant la gestion de la mémoire en C ?",
+    "options": [
+      "La mémoire allouée sur la pile est libérée manuellement.",
+      "La mémoire allouée sur la pile est libérée automatiquement.",
+      "La mémoire allouée sur le tas est libérée automatiquement."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 174,
+    "question": "Quelle est la syntaxe correcte pour allouer de la mémoire pour un tableau de 10 entiers en utilisant malloc() ?",
+    "options": [
+      "int tableau = malloc(10);",
+      "int* tableau = malloc(10);",
+      "int tableau = malloc(sizeof(int));",
+      "int* tableau = malloc(sizeof(int));",
+      "int tableau = malloc(10 * sizeof(int));",
+      "int* tableau = malloc(10 * sizeof(int));"
+    ],
+    "correctIndex": 5
+  },
+  {
+    "id": 175,
+    "question": "Quelle est la syntaxe correcte pour allouer de la mémoire avec malloc() pour un objet de type Point ?",
+    "options": [
+      "Point p = malloc(sizeof(Point));",
+      "Point p = malloc(Point);",
+      "Point* p = malloc(sizeof(Point));",
+      "Point* p = malloc(Point);"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 176,
+    "question": "Quelle est la taille typique de la mémoire tas (heap) en termes de capacité ?",
+    "options": [
+      "Mo",
+      "Go",
+      "To"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 177,
+    "question": "Quelle fonction est utilisée pour allouer de la mémoire non initialisée en C ?",
+    "options": [
+      "malloc()",
+      "calloc()",
+      "realloc()"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 178,
+    "question": "Quelle est la taille approximative du tableau alloué dans l'exemple suivant ?\n\nint taille = (int)1E9;\nint* bigArray = malloc(taille * sizeof(int));",
+    "options": [
+      "1 Go",
+      "2 Go",
+      "4 Go"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 179,
+    "question": "Quelle est la syntaxe correcte pour déclarer un pointeur vers un tableau d'entiers en C ?",
+    "options": [
+      "int[] tab",
+      "int* tab[]",
+      "int* tab",
+      "int tab*"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 180,
+    "question": "Quelle fonction est utilisée pour renvoyer un pointeur vers une copie d'une chaîne de caractères en une seule opération ?",
+    "options": [
+      "strcpy",
+      "memcpy",
+      "strdup"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 181,
+    "question": "Quelle est la syntaxe correcte pour allouer de la mémoire pour une chaîne de caractères en C ?",
+    "options": [
+      "char[] chaine = malloc(taille * sizeof(char*));",
+      "char chaine[] = malloc(taille * sizeof(char*));",
+      "char* chaine = malloc(taille * sizeof(char*));",
+      "char* chaine = malloc(taille * sizeof(char));"
+    ],
+    "correctIndex": 3
+  },
+  {
+    "id": 182,
+    "question": "Quelle est la différence entre malloc et calloc en C ?",
+    "options": [
+      "malloc initialise la mémoire à zéro, calloc ne le fait pas.",
+      "calloc initialise la mémoire à zéro, malloc ne le fait pas.",
+      "Il n'y a pas de différence entre malloc et calloc."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 183,
+    "question": "Quelle est la syntaxe correcte pour libérer la mémoire allouée dynamiquement pour un tableau en C ?",
+    "options": [
+      "free(tab[])",
+      "free(tab)",
+      "free(&tab)"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 184,
+    "question": "Que signifie l'acronyme LIFO ?",
+    "options": [
+      "Last In First Out",
+      "Last In Fast Out",
+      "Low In First Out"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 185,
+    "question": "Quelles sont les opérations principales d'une pile ?",
+    "options": [
+      "Push",
+      "Pop",
+      "Enqueue",
+      "Dequeue"
+    ],
+    "correctIndex": [0, 1]
+  },
+  {
+    "id": 186,
+    "question": "Quelles sont des applications courantes des piles ?",
+    "options": [
+      "Ctrl + Z (annuler)",
+      "Compilateurs",
+      "Évaluation d'expressions mathématiques",
+      "Files d'attente de messages"
+    ],
+    "correctIndex": [0, 1, 2]
+  },
+  {
+    "id": 187,
+    "question": "Quelle est la complexité temporelle des opérations push et pop sur une pile ?",
+    "options": [
+      "O(n)",
+      "O(1)",
+      "O(log n)"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 188,
+    "question": "Quelle erreur survient lorsqu'on essaie de retirer un élément d'une pile vide ?",
+    "options": [
+      "Stack overflow",
+      "Stack underflow",
+      "Null pointer exception"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 189,
+    "question": "Qu'est-ce qu'une liste chaînée ?",
+    "options": [
+      "Une collection d'éléments où chaque élément est lié au suivant via un pointeur.",
+      "Un tableau dynamique de taille fixe.",
+      "Une structure de données qui ne permet pas l'insertion dynamique."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 190,
+    "question": "Pourquoi étudier les listes chaînées ?",
+    "options": [
+      "Pour pallier les limitations des tableaux.",
+      "Pour améliorer l'insertion et la suppression de données.",
+      "Pour remplacer les fonctions récursives.",
+      "Pour éviter l'utilisation de pointeurs."
+    ],
+    "correctIndex": [0, 1]
+  },
+  {
+    "id": 191,
+    "question": "Quelle est une limitation des tableaux statiques en C ?",
+    "options": [
+      "La taille doit être connue à la compilation.",
+      "Ils ne peuvent pas contenir de types primitifs.",
+      "Ils ne peuvent pas être passés à des fonctions."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 192,
+    "question": "Quelle est une limitation des tableaux dynamiques en C ?",
+    "options": [
+      "Ils ne peuvent pas être redimensionnés.",
+      "Les appels à realloc peuvent être coûteux.",
+      "Ils ne permettent pas l'accès par indice."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 193,
+    "question": "Quelle est la complexité temporelle de l'insertion en tête d'une liste chaînée ?",
+    "options": [
+      "O(n)",
+      "O(1)",
+      "O(log n)"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 194,
+    "question": "Quel type de structures est privilégié pour les listes chaînées?",
+    "options": [
+      "Structures avec modifications fréquentes (piles, files)",
+      "Structures avec accès aléatoire fréquent",
+      "Données de taille variable",
+      "Structures avec recherche binaire fréquente"
+    ],
+    "correctIndex": [0, 2]
+  },
+  {
+    "id": 195,
+    "question": "Quelle est la complexité de l'accès aléatoire dans les listes chaînées?",
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 196,
+    "question": "Comment se fait l'accès aux éléments d'une liste chaînée?",
+    "options": [
+      "De manière directe, par adressage de chaque cellule.",
+      "De manière séquentielle: chaque élément permet l'accès au suivant.",
+      "De manière aléatoire, sans ordre particulier."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 197,
+    "question": "Quelle est la différence principale entre une liste chaînée et un tableau?",
+    "options": [
+      "La taille fixe des éléments.",
+      "La manière dont les éléments sont disposés en mémoire.",
+      "La nature des éléments stockés."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 198,
+    "question": "Indique quelles affirmations sont correctes concernant les listes chaînées:",
+    "options": [
+      "Les éléments sont disposés de façon contiguë en mémoire.",
+      "Chaque élément contient un pointeur vers le suivant.",
+      "L'accès aux éléments se fait de manière directe.",
+      "La taille des listes chaînées est arbitraire."
+    ],
+    "correctIndex": [1, 3]
+  },
+  {
+    "id": 199,
+    "question": "Quelle est la syntaxe pour définir un nœud dans une liste chaînée en C avec un type double?",
+    "options": [
+      "struct Node { double data; struct Node next; };",
+      "struct Node { double* data; struct Node next; };",
+      "struct Node { double data; struct Node* next; };",
+      "struct Node { double* data; struct Node* next; };"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 200,
+    "question": "Quels sont les avantages de l'implémentation de la pile avec une liste chaînée?",
+    "options": [
+      "Pas de débordement (sauf épuisement mémoire)",
+      "Complexité O(1) pour toutes les opérations fondamentales",
+      "Complexité O(n) pour toutes les opérations fondamentales"
+    ],
+    "correctIndex": [0, 1]
+  },
+  {
+    "id": 201,
+    "question": "Indique quelles affirmations sont correctes concernant le parcours complet d'une liste chaînée.",
+    "options": [
+      "On commence en créant un pointeur courant pointant vers la tête de la liste avec Noeud courant = *tete.",
+      "On commence en créant un pointeur courant pointant vers la tête de la liste avec Noeud* courant = tete.",
+      "On avance avec courant->suivant = courant.",
+      "On avance avec courant = courant->suivant.",
+      "On arrête quand courant == NULL.",
+      "On arrête quand courant->suivant == NULL."
+    ],
+    "correctIndex": [1, 3, 4]
+  },
+  {
+    "id": 202,
+    "question": "Pourquoi l'insertion en tête d'une liste chaînée est-elle délicate?",
+    "options": [
+      "Parce qu'il faut créer un nouveau nœud",
+      "Parce qu'en insérant en tête, on modifie la tête de la liste qui est déjà un pointeur",
+      "Parce qu'il faut faire pointer le suivant du nouveau nœud vers l'ancienne tête"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 203,
+    "question": "Quelles sont les affirmations correctes concernant les deux fonctions suivantes pour l'insertion en tête Noeud* insererEnTete1(Noeud* tete, int nouvelleValeur) et void insererEnTete2(Noeud** ptrTete, int nouvelleValeur)?",
+    "options": [
+      "Dans la première fonction le pointeur vers la tête est passée par valeur, donc la tête originale reste inchangée",
+      "Dans la deuxième fonction le pointeur vers la tête est passée par valeur, donc la tête originale reste inchangée",
+      "La première fonction met à jour le pointeur vers la tête en utilisant un pointeur vers un pointeur",
+      "La deuxième fonction met à jour le pointeur vers la tête en utilisant un pointeur vers un pointeur",
+      "La première fonction retourne le nouveau nœud inséré en tête",
+      "La deuxième fonction retourne le nouveau nœud inséré en tête"
+    ],
+    "correctIndex": [0, 3, 4]
+  },
+  {
+    "id": 204,
+    "question": "Indique quelles affirmations sont correctes concernant l'opération défiler:",
+    "options": [
+      "On récupère la valeur en tête de liste.",
+      "On ajoute un nouvel élément à la file.",
+      "On fait pointer la tête vers le suivant de l'ancienne tête.",
+      "On fait pointer la queue sur le nouveau nœud."
+    ],
+    "correctIndex": [0, 2]
+  },
+  {
+    "id": 205,
+    "question": "Quelle est la méthode utilisée jusqu'à maintenant pour gérer les erreurs en C ?",
+    "options": [
+      "Utiliser des exceptions",
+      "Utiliser exit(1)",
+      "Utiliser des retours de fonctions"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 206,
+    "question": "Quels sont les inconvénients de la méthode exit(1) pour gérer les erreurs ?",
+    "options": [
+      "Très brutal, termine immédiatement le programme en cas d'erreur.",
+      "Permet une gestion correcte des erreurs et des ressources.",
+      "Impossible de gérer l'erreur de manière plus fine."
+    ],
+    "correctIndex": [0, 2]
+  },
+  {
+    "id": 207,
+    "question": "Indique quelles affirmations sont correctes concernant la gestion des erreurs en C :",
+    "options": [
+      "Le programme compile sans problème avec exit(1).",
+      "exit(1) permet de libérer la mémoire et fermer les fichiers correctement.",
+      "exit(1) termine immédiatement le programme en cas d'erreur.",
+      "exit(1) permet de tenter de récupérer ou corriger l'état avant de quitter."
+    ],
+    "correctIndex": [0, 2]
+  },
+  {
+    "id": 208,
+    "question": "Quelle est la signature de la fonction defiler pour gérer les erreurs de manière plus fine ?",
+    "options": [
+      "void defiler(int* file, int valeur);",
+      "void defiler(int* file, int* valeur);",
+      "bool defiler(int* file, int valeur);",
+      "bool defiler(int* file, int* valeur);"
+    ],
+    "correctIndex": 3
+  },
+  {
+    "id": 209,
+    "question": "Qu'est-ce qu'une liste chaînée circulaire?",
+    "options": [
+      "Une liste où chaque élément pointe vers NULL.",
+      "Une liste où tous les éléments sont liés les uns aux autres en un cercle continu.",
+      "Une liste où chaque élément pointe vers le premier élément."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 210,
+    "question": "Quelle est la différence principale entre une liste chaînée circulaire et une liste chaînée simple?",
+    "options": [
+      "La liste chaînée circulaire utilise des pointeurs NULL.",
+      "La liste chaînée circulaire n'a pas de début ni de fin.",
+      "La liste chaînée circulaire ne peut pas être doublement chaînée."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 211,
+    "question": "Indique quelles affirmations sont correctes concernant l'implémentation d'une file avec une liste chaînée circulaire:",
+    "options": [
+      "On utilise un pointeur vers la queue de la file.",
+      "On utilise un pointeur vers la tête de la file.",
+      "L'accès à la tête de la file est aisé car queue->suivant = tete.",
+      "On utilise deux pointeurs, un pour la tête et un pour la queue."
+    ],
+    "correctIndex": [0, 2]
+  },
+  {
+    "id": 212,
+    "question": "Quelle est la structure utilisée pour implémenter une file avec un tableau circulaire ?",
+    "options": [
+      "Une liste chaînée simple",
+      "Un tableau de taille fixe avec des indices modulaires",
+      "Un arbre binaire"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 213,
+    "question": "Indique quelles affirmations sont correctes concernant les listes doublement chaînées mais pas pour une liste simplement chaînée:",
+    "options": [
+      "Elles permettent le parcours dans les deux sens.",
+      "Elles utilisent un pointeur vers le noeud suivant.",
+      "Elles utilisent deux pointeurs vers le noeud précédent et le suivant.",
+      "Elles permettent l'insertion avant un nœud en temps constant (O(1)) si on a un pointeur sur ce nœud.",
+      "Elles permettent l'insertion après un nœud en temps constant (O(1)) si on a un pointeur sur ce nœud.",
+      "Elles permettent la suppression d'un nœud en temps constant (O(1)) si on a un pointeur sur ce nœud."
+    ],
+    "correctIndex": [0, 2, 3, 5]
+  },
+  {
+    "id": 214,
+    "question": "Quel est l'inventeur du tri rapide (QuickSort)?",
+    "options": [
+      "Alan Turing",
+      "Charles Babbage",
+      "Richard Bellman",
+      "Tony Hoare"
+    ],
+    "correctIndex": 3
+  },
+  {
+    "id": 215,
+    "question": "Quelle est la complexité moyenne du tri rapide?",
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(n²)"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 216,
+    "question": "Indique quelles affirmations sont correctes concernant le tri rapide :",
+    "options": [
+      "Le tri rapide utilise la stratégie \"Diviser pour régner\".",
+      "Le tri rapide est toujours stable.",
+      "Le tri rapide peut être exécuté sur place (in place).",
+      "Le tri rapide a une complexité pire cas de O(n log n)."
+    ],
+    "correctIndex": [0, 2]
+  },
+  {
+    "id": 217,
+    "question": "Quelle est la complexité pire cas du tri rapide?",
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(n²)"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 218,
+    "question": "Quel est le nom de la fonction de la bibliothèque standard C utilisée pour le tri rapide?",
+    "options": [
+      "sort()",
+      "qsort()",
+      "quicksort()"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 219,
+    "question": "Quelle est la signature attendue pour la fonction de comparaison utilisée avec qsort?",
+    "options": [
+      "void compare(const void *a, const void *b)",
+      "int compare(const void *a, const void *b)",
+      "bool compare(const void *a, const void *b)"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 220,
+    "question": "Quelle est la complexité du tri fusion dans tous les cas?",
+    "options": [
+      "O(n)",
+      "O(log n)",
+      "O(n log n)",
+      "O(n²)"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 221,
+    "question": "Indique quelles affirmations sont correctes concernant le tri fusion :",
+    "options": [
+      "Le tri fusion est stable.",
+      "Le tri fusion a une complexité pire cas de O(n²).",
+      "Le tri fusion utilise une mémoire auxiliaire de O(n).",
+      "Le tri fusion est toujours exécuté sur place (in place)."
+    ],
+    "correctIndex": [0, 2]
+  },
+  {
+    "id": 222,
+    "question": "Quel est l'un des exemples classiques d'algorithme glouton?",
+    "options": [
+      "L'algorithme de tri par insertion",
+      "L'algorithme du rendu de monnaie",
+      "L'algorithme de tri par fusion"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 223,
+    "question": "Quelles sont les caractéristiques des algorithmes gloutons?",
+    "options": [
+      "Simple à implémenter",
+      "Toujours optimal",
+      "Utile pour les problèmes d'optimisation complexes"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 224,
+    "question": "Indique quelles affirmations sont correctes concernant le rendu de monnaie:",
+    "options": [
+      "Le rendu de monnaie peut être résolu de façon rapide avec un algorithme glouton si le système de pièces est canonique.",
+      "L'approche brute force pour le rendu de monnaie a une complexité linéaire.",
+      "Le rendu de monnaie glouton est optimal fonctionne pour tous les systèmes de monnaie."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 225,
+    "question": "Quelle est la stratégie de l'approche gloutonne pour le rendu de monnaie?",
+    "options": [
+      "Prendre toujours la pièce de plus petite valeur possible.",
+      "Prendre toujours la pièce de valeur médiane",
+      "Prendre toujours la pièce de plus grande valeur possible."
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 226,
+    "question": "Quel est l'objectif du problème du sac à dos?",
+    "options": [
+      "Minimiser la valeur sans dépasser la capacité.",
+      "Maximiser la valeur sans dépasser la capacité.",
+      "Minimiser le poids sans dépasser la capacité.",
+      "Maximiser le poids sans dépasser la capacité."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 227,
+    "question": "Quelle est la solution optimale pour le sac à dos fractionnaire?",
+    "options": [
+      "Glouton par ordre croissant de masse.",
+      "Glouton par ordre décroissant de prix.",
+      "Glouton par ordre décroissant de ratio valeur/poids."
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 228,
+    "question": "Quelle méthode garantit une solution optimale pour le sac à dos binaire 0/1?",
+    "options": [
+      "Algorithme glouton",
+      "Programmation dynamique",
+      "Algorithme de tri rapide"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 229,
+    "question": "Qui a introduit la programmation dynamique en 1953?",
+    "options": [
+      "Alan Turing",
+      "John von Neumann",
+      "Richard Bellman",
+      "Tony Hoare"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 230,
+    "question": "Quelle est la complexité de l'approche récursive naïve pour calculer le n-ième nombre de Fibonacci?",
+    "options": [
+      "O(n)",
+      "O(log n)",
+      "O(2^n)"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 231,
+    "question": "Indique quelles affirmations sont correctes concernant la mémoïsation avec Fibonacci:",
+    "options": [
+      "La mémoïsation stocke les résultats dans un tableau memo.",
+      "La mémoïsation a une complexité de O(2^n).",
+      "La mémoïsation passe le tableau memo lors des appels récursifs.",
+      "La mémoïsation a une complexité de O(n)."
+    ],
+    "correctIndex": [0, 2, 3]
+  },
+  {
+    "id": 232,
+    "question": "Quel est le rendu glouton pour 28 avec des pièces de 1, 7 et 23?",
+    "options": [
+      "3 pièces",
+      "4 pièces",
+      "5 pièces",
+      "6 pièces",
+      "7 pièces"
+    ],
+    "correctIndex": 3
+  },
+  {
+    "id": 233,
+    "question": "Quel est le rendu optimal obtenu pour 28 avec des pièces de 1, 7 et 23?",
+    "options": [
+      "3 pièces",
+      "4 pièces",
+      "5 pièces",
+      "6 pièces",
+      "7 pièces"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 234,
+    "question": "Quelle est la caractéristique principale d'une arborescence?",
+    "options": [
+      "Chaque nœud peut avoir plusieurs parents.",
+      "Chaque nœud peut avoir un nombre quelconque de nœuds fils, mais il n'a qu'un nœud père (sauf la racine qui n'a pas de nœud père).",
+      "La racine est toujours le nœud le plus profond."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 235,
+    "question": "Indique quelles affirmations sont correctes concernant les relations entre nœuds dans un arbre:",
+    "options": [
+      "Un parent est un nœud directement supérieur.",
+      "Un enfant est un nœud partageant le même parent.",
+      "Un frère est un nœud partageant le même parent.",
+      "Un ancêtre est un nœud directement inférieur.",
+      "Un descendant est un nœud dans le sous-arbre."
+    ],
+    "correctIndex": [0, 2, 4]
+  },
+  {
+    "id": 236,
+    "question": "Qu'est-ce qu'une feuille dans un arbre?",
+    "options": [
+      "Un nœud situé à la base de l'arbre.",
+      "Un nœud situé à l'extrémité de l'arbre qui n'a donc pas de descendants.",
+      "Un nœud qui a plusieurs enfants."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 237,
+    "question": "Quelle est la profondeur d'un nœud dans un arbre?",
+    "options": [
+      "La distance du nœud à ses feuilles.",
+      "La distance, c'est-à-dire, le nombre d'arêtes de la racine au nœud.",
+      "Le nombre de nœuds dans le sous-arbre."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 238,
+    "question": "Quelle est la hauteur d'un arbre?",
+    "options": [
+      "La distance de la racine à ses enfants directs.",
+      "La plus grande profondeur d'une feuille de l'arbre.",
+      "Le nombre total de nœuds dans l'arbre."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 239,
+    "question": "Quelle est la taille d'un arbre?",
+    "options": [
+      "La distance de la racine à ses feuilles.",
+      "Le nombre de nœuds dans l'arbre.",
+      "La profondeur de la racine."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 240,
+    "question": "Quelle est la hauteur d'un arbre vide?",
+    "options": [
+      "0",
+      "1",
+      "-1"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 241,
+    "question": "Quel est le nombre maximum de fils qu'un nœud peut avoir dans un arbre binaire?",
+    "options": [
+      "1",
+      "2",
+      "3"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 242,
+    "question": "Quelles sont les caractéristiques d'un arbre binaire parfait?",
+    "options": [
+      "Tous les nœuds internes ont exactement deux fils.",
+      "Toutes les feuilles sont au même niveau.",
+      "Les nœuds internes peuvent avoir un ou deux fils."
+    ],
+    "correctIndex": [0, 1]
+  },
+  {
+    "id": 243,
+    "question": "Indique quelles affirmations sont correctes concernant la taille d'un arbre binaire parfait de hauteur h:",
+    "options": [
+      "La taille est 2^(h+1) - 1 nœuds.",
+      "La taille est 2^h nœuds.",
+      "La taille est 2^(h+1) nœuds.",
+      "La taille est 2^h - 1 nœuds."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 244,
+    "question": "Quelle est la structure correcte pour représenter un nœud d'arbre binaire en C?",
+    "options": [
+      "typedef struct NoeudAB { int val; struct NoeudAB *gauche, *droit; } NoeudAB;",
+      "typedef struct NoeudAB { int val; NoeudAB gauche, droit; } NoeudAB;",
+      "typedef struct { int val; struct NoeudAB *gauche, *droit; } NoeudAB;"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 245,
+    "question": "Comment un arbre binaire complet peut-il être stocké dans un tableau?",
+    "options": [
+      "En parcourant l'arbre en profondeur.",
+      "En utilisant des pointeurs pour chaque nœud.",
+      "En plaçant les nœuds niveau par niveau, de gauche à droite."
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": 246,
+    "question": "Pour un nœud à l'indice i dans un tableau représentant un arbre binaire complet, quelle est la formule pour accéder à son fils gauche?",
+    "options": [
+      "2i",
+      "2i + 1",
+      "i + 1"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 247,
+    "question": "Pour un nœud à l'indice i dans un tableau représentant un arbre binaire complet, quelle est la formule pour accéder à son fils droit?",
+    "options": [
+      "2i + 1",
+      "2i + 2",
+      "i + 2"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 248,
+    "question": "Pour un nœud à l'indice i dans un tableau représentant un arbre binaire complet, quelle est la formule pour accéder à son parent?",
+    "options": [
+      "(i - 1) / 2",
+      "i / 2",
+      "i - 1"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 249,
+    "question": "Quelles sont les caractéristiques du parcours en largeur (BFS) d'un arbre binaire?",
+    "options": [
+      "Il utilise une pile.",
+      "Il utilise une file.",
+      "Il visite les nœuds de haut en bas, de gauche à droite.",
+      "Il visite les nœuds de bas en haut."
+    ],
+    "correctIndex": [1, 2]
+  },
+  {
+    "id": 250,
+    "question": "Quel est le pseudo-code correct pour un parcours préfixe (préordre) d'un arbre binaire?",
+    "options": [
+      "visiter(nœud); parcours(gauche); parcours(droit);",
+      "parcours(gauche); visiter(nœud); parcours(droit);",
+      "parcours(gauche); parcours(droit); visiter(nœud);"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 251,
+    "question": "Associez correctement les parcours en profondeur avec leur ordre de visite (N=Nœud, G=Gauche, D=Droite):",
+    "options": [
+      "Préfixe = NGD, Infixe = GND, Postfixe = GDN",
+      "Préfixe = GND, Infixe = NGD, Postfixe = GDN",
+      "Préfixe = GDN, Infixe = GND, Postfixe = NGD"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": 252,
+    "question": "Comment calcule-t-on la taille d'un arbre binaire de manière récursive?",
+    "options": [
+      "taille(gauche) + taille(droit)",
+      "taille(gauche) + taille(droit) + 1",
+      "max(taille(gauche), taille(droit)) + 1"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 253,
+    "question": "En C, quel opérateur permet de calculer 2^n efficacement pour des puissances de 2?",
+    "options": [
+      "pow(2, n)",
+      "2 * n",
+      "1 << n"
+    ],
+    "correctIndex": 2
+  }
+]
