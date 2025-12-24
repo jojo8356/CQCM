@@ -1,16 +1,21 @@
 import { createSignal, onMount } from 'solid-js';
 import { FiFilter } from 'solid-icons/fi';
 import Modal from './Modal';
+import questions from '../data/questions.json';
 
 // Utils
+const MAX_QUESTION_ID = Math.max(...questions.map(q => q.id));
+
 const range = (start: number, end: number) =>
   Array.from({ length: Math.abs(end - start) + 1 }, (_, i) => Math.min(start, end) + i);
 
-export const parseQuestionNumbers = (input: string): number[] =>
+export const parseQuestionNumbers = (input: string, maxId: number = MAX_QUESTION_ID): number[] =>
   [...new Set(
     input.trim().split(/\s+/).flatMap(part => {
       if (part.includes('-')) {
-        const [a, b] = part.split('-').map(Number);
+        const [aStr, bStr] = part.split('-');
+        const a = Number(aStr);
+        const b = bStr === '' ? maxId : Number(bStr); // "50-" means 50 to max
         return !isNaN(a) && !isNaN(b) ? range(a, b) : [];
       }
       const n = Number(part);
@@ -94,7 +99,7 @@ export default function Filter(props: FilterProps) {
         open={open()}
         onOpenChange={setOpen}
         title="Filtrer les questions"
-        description="Entrez les numéros séparés par des espaces. Utilisez - pour les intervalles. Exemple: 1 5-10 69"
+        description="Entrez les numéros séparés par des espaces. Utilisez - pour les intervalles (50- = de 50 à la fin). Exemple: 1 5-10 50-"
       >
         <textarea
           value={input()}

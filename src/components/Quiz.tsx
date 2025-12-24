@@ -1,4 +1,4 @@
-import { createSignal, createMemo, For, Show, onMount, onCleanup } from 'solid-js';
+import { createSignal, createMemo, createEffect, For, Show, onMount, onCleanup } from 'solid-js';
 import { Tooltip } from '@kobalte/core/tooltip';
 import { FiChevronUp, FiDownload } from 'solid-icons/fi';
 import Modal from './Modal';
@@ -25,11 +25,23 @@ const formatTime = (ms: number): string => {
 function QuestionCard(props: {
   question: Question;
   index: number;
+  resetKey: number;
   onAnswer: (correct: boolean, questionId: number) => void;
 }) {
   const [answered, setAnswered] = createSignal(false);
   const [selected, setSelected] = createSignal<Set<number>>(new Set());
   const [result, setResult] = createSignal<'correct' | 'incorrect' | null>(null);
+
+  // Reset state when resetKey changes
+  let lastKey = props.resetKey;
+  createEffect(() => {
+    if (props.resetKey !== lastKey) {
+      lastKey = props.resetKey;
+      setAnswered(false);
+      setSelected(new Set<number>());
+      setResult(null);
+    }
+  });
 
   const correctIndices = createMemo(() =>
     Array.isArray(props.question.correctIndex) ? props.question.correctIndex : [props.question.correctIndex]
@@ -44,13 +56,12 @@ function QuestionCard(props: {
       newSelected.has(optIndex) ? newSelected.delete(optIndex) : newSelected.add(optIndex);
       setSelected(newSelected);
 
+      // Auto-validate when correct number of answers selected
       if (newSelected.size === correctIndices().length) {
         const allCorrect = correctIndices().every(i => newSelected.has(i));
-        if (allCorrect) {
-          setAnswered(true);
-          setResult('correct');
-          props.onAnswer(true, props.question.id);
-        }
+        setAnswered(true);
+        setResult(allCorrect ? 'correct' : 'incorrect');
+        props.onAnswer(allCorrect, props.question.id);
       }
     } else {
       setAnswered(true);
@@ -131,6 +142,7 @@ function QuestionCard(props: {
 
 export default function Quiz() {
   const [filter, setFilter] = createSignal<number[]>([]);
+  const [quizKey, setQuizKey] = createSignal(0);
   const [answered, setAnswered] = createSignal(0);
   const [correct, setCorrect] = createSignal(0);
   const [errors, setErrors] = createSignal<number[]>([]);
@@ -145,6 +157,18 @@ export default function Quiz() {
     const f = filter();
     return f.length === 0 ? questions as Question[] : (questions as Question[]).filter(q => f.includes(q.id));
   });
+
+  // Reset quiz state when filter changes
+  const handleFilterChange = (numbers: number[]) => {
+    setFilter(numbers);
+    setQuizKey(k => k + 1);
+    setAnswered(0);
+    setCorrect(0);
+    setErrors([]);
+    setFinished(false);
+    setStartTime(Date.now());
+    setElapsed(0);
+  };
 
   const total = createMemo(() => filteredQuestions().length);
   const progressPercent = createMemo(() => Math.round((answered() / total()) * 100));
@@ -186,7 +210,7 @@ export default function Quiz() {
   return (
     <div class="max-w-3xl mx-auto p-4">
       {/* Filtre */}
-      <Filter onFilterChange={setFilter} />
+      <Filter onFilterChange={handleFilterChange} />
 
       {/* Stats */}
       <div class="mb-8 text-center">
@@ -271,7 +295,7 @@ export default function Quiz() {
       <div class="space-y-6">
         <For each={filteredQuestions()}>
           {(question, index) => (
-            <QuestionCard question={question} index={index()} onAnswer={handleAnswer} />
+            <QuestionCard question={question} index={index()} resetKey={quizKey()} onAnswer={handleAnswer} />
           )}
         </For>
       </div>
