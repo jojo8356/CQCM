@@ -1,9 +1,10 @@
 import { createSignal, createMemo, createEffect, For, Show, onMount, onCleanup } from 'solid-js';
 import { Tooltip } from '@kobalte/core/tooltip';
-import { FiChevronUp, FiDownload } from 'solid-icons/fi';
+import { FiChevronUp, FiDownload, FiArrowLeft } from 'solid-icons/fi';
 import Modal from './Modal';
 import Filter, { compressToIntervals } from './Filter';
-import questions from '../data/questions.json';
+import CodeBlock from './CodeBlock';
+import { parseQuestion } from '../utils/parseQuestion';
 
 // Types
 type Question = {
@@ -11,6 +12,14 @@ type Question = {
   question: string;
   options: string[];
   correctIndex: number | number[];
+  explanation?: string;
+  category?: string;
+};
+
+type QuizProps = {
+  questions: Question[];
+  quizTitle: string;
+  onBack: () => void;
 };
 
 // Utils
@@ -94,6 +103,8 @@ function QuestionCard(props: {
     return `${base} border-gray-200 cursor-default`;
   };
 
+  const parsedQuestion = createMemo(() => parseQuestion(props.question.question));
+
   return (
     <div
       id={`question-${props.question.id}`}
@@ -102,15 +113,28 @@ function QuestionCard(props: {
         result() === 'incorrect' ? 'border-red-400' : 'border-transparent'
       }`}
     >
-      <h3 class="font-semibold text-lg mb-4 text-gray-800">
-        <span class="text-blue-600 mr-2">{props.question.id}.</span>
-        {props.question.question}
-        <Show when={isMultiple()}>
-          <span class="ml-2 text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
-            {correctIndices().length} réponses
-          </span>
+      <div class="mb-4">
+        <h3 class="font-semibold text-lg text-gray-800 mb-2">
+          <span class="text-blue-600 mr-2">{props.question.id}.</span>
+          {parsedQuestion().textBefore}
+          <Show when={isMultiple()}>
+            <span class="ml-2 text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
+              {correctIndices().length} réponses
+            </span>
+          </Show>
+        </h3>
+
+        <Show when={parsedQuestion().code}>
+          <CodeBlock
+            code={parsedQuestion().code!}
+            language={parsedQuestion().language}
+          />
         </Show>
-      </h3>
+
+        <Show when={parsedQuestion().textAfter}>
+          <p class="text-gray-700 mt-2">{parsedQuestion().textAfter}</p>
+        </Show>
+      </div>
 
       <div class="space-y-2">
         <For each={props.question.options}>
@@ -127,20 +151,26 @@ function QuestionCard(props: {
       </div>
 
       <Show when={answered()}>
-        <div class="mt-4">
-          <p class={`text-sm font-medium ${result() === 'correct' ? 'text-green-600' : 'text-red-600'}`}>
+        <div class="mt-4 p-4 rounded-lg bg-gray-50">
+          <p class={`text-sm font-medium mb-2 ${result() === 'correct' ? 'text-green-600' : 'text-red-600'}`}>
             {result() === 'correct'
               ? (isMultiple() ? '✓ Correct ! Toutes les bonnes réponses trouvées.' : '✓ Correct !')
               : (isMultiple() ? '✗ Incorrect. Les bonnes réponses sont indiquées en vert.' : '✗ Incorrect. La bonne réponse est indiquée en vert.')
             }
           </p>
+          <Show when={props.question.explanation}>
+            <div class="mt-2 pt-2 border-t border-gray-200">
+              <p class="text-xs font-semibold text-gray-600 mb-1">📝 Explication :</p>
+              <p class="text-sm text-gray-700">{props.question.explanation}</p>
+            </div>
+          </Show>
         </div>
       </Show>
     </div>
   );
 }
 
-export default function Quiz() {
+export default function Quiz(props: QuizProps) {
   const [filter, setFilter] = createSignal<number[]>([]);
   const [quizKey, setQuizKey] = createSignal(0);
   const [answered, setAnswered] = createSignal(0);
@@ -155,7 +185,7 @@ export default function Quiz() {
 
   const filteredQuestions = createMemo(() => {
     const f = filter();
-    return f.length === 0 ? questions as Question[] : (questions as Question[]).filter(q => f.includes(q.id));
+    return f.length === 0 ? props.questions : props.questions.filter(q => f.includes(q.id));
   });
 
   // Reset quiz state when filter changes
@@ -207,8 +237,31 @@ export default function Quiz() {
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
+  const resetQuiz = () => {
+    setQuizKey(k => k + 1);
+    setAnswered(0);
+    setCorrect(0);
+    setErrors([]);
+    setFinished(false);
+    setStartTime(Date.now());
+    setElapsed(0);
+  };
+
   return (
     <div class="max-w-3xl mx-auto p-4">
+      {/* Header avec bouton retour */}
+      <div class="mb-6 flex items-center justify-between">
+        <button
+          onClick={props.onBack}
+          class="flex items-center gap-2 px-4 py-2 bg-white border-2 border-gray-200 text-gray-700 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-colors cursor-pointer"
+        >
+          <FiArrowLeft />
+          Retour
+        </button>
+        <h1 class="text-2xl font-bold text-gray-800">{props.quizTitle}</h1>
+        <div class="w-24"></div> {/* Spacer for centering */}
+      </div>
+
       {/* Filtre */}
       <Filter onFilterChange={handleFilterChange} />
 
@@ -250,8 +303,8 @@ export default function Quiz() {
             <ul class="space-y-2 max-h-60 overflow-y-auto">
               <For each={errors()}>
                 {(errorId) => {
-                  const q = (questions as Question[]).find(q => q.id === errorId);
-                  const idx = (questions as Question[]).findIndex(q => q.id === errorId);
+                  const q = props.questions.find(q => q.id === errorId);
+                  const idx = props.questions.findIndex(q => q.id === errorId);
                   return (
                     <li>
                       <a href={`#question-${errorId}`} class="block p-2 bg-white rounded-lg border border-red-200 hover:border-red-400 transition-colors">

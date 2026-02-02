@@ -1,0 +1,406 @@
+[
+  {
+    "id": 1,
+    "question": "Ce code compile-t-il sans erreur ?\n```java\npublic class Livre {\n    private String titre;\n    \n    public String getTitre() {\n        return titre;\n    }\n}\n\nLivre monLivre = new Livre();\nSystem.out.println(monLivre.getTitre());```",
+    "options": [
+      "Vrai - Le code compile",
+      "Faux - Le code ne compile pas"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le code en dehors d'une classe ou d'une méthode ne compile pas. Il faudrait placer ce code dans une méthode (comme main).",
+    "category": "classes_objets"
+  },
+  {
+    "id": 2,
+    "question": "Ce code est-il valide ?\n```java\npublic class Personne {\n    private String nom;\n    private int age;\n}\n\nclass Etudiant {\n    private String ecole;\n}```",
+    "options": [
+      "Vrai - Le code est valide",
+      "Faux - Le code n'est pas valide"
+    ],
+    "correctIndex": 0,
+    "explanation": "Le code est valide. Un fichier peut contenir plusieurs classes, mais une seule peut être publique (et doit avoir le même nom que le fichier).",
+    "category": "classes_objets"
+  },
+  {
+    "id": 3,
+    "question": "Ce code permet-il d'accéder à l'attribut titre ?\n```java\npublic class Livre {\n    private String titre;\n}\n\npublic class Test {\n    public static void main(String[] args) {\n        Livre livre = new Livre();\n        System.out.println(livre.titre);\n    }\n}```",
+    "options": [
+      "Vrai - On peut accéder à titre",
+      "Faux - On ne peut pas accéder à titre"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'attribut titre est private, donc il n'est pas accessible depuis l'extérieur de la classe. Il faut utiliser un getter.",
+    "category": "encapsulation"
+  },
+  {
+    "id": 4,
+    "question": "Ce constructeur est-il correct ?\n```java\npublic class Point {\n    private int x;\n    private int y;\n    \n    public void Point(int x, int y) {\n        this.x = x;\n        this.y = y;\n    }\n}```",
+    "options": [
+      "Vrai - Le constructeur est correct",
+      "Faux - Le constructeur est incorrect"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un constructeur ne doit pas avoir de type de retour (même pas void). Il faut écrire : public Point(int x, int y)",
+    "category": "constructeurs"
+  },
+  {
+    "id": 5,
+    "question": "Que se passe-t-il si on appelle cette méthode ?\n```java\npublic class Livre {\n    private String titre;\n    \n    public void afficher() {\n        System.out.println(titre);\n    }\n}\n\nLivre livre = new Livre();\nlivre.afficher();```",
+    "options": [
+      "Erreur de compilation",
+      "null est affiché",
+      "Une exception est levée",
+      "Rien ne s'affiche"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'attribut titre n'est pas initialisé, donc il vaut null par défaut. null sera affiché.",
+    "category": "classes_objets"
+  },
+  {
+    "id": 6,
+    "question": "Ce code utilise-t-il correctement le mot-clé this ?\n```java\npublic class Point {\n    private int x;\n    \n    public void setX(int x) {\n        x = x;\n    }\n}```",
+    "options": [
+      "Vrai - this est utilisé correctement",
+      "Faux - this n'est pas utilisé correctement"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sans this, on affecte le paramètre à lui-même. Il faut écrire : this.x = x; pour affecter le paramètre à l'attribut.",
+    "category": "encapsulation"
+  },
+  {
+    "id": 7,
+    "question": "Quelle méthode est appelée implicitement dans ce code ?\n```java\nLivre livre = new Livre(\"Germinal\");\nSystem.out.println(livre);```",
+    "options": [
+      "print()",
+      "getString()",
+      "toString()",
+      "valueOf()"
+    ],
+    "correctIndex": 2,
+    "explanation": "La méthode toString() est appelée implicitement par println() pour convertir l'objet en chaîne de caractères.",
+    "category": "methodes"
+  },
+  {
+    "id": 8,
+    "question": "Ce code est-il correct ?\n```java\npublic class Compteur {\n    private static int total = 0;\n    \n    public void incrementer() {\n        total++;\n    }\n}```",
+    "options": [
+      "Vrai - Le code est correct",
+      "Faux - Le code est incorrect"
+    ],
+    "correctIndex": 0,
+    "explanation": "Une méthode d'instance peut accéder à une variable static. Le code est correct.",
+    "category": "static"
+  },
+  {
+    "id": 9,
+    "question": "Qu'est-ce qu'une classe en programmation orientée objet ?",
+    "options": [
+      "Une instance d'un objet",
+      "Un moule/modèle pour créer des objets",
+      "Une fonction qui retourne un objet",
+      "Une variable de type objet"
+    ],
+    "correctIndex": 1,
+    "explanation": "Une classe est un moule (template) qui définit la structure et le comportement communs à un ensemble d'objets.",
+    "category": "classes_objets"
+  },
+  {
+    "id": 10,
+    "question": "Qu'est-ce qu'un objet ?",
+    "options": [
+      "Une classe particulière",
+      "Une méthode d'une classe",
+      "Une instance d'une classe",
+      "Un attribut d'une classe"
+    ],
+    "correctIndex": 2,
+    "explanation": "Un objet est une instance concrète d'une classe, créée avec l'opérateur new.",
+    "category": "classes_objets"
+  },
+  {
+    "id": 11,
+    "question": "Comment appelle-t-on les données d'un objet ?",
+    "options": [
+      "Les méthodes",
+      "Les attributs",
+      "Les fonctions",
+      "Les classes"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les données d'un objet sont appelées attributs (ou champs, ou variables d'instance).",
+    "category": "classes_objets"
+  },
+  {
+    "id": 12,
+    "question": "Comment appelle-t-on les traitements d'un objet ?",
+    "options": [
+      "Les attributs",
+      "Les procédures",
+      "Les méthodes",
+      "Les variables"
+    ],
+    "correctIndex": 2,
+    "explanation": "Les traitements qu'un objet peut effectuer sont appelés méthodes.",
+    "category": "methodes"
+  },
+  {
+    "id": 13,
+    "question": "Quel modificateur d'accès rend un membre accessible uniquement dans sa classe ?",
+    "options": [
+      "public",
+      "private",
+      "protected",
+      "default"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le modificateur private rend un membre accessible uniquement depuis la classe où il est défini.",
+    "category": "encapsulation"
+  },
+  {
+    "id": 14,
+    "question": "Quel modificateur d'accès rend un membre accessible depuis tout l'univers Java ?",
+    "options": [
+      "public",
+      "private",
+      "protected",
+      "default"
+    ],
+    "correctIndex": 0,
+    "explanation": "Le modificateur public rend un membre accessible depuis n'importe quelle classe.",
+    "category": "encapsulation"
+  },
+  {
+    "id": 15,
+    "question": "Que signifie l'encapsulation ?",
+    "options": [
+      "Créer plusieurs objets",
+      "Cacher les détails d'implémentation",
+      "Hériter d'une classe",
+      "Créer un package"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'encapsulation consiste à cacher les détails d'implémentation et à contrôler l'accès aux données via des méthodes.",
+    "category": "encapsulation"
+  },
+  {
+    "id": 16,
+    "question": "Qu'est-ce qu'un getter (accesseur) ?",
+    "options": [
+      "Une méthode qui modifie un attribut",
+      "Une méthode qui retourne la valeur d'un attribut",
+      "Un constructeur",
+      "Une variable publique"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un getter (accesseur) est une méthode qui permet de lire la valeur d'un attribut privé.",
+    "category": "encapsulation"
+  },
+  {
+    "id": 17,
+    "question": "Qu'est-ce qu'un setter (mutateur) ?",
+    "options": [
+      "Une méthode qui retourne la valeur d'un attribut",
+      "Une méthode qui modifie la valeur d'un attribut",
+      "Un constructeur",
+      "Une variable privée"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un setter (mutateur) est une méthode qui permet de modifier la valeur d'un attribut privé.",
+    "category": "encapsulation"
+  },
+  {
+    "id": 18,
+    "question": "Qu'est-ce qu'un constructeur ?",
+    "options": [
+      "Une méthode qui détruit un objet",
+      "Une méthode spéciale pour initialiser un objet",
+      "Une variable d'instance",
+      "Un attribut obligatoire"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un constructeur est une méthode spéciale appelée lors de la création d'un objet pour l'initialiser.",
+    "category": "constructeurs"
+  },
+  {
+    "id": 19,
+    "question": "Quelle est la caractéristique d'un constructeur ?",
+    "options": [
+      "Il a toujours un type de retour void",
+      "Il a le même nom que la classe",
+      "Il doit être private",
+      "Il ne peut pas avoir de paramètres"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un constructeur a le même nom que la classe et n'a pas de type de retour.",
+    "category": "constructeurs"
+  },
+  {
+    "id": 20,
+    "question": "Que se passe-t-il si on ne définit pas de constructeur ?",
+    "options": [
+      "Erreur de compilation",
+      "L'objet ne peut pas être créé",
+      "Java crée un constructeur par défaut",
+      "Il faut utiliser une factory"
+    ],
+    "correctIndex": 2,
+    "explanation": "Si aucun constructeur n'est défini, Java crée automatiquement un constructeur par défaut sans paramètres.",
+    "category": "constructeurs"
+  },
+  {
+    "id": 21,
+    "question": "Comment crée-t-on une instance d'une classe ?",
+    "options": [
+      "Avec le mot-clé create",
+      "Avec le mot-clé new",
+      "Avec le mot-clé instance",
+      "Avec le mot-clé make"
+    ],
+    "correctIndex": 1,
+    "explanation": "On utilise le mot-clé new suivi du constructeur pour créer une instance d'une classe.",
+    "category": "classes_objets"
+  },
+  {
+    "id": 22,
+    "question": "Que désigne le mot-clé this dans une méthode d'instance ?",
+    "options": [
+      "La classe parente",
+      "L'objet courant",
+      "Le package",
+      "La méthode elle-même"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le mot-clé this désigne l'objet sur lequel la méthode est appelée (l'objet courant).",
+    "category": "methodes"
+  },
+  {
+    "id": 23,
+    "question": "Qu'est-ce qu'une méthode static ?",
+    "options": [
+      "Une méthode qui ne peut pas être modifiée",
+      "Une méthode qui appartient à la classe",
+      "Une méthode privée",
+      "Une méthode finale"
+    ],
+    "correctIndex": 1,
+    "explanation": "Une méthode static appartient à la classe elle-même et peut être appelée sans créer d'instance.",
+    "category": "static"
+  },
+  {
+    "id": 24,
+    "question": "Peut-on accéder à un attribut d'instance depuis une méthode static ?",
+    "options": [
+      "Oui, toujours",
+      "Non, jamais",
+      "Seulement si l'attribut est public",
+      "Seulement avec this"
+    ],
+    "correctIndex": 1,
+    "explanation": "Une méthode static ne peut pas accéder directement aux attributs d'instance car elle n'est pas liée à un objet particulier.",
+    "category": "static"
+  },
+  {
+    "id": 25,
+    "question": "Quelle est la signature de la méthode main ?",
+    "options": [
+      "public void main()",
+      "public static void main(String[] args)",
+      "private static void main()",
+      "public main(String args)"
+    ],
+    "correctIndex": 1,
+    "explanation": "La méthode main doit être : public static void main(String[] args)",
+    "category": "methodes"
+  },
+  {
+    "id": 26,
+    "question": "Que contient le package java.lang ?",
+    "options": [
+      "Les classes de collections",
+      "Les classes fondamentales (Object, String, Math, System)",
+      "Les classes de gestion de fichiers",
+      "Les classes réseau"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le package java.lang contient les classes fondamentales comme Object, String, Math, System, et est importé automatiquement.",
+    "category": "packages"
+  },
+  {
+    "id": 27,
+    "question": "Comment déclarer qu'une classe appartient à un package ?",
+    "options": [
+      "Avec import au début du fichier",
+      "Avec package au début du fichier",
+      "Avec namespace au début du fichier",
+      "Avec module au début du fichier"
+    ],
+    "correctIndex": 1,
+    "explanation": "On utilise le mot-clé package suivi du nom en première ligne du fichier source.",
+    "category": "packages"
+  },
+  {
+    "id": 28,
+    "question": "Quelle est la visibilité par défaut (sans modificateur) d'une classe ?",
+    "options": [
+      "public",
+      "private",
+      "protected",
+      "package-private (visible dans le package)"
+    ],
+    "correctIndex": 3,
+    "explanation": "Sans modificateur, une classe a une visibilité package-private : elle n'est visible que depuis les classes du même package.",
+    "category": "encapsulation"
+  },
+  {
+    "id": 29,
+    "question": "Combien de classes publiques peut contenir un fichier .java ?",
+    "options": [
+      "Autant qu'on veut",
+      "Une seule",
+      "Deux maximum",
+      "Aucune"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un fichier .java ne peut contenir qu'une seule classe publique, qui doit avoir le même nom que le fichier.",
+    "category": "classes_objets"
+  },
+  {
+    "id": 30,
+    "question": "Quel principe de la POO permet de limiter l'accès aux données ?",
+    "options": [
+      "L'héritage",
+      "Le polymorphisme",
+      "L'encapsulation",
+      "L'abstraction"
+    ],
+    "correctIndex": 2,
+    "explanation": "L'encapsulation permet de contrôler l'accès aux données en les rendant privées et en fournissant des méthodes publiques.",
+    "category": "encapsulation"
+  },
+  {
+    "id": 31,
+    "question": "Quelle méthode de la classe Object est redéfinie pour afficher un objet ?",
+    "options": [
+      "print()",
+      "display()",
+      "toString()",
+      "getString()"
+    ],
+    "correctIndex": 2,
+    "explanation": "La méthode toString() héritée de Object est redéfinie pour personnaliser l'affichage d'un objet.",
+    "category": "methodes"
+  },
+  {
+    "id": 32,
+    "question": "Que signifie le mot-clé final sur un attribut ?",
+    "options": [
+      "L'attribut est public",
+      "L'attribut ne peut être affecté qu'une seule fois",
+      "L'attribut est static",
+      "L'attribut ne peut pas être lu"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le mot-clé final signifie que l'attribut ne peut être affecté qu'une seule fois (constante).",
+    "category": "classes_objets"
+  }
+]

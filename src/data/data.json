@@ -1,0 +1,34 @@
+{
+  "quizzes": [
+    {
+      "id": "c-functions",
+      "title": "Fonctions en C",
+      "description": "Questions sur les fonctions et procédures en langage C",
+      "category": "Langage C",
+      "difficulty": "intermediaire",
+      "questionCount": 0,
+      "fileName": "questions.json",
+      "icon": "🔧"
+    },
+    {
+      "id": "java-variables",
+      "title": "Variables et types en Java",
+      "description": "Types primitifs, Wrappers, tableaux, passage de paramètres",
+      "category": "Java - POO",
+      "difficulty": "intermediaire",
+      "questionCount": 32,
+      "fileName": "questions-java-variables.json",
+      "icon": "☕"
+    },
+    {
+      "id": "java-oop-basics",
+      "title": "Bases de la POO en Java",
+      "description": "Classes, objets, encapsulation, constructeurs, méthodes",
+      "category": "Java - POO",
+      "difficulty": "debutant",
+      "questionCount": 32,
+      "fileName": "questions-java-oop-basics.json",
+      "icon": "📦"
+    }
+  ]
+}
