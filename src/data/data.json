@@ -29,6 +29,16 @@
       "questionCount": 32,
       "fileName": "questions-java-oop-basics.json",
       "icon": "📦"
+    },
+    {
+      "id": "graphes-non-orientes",
+      "title": "Graphes non orientés",
+      "description": "Définitions, cas particuliers, parcours (eulériens, hamiltoniens), coloration",
+      "category": "Graphes",
+      "difficulty": "intermediaire",
+      "questionCount": 70,
+      "fileName": "questions-graphes-non-orientes.json",
+      "icon": "🔗"
     }
   ]
 }

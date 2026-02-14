@@ -1,0 +1,910 @@
+[
+  {
+    "id": 1,
+    "question": "Un graphe non orienté G est donné par un triplet (V, E, γ). Que représentent V, E et γ ?",
+    "options": [
+      "V = sommets, E = arêtes, γ = fonction d'incidence qui associe à chaque arête les sommets qu'elle joint",
+      "V = valeurs, E = entrées, γ = fonction de poids",
+      "V = sommets, E = arêtes, γ = fonction de coloration",
+      "V = voisins, E = ensembles, γ = fonction de degré"
+    ],
+    "correctIndex": 0,
+    "explanation": "Un graphe non orienté G = (V, E, γ) où V est l'ensemble des sommets (vertex), E l'ensemble des arêtes (edge), et γ : E → U la fonction d'incidence qui associe à chaque arête les sommets qu'elle joint.",
+    "category": "definitions"
+  },
+  {
+    "id": 2,
+    "question": "Qu'est-ce que l'ordre d'un graphe ?",
+    "options": [
+      "Le nombre d'arêtes du graphe",
+      "Le nombre de sommets du graphe",
+      "Le degré maximal d'un sommet",
+      "Le nombre de composantes connexes"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'ordre d'un graphe G = (V, E, γ) est o(G) = card(V), c'est-à-dire le nombre de sommets.",
+    "category": "definitions"
+  },
+  {
+    "id": 3,
+    "question": "Qu'est-ce que le degré d'un graphe ?",
+    "options": [
+      "Le nombre de sommets du graphe",
+      "Le degré maximal d'un sommet",
+      "Le nombre d'arêtes du graphe",
+      "La somme des degrés de tous les sommets"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le degré d'un graphe G est d(G) = card(E), c'est-à-dire le nombre d'arêtes du graphe.",
+    "category": "definitions"
+  },
+  {
+    "id": 4,
+    "question": "Qu'est-ce que le degré d'un sommet s ?",
+    "options": [
+      "Le nombre de sommets adjacents à s",
+      "Le nombre d'arêtes issues de s (les boucles comptent deux fois)",
+      "Le nombre de chaînes passant par s",
+      "Le nombre de cycles contenant s"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le degré d'un sommet s ∈ V est le nombre d'arêtes issues de s, noté d(s). Attention : les boucles qui passent par ce sommet comptent deux fois.",
+    "category": "definitions"
+  },
+  {
+    "id": 5,
+    "question": "Que dit le théorème reliant la somme des degrés des sommets au degré du graphe ?",
+    "options": [
+      "La somme des degrés est égale au degré du graphe",
+      "La somme des degrés est égale au double du degré du graphe",
+      "La somme des degrés est égale à la moitié du degré du graphe",
+      "La somme des degrés est égale au carré du degré du graphe"
+    ],
+    "correctIndex": 1,
+    "explanation": "La somme des degrés de tous les sommets est égale au double du nombre d'arêtes : Σ d(s) = 2 × d(G). En effet, chaque arête a deux extrémités et contribue donc à augmenter de 1 le degré de chacune.",
+    "category": "definitions"
+  },
+  {
+    "id": 6,
+    "question": "Quel corollaire découle du théorème Σ d(s) = 2 × d(G) ?",
+    "options": [
+      "Un graphe a toujours un nombre pair de sommets",
+      "Dans un graphe, il ne peut pas y avoir un nombre impair de sommets de degré impair",
+      "Tous les sommets d'un graphe ont le même degré",
+      "Le degré d'un graphe est toujours pair"
+    ],
+    "correctIndex": 1,
+    "explanation": "Comme la somme des degrés est paire (le double du nombre d'arêtes), il ne peut pas y avoir un nombre impair de sommets de degré impair.",
+    "category": "definitions"
+  },
+  {
+    "id": 7,
+    "question": "Qu'est-ce qu'un graphe simple ?",
+    "options": [
+      "Un graphe qui n'a qu'un seul sommet",
+      "Un graphe non orienté qui n'a ni boucles ni arêtes parallèles",
+      "Un graphe dont tous les sommets ont le même degré",
+      "Un graphe qui est connexe"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un graphe simple est un graphe non orienté qui n'a ni boucles ni arêtes parallèles. Dans de nombreux contextes, les graphes qui apparaissent sont forcément simples.",
+    "category": "definitions"
+  },
+  {
+    "id": 8,
+    "question": "Deux arêtes a₁ et a₂ sont dites parallèles si :",
+    "options": [
+      "Elles ne partagent aucun sommet",
+      "Elles ont les mêmes extrémités : γ(a₁) = γ(a₂)",
+      "Elles forment un cycle",
+      "Elles sont adjacentes à un même sommet"
+    ],
+    "correctIndex": 1,
+    "explanation": "Deux arêtes sont parallèles si elles ont les mêmes extrémités, c'est-à-dire γ(a₁) = γ(a₂).",
+    "category": "definitions"
+  },
+  {
+    "id": 9,
+    "question": "La matrice d'adjacence d'un graphe non orienté est toujours :",
+    "options": [
+      "Diagonale",
+      "Triangulaire",
+      "Symétrique",
+      "Inversible"
+    ],
+    "correctIndex": 2,
+    "explanation": "La matrice d'adjacence d'un graphe non orienté est toujours symétrique car si s_i est adjacent à s_j, alors s_j est adjacent à s_i.",
+    "category": "definitions"
+  },
+  {
+    "id": 10,
+    "question": "Dans la matrice d'adjacence d'un graphe non orienté, que représentent les éléments de la diagonale ?",
+    "options": [
+      "Le degré de chaque sommet",
+      "Le nombre de boucles sur chaque sommet",
+      "Le nombre de sommets adjacents",
+      "Ils sont toujours égaux à 0"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les éléments de la diagonale de la matrice d'adjacence représentent les boucles. Si le graphe est simple, la diagonale ne contient que des 0.",
+    "category": "definitions"
+  },
+  {
+    "id": 11,
+    "question": "Dans la matrice d'adjacence, que donne la somme des éléments de la ligne i ?",
+    "options": [
+      "L'ordre du graphe",
+      "Le degré du graphe",
+      "Le degré du sommet s_i",
+      "Le nombre de chaînes partant de s_i"
+    ],
+    "correctIndex": 2,
+    "explanation": "La somme des éléments de la ligne i donne d(s_i), le degré du sommet s_i.",
+    "category": "definitions"
+  },
+  {
+    "id": 12,
+    "question": "Soit G = (V, E, γ) avec V = {s₁,s₂,s₃,s₄}, E = {a₁,...,a₆} et γ(a₁)={s₁,s₂}, γ(a₂)={s₁,s₃}, γ(a₃)={s₁,s₂}, γ(a₄)={s₄}, γ(a₅)={s₄,s₂}, γ(a₆)={s₂,s₃}. Quel est l'ordre et le degré de G ?",
+    "options": [
+      "o(G) = 6, d(G) = 4",
+      "o(G) = 4, d(G) = 6",
+      "o(G) = 4, d(G) = 4",
+      "o(G) = 6, d(G) = 6"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'ordre est le nombre de sommets : o(G) = card(V) = 4. Le degré est le nombre d'arêtes : d(G) = card(E) = 6.",
+    "category": "definitions"
+  },
+  {
+    "id": 13,
+    "question": "Peut-il exister un graphe simple à 6 sommets de degrés 2, 3, 3, 4, 4, 5 ?",
+    "options": [
+      "Oui, c'est possible",
+      "Non, car la somme des degrés (21) est impaire",
+      "Non, car le degré maximal dépasse n-1",
+      "Non, car il y a trop de sommets de degré impair"
+    ],
+    "correctIndex": 1,
+    "explanation": "La somme des degrés 2+3+3+4+4+5 = 21 est impaire, ce qui est impossible car la somme des degrés doit toujours être paire (égale à 2 × nombre d'arêtes).",
+    "category": "definitions"
+  },
+  {
+    "id": 14,
+    "question": "Peut-il exister un graphe simple à 5 sommets de degrés 2, 4, 4, 6, 6 ?",
+    "options": [
+      "Oui, c'est possible",
+      "Non, car la somme des degrés est impaire",
+      "Non, car dans un graphe simple d'ordre n, le degré d'un sommet ne peut dépasser n-1 = 4",
+      "Non, car il y a un nombre impair de sommets de degré impair"
+    ],
+    "correctIndex": 2,
+    "explanation": "Dans un graphe simple d'ordre 5, le degré d'un sommet ne peut pas dépasser n-1 = 4. Or ici, deux sommets ont un degré de 6, ce qui est impossible.",
+    "category": "definitions"
+  },
+  {
+    "id": 15,
+    "question": "Deux graphes G et G' sont isomorphes si et seulement si :",
+    "options": [
+      "Ils ont le même nombre de sommets et d'arêtes",
+      "Ils ont la même matrice d'adjacence",
+      "Il existe des bijections entre sommets et entre arêtes qui respectent la fonction d'incidence",
+      "Tous leurs sommets ont le même degré"
+    ],
+    "correctIndex": 2,
+    "explanation": "Deux graphes sont isomorphes s'il existe deux applications bijectives φ entre les sommets et ψ entre les arêtes qui respectent les fonctions d'incidence. Avoir même ordre et même degré est nécessaire mais pas suffisant.",
+    "category": "isomorphisme"
+  },
+  {
+    "id": 16,
+    "question": "Deux graphes ont même ordre, même degré et mêmes degrés de sommets. Sont-ils forcément isomorphes ?",
+    "options": [
+      "Oui, c'est une condition suffisante",
+      "Non, ce n'est pas parce qu'ils ont ces propriétés en commun qu'ils sont isomorphes",
+      "Oui, si en plus ils sont simples",
+      "Oui, si en plus ils sont connexes"
+    ],
+    "correctIndex": 1,
+    "explanation": "Ce n'est pas parce que deux graphes ont même ordre, même degré et des sommets de mêmes degrés qu'ils sont isomorphes. Ce sont des conditions nécessaires mais pas suffisantes. Il existe des contrexemples classiques.",
+    "category": "isomorphisme"
+  },
+  {
+    "id": 17,
+    "question": "Qu'est-ce qu'un sous-graphe induit d'un graphe G ?",
+    "options": [
+      "Un graphe composé d'une partie des sommets avec seulement certaines arêtes les reliant",
+      "Un graphe composé d'un sous-ensemble de sommets et de TOUTES les arêtes les reliant dans G",
+      "Un graphe obtenu en supprimant des arêtes",
+      "Un graphe ayant les mêmes sommets mais moins d'arêtes"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un sous-graphe induit est constitué d'un sous-ensemble de sommets et de toutes les arêtes les reliant dans le graphe initial. Un sous-graphe (non induit) peut ne conserver qu'une partie de ces arêtes.",
+    "category": "definitions"
+  },
+  {
+    "id": 18,
+    "question": "Qu'est-ce qu'un graphe complet ?",
+    "options": [
+      "Un graphe où tous les sommets ont le même degré",
+      "Un graphe simple dans lequel chaque sommet est adjacent à tous les autres",
+      "Un graphe connexe",
+      "Un graphe sans boucles"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un graphe complet est un graphe simple dans lequel chaque sommet est adjacent à tous les autres. La connectivité est maximale.",
+    "category": "cas_particuliers"
+  },
+  {
+    "id": 19,
+    "question": "Le graphe complet d'ordre n est noté Kₙ. Quel est son degré (nombre d'arêtes) ?",
+    "options": [
+      "n",
+      "n - 1",
+      "n(n-1)/2",
+      "n²"
+    ],
+    "correctIndex": 2,
+    "explanation": "Dans un graphe complet Kₙ, chaque sommet est de degré n-1. Le nombre d'arêtes est donc d(Kₙ) = n(n-1)/2.",
+    "category": "cas_particuliers"
+  },
+  {
+    "id": 20,
+    "question": "Comment est faite la matrice d'adjacence d'un graphe complet ?",
+    "options": [
+      "Elle ne contient que des 1",
+      "Elle ne contient que des 1, sauf sur la diagonale qui ne contient que des 0",
+      "Elle ne contient que des 0, sauf sur la diagonale qui ne contient que des 1",
+      "C'est la matrice identité"
+    ],
+    "correctIndex": 1,
+    "explanation": "La matrice d'adjacence d'un graphe complet ne contient que des 1 partout sauf sur la diagonale (qui vaut 0 car un graphe complet est simple, donc sans boucles).",
+    "category": "cas_particuliers"
+  },
+  {
+    "id": 21,
+    "question": "Qu'est-ce qu'un graphe régulier ?",
+    "options": [
+      "Un graphe complet",
+      "Un graphe simple où tous les sommets ont le même degré",
+      "Un graphe connexe et simple",
+      "Un graphe planaire"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un graphe régulier est un graphe simple où tous les sommets sont de même degré. Si ce degré est r, on parle de graphe r-régulier. Les graphes complets sont des cas particuliers de graphes réguliers.",
+    "category": "cas_particuliers"
+  },
+  {
+    "id": 22,
+    "question": "Un graphe 3-régulier d'ordre n peut exister seulement si :",
+    "options": [
+      "n est impair",
+      "n est pair",
+      "n ≥ 4",
+      "n est un multiple de 3"
+    ],
+    "correctIndex": 1,
+    "explanation": "Pour un graphe 3-régulier d'ordre n, la somme des degrés vaut 3n. Comme cette somme doit être paire (= 2 × nombre d'arêtes), il faut que 3n soit pair, donc n doit être pair.",
+    "category": "cas_particuliers"
+  },
+  {
+    "id": 23,
+    "question": "Qu'est-ce qu'un graphe stable ?",
+    "options": [
+      "Un graphe connexe",
+      "Un graphe ne possédant aucune arête",
+      "Un graphe dont tous les sommets ont le même degré",
+      "Un graphe qui ne peut pas être modifié"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un graphe stable est un graphe ne possédant aucune arête. Les graphes stables sont donc les graphes 0-réguliers.",
+    "category": "cas_particuliers"
+  },
+  {
+    "id": 24,
+    "question": "Qu'est-ce qu'un graphe biparti ?",
+    "options": [
+      "Un graphe dont les sommets peuvent se partager en deux groupes V₁ et V₂ tels qu'aucune arête ne relie deux sommets d'un même groupe",
+      "Un graphe composé exactement de deux composantes connexes",
+      "Un graphe avec exactement deux sommets",
+      "Un graphe dont chaque sommet a exactement 2 voisins"
+    ],
+    "correctIndex": 0,
+    "explanation": "Un graphe biparti est un graphe simple où les sommets peuvent se partager en deux groupes V = V₁ ∪ V₂ tels qu'aucune arête ne relie des sommets d'un même groupe.",
+    "category": "cas_particuliers"
+  },
+  {
+    "id": 25,
+    "question": "Qu'est-ce qu'un graphe biparti complet K_{n,m} ?",
+    "options": [
+      "Un graphe biparti où certains sommets de V₁ sont reliés à certains sommets de V₂",
+      "Un graphe biparti où chaque sommet de V₁ est adjacent à tous les sommets de V₂",
+      "Un graphe biparti connexe",
+      "Un graphe biparti régulier"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un graphe biparti complet K_{n,m} est un graphe biparti où chaque sommet de V₁ est adjacent à tous les sommets de V₂ (et réciproquement). Son ordre est n+m et son degré est n×m.",
+    "category": "cas_particuliers"
+  },
+  {
+    "id": 26,
+    "question": "Un graphe est planaire si :",
+    "options": [
+      "Il peut être dessiné dans le plan sans que deux arêtes se croisent",
+      "Il est de degré inférieur ou égal à 4",
+      "Il ne contient pas de cycle",
+      "Tous ses sommets sont de degré pair"
+    ],
+    "correctIndex": 0,
+    "explanation": "Un graphe est planaire s'il existe un graphe isomorphe à G qui peut être dessiné dans le plan sans que deux arêtes se croisent.",
+    "category": "cas_particuliers"
+  },
+  {
+    "id": 27,
+    "question": "Que dit le théorème de Kuratowski sur les graphes planaires ?",
+    "options": [
+      "Un graphe est planaire si et seulement si son nombre chromatique est ≤ 4",
+      "Un graphe est planaire si et seulement si aucun de ses sous-graphes n'est une expansion de K₅ ou de K₃,₃",
+      "Un graphe est planaire si et seulement si il est biparti",
+      "Un graphe est planaire si et seulement si il est connexe"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le théorème de Kuratowski dit qu'un graphe est planaire si et seulement si aucun de ses sous-graphes n'est une expansion de K₅ ou de K₃,₃. K₅ et K₃,₃ sont les deux plus petits graphes non planaires.",
+    "category": "cas_particuliers"
+  },
+  {
+    "id": 28,
+    "question": "Le graphe de Petersen est un graphe simple particulier. Quels sont son ordre et son degré ?",
+    "options": [
+      "Ordre 5, degré 10",
+      "Ordre 10, degré 15",
+      "Ordre 10, degré 10",
+      "Ordre 15, degré 10"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le graphe de Petersen est un graphe simple particulier d'ordre 10 et de degré 15. C'est un graphe 3-régulier souvent utilisé comme contrexemple.",
+    "category": "cas_particuliers"
+  },
+  {
+    "id": 29,
+    "question": "Qu'est-ce qu'une chaîne dans un graphe ?",
+    "options": [
+      "Un ensemble de sommets isolés",
+      "Une suite quelconque de sommets et d'arêtes adjacents",
+      "Un cycle de longueur paire",
+      "Un sous-graphe complet"
+    ],
+    "correctIndex": 1,
+    "explanation": "Une chaîne est une suite quelconque de sommets et d'arêtes adjacents. Si elle ne contient pas deux fois la même arête, on dit qu'elle est simple. Sa longueur est son nombre d'arêtes.",
+    "category": "parcours"
+  },
+  {
+    "id": 30,
+    "question": "Qu'est-ce qu'un cycle dans un graphe ?",
+    "options": [
+      "Une chaîne qui passe par tous les sommets",
+      "Une chaîne dont les deux extrémités sont confondues et dont toutes les arêtes sont distinctes",
+      "Un graphe régulier",
+      "Un sous-graphe connexe"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un cycle est une chaîne dont les deux extrémités sont confondues et dont toutes les arêtes sont distinctes. Si une arête se répète, on parle plutôt de chaîne fermée.",
+    "category": "parcours"
+  },
+  {
+    "id": 31,
+    "question": "Qu'appelle-t-on la distance entre deux sommets d'un graphe ?",
+    "options": [
+      "Le nombre de sommets entre eux",
+      "La longueur de la plus courte chaîne qui les relie",
+      "Le nombre d'arêtes communes à leurs voisins",
+      "La différence de leurs degrés"
+    ],
+    "correctIndex": 1,
+    "explanation": "La distance entre deux sommets est la longueur de la plus courte chaîne qui les relie. Si aucune chaîne ne les relie, la distance est considérée comme infinie.",
+    "category": "parcours"
+  },
+  {
+    "id": 32,
+    "question": "Qu'est-ce que le diamètre d'un graphe ?",
+    "options": [
+      "Le degré maximal d'un sommet",
+      "Le nombre de composantes connexes",
+      "La distance maximale entre deux sommets du graphe",
+      "Le nombre de cycles du graphe"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le diamètre d'un graphe est la distance des deux sommets les plus éloignés l'un de l'autre.",
+    "category": "parcours"
+  },
+  {
+    "id": 33,
+    "question": "Un graphe non orienté est connexe si :",
+    "options": [
+      "Tous ses sommets ont le même degré",
+      "Il existe toujours une chaîne qui permet d'aller d'un sommet à un autre",
+      "Il ne contient pas de cycle",
+      "Sa matrice d'adjacence est symétrique"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un graphe non orienté est connexe s'il existe toujours une chaîne qui permet d'aller de n'importe quel sommet à n'importe quel autre.",
+    "category": "parcours"
+  },
+  {
+    "id": 34,
+    "question": "Un graphe simple non orienté G est connexe si et seulement si sa fermeture transitive est :",
+    "options": [
+      "Un graphe régulier",
+      "Un graphe complet",
+      "Un graphe biparti",
+      "Un graphe stable"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un graphe simple G est connexe si et seulement si sa fermeture transitive Ĝ est un graphe complet. La fermeture transitive a une arête entre s₁ et s₂ dès qu'il existe une chaîne entre eux dans G.",
+    "category": "parcours"
+  },
+  {
+    "id": 35,
+    "question": "Si A est la matrice d'adjacence d'un graphe, que représente l'élément (i,j) de A² ?",
+    "options": [
+      "Le nombre de chaînes de longueur 2 entre s_i et s_j",
+      "La distance entre s_i et s_j",
+      "Le degré de s_i multiplié par celui de s_j",
+      "Le nombre d'arêtes entre s_i et s_j"
+    ],
+    "correctIndex": 0,
+    "explanation": "L'élément (i,j) de A² = A × A donne le nombre de chaînes de longueur 2 entre les sommets s_i et s_j. De même, A³ donne les chaînes de longueur 3, etc.",
+    "category": "parcours"
+  },
+  {
+    "id": 36,
+    "question": "Qu'est-ce qu'un graphe eulérien ?",
+    "options": [
+      "Un graphe possédant un cycle qui passe par chaque sommet une et une seule fois",
+      "Un graphe possédant un cycle qui emprunte chaque arête une et une seule fois",
+      "Un graphe dont tous les sommets sont de degré impair",
+      "Un graphe planaire"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un graphe eulérien est un graphe possédant un cycle eulérien, c'est-à-dire un cycle qui emprunte chaque arête une et une seule fois. On impose de passer par chaque arête, pas par chaque sommet.",
+    "category": "parcours"
+  },
+  {
+    "id": 37,
+    "question": "Un graphe connexe est eulérien si et seulement si :",
+    "options": [
+      "Tous ses sommets sont de degré pair",
+      "Il a au moins un sommet de degré impair",
+      "Il a exactement deux sommets de degré impair",
+      "Il est complet"
+    ],
+    "correctIndex": 0,
+    "explanation": "Théorème d'Euler : un graphe connexe est eulérien si et seulement si tous ses sommets sont de degré pair.",
+    "category": "parcours"
+  },
+  {
+    "id": 38,
+    "question": "Un graphe connexe est semi-eulérien (traversable) si et seulement si :",
+    "options": [
+      "Tous ses sommets sont de degré pair",
+      "Il a exactement un sommet de degré impair",
+      "Il a au maximum deux sommets de degré impair",
+      "Il est biparti"
+    ],
+    "correctIndex": 2,
+    "explanation": "Un graphe connexe est traversable (semi-eulérien) s'il a au maximum deux sommets de degré impair. Si c'est le cas, la chaîne eulérienne commence et se termine aux deux sommets de degré impair.",
+    "category": "parcours"
+  },
+  {
+    "id": 39,
+    "question": "Le problème des sept ponts de Königsberg (Euler, 1736) a-t-il une solution ?",
+    "options": [
+      "Oui, il existe un cycle eulérien",
+      "Oui, il existe une chaîne eulérienne",
+      "Non, car tous les sommets sont de degré impair",
+      "Non, car le graphe n'est pas connexe"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le graphe des ponts de Königsberg a 4 sommets, tous de degré impair. Il n'est donc ni eulérien ni semi-eulérien : il est impossible de traverser chacun des ponts une seule fois.",
+    "category": "parcours"
+  },
+  {
+    "id": 40,
+    "question": "Quels graphes complets Kₙ sont eulériens ?",
+    "options": [
+      "Ceux pour lesquels n est pair",
+      "Ceux pour lesquels n est impair",
+      "Tous les graphes complets",
+      "Aucun graphe complet"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dans Kₙ, chaque sommet est de degré n-1. Pour que le graphe soit eulérien, il faut que n-1 soit pair, donc que n soit impair.",
+    "category": "parcours"
+  },
+  {
+    "id": 41,
+    "question": "Qu'est-ce qu'un graphe hamiltonien ?",
+    "options": [
+      "Un graphe possédant un cycle qui emprunte chaque arête une et une seule fois",
+      "Un graphe possédant un cycle qui passe par chaque sommet une et une seule fois",
+      "Un graphe connexe dont tous les sommets sont de degré pair",
+      "Un graphe planaire et connexe"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un graphe hamiltonien possède un cycle hamiltonien, c'est-à-dire un cycle qui passe une fois et une seule par chaque sommet du graphe.",
+    "category": "parcours"
+  },
+  {
+    "id": 42,
+    "question": "Existe-t-il un critère simple (condition nécessaire et suffisante) pour déterminer si un graphe est hamiltonien ?",
+    "options": [
+      "Oui, il suffit que tous les sommets soient de degré pair",
+      "Oui, il suffit que le graphe soit connexe",
+      "Non, contrairement aux graphes eulériens, il n'existe pas de critère simple",
+      "Oui, il suffit que le graphe soit complet"
+    ],
+    "correctIndex": 2,
+    "explanation": "Contrairement aux graphes eulériens (critère sur la parité des degrés), il n'existe aucun critère simple (condition nécessaire et suffisante) pour les graphes hamiltoniens. Il existe seulement des conditions suffisantes.",
+    "category": "parcours"
+  },
+  {
+    "id": 43,
+    "question": "Soit G un graphe simple d'ordre n ≥ 3. Si pour tout sommet a, deg(a) ≥ n/2, alors G est :",
+    "options": [
+      "Eulérien",
+      "Biparti",
+      "Hamiltonien",
+      "Planaire"
+    ],
+    "correctIndex": 2,
+    "explanation": "C'est le théorème de Dirac : si G est un graphe simple d'ordre n ≥ 3 et que pour tout sommet a, deg(a) ≥ n/2, alors G est hamiltonien. C'est une condition suffisante mais pas nécessaire.",
+    "category": "parcours"
+  },
+  {
+    "id": 44,
+    "question": "Un graphe peut-il être eulérien sans être hamiltonien, et vice versa ?",
+    "options": [
+      "Non, eulérien implique toujours hamiltonien",
+      "Non, hamiltonien implique toujours eulérien",
+      "Oui, les deux propriétés sont indépendantes",
+      "Oui, mais seulement pour les graphes bipartis"
+    ],
+    "correctIndex": 2,
+    "explanation": "Les propriétés eulérien et hamiltonien sont indépendantes. Un graphe peut être l'un sans l'autre, les deux, ou aucun. Par exemple, K₃,₃ est eulérien non hamiltonien... en fait non, K₃,₃ n'est pas eulérien (degrés impairs). Le cours montre des exemples de graphes hamiltoniens non eulériens et eulériens non hamiltoniens.",
+    "category": "parcours"
+  },
+  {
+    "id": 45,
+    "question": "Colorer un graphe, c'est :",
+    "options": [
+      "Attribuer une couleur à chaque arête de sorte que deux arêtes adjacentes aient des couleurs différentes",
+      "Attribuer une couleur à chaque sommet de sorte que deux sommets adjacents aient des couleurs différentes",
+      "Attribuer une couleur à chaque composante connexe",
+      "Attribuer la même couleur à tous les sommets de même degré"
+    ],
+    "correctIndex": 1,
+    "explanation": "Colorer un graphe signifie attribuer une couleur à chacun de ses sommets de manière à ce que deux sommets adjacents soient de couleurs différentes.",
+    "category": "coloration"
+  },
+  {
+    "id": 46,
+    "question": "Qu'est-ce que le nombre chromatique χ(G) d'un graphe G ?",
+    "options": [
+      "Le nombre maximal de couleurs utilisables",
+      "Le nombre minimal de couleurs nécessaires pour colorer le graphe",
+      "Le nombre de sommets du graphe",
+      "Le degré maximal du graphe"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le nombre chromatique χ(G) est le nombre minimal de couleurs nécessaires pour colorer le graphe G (c'est-à-dire pour que deux sommets adjacents aient des couleurs différentes).",
+    "category": "coloration"
+  },
+  {
+    "id": 47,
+    "question": "Si G est un graphe complet d'ordre n, alors χ(G) = ?",
+    "options": [
+      "1",
+      "2",
+      "n",
+      "n - 1"
+    ],
+    "correctIndex": 2,
+    "explanation": "Si G est complet, chaque sommet est adjacent à tous les autres, il faut donc une couleur différente par sommet : χ(G) = o(G) = n.",
+    "category": "coloration"
+  },
+  {
+    "id": 48,
+    "question": "Si d est le degré le plus élevé des sommets de G, alors :",
+    "options": [
+      "χ(G) = d",
+      "χ(G) ≤ d + 1",
+      "χ(G) ≥ d + 1",
+      "χ(G) = d + 1"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le nombre chromatique est toujours borné par χ(G) ≤ d + 1, où d est le degré maximal d'un sommet du graphe.",
+    "category": "coloration"
+  },
+  {
+    "id": 49,
+    "question": "Si G contient un sous-graphe complet d'ordre n (Kₙ), alors :",
+    "options": [
+      "χ(G) ≤ n",
+      "χ(G) = n",
+      "χ(G) ≥ n",
+      "χ(G) = n + 1"
+    ],
+    "correctIndex": 2,
+    "explanation": "Si G contient Kₙ comme sous-graphe, alors il faut au moins n couleurs pour les n sommets de ce sous-graphe complet, donc χ(G) ≥ n.",
+    "category": "coloration"
+  },
+  {
+    "id": 50,
+    "question": "Quel est le nombre chromatique d'un graphe biparti (non stable) ?",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "Ça dépend du graphe"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un graphe biparti non stable a un nombre chromatique de 2 : on attribue une couleur aux sommets de V₁ et une autre aux sommets de V₂. Comme aucune arête ne relie deux sommets d'un même groupe, c'est une coloration valide.",
+    "category": "coloration"
+  },
+  {
+    "id": 51,
+    "question": "En quoi consiste l'algorithme de Welsh & Powell pour colorer un graphe ?",
+    "options": [
+      "On colore les sommets dans l'ordre alphabétique avec le minimum de couleurs",
+      "On trie les sommets par degrés décroissants, puis on colore chaque sommet avec la plus petite couleur compatible",
+      "On cherche tous les sous-graphes complets et on attribue une couleur par sous-graphe",
+      "On colore aléatoirement et on vérifie si c'est valide"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'algorithme de Welsh & Powell : on trie les sommets par degrés décroissants, puis on attribue à chaque sommet (dans cet ordre) la plus petite couleur qui ne soit pas déjà utilisée par un de ses voisins.",
+    "category": "coloration"
+  },
+  {
+    "id": 52,
+    "question": "L'algorithme de Welsh & Powell donne-t-il toujours un coloriage optimal (avec le minimum de couleurs) ?",
+    "options": [
+      "Oui, toujours",
+      "Non, c'est un algorithme glouton qui ne garantit pas l'optimalité",
+      "Oui, pour les graphes planaires",
+      "Oui, pour les graphes bipartis"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'algorithme de Welsh & Powell est un algorithme glouton : il donne une bonne approximation mais ne garantit pas toujours le nombre minimal de couleurs. Il peut parfois utiliser plus de couleurs que nécessaire.",
+    "category": "coloration"
+  },
+  {
+    "id": 53,
+    "question": "Si un graphe est planaire, alors χ(G) ≤ ?",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "correctIndex": 2,
+    "explanation": "C'est le théorème des 4 couleurs : tout graphe planaire peut être coloré avec au plus 4 couleurs, soit χ(G) ≤ 4.",
+    "category": "coloration"
+  },
+  {
+    "id": 54,
+    "question": "Dans un graphe simple d'ordre n (n ≥ 2), est-il vrai qu'il y a toujours au moins deux sommets de même degré ?",
+    "options": [
+      "Vrai",
+      "Faux"
+    ],
+    "correctIndex": 0,
+    "explanation": "Oui ! Par l'absurde : les degrés possibles vont de 0 à n-1 (n valeurs). S'ils étaient tous différents, on aurait un sommet de degré 0 (relié à personne) et un de degré n-1 (relié à tous), ce qui est contradictoire.",
+    "category": "definitions"
+  },
+  {
+    "id": 55,
+    "question": "Quel est le nombre maximal d'arêtes dans un graphe simple d'ordre n ?",
+    "options": [
+      "n",
+      "n(n+1)/2",
+      "n(n-1)/2",
+      "n²"
+    ],
+    "correctIndex": 2,
+    "explanation": "Dans un graphe simple (sans boucles ni arêtes parallèles), chaque sommet est de degré au maximum n-1. Le nombre maximal d'arêtes est n(n-1)/2, atteint par le graphe complet Kₙ.",
+    "category": "definitions"
+  },
+  {
+    "id": 56,
+    "question": "Peut-il exister un graphe simple à 4 sommets de degrés 1, 3, 3, 3 ?",
+    "options": [
+      "Oui, c'est possible",
+      "Non, car la somme des degrés est impaire",
+      "Non, car si 3 sommets sont de degré n-1=3, ils sont reliés à tous les autres, donc le 4e sommet doit aussi être de degré 3",
+      "Non, car le graphe n'est pas connexe"
+    ],
+    "correctIndex": 2,
+    "explanation": "Dans un graphe simple d'ordre 4, un sommet de degré 3 est relié à tous les autres. Si 3 sommets sont de degré 3, ils sont chacun reliés au 4e sommet, qui doit donc être de degré au moins 3, pas 1. Contradiction !",
+    "category": "definitions"
+  },
+  {
+    "id": 57,
+    "question": "K₃,₃ est-il eulérien ?",
+    "options": [
+      "Oui, car il est connexe",
+      "Oui, car il est biparti complet",
+      "Non, car tous ses sommets sont de degré 3 (impair)",
+      "Non, car il n'est pas planaire"
+    ],
+    "correctIndex": 2,
+    "explanation": "K₃,₃ a tous ses sommets de degré 3 (chaque sommet est relié aux 3 sommets de l'autre groupe). Comme 3 est impair, le graphe n'est pas eulérien.",
+    "category": "parcours"
+  },
+  {
+    "id": 58,
+    "question": "Un graphe biparti peut-il contenir K₃ (triangle) comme sous-graphe ?",
+    "options": [
+      "Oui, dans certains cas",
+      "Non, jamais",
+      "Oui, si le graphe est biparti complet",
+      "Oui, si le graphe est connexe"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un graphe biparti ne contient jamais K₃. En effet, parmi 3 sommets d'un graphe biparti, au moins 2 appartiennent au même groupe et ne peuvent donc pas être reliés entre eux.",
+    "category": "cas_particuliers"
+  },
+  {
+    "id": 59,
+    "question": "Qu'est-ce que la fermeture transitive d'un graphe G ?",
+    "options": [
+      "Le graphe Ĝ qui a les mêmes sommets que G et une arête entre s₁ et s₂ dès qu'il existe une chaîne entre s₁ et s₂ dans G",
+      "Le complémentaire de G",
+      "Le graphe obtenu en supprimant les boucles de G",
+      "Le graphe obtenu en ajoutant toutes les boucles possibles"
+    ],
+    "correctIndex": 0,
+    "explanation": "La fermeture transitive Ĝ de G a les mêmes sommets que G et possède une arête entre s₁ et s₂ si dans G il y a une chaîne entre s₁ et s₂. On peut la calculer via les puissances de la matrice d'adjacence.",
+    "category": "parcours"
+  },
+  {
+    "id": 60,
+    "question": "Qu'est-ce que l'expansion d'un graphe ?",
+    "options": [
+      "L'ajout de nouveaux sommets reliés à tous les autres",
+      "Le fait de rajouter un ou plusieurs sommets intermédiaires sur une ou des arêtes",
+      "La fermeture transitive du graphe",
+      "La suppression des arêtes parallèles"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'expansion d'un graphe consiste à rajouter un ou plusieurs sommets intermédiaires sur une ou des arêtes. C'est utilisé dans le théorème de Kuratowski pour caractériser les graphes planaires.",
+    "category": "cas_particuliers"
+  },
+  {
+    "id": 61,
+    "question": "La théorie des graphes est née en 1736 grâce à :",
+    "options": [
+      "Isaac Newton, avec le problème de la gravité",
+      "Leonhard Euler, avec le problème des ponts de Königsberg",
+      "Carl Friedrich Gauss, avec le problème des nombres premiers",
+      "Blaise Pascal, avec le triangle arithmétique"
+    ],
+    "correctIndex": 1,
+    "explanation": "La théorie des graphes est née en 1736 quand Leonhard Euler (1707-1783) démontra qu'il était impossible de traverser chacun des sept ponts de la ville de Königsberg (aujourd'hui Kaliningrad) une fois exactement puis revenir au point de départ.",
+    "category": "definitions"
+  },
+  {
+    "id": 62,
+    "question": "Dans un graphe non orienté, quelle est la différence entre une arête et un arc ?",
+    "options": [
+      "Il n'y a pas de différence",
+      "Une arête est bidirectionnelle (graphe non orienté), un arc a un sens (graphe orienté)",
+      "Un arc est une arête avec un poids",
+      "Un arc est une arête qui forme une boucle"
+    ],
+    "correctIndex": 1,
+    "explanation": "Une arête est un lien bidirectionnel (graphe non orienté), tandis qu'un arc est un lien qui possède un sens, une direction (graphe orienté).",
+    "category": "definitions"
+  },
+  {
+    "id": 63,
+    "question": "Qu'est-ce qu'un graphe étiqueté (ou valué) ?",
+    "options": [
+      "Un graphe dont les sommets ont des noms",
+      "Un graphe dont les liens portent une information supplémentaire (ex: un nombre représentant une distance ou un débit)",
+      "Un graphe coloré",
+      "Un graphe dont les sommets sont numérotés de 1 à n"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un graphe étiqueté (ou valué) est un graphe dans lequel on attribue une information supplémentaire (une étiquette, souvent un nombre) à chaque lien, comme une distance ou un débit maximal.",
+    "category": "definitions"
+  },
+  {
+    "id": 64,
+    "question": "Un problème de coloration de graphe peut modéliser :",
+    "options": [
+      "Uniquement la coloration de cartes géographiques",
+      "Des problèmes d'allocation de fréquences, de planification d'emplois du temps, de stockage de produits incompatibles...",
+      "Uniquement le calcul du plus court chemin",
+      "Uniquement le problème du voyageur de commerce"
+    ],
+    "correctIndex": 1,
+    "explanation": "La coloration de graphe modélise de nombreux problèmes : allocation de fréquences (émetteurs proches = couleurs différentes), planification (films avec acteurs communs), transport de produits chimiques incompatibles, etc.",
+    "category": "coloration"
+  },
+  {
+    "id": 65,
+    "question": "Un graphe possédant un sommet de degré 1 peut-il être hamiltonien ?",
+    "options": [
+      "Oui, toujours",
+      "Non, jamais",
+      "Oui, si le graphe est connexe",
+      "Oui, si le graphe est planaire"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un graphe possédant un sommet de degré 1 ne peut pas être hamiltonien. En effet, un cycle hamiltonien nécessite d'entrer et de sortir de chaque sommet, ce qui requiert au moins 2 arêtes par sommet.",
+    "category": "parcours"
+  },
+  {
+    "id": 66,
+    "question": "Tout graphe complet est :",
+    "options": [
+      "Hamiltonien (pour n ≥ 3)",
+      "Biparti",
+      "Planaire",
+      "Stable"
+    ],
+    "correctIndex": 0,
+    "explanation": "Tout graphe complet Kₙ (pour n ≥ 3) est hamiltonien, car chaque sommet est relié à tous les autres, ce qui permet toujours de trouver un cycle passant par tous les sommets.",
+    "category": "parcours"
+  },
+  {
+    "id": 67,
+    "question": "Soit un graphe d'ordre 5 avec les degrés : d(s₁)=4, d(s₂)=2, d(s₃)=1, d(s₄)=2. Quelles sont les valeurs possibles pour d(s₅) ?",
+    "options": [
+      "Uniquement 1",
+      "Uniquement 3",
+      "1 ou 3",
+      "0 ou 2 ou 4"
+    ],
+    "correctIndex": 2,
+    "explanation": "La somme des 4 premiers degrés est 4+2+1+2 = 9 (impair). Comme la somme totale doit être paire, d(s₅) doit être impair. Dans un graphe simple d'ordre 5, le degré est entre 0 et 4, donc d(s₅) = 1 ou 3.",
+    "category": "definitions"
+  },
+  {
+    "id": 68,
+    "question": "K₅ est-il planaire ?",
+    "options": [
+      "Oui",
+      "Non",
+      "Seulement si on supprime une arête",
+      "Ça dépend de la représentation"
+    ],
+    "correctIndex": 1,
+    "explanation": "K₅ (le graphe complet d'ordre 5) n'est pas planaire. C'est l'un des deux graphes de base du théorème de Kuratowski : un graphe est planaire ssi aucun de ses sous-graphes n'est une expansion de K₅ ou K₃,₃.",
+    "category": "cas_particuliers"
+  },
+  {
+    "id": 69,
+    "question": "Le graphe du cube (8 sommets, 12 arêtes) est-il planaire ?",
+    "options": [
+      "Non, car il a trop de sommets",
+      "Non, car il a trop d'arêtes",
+      "Oui, il peut être dessiné dans le plan sans croisement d'arêtes",
+      "On ne peut pas le déterminer"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le graphe du cube est planaire : il peut être redessiné dans le plan sans qu'aucune arête ne se croise.",
+    "category": "cas_particuliers"
+  },
+  {
+    "id": 70,
+    "question": "Existe-t-il un graphe de nombre chromatique 3 qui ne contient pas K₃ (triangle) ?",
+    "options": [
+      "Non, c'est impossible",
+      "Oui, par exemple le cycle C₅ (pentagone)",
+      "Non, χ(G) ≥ 3 implique toujours la présence de K₃",
+      "Oui, mais seulement pour des graphes infinis"
+    ],
+    "correctIndex": 1,
+    "explanation": "Oui, le cycle C₅ (pentagone, 5 sommets formant un cycle) a un nombre chromatique de 3 mais ne contient pas K₃. On peut même construire des graphes de nombre chromatique arbitrairement grand sans contenir K₃.",
+    "category": "coloration"
+  }
+]
