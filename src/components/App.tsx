@@ -6,6 +6,9 @@ import Quiz from './Quiz';
 import questionsCFunctions from '../data/questions.json';
 import questionsJavaVariables from '../data/questions-java-variables.json';
 import questionsJavaOOPBasics from '../data/questions-java-oop-basics.json';
+import questionsGraphes from '../data/questions-graphes-non-orientes.json';
+import questionsJavaComposition from '../data/questions-java-composition.json';
+import questionsJavaExceptions from '../data/questions-java-exceptions.json';
 
 type Question = {
   id: number;
@@ -21,6 +24,9 @@ const questionsMap: Record<string, Question[]> = {
   'questions.json': questionsCFunctions as Question[],
   'questions-java-variables.json': questionsJavaVariables as Question[],
   'questions-java-oop-basics.json': questionsJavaOOPBasics as Question[],
+  'questions-graphes-non-orientes.json': questionsGraphes as Question[],
+  'questions-java-composition.json': questionsJavaComposition as Question[],
+  'questions-java-exceptions.json': questionsJavaExceptions as Question[],
 };
 
 export default function App() {

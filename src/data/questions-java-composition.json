@@ -1,0 +1,258 @@
+[
+  {
+    "id": 1,
+    "question": "Que modélise la relation de composition en POO ?",
+    "options": [
+      "La relation d'héritage (is a)",
+      "La relation d'appartenance (has a / is part of)",
+      "La relation de dépendance",
+      "La relation d'implémentation"
+    ],
+    "correctIndex": 1,
+    "explanation": "La composition modélise la relation d'appartenance « has a » ou « is part of ». Un objet composé contient d'autres objets.",
+    "category": "composition"
+  },
+  {
+    "id": 2,
+    "question": "Quels types peuvent être les attributs d'une classe composée ?",
+    "options": [
+      "Uniquement des types primitifs",
+      "Uniquement des types objets",
+      "Des types primitifs et n'importe quel type objet",
+      "Uniquement des types de la même classe"
+    ],
+    "correctIndex": 2,
+    "explanation": "Les attributs d'une classe peuvent être des types primitifs ou n'importe quel type objet, ce qui permet la composition.",
+    "category": "composition"
+  },
+  {
+    "id": 3,
+    "question": "Quels sont les objectifs de la construction par assemblage (composition) ?",
+    "options": [
+      "Réduire le nombre de classes",
+      "Favoriser la réutilisation du code et respecter l'encapsulation",
+      "Éviter l'utilisation de constructeurs",
+      "Remplacer l'héritage dans tous les cas"
+    ],
+    "correctIndex": 1,
+    "explanation": "La construction par assemblage vise à favoriser la réutilisation des codes sources et de la conception, tout en respectant les règles d'encapsulation.",
+    "category": "composition"
+  },
+  {
+    "id": 4,
+    "question": "Ce code est-il un exemple de composition ?\n```java\npublic class Voiture {\n    private Carrosserie car;\n    private Roue avD, avG, arD, arG;\n    private String immat;\n}```",
+    "options": [
+      "Vrai - C'est une composition",
+      "Faux - Ce n'est pas une composition"
+    ],
+    "correctIndex": 0,
+    "explanation": "C'est bien une composition : la classe Voiture contient des attributs de type Carrosserie et Roue. Elle est composée de ces objets.",
+    "category": "composition"
+  },
+  {
+    "id": 5,
+    "question": "Quelle est la différence entre agrégation et composition ?",
+    "options": [
+      "Il n'y a aucune différence",
+      "En agrégation, le composant existe en dehors du composé ; en composition, il est détruit avec le composé",
+      "L'agrégation n'utilise pas de classes",
+      "La composition n'utilise pas de constructeurs"
+    ],
+    "correctIndex": 1,
+    "explanation": "En agrégation, le composant peut exister indépendamment du composé. En composition (agrégation forte), tous les composants sont détruits quand on détruit le composé.",
+    "category": "agregation_vs_composition"
+  },
+  {
+    "id": 6,
+    "question": "En UML, quel symbole représente l'agrégation ?",
+    "options": [
+      "Un losange plein (noir)",
+      "Un losange vide (blanc)",
+      "Une flèche pleine",
+      "Un triangle"
+    ],
+    "correctIndex": 1,
+    "explanation": "En UML, l'agrégation est représentée par un losange vide (blanc) du côté de la classe composée.",
+    "category": "agregation_vs_composition"
+  },
+  {
+    "id": 7,
+    "question": "En UML, quel symbole représente la composition ?",
+    "options": [
+      "Un losange vide (blanc)",
+      "Un losange plein (noir)",
+      "Une flèche en pointillés",
+      "Un cercle"
+    ],
+    "correctIndex": 1,
+    "explanation": "En UML, la composition (agrégation forte) est représentée par un losange plein (noir) du côté de la classe composée.",
+    "category": "agregation_vs_composition"
+  },
+  {
+    "id": 8,
+    "question": "Dans une agrégation, comment le composant est-il généralement créé ?",
+    "options": [
+      "Il est créé à l'intérieur du constructeur du composé",
+      "Il est créé à l'extérieur et passé en paramètre au constructeur du composé",
+      "Il est créé automatiquement par Java",
+      "Il ne peut pas être créé séparément"
+    ],
+    "correctIndex": 1,
+    "explanation": "En agrégation, le composant existe en dehors du composé. Il est créé à l'extérieur puis passé en paramètre au constructeur : A a = new A(b); où b existe déjà.",
+    "category": "agregation_vs_composition"
+  },
+  {
+    "id": 9,
+    "question": "Dans une composition, comment le composant est-il généralement créé ?",
+    "options": [
+      "Il est passé en paramètre au constructeur",
+      "Il est créé à l'intérieur du constructeur du composé (avec new)",
+      "Il est créé par une méthode statique",
+      "Il est créé dans la méthode main"
+    ],
+    "correctIndex": 1,
+    "explanation": "En composition, le composant est créé à l'intérieur du constructeur du composé : b = new B(\"mon B\"); dans le constructeur de A.",
+    "category": "agregation_vs_composition"
+  },
+  {
+    "id": 10,
+    "question": "Ce code illustre-t-il une agrégation ou une composition ?\n```java\npublic class A {\n    private B b;\n    public A(B x) {\n        b = x;\n    }\n}```",
+    "options": [
+      "Agrégation - B est passé en paramètre et existe en dehors de A",
+      "Composition - B est créé dans le constructeur de A",
+      "Ni l'un ni l'autre",
+      "Les deux en même temps"
+    ],
+    "correctIndex": 0,
+    "explanation": "C'est une agrégation : l'objet B est passé en paramètre au constructeur de A. Il existe en dehors de A et peut survivre à la destruction de A.",
+    "category": "agregation_vs_composition"
+  },
+  {
+    "id": 11,
+    "question": "Ce code illustre-t-il une agrégation ou une composition ?\n```java\npublic class A {\n    private B b;\n    public A() {\n        b = new B(\"mon B\");\n    }\n}```",
+    "options": [
+      "Agrégation - B est passé en paramètre",
+      "Composition - B est créé dans le constructeur de A",
+      "Ni l'un ni l'autre",
+      "Héritage"
+    ],
+    "correctIndex": 1,
+    "explanation": "C'est une composition : l'objet B est créé directement dans le constructeur de A avec new. B dépend entièrement de A.",
+    "category": "agregation_vs_composition"
+  },
+  {
+    "id": 12,
+    "question": "Un segment est composé de deux points. Quelle relation UML est la plus appropriée ?",
+    "options": [
+      "Composition (losange plein)",
+      "Agrégation (losange vide)",
+      "Héritage",
+      "Dépendance"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un segment est composé de deux points, mais les points peuvent exister indépendamment du segment. C'est donc une agrégation.",
+    "category": "agregation_vs_composition"
+  },
+  {
+    "id": 13,
+    "question": "Un bâtiment contient des salles. Si on détruit le bâtiment, les salles sont détruites. Quelle relation ?",
+    "options": [
+      "Agrégation",
+      "Composition",
+      "Association simple",
+      "Héritage"
+    ],
+    "correctIndex": 1,
+    "explanation": "C'est une composition (agrégation forte) : les salles n'existent pas en dehors du bâtiment, elles sont détruites avec lui.",
+    "category": "agregation_vs_composition"
+  },
+  {
+    "id": 14,
+    "question": "Qu'est-ce que la succession d'appels en composition ?\n```java\nr.s1.origine.abscisse```",
+    "options": [
+      "Un accès direct à un attribut privé",
+      "Un chaînage d'appels naviguant à travers les objets composés",
+      "Une erreur de syntaxe",
+      "Un appel de méthode statique"
+    ],
+    "correctIndex": 1,
+    "explanation": "La succession d'appels permet de naviguer à travers les objets composés : r est un Rectangle, s1 un Segment, origine un Point, et abscisse un attribut du Point.",
+    "category": "composition"
+  },
+  {
+    "id": 15,
+    "question": "La composition peut-elle être récursive (une classe se compose d'elle-même) ?",
+    "options": [
+      "Non, c'est interdit en Java",
+      "Oui, c'est possible (ex: une boîte contient d'autres boîtes)",
+      "Seulement avec l'héritage",
+      "Seulement avec des tableaux"
+    ],
+    "correctIndex": 1,
+    "explanation": "La composition peut être récursive. Par exemple, une boîte peut contenir d'autres boîtes. Plusieurs niveaux de composition et la récursivité sont possibles.",
+    "category": "composition"
+  },
+  {
+    "id": 16,
+    "question": "Lors de la création d'un objet composé en agrégation, dans quel ordre crée-t-on les objets ?",
+    "options": [
+      "On crée d'abord l'objet composé, puis les composants",
+      "On crée d'abord les composants, puis l'objet composé",
+      "L'ordre n'a pas d'importance",
+      "On crée tout en même temps"
+    ],
+    "correctIndex": 1,
+    "explanation": "En agrégation, on crée d'abord les composants (ex: Carrosserie, Roue) puis le composé (Voiture) en passant les composants au constructeur.",
+    "category": "agregation_vs_composition"
+  },
+  {
+    "id": 17,
+    "question": "Ce code crée-t-il correctement une voiture par composition ?\n```java\nCarrosserie c = new Carrosserie(...);\nRoue r1 = new Roue(...);\nRoue r2 = new Roue(...);\nRoue r3 = new Roue(...);\nRoue r4 = new Roue(...);\nVoiture v = new Voiture(c, r1, r2, r3, r4);```",
+    "options": [
+      "Vrai - C'est correct",
+      "Faux - Ce n'est pas correct"
+    ],
+    "correctIndex": 0,
+    "explanation": "Le code est correct : on crée d'abord les composants (carrosserie et roues) puis on les passe au constructeur de Voiture. C'est un exemple d'agrégation.",
+    "category": "composition"
+  },
+  {
+    "id": 18,
+    "question": "La relation de composition est une relation exclusivement entre :",
+    "options": [
+      "Objets et méthodes",
+      "Classes",
+      "Packages",
+      "Interfaces"
+    ],
+    "correctIndex": 1,
+    "explanation": "La composition est une relation exclusivement entre classes. Elle définit une classe composée et des composants objets.",
+    "category": "composition"
+  },
+  {
+    "id": 19,
+    "question": "Un objet composant en agrégation peut-il appartenir à plusieurs objets composés ?",
+    "options": [
+      "Non, jamais",
+      "Oui, car il existe en dehors du composé",
+      "Seulement en composition",
+      "Seulement si c'est un type primitif"
+    ],
+    "correctIndex": 1,
+    "explanation": "En agrégation, le composant existe en dehors du composé. Il peut donc potentiellement être partagé entre plusieurs composés.",
+    "category": "agregation_vs_composition"
+  },
+  {
+    "id": 20,
+    "question": "Une fenêtre graphique est composée de 2 glisseurs, 1 entête et 1 panneau. Si la fenêtre est détruite, ses composants le sont aussi. C'est :",
+    "options": [
+      "Une agrégation",
+      "Une composition",
+      "Un héritage",
+      "Une association simple"
+    ],
+    "correctIndex": 1,
+    "explanation": "C'est une composition car les composants (glisseurs, entête, panneau) sont détruits quand la fenêtre est détruite. Ils n'existent pas en dehors d'elle.",
+    "category": "agregation_vs_composition"
+  }
+]

@@ -39,6 +39,26 @@
       "questionCount": 70,
       "fileName": "questions-graphes-non-orientes.json",
       "icon": "🔗"
+    },
+    {
+      "id": "java-composition",
+      "title": "Composition et Agrégation",
+      "description": "Relation de composition, agrégation, correspondance UML-Java, construction par assemblage",
+      "category": "Java - POO",
+      "difficulty": "intermediaire",
+      "questionCount": 20,
+      "fileName": "questions-java-composition.json",
+      "icon": "🧩"
+    },
+    {
+      "id": "java-exceptions",
+      "title": "Gestion des exceptions",
+      "description": "try/catch/finally, throw/throws, hiérarchie des exceptions, propagation",
+      "category": "Java - POO",
+      "difficulty": "intermediaire",
+      "questionCount": 32,
+      "fileName": "questions-java-exceptions.json",
+      "icon": "⚠️"
     }
   ]
 }
