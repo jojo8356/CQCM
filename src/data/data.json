@@ -59,6 +59,36 @@
       "questionCount": 32,
       "fileName": "questions-java-exceptions.json",
       "icon": "⚠️"
+    },
+    {
+      "id": "graphes-td1",
+      "title": "TD1 - Graphes non orientés : généralités",
+      "description": "Exercices : ordre, degré, matrice d'adjacence, graphes simples/complets/connexes, distances, coloration, Ramsey",
+      "category": "Graphes",
+      "difficulty": "intermediaire",
+      "questionCount": 35,
+      "fileName": "questions-graphes-td1.json",
+      "icon": "📝"
+    },
+    {
+      "id": "graphes-td1bis",
+      "title": "TD1-Bis - Isomorphismes, parcours, coloration",
+      "description": "Isomorphismes, graphes eulériens/hamiltoniens, Welsh & Powell, graphes d'incompatibilité, problèmes d'application",
+      "category": "Graphes",
+      "difficulty": "intermediaire",
+      "questionCount": 40,
+      "fileName": "questions-graphes-td1bis.json",
+      "icon": "📝"
+    },
+    {
+      "id": "stats-descriptives",
+      "title": "Statistique descriptive",
+      "description": "Vocabulaire, variables (quantitatives/qualitatives), effectifs, fréquences, représentations graphiques, moyenne, médiane, mode, variance, écart-type, quartiles",
+      "category": "Statistiques",
+      "difficulty": "intermediaire",
+      "questionCount": 50,
+      "fileName": "questions-stats-descriptives.json",
+      "icon": "📊"
     }
   ]
 }

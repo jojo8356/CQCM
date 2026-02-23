@@ -1,0 +1,652 @@
+[
+  {
+    "id": 1,
+    "question": "Quelle est la différence entre « la statistique » et « les statistiques » ?",
+    "options": [
+      "La statistique = collecter, analyser et interpréter des observations. Les statistiques = les informations et données collectées.",
+      "C'est la même chose",
+      "La statistique = les données. Les statistiques = la méthode.",
+      "La statistique = les graphiques. Les statistiques = les tableaux."
+    ],
+    "correctIndex": 0,
+    "explanation": "La statistique est la discipline qui consiste à collecter, analyser des observations et interpréter les résultats. Les statistiques désignent les informations et données collectées (ex : indice de la bourse, taux de chômage).",
+    "category": "vocabulaire"
+  },
+  {
+    "id": 2,
+    "question": "Que fait la statistique descriptive univariée ?",
+    "options": [
+      "Formuler des jugements et tester des hypothèses",
+      "Décrire, résumer ou représenter les données d'une seule variable",
+      "Étudier la relation entre deux variables",
+      "Prédire des valeurs futures"
+    ],
+    "correctIndex": 1,
+    "explanation": "La statistique descriptive univariée décrit (résume ou représente) les données d'une variable via des représentations graphiques et des résumés numériques (paramètres de position, de dispersion).",
+    "category": "vocabulaire"
+  },
+  {
+    "id": 3,
+    "question": "Que fait la statistique inférentielle ?",
+    "options": [
+      "Représenter les données sous forme de graphiques",
+      "Calculer des moyennes et des médianes",
+      "Formuler un jugement sur les données : estimation, intervalles de confiance, tests d'hypothèses, modélisation",
+      "Collecter des données auprès d'un établissement"
+    ],
+    "correctIndex": 2,
+    "explanation": "La statistique inférentielle va au-delà de la description : elle formule un jugement sur les données (estimation de paramètres, intervalles de confiance, tests d'hypothèses, modélisation).",
+    "category": "vocabulaire"
+  },
+  {
+    "id": 4,
+    "question": "Qu'est-ce qu'une population (Ω) en statistique ?",
+    "options": [
+      "Un sous-ensemble d'individus étudiés",
+      "La collection complète d'objets étudiés (ensemble d'éléments homogènes)",
+      "Le nombre total d'observations",
+      "Une variable mesurée sur des individus"
+    ],
+    "correctIndex": 1,
+    "explanation": "La population (Ω) est la collection complète d'objets étudiés, un ensemble d'éléments homogènes. Exemple : les étudiants du département informatique.",
+    "category": "notions_base"
+  },
+  {
+    "id": 5,
+    "question": "Qu'est-ce qu'un échantillon (E) ?",
+    "options": [
+      "L'ensemble de la population",
+      "Un sous-ensemble de la population étudiée",
+      "Une variable statistique",
+      "Le nombre d'individus"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un échantillon est un sous-ensemble de la population étudiée. Exemple : les étudiants de première année du département informatique (sous-ensemble de tous les étudiants).",
+    "category": "notions_base"
+  },
+  {
+    "id": 6,
+    "question": "Qu'est-ce qu'un caractère (ou variable statistique) X ?",
+    "options": [
+      "Le nombre d'individus de la population",
+      "Une caractéristique/propriété mesurée ou observée sur les individus d'une population",
+      "Un sous-ensemble de la population",
+      "La fréquence d'une modalité"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un caractère (variable statistique) X est une caractéristique/propriété qui décrit un individu, mesurée ou observée sur les individus d'une population. Exemple : notes des étudiants.",
+    "category": "notions_base"
+  },
+  {
+    "id": 7,
+    "question": "Qu'est-ce qu'une modalité (x) ?",
+    "options": [
+      "Le nombre d'individus",
+      "Les valeurs possibles d'une variable statistique",
+      "La moyenne de la variable",
+      "Un type de graphique"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les modalités sont les valeurs possibles d'une variable. Exemple : rouge, vert, bleu pour la variable « couleur ». Ou « célibataire, marié, divorcé » pour la variable « situation familiale ».",
+    "category": "notions_base"
+  },
+  {
+    "id": 8,
+    "question": "Quels sont les deux grands types de variables statistiques ?",
+    "options": [
+      "Discrètes et continues",
+      "Quantitatives (mesurables) et qualitatives (non mesurables)",
+      "Nominales et ordinales",
+      "Simples et composées"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les variables quantitatives (mesurables) prennent des valeurs numériques. Les variables qualitatives (non mesurables) décrivent des catégories. Chaque type a des sous-types.",
+    "category": "variables"
+  },
+  {
+    "id": 9,
+    "question": "Quelle est la différence entre une variable quantitative discrète et continue ?",
+    "options": [
+      "Discrète = valeurs réelles, Continue = valeurs entières",
+      "Discrète = valeurs d'un ensemble fini (entières), Continue = valeurs réelles",
+      "Discrète = non ordonnée, Continue = ordonnée",
+      "Il n'y a pas de différence"
+    ],
+    "correctIndex": 1,
+    "explanation": "Discrète : les modalités font partie d'un ensemble fini (ex : nombre d'enseignants). Continue : les modalités prennent des valeurs réelles (ex : poids d'un élève), souvent regroupées en classes.",
+    "category": "variables"
+  },
+  {
+    "id": 10,
+    "question": "Quelle est la différence entre une variable qualitative nominale et ordinale ?",
+    "options": [
+      "Nominale = ordonnée, Ordinale = non ordonnée",
+      "Nominale = non ordonnée, Ordinale = ordonnée",
+      "Nominale = numérique, Ordinale = textuelle",
+      "Il n'y a pas de différence"
+    ],
+    "correctIndex": 1,
+    "explanation": "Nominale : les modalités ne sont pas ordonnées (ex : catégorie socioprofessionnelle). Ordinale : les modalités sont ordonnées (ex : Mention : Passable < Assez Bien < Bien < Très Bien).",
+    "category": "variables"
+  },
+  {
+    "id": 11,
+    "question": "Le salaire mensuel d'un salarié est une variable de quel type ?",
+    "options": [
+      "Qualitative nominale",
+      "Qualitative ordinale",
+      "Quantitative discrète",
+      "Quantitative continue"
+    ],
+    "correctIndex": 3,
+    "explanation": "Le salaire est une valeur numérique réelle (ex : 1523,47€). C'est donc une variable quantitative continue.",
+    "category": "variables"
+  },
+  {
+    "id": 12,
+    "question": "Le nombre d'enseignants au département informatique est une variable de quel type ?",
+    "options": [
+      "Quantitative continue",
+      "Quantitative discrète",
+      "Qualitative nominale",
+      "Qualitative ordinale"
+    ],
+    "correctIndex": 1,
+    "explanation": "C'est un nombre entier fini (on ne peut pas avoir 3,5 enseignants). C'est donc une variable quantitative discrète.",
+    "category": "variables"
+  },
+  {
+    "id": 13,
+    "question": "La mention au bac (Passable, Assez Bien, Bien, Très Bien) est une variable de quel type ?",
+    "options": [
+      "Quantitative discrète",
+      "Quantitative continue",
+      "Qualitative nominale",
+      "Qualitative ordinale"
+    ],
+    "correctIndex": 3,
+    "explanation": "Les mentions ne sont pas mesurables (qualitative) mais sont ordonnées (Passable < AB < B < TB). C'est donc une variable qualitative ordinale.",
+    "category": "variables"
+  },
+  {
+    "id": 14,
+    "question": "La catégorie socioprofessionnelle (Ingénieur, Technicien, Enseignant...) est une variable de quel type ?",
+    "options": [
+      "Quantitative discrète",
+      "Quantitative continue",
+      "Qualitative nominale",
+      "Qualitative ordinale"
+    ],
+    "correctIndex": 2,
+    "explanation": "Les catégories ne sont pas mesurables (qualitative) et il n'y a pas d'ordre naturel entre elles (nominale). C'est donc une variable qualitative nominale.",
+    "category": "variables"
+  },
+  {
+    "id": 15,
+    "question": "Qu'est-ce que l'effectif ni d'une modalité xi ?",
+    "options": [
+      "Le nombre total d'individus de la population",
+      "Le nombre d'individus ayant cette modalité (nombre de fois que xi est observée)",
+      "La fréquence de la modalité",
+      "Le rang de la modalité"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'effectif ni d'une modalité xi est le nombre d'individus ayant cette modalité. Exemple : pour la série 5,5,5,5,5,7,7,7,8,8, la modalité x1=5 a pour effectif n1=5.",
+    "category": "effectif_frequence"
+  },
+  {
+    "id": 16,
+    "question": "Soit la série : 5, 5, 5, 5, 5, 7, 7, 7, 8, 8. Quel est l'effectif de la modalité 7 ?",
+    "options": [
+      "2",
+      "3",
+      "5",
+      "7"
+    ],
+    "correctIndex": 1,
+    "explanation": "La valeur 7 apparaît 3 fois dans la série. L'effectif de la modalité 7 est donc n = 3.",
+    "category": "effectif_frequence"
+  },
+  {
+    "id": 17,
+    "question": "Qu'est-ce que l'effectif cumulé croissant Ni ?",
+    "options": [
+      "Le nombre d'individus ayant exactement la modalité xi",
+      "La somme de l'effectif de xi plus les effectifs des valeurs qui lui sont inférieures",
+      "La fréquence de xi multipliée par N",
+      "Le nombre d'individus ayant des valeurs supérieures à xi"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'effectif cumulé croissant Ni est le nombre d'individus ayant une valeur inférieure ou égale à xi : c'est la somme de l'effectif de cette valeur plus les effectifs des valeurs inférieures.",
+    "category": "effectif_frequence"
+  },
+  {
+    "id": 18,
+    "question": "Comment calcule-t-on la fréquence fi d'une modalité xi ?",
+    "options": [
+      "fi = ni × N",
+      "fi = ni / N (effectif de la modalité divisé par l'effectif total)",
+      "fi = N / ni",
+      "fi = ni - N"
+    ],
+    "correctIndex": 1,
+    "explanation": "La fréquence fi = ni / N, c'est le ratio entre l'effectif de la modalité et l'effectif total de la population. Le pourcentage est pi = fi × 100.",
+    "category": "effectif_frequence"
+  },
+  {
+    "id": 19,
+    "question": "Quelle est la somme de toutes les fréquences fi ?",
+    "options": [
+      "0",
+      "1",
+      "N (effectif total)",
+      "Ça dépend des données"
+    ],
+    "correctIndex": 1,
+    "explanation": "La somme de toutes les fréquences vaut toujours 1 (ou 100% en pourcentage), car Σfi = Σ(ni/N) = (Σni)/N = N/N = 1.",
+    "category": "effectif_frequence"
+  },
+  {
+    "id": 20,
+    "question": "Quel type de graphique utilise-t-on pour représenter un caractère qualitatif ?",
+    "options": [
+      "Histogramme à rectangles jointifs",
+      "Diagramme en barres ou diagramme en secteurs (circulaire)",
+      "Polygone de fréquences",
+      "Diagramme cumulatif"
+    ],
+    "correctIndex": 1,
+    "explanation": "Pour un caractère qualitatif, on utilise un diagramme en barres (hauteur proportionnelle à l'effectif/fréquence) ou un diagramme en secteurs (angle proportionnel à l'effectif).",
+    "category": "representations"
+  },
+  {
+    "id": 21,
+    "question": "Quel type de graphique utilise-t-on pour une variable quantitative discrète ?",
+    "options": [
+      "Diagramme en secteurs",
+      "Histogramme à rectangles jointifs",
+      "Diagramme en bâtons (segments verticaux)",
+      "Polygone de fréquences"
+    ],
+    "correctIndex": 2,
+    "explanation": "Pour une variable quantitative discrète, on utilise un diagramme en bâtons : chaque modalité xi est associée à un segment vertical de hauteur proportionnelle à ni ou fi.",
+    "category": "representations"
+  },
+  {
+    "id": 22,
+    "question": "Quel type de graphique utilise-t-on pour une variable quantitative continue ?",
+    "options": [
+      "Diagramme en bâtons",
+      "Diagramme en secteurs",
+      "Histogramme (rectangles jointifs dont l'aire est proportionnelle à l'effectif)",
+      "Diagramme en barres séparées"
+    ],
+    "correctIndex": 2,
+    "explanation": "Pour une variable quantitative continue, on utilise un histogramme : des rectangles jointifs dont la base est l'amplitude de la classe et dont l'aire est proportionnelle à l'effectif (ou fréquence).",
+    "category": "representations"
+  },
+  {
+    "id": 23,
+    "question": "Dans un histogramme de variable continue, si les classes ont des amplitudes inégales, que faut-il ajuster ?",
+    "options": [
+      "Rien, on utilise les effectifs directement comme hauteurs",
+      "La hauteur des rectangles, car c'est l'aire (et non la hauteur) qui doit être proportionnelle à l'effectif",
+      "La largeur des rectangles pour qu'elles soient toutes égales",
+      "On ne peut pas faire d'histogramme avec des amplitudes inégales"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'aire du rectangle doit être proportionnelle à l'effectif. Si les amplitudes sont inégales, on ajuste la hauteur (densité de fréquence = fréquence / amplitude) pour que l'aire reste correcte.",
+    "category": "representations"
+  },
+  {
+    "id": 24,
+    "question": "Qu'est-ce qu'un polygone de fréquences ?",
+    "options": [
+      "Un diagramme en barres",
+      "Un diagramme formé en joignant par des segments les milieux des sommets de chaque rectangle de l'histogramme",
+      "Un diagramme en secteurs",
+      "Un diagramme cumulatif"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le polygone de fréquences est obtenu en joignant par des segments de droite les milieux des sommets supérieurs de chaque rectangle de l'histogramme.",
+    "category": "representations"
+  },
+  {
+    "id": 25,
+    "question": "Dans un diagramme en secteurs (circulaire), à quoi est proportionnel l'angle de chaque secteur ?",
+    "options": [
+      "À la moyenne de la modalité",
+      "À l'effectif (ou la fréquence) de la modalité",
+      "Au carré de l'effectif",
+      "À la variance"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'angle du secteur est proportionnel à l'effectif (ou la fréquence) de la modalité. L'angle en degrés = fi × 360°.",
+    "category": "representations"
+  },
+  {
+    "id": 26,
+    "question": "Comment calcule-t-on la moyenne arithmétique simple d'une série x1, x2, ..., xN ?",
+    "options": [
+      "x̄ = (x1 + x2 + ... + xN) / N",
+      "x̄ = x1 × x2 × ... × xN",
+      "x̄ = (xmax - xmin) / 2",
+      "x̄ = la valeur la plus fréquente"
+    ],
+    "correctIndex": 0,
+    "explanation": "La moyenne arithmétique simple est la somme de toutes les valeurs divisée par le nombre total d'observations : x̄ = (Σxi) / N.",
+    "category": "tendance_centrale"
+  },
+  {
+    "id": 27,
+    "question": "Comment calcule-t-on la moyenne arithmétique pondérée ?",
+    "options": [
+      "x̄ = Σxi / N",
+      "x̄ = Σ(ni × xi) / N, où ni est l'effectif de chaque modalité xi",
+      "x̄ = produit de toutes les valeurs",
+      "x̄ = (xmax + xmin) / 2"
+    ],
+    "correctIndex": 1,
+    "explanation": "La moyenne pondérée tient compte des effectifs : x̄ = Σ(ni × xi) / N. On multiplie chaque modalité par son effectif, on somme, puis on divise par l'effectif total.",
+    "category": "tendance_centrale"
+  },
+  {
+    "id": 28,
+    "question": "Pour une variable quantitative continue, quelle valeur utilise-t-on pour calculer la moyenne de chaque classe ?",
+    "options": [
+      "La borne inférieure de la classe",
+      "La borne supérieure de la classe",
+      "Le centre (milieu) de la classe",
+      "L'amplitude de la classe"
+    ],
+    "correctIndex": 2,
+    "explanation": "Pour une variable continue regroupée en classes, on utilise le centre de chaque classe (milieu = (borne inf + borne sup) / 2) comme valeur représentative pour calculer la moyenne.",
+    "category": "tendance_centrale"
+  },
+  {
+    "id": 29,
+    "question": "Qu'est-ce que le mode d'une variable statistique ?",
+    "options": [
+      "La valeur centrale de la série",
+      "La valeur la plus fréquente (effectif le plus élevé)",
+      "La moyenne des valeurs extrêmes",
+      "La valeur qui partage la série en deux groupes égaux"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le mode est la valeur du caractère ayant l'effectif (ou la fréquence) le plus élevé. C'est la modalité la plus fréquente. Il peut y avoir plusieurs modes.",
+    "category": "tendance_centrale"
+  },
+  {
+    "id": 30,
+    "question": "Qu'est-ce que la médiane ?",
+    "options": [
+      "La valeur la plus fréquente",
+      "La moyenne arithmétique",
+      "La valeur qui partage la série statistique en 2 groupes de même effectif (50% de chaque côté)",
+      "La différence entre le max et le min"
+    ],
+    "correctIndex": 2,
+    "explanation": "La médiane est la valeur du caractère qui partage la série statistique en deux groupes de même effectif : 50% des individus ont une valeur ≤ médiane et 50% ont une valeur ≥ médiane.",
+    "category": "tendance_centrale"
+  },
+  {
+    "id": 31,
+    "question": "Pour une variable discrète avec N observations ordonnées, comment trouve-t-on la médiane si N est impair ?",
+    "options": [
+      "C'est la valeur en position N/2",
+      "C'est la valeur en position (N+1)/2",
+      "C'est la moyenne des deux valeurs centrales",
+      "C'est le mode"
+    ],
+    "correctIndex": 1,
+    "explanation": "Si N est impair, la médiane est la valeur de rang (N+1)/2. Exemple : pour 7 observations, c'est la 4e valeur une fois la série ordonnée.",
+    "category": "tendance_centrale"
+  },
+  {
+    "id": 32,
+    "question": "Pour une variable discrète avec N observations ordonnées, comment trouve-t-on la médiane si N est pair ?",
+    "options": [
+      "C'est la valeur en position N/2",
+      "C'est la valeur en position (N+1)/2",
+      "C'est la moyenne des valeurs en positions N/2 et N/2 + 1",
+      "C'est le mode"
+    ],
+    "correctIndex": 2,
+    "explanation": "Si N est pair, la médiane est la moyenne des deux valeurs centrales : celles aux positions N/2 et N/2 + 1. Exemple : pour 10 observations, moyenne des 5e et 6e valeurs.",
+    "category": "tendance_centrale"
+  },
+  {
+    "id": 33,
+    "question": "Pour une variable continue, comment détermine-t-on la médiane graphiquement ?",
+    "options": [
+      "Par le sommet de l'histogramme",
+      "Par le diagramme cumulatif : la médiane Me est la valeur où F(Me) = 50%",
+      "Par le diagramme en secteurs",
+      "Par le diagramme en bâtons"
+    ],
+    "correctIndex": 1,
+    "explanation": "On utilise la courbe de fréquences cumulées. La médiane Me est la valeur telle que F(Me) = 50%. On peut utiliser le théorème de Thalès pour interpoler entre deux bornes de classe.",
+    "category": "tendance_centrale"
+  },
+  {
+    "id": 34,
+    "question": "Qu'est-ce qu'un quantile d'ordre α ?",
+    "options": [
+      "La valeur xα telle que F(xα) = α (proportion α des individus ont une valeur ≤ xα)",
+      "La moyenne pondérée par α",
+      "L'effectif multiplié par α",
+      "La variance divisée par α"
+    ],
+    "correctIndex": 0,
+    "explanation": "Le quantile d'ordre α est la valeur xα telle que F(xα) = α. C'est une généralisation de la médiane (qui est le quantile d'ordre 0,5).",
+    "category": "tendance_centrale"
+  },
+  {
+    "id": 35,
+    "question": "Que sont les quartiles Q1, Q2, Q3 ?",
+    "options": [
+      "Q1 = x0,10, Q2 = x0,50, Q3 = x0,90",
+      "Q1 = x0,25, Q2 = x0,50 (médiane), Q3 = x0,75",
+      "Q1 = x0,33, Q2 = x0,50, Q3 = x0,66",
+      "Q1 = minimum, Q2 = moyenne, Q3 = maximum"
+    ],
+    "correctIndex": 1,
+    "explanation": "Q1 = quantile d'ordre 0,25 (25% des individus en dessous), Q2 = quantile d'ordre 0,50 (médiane), Q3 = quantile d'ordre 0,75 (75% des individus en dessous).",
+    "category": "tendance_centrale"
+  },
+  {
+    "id": 36,
+    "question": "Qu'est-ce que l'intervalle interquartile (IIQ) ?",
+    "options": [
+      "IIQ = Q3 + Q1",
+      "IIQ = Q3 - Q1",
+      "IIQ = Q2 - Q1",
+      "IIQ = Q3 × Q1"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'intervalle interquartile IIQ = Q3 - Q1. Il contient 50% des observations centrales et sert à estimer la dispersion de la variable X.",
+    "category": "dispersion"
+  },
+  {
+    "id": 37,
+    "question": "Qu'est-ce que l'étendue d'une série statistique ?",
+    "options": [
+      "La différence entre la valeur maximale et la valeur minimale",
+      "La somme de toutes les valeurs",
+      "L'effectif total",
+      "La fréquence maximale"
+    ],
+    "correctIndex": 0,
+    "explanation": "L'étendue = valeur max - valeur min. C'est l'indicateur de dispersion le plus simple, mais il est très sensible aux valeurs extrêmes.",
+    "category": "dispersion"
+  },
+  {
+    "id": 38,
+    "question": "Qu'est-ce que la variance V(X) ?",
+    "options": [
+      "La moyenne des écarts à la moyenne",
+      "La moyenne arithmétique des carrés des écarts à la moyenne",
+      "La racine carrée de l'écart-type",
+      "La différence entre max et min"
+    ],
+    "correctIndex": 1,
+    "explanation": "La variance V(X) = (1/N) × Σ ni(xi - x̄)². C'est la moyenne arithmétique des carrés des écarts à la moyenne. Elle mesure la dispersion des valeurs autour de la moyenne.",
+    "category": "dispersion"
+  },
+  {
+    "id": 39,
+    "question": "Quelle est la formule de Huygens pour la variance ?",
+    "options": [
+      "V(X) = x̄² - (x̄)²",
+      "V(X) = moyenne des x² - (moyenne des x)², soit V(X) = x̄² - (x̄)²",
+      "V(X) = (x̄)² - x̄²",
+      "V(X) = Σxi² / N"
+    ],
+    "correctIndex": 1,
+    "explanation": "La formule de Huygens : V(X) = (1/N)Σni·xi² - x̄² = « moyenne des carrés moins carré de la moyenne ». C'est souvent plus pratique pour le calcul.",
+    "category": "dispersion"
+  },
+  {
+    "id": 40,
+    "question": "Qu'est-ce que l'écart-type σ(X) ?",
+    "options": [
+      "Le carré de la variance",
+      "La racine carrée de la variance : σ = √V(X)",
+      "La moyenne des écarts",
+      "L'étendue divisée par 2"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'écart-type σ(X) = √V(X). Il a l'avantage d'être dans la même unité que la variable X, contrairement à la variance qui est en unité².",
+    "category": "dispersion"
+  },
+  {
+    "id": 41,
+    "question": "Pourquoi utilise-t-on l'écart-type plutôt que la variance pour interpréter la dispersion ?",
+    "options": [
+      "L'écart-type est toujours plus grand",
+      "L'écart-type est dans la même unité que la variable X, ce qui facilite l'interprétation",
+      "L'écart-type est toujours plus facile à calculer",
+      "Il n'y a pas de raison particulière"
+    ],
+    "correctIndex": 1,
+    "explanation": "La variance est en unité² (si X est en kg, V est en kg²). L'écart-type (racine de la variance) est en kg, ce qui est directement interprétable et comparable aux données.",
+    "category": "dispersion"
+  },
+  {
+    "id": 42,
+    "question": "Soit deux sous-populations de tailles N1 et N2 avec moyennes x̄1 et x̄2. Quelle est la moyenne totale ?",
+    "options": [
+      "x̄ = (x̄1 + x̄2) / 2",
+      "x̄ = (N1·x̄1 + N2·x̄2) / (N1 + N2)",
+      "x̄ = x̄1 × x̄2",
+      "x̄ = max(x̄1, x̄2)"
+    ],
+    "correctIndex": 1,
+    "explanation": "La moyenne totale est la moyenne pondérée par les effectifs : x̄ = (N1·x̄1 + N2·x̄2) / (N1 + N2). Ce n'est la simple moyenne (x̄1+x̄2)/2 que si N1 = N2.",
+    "category": "tendance_centrale"
+  },
+  {
+    "id": 43,
+    "question": "La variance totale de deux sous-populations est-elle simplement la moyenne des variances ?",
+    "options": [
+      "Oui, V = (V1 + V2) / 2",
+      "Non, il faut aussi prendre en compte l'écart entre les moyennes des sous-populations (variance inter)",
+      "Oui, V = V1 + V2",
+      "Non, V = V1 × V2"
+    ],
+    "correctIndex": 1,
+    "explanation": "La variance totale = variance intra (moyenne pondérée des variances) + variance inter (écarts entre les moyennes des sous-populations). On ne peut pas simplement moyenner les variances.",
+    "category": "dispersion"
+  },
+  {
+    "id": 44,
+    "question": "Pour une variable continue, comment détermine-t-on la classe modale ?",
+    "options": [
+      "La classe avec la plus grande amplitude",
+      "La classe avec la plus grande densité de fréquence (effectif / amplitude)",
+      "La classe contenant la médiane",
+      "La première classe du tableau"
+    ],
+    "correctIndex": 1,
+    "explanation": "La classe modale est celle avec la plus grande densité de fréquence (effectif divisé par l'amplitude de la classe). Si les classes ont la même amplitude, c'est simplement celle avec le plus grand effectif.",
+    "category": "tendance_centrale"
+  },
+  {
+    "id": 45,
+    "question": "La couleur des yeux (bleu, marron, noir, vert) est une variable de quel type ?",
+    "options": [
+      "Quantitative discrète",
+      "Quantitative continue",
+      "Qualitative nominale",
+      "Qualitative ordinale"
+    ],
+    "correctIndex": 2,
+    "explanation": "La couleur des yeux est non mesurable (qualitative) et il n'y a pas d'ordre naturel entre les couleurs (nominale). C'est une variable qualitative nominale.",
+    "category": "variables"
+  },
+  {
+    "id": 46,
+    "question": "Qu'est-ce que la fréquence cumulée croissante ?",
+    "options": [
+      "La fréquence de la modalité la plus élevée",
+      "La proportion d'individus ayant des modalités inférieures ou égales à xi",
+      "La somme de toutes les fréquences",
+      "La fréquence multipliée par l'effectif total"
+    ],
+    "correctIndex": 1,
+    "explanation": "La fréquence cumulée croissante de xi est la proportion d'individus ayant des modalités du caractère inférieures ou égales à xi. C'est Fi = Σ(fj) pour j ≤ i.",
+    "category": "effectif_frequence"
+  },
+  {
+    "id": 47,
+    "question": "Qu'est-ce que l'écart absolu moyen à la moyenne ?",
+    "options": [
+      "La moyenne des carrés des écarts à la moyenne",
+      "La moyenne des valeurs absolues des écarts à la moyenne : (1/N) × Σ|xi - x̄|",
+      "La racine carrée de la variance",
+      "La différence entre max et min"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'écart absolu moyen à la moyenne = (1/N) × Σ ni × |xi - x̄|. C'est une alternative à la variance qui utilise les valeurs absolues au lieu des carrés.",
+    "category": "dispersion"
+  },
+  {
+    "id": 48,
+    "question": "Qu'est-ce que la distribution d'un caractère X ?",
+    "options": [
+      "La moyenne et la variance de X",
+      "L'ensemble des couples (modalité, effectif) ou (modalité, fréquence)",
+      "Le graphique de X",
+      "L'étendue de X"
+    ],
+    "correctIndex": 1,
+    "explanation": "La distribution d'un caractère X est l'ensemble des couples (xi, ni) ou (xi, fi), c'est-à-dire chaque modalité associée à son effectif ou sa fréquence.",
+    "category": "notions_base"
+  },
+  {
+    "id": 49,
+    "question": "Qu'est-ce que la fonction de répartition F(x) d'une variable quantitative discrète ?",
+    "options": [
+      "F(x) = fréquence de x",
+      "F(x) = fréquence cumulée croissante, c'est-à-dire la proportion d'individus ayant une valeur ≤ x",
+      "F(x) = effectif de x",
+      "F(x) = variance de x"
+    ],
+    "correctIndex": 1,
+    "explanation": "La fonction de répartition F(x) donne la proportion d'individus ayant une valeur ≤ x. C'est la fréquence cumulée croissante. Elle est croissante, part de 0 et tend vers 1.",
+    "category": "effectif_frequence"
+  },
+  {
+    "id": 50,
+    "question": "Quelle est la différence entre un diagramme en barres et un diagramme en bâtons ?",
+    "options": [
+      "Aucune différence",
+      "Barres = variable qualitative (rectangles séparés), Bâtons = variable quantitative discrète (segments verticaux)",
+      "Barres = variable continue, Bâtons = variable discrète",
+      "Barres = vertical, Bâtons = horizontal"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le diagramme en barres (rectangles séparés) est pour les variables qualitatives. Le diagramme en bâtons (segments verticaux) est pour les variables quantitatives discrètes. L'histogramme (rectangles jointifs) est pour les variables continues.",
+    "category": "representations"
+  }
+]
