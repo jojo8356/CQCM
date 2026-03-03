@@ -1,0 +1,446 @@
+[
+  {
+    "id": 1,
+    "question": "Soit G = (V, E, γ) avec V = {s1,s2,s3,s4,s5}, E = {a1,...,a6} et γ(a1)={s5,s1}, γ(a2)={s2,s1}, γ(a3)={s4}, γ(a4)={s4,s2}, γ(a5)={s3,s2}, γ(a6)={s2,s3}. Quel est l'ordre et le degré de G ?",
+    "options": [
+      "o(G) = 5 et d(G) = 6",
+      "o(G) = 6 et d(G) = 5",
+      "o(G) = 5 et d(G) = 5",
+      "o(G) = 6 et d(G) = 6"
+    ],
+    "correctIndex": 0,
+    "explanation": "L'ordre est le nombre de sommets : card(V) = 5. Le degré est le nombre d'arêtes : card(E) = 6.",
+    "category": "exercice1"
+  },
+  {
+    "id": 2,
+    "question": "Même graphe G (exercice 1). Quels sont les degrés de s1, s2, s3, s4 et s5 ?",
+    "options": [
+      "d(s1)=2, d(s2)=4, d(s3)=2, d(s4)=3, d(s5)=1",
+      "d(s1)=2, d(s2)=3, d(s3)=2, d(s4)=3, d(s5)=1",
+      "d(s1)=2, d(s2)=4, d(s3)=2, d(s4)=2, d(s5)=1",
+      "d(s1)=3, d(s2)=4, d(s3)=2, d(s4)=3, d(s5)=1"
+    ],
+    "correctIndex": 0,
+    "explanation": "s1 est relié par a1 et a2 → d(s1)=2. s2 est relié par a2, a4, a5, a6 → d(s2)=4. s3 par a5, a6 → d(s3)=2. s4 a une boucle a3 (compte 2) + a4 → d(s4)=3. s5 par a1 → d(s5)=1. Vérification : 2+4+2+3+1 = 12 = 2×6.",
+    "category": "exercice1"
+  },
+  {
+    "id": 3,
+    "question": "Même graphe G (exercice 1). Quelle est sa matrice d'adjacence ?",
+    "options": [
+      "Diagonale avec 2 en position (4,4), valeur 2 aux positions (2,3) et (3,2), reste selon les arêtes",
+      "Matrice ne contenant que des 0 et des 1",
+      "Matrice avec uniquement des 1 sauf la diagonale",
+      "Matrice identité 5×5"
+    ],
+    "correctIndex": 0,
+    "explanation": "La matrice a un 2 en (4,4) pour la boucle sur s4, et des 2 en (2,3) et (3,2) car il y a deux arêtes parallèles (a5 et a6) entre s2 et s3. La matrice est symétrique.",
+    "category": "exercice1"
+  },
+  {
+    "id": 4,
+    "question": "Même graphe G (exercice 1). Ce graphe est-il simple ?",
+    "options": [
+      "Oui",
+      "Non, car il a une boucle (a3 sur s4) et des arêtes parallèles (a5 et a6 entre s2 et s3)"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un graphe simple n'a ni boucles ni arêtes parallèles. Ici a3 est une boucle sur s4, et a5/a6 sont des arêtes parallèles entre s2 et s3.",
+    "category": "exercice1"
+  },
+  {
+    "id": 5,
+    "question": "Même graphe G (exercice 1). Ce graphe est-il complet ?",
+    "options": [
+      "Oui",
+      "Non, car s4 et s5 ne sont pas adjacents (et le graphe n'est pas simple)"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un graphe complet est un graphe simple où chaque sommet est adjacent à tous les autres. Ici le graphe n'est même pas simple, et des sommets comme s4 et s5 ne sont pas adjacents.",
+    "category": "exercice1"
+  },
+  {
+    "id": 6,
+    "question": "Même graphe G (exercice 1). Ce graphe est-il connexe ?",
+    "options": [
+      "Oui, car on peut toujours trouver une chaîne entre deux sommets quelconques",
+      "Non, car s5 est isolé",
+      "Non, car il y a une boucle"
+    ],
+    "correctIndex": 0,
+    "explanation": "Le graphe est connexe car il est « d'un seul tenant » : on peut toujours trouver une chaîne reliant deux sommets quelconques.",
+    "category": "exercice1"
+  },
+  {
+    "id": 7,
+    "question": "Soit un graphe G à 6 sommets avec les arêtes : s1-s2, s1-s3, s2-s3, s2-s4, s2-s5, s2-s6, s3-s4, s3-s6, s4-s6, s5-s6. Quel est l'ordre, le degré, et les degrés de chaque sommet ?",
+    "options": [
+      "o(G)=6, d(G)=10, degrés : 2,5,4,3,2,4",
+      "o(G)=6, d(G)=10, degrés : 3,5,4,3,2,3",
+      "o(G)=6, d(G)=9, degrés : 2,5,4,3,2,4",
+      "o(G)=6, d(G)=10, degrés : 2,4,4,3,2,4"
+    ],
+    "correctIndex": 0,
+    "explanation": "o(G)=6 sommets, d(G)=10 arêtes. d(s1)=2, d(s2)=5, d(s3)=4, d(s4)=3, d(s5)=2, d(s6)=4. Vérification : 2+5+4+3+2+4 = 20 = 2×10.",
+    "category": "exercice2"
+  },
+  {
+    "id": 8,
+    "question": "Même graphe (exercice 2). Ce graphe est-il simple, complet et connexe ?",
+    "options": [
+      "Simple : oui, Complet : non, Connexe : oui",
+      "Simple : oui, Complet : oui, Connexe : oui",
+      "Simple : non, Complet : non, Connexe : oui",
+      "Simple : oui, Complet : non, Connexe : non"
+    ],
+    "correctIndex": 0,
+    "explanation": "Simple : oui (ni boucle ni arêtes parallèles). Complet : non (s4 et s5 ne sont pas adjacents par exemple). Connexe : oui (on peut relier tout sommet à tout autre).",
+    "category": "exercice2"
+  },
+  {
+    "id": 9,
+    "question": "Soit un graphe défini par la matrice :\n0 1 0 1 0 0\n1 0 0 3 0 0\n0 0 2 0 0 1\n1 3 0 0 0 0\n0 0 0 0 0 1\n0 0 1 0 1 0\nCe graphe est-il simple ?",
+    "options": [
+      "Oui",
+      "Non, car il y a une boucle (valeur 2 en diagonale pour s3) et des arêtes parallèles (valeur 3 entre s2 et s4)"
+    ],
+    "correctIndex": 1,
+    "explanation": "La diagonale contient un 2 (boucle sur s3) et il y a une valeur 3 entre s2 et s4 (3 arêtes parallèles). Un graphe simple ne doit avoir ni boucles ni arêtes parallèles.",
+    "category": "exercice3"
+  },
+  {
+    "id": 10,
+    "question": "Même graphe (exercice 3, matrice d'adjacence donnée). Ce graphe est-il connexe ?",
+    "options": [
+      "Oui",
+      "Non, le graphe est en deux parties disjointes : {s1,s2,s4} et {s3,s5,s6}"
+    ],
+    "correctIndex": 1,
+    "explanation": "Il n'y a aucune arête entre les sommets {s1,s2,s4} et les sommets {s3,s5,s6}. On ne peut pas trouver de chaîne entre s3 et s4 par exemple.",
+    "category": "exercice3"
+  },
+  {
+    "id": 11,
+    "question": "Comment est faite la matrice d'adjacence d'un graphe complet d'ordre n ?",
+    "options": [
+      "Elle ne contient que des 1, sauf sur la diagonale qui ne contient que des 0",
+      "Elle ne contient que des 1 partout",
+      "Elle ne contient que des 0, sauf sur la diagonale",
+      "Elle contient des 1 et des 2 aléatoirement"
+    ],
+    "correctIndex": 0,
+    "explanation": "Un graphe complet est simple (diagonale = 0, pas de boucles) et chaque sommet est adjacent à tous les autres (1 partout ailleurs).",
+    "category": "exercice4"
+  },
+  {
+    "id": 12,
+    "question": "Soit G un graphe simple d'ordre 5 avec les 4 premiers sommets de degré 4, 2, 1, 2. Quel est le degré du 5e sommet ?",
+    "options": [
+      "0 ou 2",
+      "1 ou 3",
+      "2 ou 4",
+      "Uniquement 1"
+    ],
+    "correctIndex": 1,
+    "explanation": "4+2+1+2 = 9 (impair). La somme des degrés doit être paire (= 2×d(G)). Le 5e sommet est de degré 0 à 4. Pour rendre la somme paire, son degré est 1 ou 3.",
+    "category": "exercice5"
+  },
+  {
+    "id": 13,
+    "question": "Quel est le nombre maximal d'arêtes dans un graphe non orienté d'ordre n sans arêtes parallèles (mais avec boucles possibles) ?",
+    "options": [
+      "n(n-1)/2",
+      "n(n+1)/2",
+      "n²",
+      "n(n-1)"
+    ],
+    "correctIndex": 1,
+    "explanation": "Chaque sommet peut être relié aux n-1 autres et avoir une boucle, donc degré max = n+1. Somme des degrés = n(n+1). Nombre d'arêtes = n(n+1)/2.",
+    "category": "exercice6"
+  },
+  {
+    "id": 14,
+    "question": "Pourquoi ne peut-il pas exister de graphe simple à 6 sommets de degrés 2, 3, 3, 4, 4, 5 ?",
+    "options": [
+      "La somme des degrés (21) est impaire, or elle doit être paire",
+      "Le degré maximal dépasse n-1",
+      "Il y a trop de sommets de degré impair",
+      "Un graphe simple ne peut pas avoir de sommet de degré 5"
+    ],
+    "correctIndex": 0,
+    "explanation": "La somme des degrés = 2+3+3+4+4+5 = 21, qui est impair. Or la somme des degrés = 2×d(G) qui est toujours pair. Contradiction.",
+    "category": "exercice7"
+  },
+  {
+    "id": 15,
+    "question": "Pourquoi ne peut-il pas exister de graphe simple à 5 sommets de degrés 2, 4, 4, 6, 6 ?",
+    "options": [
+      "La somme des degrés est impaire",
+      "Dans un graphe simple d'ordre 5, le degré d'un sommet ne peut pas dépasser n-1 = 4",
+      "Il y a trop de sommets",
+      "Les degrés ne sont pas tous pairs"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dans un graphe simple d'ordre n, le degré maximal d'un sommet est n-1. Ici n=5, donc le degré max est 4. Or on a des sommets de degré 6, ce qui est impossible.",
+    "category": "exercice7"
+  },
+  {
+    "id": 16,
+    "question": "Pourquoi ne peut-il pas exister de graphe simple à 4 sommets de degrés 1, 3, 3, 3 ?",
+    "options": [
+      "La somme des degrés est impaire",
+      "Les 3 sommets de degré 3 (= n-1) sont reliés à tous les autres, donc au premier sommet qui devrait aussi être de degré 3",
+      "Le degré dépasse n-1",
+      "Un graphe d'ordre 4 ne peut pas avoir de sommet de degré 1"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un sommet de degré n-1 = 3 est relié à tous les autres. Si 3 sommets sont de degré 3, ils sont tous reliés au premier sommet, qui a donc au moins degré 3, pas 1. Contradiction.",
+    "category": "exercice7"
+  },
+  {
+    "id": 17,
+    "question": "Dans une réunion de n >= 2 personnes, pourquoi y a-t-il toujours au moins 2 personnes ayant le même nombre d'amis ?",
+    "options": [
+      "Car dans un graphe simple d'ordre n, les degrés vont de 0 à n-1, mais un sommet de degré 0 et un de degré n-1 ne peuvent coexister",
+      "Car la somme des degrés est toujours paire",
+      "Car il y a plus de sommets que d'arêtes",
+      "Car le graphe est toujours connexe"
+    ],
+    "correctIndex": 0,
+    "explanation": "Les degrés possibles sont 0 à n-1 (n valeurs). Si tous les n sommets avaient des degrés différents, il faudrait un sommet de degré 0 (relié à personne) et un de degré n-1 (relié à tous). C'est contradictoire si n >= 2.",
+    "category": "exercice8"
+  },
+  {
+    "id": 18,
+    "question": "Quelle est la matrice des distances du graphe G de l'exercice 1 ? Quel est son diamètre ?",
+    "options": [
+      "Diamètre = 3 (distance maximale entre s3 ou s4 et s5)",
+      "Diamètre = 2",
+      "Diamètre = 4",
+      "Diamètre = infini (graphe non connexe)"
+    ],
+    "correctIndex": 0,
+    "explanation": "Le graphe est connexe. La distance maximale est 3, par exemple entre s5 et s3 : s5→s1→s2→s3. Donc le diamètre est 3.",
+    "category": "exercice9"
+  },
+  {
+    "id": 19,
+    "question": "Quel est le diamètre du graphe de l'exercice 2 (6 sommets, 10 arêtes) ?",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "Infini"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le diamètre est 2. Grâce à s2 et s6 qui sont très connectés, on peut toujours relier deux sommets en au plus 2 arêtes.",
+    "category": "exercice9"
+  },
+  {
+    "id": 20,
+    "question": "Quel est le diamètre du graphe de l'exercice 3 (matrice avec composantes {s1,s2,s4} et {s3,s5,s6}) ?",
+    "options": [
+      "2",
+      "3",
+      "6",
+      "Infini (le graphe n'est pas connexe)"
+    ],
+    "correctIndex": 3,
+    "explanation": "Le graphe n'est pas connexe : il n'existe pas de chaîne entre s1 et s3 par exemple. La distance entre ces sommets est infinie, donc le diamètre est infini.",
+    "category": "exercice9"
+  },
+  {
+    "id": 21,
+    "question": "Dans le problème du musée, un gardien dans un couloir surveille les 2 carrefours aux extrémités. S'il y a 11 carrefours, combien faut-il de gardiens au minimum ?",
+    "options": [
+      "5",
+      "6",
+      "7",
+      "11"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un gardien surveille au maximum 2 carrefours. Il faut donc au minimum ⌈11/2⌉ = 6 gardiens.",
+    "category": "exercice10"
+  },
+  {
+    "id": 22,
+    "question": "Dans le problème du musée avec gardiens aux carrefours, pourquoi faut-il au moins 6 gardiens pour surveiller tous les couloirs ?",
+    "options": [
+      "Car le graphe a 15 arêtes et un gardien surveille au max 3 couloirs, donc 15/3 = 5 suffit",
+      "Car le graphe contient 2 pentagones disjoints, et il faut 3 gardiens par pentagone",
+      "Car il y a 6 carrefours de degré impair",
+      "Car le graphe n'est pas eulérien"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le graphe contient deux pentagones disjoints (sans arête commune). Il faut 3 gardiens pour surveiller les arêtes d'un pentagone. Comme les pentagones sont disjoints, aucun gardien ne peut servir aux deux. Donc il faut au moins 6 gardiens.",
+    "category": "exercice11"
+  },
+  {
+    "id": 23,
+    "question": "Le problème de l'agence d'intérim (6 travailleurs, 6 emplois selon qualifications) se modélise par quel type de graphe ?",
+    "options": [
+      "Un graphe complet K6",
+      "Un graphe biparti avec les travailleurs d'un côté et les emplois de l'autre",
+      "Un graphe eulérien",
+      "Un graphe 3-régulier"
+    ],
+    "correctIndex": 1,
+    "explanation": "C'est un graphe biparti : les travailleurs forment un ensemble V1, les emplois un ensemble V2. Les arêtes relient chaque travailleur aux emplois qu'il peut occuper.",
+    "category": "exercice12"
+  },
+  {
+    "id": 24,
+    "question": "Pour quelles valeurs de n peut-on construire un graphe simple 3-régulier d'ordre n ?",
+    "options": [
+      "Pour tout n >= 4",
+      "Seulement pour n pair (et n >= 4)",
+      "Seulement pour n impair",
+      "Seulement pour n multiple de 3"
+    ],
+    "correctIndex": 1,
+    "explanation": "Pour un graphe 3-régulier d'ordre n, la somme des degrés = 3n. Cette somme doit être paire (= 2×nombre d'arêtes), donc 3n doit être pair, ce qui impose n pair.",
+    "category": "exercice13"
+  },
+  {
+    "id": 25,
+    "question": "Dans un groupe de 6 personnes, est-il vrai qu'il y a forcément soit 3 personnes qui se connaissent toutes, soit 3 qui ne se connaissent pas ?",
+    "options": [
+      "Oui, c'est toujours vrai",
+      "Non, ce n'est pas toujours vrai",
+      "Seulement si le graphe est connexe",
+      "Seulement si le graphe est complet"
+    ],
+    "correctIndex": 0,
+    "explanation": "Oui. En prenant une personne A : soit elle connaît au moins 3 personnes (et parmi elles, soit 2 se connaissent → triangle, soit aucune → 3 inconnues), soit elle en connaît au plus 2 (raisonnement symétrique).",
+    "category": "exercice14"
+  },
+  {
+    "id": 26,
+    "question": "En termes de théorie des graphes, que signifie le résultat de l'exercice 14 (6 personnes) ?",
+    "options": [
+      "Tout graphe d'ordre 6 est eulérien",
+      "Tout graphe simple d'ordre 6 contient soit K3, soit un sous-graphe stable d'ordre 3",
+      "Tout graphe d'ordre 6 est connexe",
+      "Tout graphe d'ordre 6 est biparti"
+    ],
+    "correctIndex": 1,
+    "explanation": "3 personnes se connaissant toutes = K3 (triangle). 3 personnes ne se connaissant pas = sous-graphe stable d'ordre 3 (aucune arête). Tout graphe simple d'ordre 6 contient l'un ou l'autre.",
+    "category": "exercice14"
+  },
+  {
+    "id": 27,
+    "question": "Le résultat de l'exercice 14 est-il encore vrai pour un groupe de 5 personnes ?",
+    "options": [
+      "Oui, c'est encore vrai",
+      "Non, il existe un graphe d'ordre 5 sans K3 et sans sous-graphe stable d'ordre 3 (le cycle C5)"
+    ],
+    "correctIndex": 1,
+    "explanation": "Non. Le cycle C5 (pentagone) est un contre-exemple : chaque sommet a degré 2, il n'y a ni triangle (K3) ni 3 sommets mutuellement non adjacents.",
+    "category": "exercice14"
+  },
+  {
+    "id": 28,
+    "question": "Dans un groupe de 10 personnes, est-il vrai qu'il y a forcément soit 4 personnes qui se connaissent toutes, soit 3 qui ne se connaissent pas ?",
+    "options": [
+      "Oui, c'est toujours vrai",
+      "Non, ce n'est pas toujours le cas",
+      "Seulement si tout le monde connaît au moins 5 personnes",
+      "Seulement si le graphe est planaire"
+    ],
+    "correctIndex": 0,
+    "explanation": "Oui. Pour A dans le groupe : si A connaît ≥ 6 personnes, parmi elles soit 3 ne se connaissent pas, soit 3 se connaissent → avec A ça fait 4. Si A connaît ≤ 5 personnes, il y en a ≥ 4 qu'il ne connaît pas, et on raisonne de manière symétrique.",
+    "category": "exercice15"
+  },
+  {
+    "id": 29,
+    "question": "Que peut-on déduire de la matrice d'adjacence pour savoir si un graphe est simple ?",
+    "options": [
+      "La matrice ne contient que des 0 et des 1, et la diagonale est nulle",
+      "La matrice est symétrique",
+      "La somme de chaque ligne est la même",
+      "La matrice est inversible"
+    ],
+    "correctIndex": 0,
+    "explanation": "Pas de boucles = diagonale nulle. Pas d'arêtes parallèles = que des 0 et des 1 hors diagonale. La symétrie est vraie pour tout graphe non orienté, pas seulement les simples.",
+    "category": "exercice3"
+  },
+  {
+    "id": 30,
+    "question": "Si la somme des degrés d'un graphe vaut 20, combien d'arêtes a-t-il ?",
+    "options": [
+      "20",
+      "10",
+      "40",
+      "On ne peut pas savoir"
+    ],
+    "correctIndex": 1,
+    "explanation": "D'après le théorème : Σ d(s) = 2 × d(G). Donc d(G) = 20/2 = 10 arêtes.",
+    "category": "exercice2"
+  },
+  {
+    "id": 31,
+    "question": "Pour le graphe de l'exercice 1, quelle est la distance entre s5 et s3 ?",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "Infini"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le plus court chemin de s5 à s3 passe par s5→s1→s2→s3 (longueur 3). Il n'existe pas de chemin plus court.",
+    "category": "exercice9"
+  },
+  {
+    "id": 32,
+    "question": "Quel est le nombre maximal d'arêtes dans un graphe simple d'ordre n ?",
+    "options": [
+      "n(n+1)/2",
+      "n(n-1)/2",
+      "n²",
+      "n(n-1)"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dans un graphe simple (sans boucles ni arêtes parallèles), chaque sommet a un degré max de n-1. Somme des degrés = n(n-1). Nombre d'arêtes = n(n-1)/2.",
+    "category": "exercice6"
+  },
+  {
+    "id": 33,
+    "question": "Dans la preuve de l'exercice 14 (groupe de 6 personnes), quel est le premier argument clé ?",
+    "options": [
+      "Prendre une personne A : soit elle connaît ≥ 3 personnes, soit elle en connaît ≤ 2 (donc ≥ 3 inconnues)",
+      "Compter le nombre total d'arêtes",
+      "Calculer la somme des degrés",
+      "Vérifier si le graphe est biparti"
+    ],
+    "correctIndex": 0,
+    "explanation": "On prend une personne A. Parmi les 5 autres, soit A en connaît au moins 3, soit il y en a au moins 3 qu'elle ne connaît pas (car 5-2=3). Ensuite on raisonne dans chaque cas.",
+    "category": "exercice14"
+  },
+  {
+    "id": 34,
+    "question": "Pourquoi ne peut-il pas exister de graphe simple à 5 sommets de degrés 2, 3, 4, 4, 5 ?",
+    "options": [
+      "La somme des degrés est impaire",
+      "Le degré 5 dépasse n-1 = 4, ce qui est impossible dans un graphe simple d'ordre 5",
+      "Il y a un nombre impair de sommets de degré impair",
+      "Le graphe ne serait pas connexe"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dans un graphe simple d'ordre n=5, le degré maximal d'un sommet est n-1=4. Un sommet de degré 5 est donc impossible.",
+    "category": "exercice7"
+  },
+  {
+    "id": 35,
+    "question": "Si un graphe non connexe a deux composantes connexes de 3 et 4 sommets, quel est son diamètre ?",
+    "options": [
+      "3",
+      "4",
+      "7",
+      "Infini"
+    ],
+    "correctIndex": 3,
+    "explanation": "Comme le graphe n'est pas connexe, il existe des sommets entre lesquels il n'y a aucune chaîne. La distance entre eux est infinie, donc le diamètre est infini.",
+    "category": "exercice9"
+  }
+]

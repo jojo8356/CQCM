@@ -1,0 +1,94 @@
+{
+  "quizzes": [
+    {
+      "id": "c-functions",
+      "title": "Fonctions en C",
+      "description": "Questions sur les fonctions et procédures en langage C",
+      "category": "Langage C",
+      "difficulty": "intermediaire",
+      "questionCount": 0,
+      "fileName": "questions.json",
+      "icon": "🔧"
+    },
+    {
+      "id": "java-variables",
+      "title": "Variables et types en Java",
+      "description": "Types primitifs, Wrappers, tableaux, passage de paramètres",
+      "category": "Java - POO",
+      "difficulty": "intermediaire",
+      "questionCount": 32,
+      "fileName": "questions-java-variables.json",
+      "icon": "☕"
+    },
+    {
+      "id": "java-oop-basics",
+      "title": "Bases de la POO en Java",
+      "description": "Classes, objets, encapsulation, constructeurs, méthodes",
+      "category": "Java - POO",
+      "difficulty": "debutant",
+      "questionCount": 32,
+      "fileName": "questions-java-oop-basics.json",
+      "icon": "📦"
+    },
+    {
+      "id": "graphes-non-orientes",
+      "title": "Graphes non orientés",
+      "description": "Définitions, cas particuliers, parcours (eulériens, hamiltoniens), coloration",
+      "category": "Graphes",
+      "difficulty": "intermediaire",
+      "questionCount": 70,
+      "fileName": "questions-graphes-non-orientes.json",
+      "icon": "🔗"
+    },
+    {
+      "id": "java-composition",
+      "title": "Composition et Agrégation",
+      "description": "Relation de composition, agrégation, correspondance UML-Java, construction par assemblage",
+      "category": "Java - POO",
+      "difficulty": "intermediaire",
+      "questionCount": 20,
+      "fileName": "questions-java-composition.json",
+      "icon": "🧩"
+    },
+    {
+      "id": "java-exceptions",
+      "title": "Gestion des exceptions",
+      "description": "try/catch/finally, throw/throws, hiérarchie des exceptions, propagation",
+      "category": "Java - POO",
+      "difficulty": "intermediaire",
+      "questionCount": 32,
+      "fileName": "questions-java-exceptions.json",
+      "icon": "⚠️"
+    },
+    {
+      "id": "graphes-td1",
+      "title": "TD1 - Graphes non orientés : généralités",
+      "description": "Exercices : ordre, degré, matrice d'adjacence, graphes simples/complets/connexes, distances, coloration, Ramsey",
+      "category": "Graphes",
+      "difficulty": "intermediaire",
+      "questionCount": 35,
+      "fileName": "questions-graphes-td1.json",
+      "icon": "📝"
+    },
+    {
+      "id": "graphes-td1bis",
+      "title": "TD1-Bis - Isomorphismes, parcours, coloration",
+      "description": "Isomorphismes, graphes eulériens/hamiltoniens, Welsh & Powell, graphes d'incompatibilité, problèmes d'application",
+      "category": "Graphes",
+      "difficulty": "intermediaire",
+      "questionCount": 40,
+      "fileName": "questions-graphes-td1bis.json",
+      "icon": "📝"
+    },
+    {
+      "id": "stats-descriptives",
+      "title": "Statistique descriptive",
+      "description": "Vocabulaire, variables (quantitatives/qualitatives), effectifs, fréquences, représentations graphiques, moyenne, médiane, mode, variance, écart-type, quartiles",
+      "category": "Statistiques",
+      "difficulty": "intermediaire",
+      "questionCount": 50,
+      "fileName": "questions-stats-descriptives.json",
+      "icon": "📊"
+    }
+  ]
+}

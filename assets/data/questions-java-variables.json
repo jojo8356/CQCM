@@ -1,0 +1,402 @@
+[
+  {
+    "id": 1,
+    "question": "Ce code compile-t-il sans erreur ?\n```java\npublic class Test {\n    public static void main(String[] args) {\n        double d1 = 0.1;\n        double d2 = 0.2;\n        double d3 = 0.3;\n        if (d1 + d2 == d3) {\n            System.out.println(\"Égaux\");\n        }\n    }\n}```",
+    "options": [
+      "Vrai - Le code compile sans erreur",
+      "Faux - Le code ne compile pas"
+    ],
+    "correctIndex": 0,
+    "explanation": "Le code compile, mais la condition ne sera jamais vraie à cause de l'imprécision des nombres flottants. Il faut tester la proximité avec un epsilon.",
+    "category": "types_primitifs"
+  },
+  {
+    "id": 2,
+    "question": "Ce code affichera-t-il '6' ?\n```java\npublic class Test {\n    public static void incrementer(int entier) {\n        entier = entier + 1;\n    }\n    \n    public static void main(String[] args) {\n        int i = 5;\n        incrementer(i);\n        System.out.println(i);\n    }\n}```",
+    "options": [
+      "Vrai - Le code affichera 6",
+      "Faux - Le code affichera 5"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le code affichera '5' car les types primitifs sont passés par valeur. La modification du paramètre dans la méthode n'affecte pas la variable d'origine.",
+    "category": "passage_parametre"
+  },
+  {
+    "id": 3,
+    "question": "Ce code affichera-t-il '6' ?\n```java\npublic class Box {\n    public int field;\n    public Box(int f) { field = f; }\n}\n\npublic class Test {\n    public static void incrementer(Box box) {\n        box.field = box.field + 1;\n    }\n    \n    public static void main(String[] args) {\n        Box b = new Box(5);\n        incrementer(b);\n        System.out.println(b.field);\n    }\n}```",
+    "options": [
+      "Vrai - Le code affichera 6",
+      "Faux - Le code affichera 5"
+    ],
+    "correctIndex": 0,
+    "explanation": "Le code affichera '6' car les objets sont passés par référence. La modification du champ de l'objet via la référence affecte l'objet d'origine.",
+    "category": "passage_parametre"
+  },
+  {
+    "id": 4,
+    "question": "Ce code affichera-t-il '6' ?\n```java\npublic class Box {\n    public int field;\n    public Box(int f) { field = f; }\n}\n\npublic class Test {\n    public static void changer(Box box) {\n        Box tmp = new Box(6);\n        box = tmp;\n    }\n    \n    public static void main(String[] args) {\n        Box b = new Box(5);\n        changer(b);\n        System.out.println(b.field);\n    }\n}```",
+    "options": [
+      "Vrai - Le code affichera 6",
+      "Faux - Le code affichera 5"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le code affichera '5' car modifier la référence locale (box = tmp) ne modifie pas la référence d'origine (b). Seule la copie locale de la référence est modifiée.",
+    "category": "passage_parametre"
+  },
+  {
+    "id": 5,
+    "question": "Ce code est-il valide ?\n```java\npublic class Test {\n    public static void main(String[] args) {\n        int a = 4;\n        Integer i = a;\n        int j = i;\n    }\n}```",
+    "options": [
+      "Vrai - Le code est valide",
+      "Faux - Le code n'est pas valide"
+    ],
+    "correctIndex": 0,
+    "explanation": "Le code est valide grâce à l'autoboxing/unboxing automatique entre types primitifs et leurs Wrappers (conversion implicite).",
+    "category": "wrapper"
+  },
+  {
+    "id": 6,
+    "question": "Ce code provoquera-t-il une erreur de compilation ?\n```java\npublic class Test {\n    public static void main(String[] args) {\n        double x = 8.234;\n        int n = x;\n    }\n}```",
+    "options": [
+      "Vrai - Erreur de compilation",
+      "Faux - Pas d'erreur"
+    ],
+    "correctIndex": 0,
+    "explanation": "Une conversion explicite (cast) est nécessaire : int n = (int) x; pour éviter une perte de précision.",
+    "category": "transtypage"
+  },
+  {
+    "id": 7,
+    "question": "Ce code crée-t-il correctement un tableau d'entiers ?\n```java\npublic class Test {\n    public static void main(String[] args) {\n        int[] tab = new int[5];\n        int longueur = tab.length();\n    }\n}```",
+    "options": [
+      "Vrai - Le code est correct",
+      "Faux - Il y a une erreur"
+    ],
+    "correctIndex": 1,
+    "explanation": "length est un attribut, pas une méthode. Il faut écrire : int longueur = tab.length; (sans parenthèses).",
+    "category": "tableaux"
+  },
+  {
+    "id": 8,
+    "question": "Ce code est-il valide ?\n```java\npublic class Test {\n    public static void main(String[] args) {\n        Box b;\n        b.field = 5;\n    }\n}\n\nclass Box {\n    public int field;\n}```",
+    "options": [
+      "Vrai - Le code est valide",
+      "Faux - Le code n'est pas valide"
+    ],
+    "correctIndex": 1,
+    "explanation": "La variable b n'est pas initialisée (vaut null). Il faut l'instancier : Box b = new Box(); avant de pouvoir accéder à ses champs.",
+    "category": "allocation_memoire"
+  },
+  {
+    "id": 9,
+    "question": "Quelle est la taille en octets d'une variable de type int ?",
+    "options": [
+      "1 octet",
+      "2 octets",
+      "4 octets",
+      "8 octets"
+    ],
+    "correctIndex": 2,
+    "explanation": "Un int occupe 4 octets en mémoire et peut stocker des valeurs de -2 147 483 648 à 2 147 483 647.",
+    "category": "types_primitifs"
+  },
+  {
+    "id": 10,
+    "question": "Quelle est la valeur par défaut d'une variable de type boolean ?",
+    "options": [
+      "true",
+      "false",
+      "null",
+      "0"
+    ],
+    "correctIndex": 1,
+    "explanation": "La valeur par défaut d'un boolean est false.",
+    "category": "types_primitifs"
+  },
+  {
+    "id": 11,
+    "question": "Quel est le Wrapper (classe enveloppeur) du type primitif int ?",
+    "options": [
+      "Int",
+      "INTEGER",
+      "Integer",
+      "IntWrapper"
+    ],
+    "correctIndex": 2,
+    "explanation": "La classe Integer est le Wrapper du type primitif int.",
+    "category": "wrapper"
+  },
+  {
+    "id": 12,
+    "question": "Combien d'octets occupe un Integer en mémoire sur une JVM 64 bits ?",
+    "options": [
+      "4 octets",
+      "8 octets",
+      "20 octets",
+      "32 octets"
+    ],
+    "correctIndex": 3,
+    "explanation": "Un objet Integer occupe 32 octets sur une JVM 64 bits (contre 4 octets pour un int primitif), d'où l'importance de choisir le bon type.",
+    "category": "wrapper"
+  },
+  {
+    "id": 13,
+    "question": "Que vaut une variable objet non initialisée ?",
+    "options": [
+      "0",
+      "false",
+      "null",
+      "undefined"
+    ],
+    "correctIndex": 2,
+    "explanation": "Une variable objet non initialisée a pour valeur null (aucune référence).",
+    "category": "allocation_memoire"
+  },
+  {
+    "id": 14,
+    "question": "Comment obtenir la taille d'un tableau en Java ?",
+    "options": [
+      "tab.size()",
+      "tab.length()",
+      "tab.length",
+      "tab.size"
+    ],
+    "correctIndex": 2,
+    "explanation": "Pour obtenir la taille d'un tableau, on utilise l'attribut public length (sans parenthèses).",
+    "category": "tableaux"
+  },
+  {
+    "id": 15,
+    "question": "Quel mot-clé permet d'allouer de la mémoire pour un objet ?",
+    "options": [
+      "alloc",
+      "malloc",
+      "new",
+      "create"
+    ],
+    "correctIndex": 2,
+    "explanation": "L'opérateur new permet d'allouer de la mémoire pour créer une nouvelle instance d'objet.",
+    "category": "allocation_memoire"
+  },
+  {
+    "id": 16,
+    "question": "Comment libère-t-on la mémoire d'un objet en Java ?",
+    "options": [
+      "Avec delete",
+      "Avec free()",
+      "Automatiquement par le Garbage Collector",
+      "Avec dispose()"
+    ],
+    "correctIndex": 2,
+    "explanation": "La désallocation mémoire est gérée automatiquement par le Garbage Collector, pas par le programmeur.",
+    "category": "allocation_memoire"
+  },
+  {
+    "id": 17,
+    "question": "Quelle classe contient des méthodes utilitaires pour manipuler les tableaux ?",
+    "options": [
+      "java.util.Array",
+      "java.util.Arrays",
+      "java.lang.Array",
+      "java.lang.Arrays"
+    ],
+    "correctIndex": 1,
+    "explanation": "La classe java.util.Arrays contient des méthodes statiques comme sort(), fill(), copyOf() pour manipuler les tableaux.",
+    "category": "tableaux"
+  },
+  {
+    "id": 18,
+    "question": "Quelle est la plage de valeurs d'un type byte ?",
+    "options": [
+      "0 à 255",
+      "-128 à +127",
+      "-32768 à +32767",
+      "0 à 127"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un byte est un entier signé de 1 octet allant de -128 (Byte.MIN_VALUE) à +127 (Byte.MAX_VALUE).",
+    "category": "types_primitifs"
+  },
+  {
+    "id": 19,
+    "question": "Quel type primitif Java occupe 8 octets ?",
+    "options": [
+      "int",
+      "float",
+      "long",
+      "double"
+    ],
+    "correctIndex": [2, 3],
+    "explanation": "Les types long et double occupent tous deux 8 octets en mémoire.",
+    "category": "types_primitifs"
+  },
+  {
+    "id": 20,
+    "question": "Comment tester correctement l'égalité de deux nombres flottants ?",
+    "options": [
+      "Avec l'opérateur ==",
+      "Avec la méthode equals()",
+      "En testant leur proximité avec un epsilon",
+      "Avec l'opérateur ==="
+    ],
+    "correctIndex": 2,
+    "explanation": "Les nombres flottants sont des approximations. Il faut tester leur proximité : Math.abs(d1 - d2) < EPSILON.",
+    "category": "types_primitifs"
+  },
+  {
+    "id": 21,
+    "question": "Que se passe-t-il lors du passage d'un type primitif en paramètre ?",
+    "options": [
+      "Passage par référence",
+      "Passage par valeur",
+      "Passage par pointeur",
+      "Passage par copie de référence"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les types primitifs sont passés par valeur : la valeur est recopiée, les modifications ne sont pas répercutées.",
+    "category": "passage_parametre"
+  },
+  {
+    "id": 22,
+    "question": "Que se passe-t-il lors du passage d'un objet en paramètre ?",
+    "options": [
+      "Passage par valeur de la référence",
+      "Passage par valeur de l'objet",
+      "Passage par pointeur",
+      "Passage par copie profonde"
+    ],
+    "correctIndex": 0,
+    "explanation": "La référence est recopiée. Les modifications via cette référence affectent l'objet, mais pas la modification de la référence elle-même.",
+    "category": "passage_parametre"
+  },
+  {
+    "id": 23,
+    "question": "Quelle méthode permet de convertir une String en int ?",
+    "options": [
+      "String.toInt()",
+      "Integer.parseInt()",
+      "int.parse()",
+      "Integer.toInt()"
+    ],
+    "correctIndex": 1,
+    "explanation": "La méthode statique Integer.parseInt(String s) permet de convertir une chaîne en int.",
+    "category": "wrapper"
+  },
+  {
+    "id": 24,
+    "question": "Quelle déclaration de tableau est INCORRECTE ?",
+    "options": [
+      "int[] tab = new int[10];",
+      "int tab[] = {1,2,3};",
+      "int[] tab = [1,2,3];",
+      "int[] tab = new int[]{1,2,3};"
+    ],
+    "correctIndex": 2,
+    "explanation": "La syntaxe int[] tab = [1,2,3]; n'est pas valide en Java. Il faut utiliser des accolades {} ou l'opérateur new.",
+    "category": "tableaux"
+  },
+  {
+    "id": 25,
+    "question": "Dans une boucle for, que peut être l'instruction d'incrémentation ?",
+    "options": [
+      "Uniquement i++",
+      "Uniquement i-- ou i++",
+      "N'importe quelle expression mathématique",
+      "Seulement des additions ou soustractions"
+    ],
+    "correctIndex": 2,
+    "explanation": "L'instruction d'incrémentation peut être n'importe quelle formule mathématique : i++, i--, i*=2, i%=2, etc.",
+    "category": "boucles"
+  },
+  {
+    "id": 26,
+    "question": "Toute variable désignant un objet en Java est :",
+    "options": [
+      "Une valeur directe",
+      "Une référence (pointeur)",
+      "Une copie de l'objet",
+      "Un alias"
+    ],
+    "correctIndex": 1,
+    "explanation": "En Java, toute variable désignant un objet est une référence (sorte de pointeur) vers l'emplacement mémoire de l'objet.",
+    "category": "nature_variables"
+  },
+  {
+    "id": 27,
+    "question": "Quel est l'avantage principal des Wrappers ?",
+    "options": [
+      "Ils occupent moins de mémoire",
+      "Ils sont plus rapides",
+      "Ils ont leurs propres méthodes",
+      "Ils sont immutables"
+    ],
+    "correctIndex": 2,
+    "explanation": "Les Wrappers peuvent être utilisés comme des objets avec leurs propres méthodes (parseInt, doubleValue, etc.).",
+    "category": "wrapper"
+  },
+  {
+    "id": 28,
+    "question": "Un objet Wrapper est :",
+    "options": [
+      "Mutable (modifiable)",
+      "Immuable (non modifiable)",
+      "Partiellement modifiable",
+      "Modifiable uniquement dans un constructeur"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les Wrappers sont immuables : toute modification nécessite de créer un nouvel objet.",
+    "category": "wrapper"
+  },
+  {
+    "id": 29,
+    "question": "Quel est le type de retour de la méthode intValue() de la classe Integer ?",
+    "options": [
+      "Integer",
+      "int",
+      "String",
+      "Object"
+    ],
+    "correctIndex": 1,
+    "explanation": "La méthode intValue() retourne un type primitif int à partir d'un objet Integer.",
+    "category": "wrapper"
+  },
+  {
+    "id": 30,
+    "question": "Quand un objet est-il récupéré par le Garbage Collector ?",
+    "options": [
+      "Dès qu'on sort d'une méthode",
+      "Quand il n'est plus référencé par aucune variable",
+      "Après 1 minute sans utilisation",
+      "Quand on appelle System.gc()"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le Garbage Collector récupère automatiquement les objets qui ne sont plus référencés par aucune variable.",
+    "category": "allocation_memoire"
+  },
+  {
+    "id": 31,
+    "question": "Comment déclarer un tableau à 2 dimensions en Java ?",
+    "options": [
+      "int[2] tab;",
+      "int[][] tab;",
+      "int[,] tab;",
+      "int[2][2] tab;"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un tableau à 2 dimensions (matrice) se déclare avec int[][] tab;",
+    "category": "tableaux"
+  },
+  {
+    "id": 32,
+    "question": "Quelle est la valeur par défaut d'un type char ?",
+    "options": [
+      "'\\0'",
+      "'\\u0000'",
+      "null",
+      "' ' (espace)"
+    ],
+    "correctIndex": 1,
+    "explanation": "La valeur par défaut d'un char est '\\u0000' (le caractère Unicode null).",
+    "category": "types_primitifs"
+  }
+]

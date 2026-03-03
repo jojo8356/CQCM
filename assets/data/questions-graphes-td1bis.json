@@ -1,0 +1,498 @@
+[
+  {
+    "id": 1,
+    "question": "Soit 4 graphes d'ordre 4. G1 a des sommets de degrés 3,3,4,4. G2 a des degrés 2,2,5,5. G3 a des degrés 4,4,3,3. G4 a des degrés 3,3,3,3. Lesquels sont potentiellement isomorphes ?",
+    "options": [
+      "G1 et G3 (mêmes degrés réordonnés)",
+      "G1 et G4",
+      "G2 et G3",
+      "Aucun n'est isomorphe à un autre"
+    ],
+    "correctIndex": 0,
+    "explanation": "Deux graphes isomorphes ont les mêmes degrés de sommets. G1 (3,3,4,4) et G3 (4,4,3,3) ont les mêmes degrés. G2 (2,2,5,5) et G4 (3,3,3,3) ne correspondent à aucun autre.",
+    "category": "isomorphisme"
+  },
+  {
+    "id": 2,
+    "question": "Pour prouver que G1 et G3 sont isomorphes, que faut-il exhiber ?",
+    "options": [
+      "Une bijection φ entre les sommets qui transforme les arêtes de G1 en arêtes de G3",
+      "Montrer qu'ils ont le même nombre d'arêtes",
+      "Montrer qu'ils ont la même matrice d'adjacence",
+      "Montrer qu'ils sont tous les deux connexes"
+    ],
+    "correctIndex": 0,
+    "explanation": "Il faut trouver une bijection φ : V(G1) → V(G3) telle qu'après renommage des sommets, G1 et G3 aient la même matrice d'adjacence. Avoir même ordre/degré est nécessaire mais pas suffisant.",
+    "category": "isomorphisme"
+  },
+  {
+    "id": 3,
+    "question": "Deux graphes 3-réguliers d'ordre 6 sont-ils forcément isomorphes ?",
+    "options": [
+      "Oui, car ils ont les mêmes degrés",
+      "Non, l'un peut contenir K3 (triangle) et pas l'autre"
+    ],
+    "correctIndex": 1,
+    "explanation": "Non. K3,3 est 3-régulier d'ordre 6 et ne contient pas K3 (c'est un graphe biparti). Un autre graphe 3-régulier d'ordre 6 peut contenir K3. Avoir mêmes degrés n'est pas suffisant pour l'isomorphisme.",
+    "category": "isomorphisme"
+  },
+  {
+    "id": 4,
+    "question": "Pourquoi un graphe biparti ne peut-il jamais contenir K3 (triangle) comme sous-graphe ?",
+    "options": [
+      "Parce qu'un graphe biparti a toujours un nombre pair de sommets",
+      "Parce que parmi 3 sommets d'un graphe biparti, il y en a forcément 2 du même groupe, qui ne peuvent être reliés entre eux",
+      "Parce qu'un graphe biparti est toujours planaire",
+      "Parce que K3 a un nombre impair de sommets"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dans un graphe biparti, les sommets sont en 2 groupes V1 et V2. Parmi 3 sommets quelconques, au moins 2 sont dans le même groupe (pigeonhole) et ne sont donc pas reliés. Impossible d'avoir K3.",
+    "category": "isomorphisme"
+  },
+  {
+    "id": 5,
+    "question": "Lequel des deux graphes 3-réguliers d'ordre 6 de l'exercice 2 est isomorphe à K3,3 ?",
+    "options": [
+      "Celui qui contient K3",
+      "Celui qui ne contient pas K3 (c'est un graphe biparti)"
+    ],
+    "correctIndex": 1,
+    "explanation": "K3,3 est un graphe biparti complet. Un graphe biparti ne contient jamais K3. Donc c'est le graphe sans triangle qui est isomorphe à K3,3.",
+    "category": "isomorphisme"
+  },
+  {
+    "id": 6,
+    "question": "Combien existe-t-il de graphes simples non isomorphes d'ordre 4 et de degré 2 ?",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctIndex": 1,
+    "explanation": "Il n'y en a que 2 : un cycle C4 (carré) et un graphe formé d'un triangle K3 plus un sommet isolé relié par... En fait, les 2 graphes sont le cycle de longueur 4 et le triangle + une arête disjointe.",
+    "category": "isomorphisme"
+  },
+  {
+    "id": 7,
+    "question": "Combien existe-t-il de graphes non orientés (non nécessairement simples) d'ordre 4 et de degré 3, à isomorphisme près ?",
+    "options": [
+      "5",
+      "10",
+      "20",
+      "15"
+    ],
+    "correctIndex": 2,
+    "explanation": "En catégorisant : simples, sans boucle avec arêtes parallèles, 1 boucle sans arêtes parallèles, 1 boucle avec arêtes parallèles, 2 boucles non-parallèles, 2 boucles parallèles, 3 boucles, on trouve 20 graphes.",
+    "category": "isomorphisme"
+  },
+  {
+    "id": 8,
+    "question": "Quels graphes complets Kn sont eulériens ?",
+    "options": [
+      "Ceux d'ordre pair (K2, K4, K6...)",
+      "Ceux d'ordre impair (K1, K3, K5...)",
+      "Tous les graphes complets",
+      "Aucun graphe complet"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un graphe est eulérien ssi tous ses sommets sont de degré pair. Dans Kn, chaque sommet est de degré n-1. Donc n-1 doit être pair, c'est-à-dire n impair.",
+    "category": "euler_hamilton"
+  },
+  {
+    "id": 9,
+    "question": "K3,3 est-il eulérien ?",
+    "options": [
+      "Oui",
+      "Non, car tous ses sommets sont de degré 3 (impair)"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dans K3,3, chaque sommet est de degré 3 (relié aux 3 sommets de l'autre groupe). Comme 3 est impair, K3,3 n'est pas eulérien.",
+    "category": "euler_hamilton"
+  },
+  {
+    "id": 10,
+    "question": "Un graphe à 6 sommets a les degrés : 2, 5, 4, 3, 2, 4. Ce graphe est-il eulérien, semi-eulérien, ou ni l'un ni l'autre ?",
+    "options": [
+      "Eulérien",
+      "Semi-eulérien (traversable) car il a exactement 2 sommets de degré impair",
+      "Ni eulérien ni semi-eulérien",
+      "On ne peut pas savoir sans voir le graphe"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les sommets de degré impair sont s2 (degré 5) et s4 (degré 3) : exactement 2 sommets impairs. Le graphe est connexe et semi-eulérien. Pour le traverser, il faut partir de s2 ou s4 et finir à l'autre.",
+    "category": "euler_hamilton"
+  },
+  {
+    "id": 11,
+    "question": "Pour traverser un graphe semi-eulérien (chaîne eulérienne), par quel sommet faut-il commencer ?",
+    "options": [
+      "Par n'importe quel sommet",
+      "Par un des deux sommets de degré impair",
+      "Par le sommet de plus grand degré",
+      "Par le sommet de plus petit degré"
+    ],
+    "correctIndex": 1,
+    "explanation": "Une chaîne eulérienne doit commencer à l'un des deux sommets de degré impair et se terminer à l'autre. C'est une conséquence du théorème d'Euler.",
+    "category": "euler_hamilton"
+  },
+  {
+    "id": 12,
+    "question": "On veut dessiner une figure composée de 16 segments sans lever le stylo. Le graphe associé a les degrés : 4, 5, 4, 5, 5, 9. Est-ce possible ?",
+    "options": [
+      "Oui, c'est un graphe eulérien",
+      "Oui, c'est un graphe semi-eulérien",
+      "Non, car il y a plus de 2 sommets de degré impair (4 sommets impairs)"
+    ],
+    "correctIndex": 2,
+    "explanation": "Les sommets de degré impair sont ceux de degrés 5, 5, 5, 9 : il y en a 4. Un graphe est traversable ssi il a au maximum 2 sommets de degré impair. Ici c'est impossible.",
+    "category": "euler_hamilton"
+  },
+  {
+    "id": 13,
+    "question": "Les châteaux de la Loire : un graphe à 8 sommets (A-H). On cherche une chaîne passant une fois et une seule par chaque château. Quel type de chaîne cherche-t-on ?",
+    "options": [
+      "Une chaîne eulérienne",
+      "Une chaîne hamiltonienne",
+      "Un cycle eulérien",
+      "Un cycle hamiltonien"
+    ],
+    "correctIndex": 1,
+    "explanation": "Passer une fois par chaque sommet (château) = chaîne hamiltonienne. Attention : eulérien concerne les arêtes (passer par chaque arête), hamiltonien concerne les sommets (passer par chaque sommet).",
+    "category": "euler_hamilton"
+  },
+  {
+    "id": 14,
+    "question": "Quelle est la différence fondamentale entre un problème eulérien et un problème hamiltonien ?",
+    "options": [
+      "Eulérien = passer par chaque arête une fois. Hamiltonien = passer par chaque sommet une fois.",
+      "Eulérien = passer par chaque sommet une fois. Hamiltonien = passer par chaque arête une fois.",
+      "Eulérien = graphe connexe. Hamiltonien = graphe complet.",
+      "Il n'y a pas de différence"
+    ],
+    "correctIndex": 0,
+    "explanation": "Eulérien : parcourir chaque arête exactement une fois. Hamiltonien : passer par chaque sommet exactement une fois. Pour l'eulérien il existe un critère simple (degrés pairs), pas pour l'hamiltonien.",
+    "category": "euler_hamilton"
+  },
+  {
+    "id": 15,
+    "question": "Un club de 9 joueurs se réunit autour d'une table ronde. Chaque jour, personne ne doit retrouver le même voisin. Combien de jours maximum peuvent-ils se réunir ?",
+    "options": [
+      "3 jours",
+      "4 jours",
+      "5 jours",
+      "8 jours"
+    ],
+    "correctIndex": 1,
+    "explanation": "Chaque joueur a 8 voisins potentiels et perd 2 voisins par jour. Maximum = 8/2 = 4 jours. Ce maximum est bien atteint grâce à la décomposition de K9 en 4 cycles hamiltoniens disjoints.",
+    "category": "euler_hamilton"
+  },
+  {
+    "id": 16,
+    "question": "Le problème de la table ronde (9 joueurs, voisins différents chaque jour) se ramène à quel problème de théorie des graphes ?",
+    "options": [
+      "Trouver des cycles eulériens disjoints dans K9",
+      "Trouver le nombre chromatique de K9",
+      "Trouver le maximum de cycles hamiltoniens disjoints (sans arête commune) dans K9",
+      "Trouver un graphe biparti dans K9"
+    ],
+    "correctIndex": 2,
+    "explanation": "Un placement à table = cycle hamiltonien (chaque joueur est voisin de 2 autres). Ne pas retrouver le même voisin = les cycles n'ont aucune arête commune (disjoints). On cherche le max de tels cycles dans K9.",
+    "category": "euler_hamilton"
+  },
+  {
+    "id": 17,
+    "question": "Si le club n'a que 8 joueurs, combien de jours maximum peuvent-ils se réunir (même règle de voisins différents) ?",
+    "options": [
+      "2 jours",
+      "3 jours",
+      "4 jours",
+      "7 jours"
+    ],
+    "correctIndex": 1,
+    "explanation": "Chaque joueur a 7 voisins potentiels, perd 2 par jour. Maximum = ⌊7/2⌋ = 3 jours.",
+    "category": "euler_hamilton"
+  },
+  {
+    "id": 18,
+    "question": "Pour le graphe K3,3, quel est le plus grand sous-graphe complet qu'il contient ?",
+    "options": [
+      "K1",
+      "K2",
+      "K3",
+      "K4"
+    ],
+    "correctIndex": 1,
+    "explanation": "K3,3 est biparti, donc ne contient pas K3 (un graphe biparti ne peut pas contenir de triangle). Le plus grand sous-graphe complet est K2 (une simple arête).",
+    "category": "coloration"
+  },
+  {
+    "id": 19,
+    "question": "Pour K3,3, on sait que le plus grand sous-graphe complet est K2 et que le degré max est 3. Quel encadrement obtient-on pour χ(K3,3) ?",
+    "options": [
+      "1 ≤ χ ≤ 3",
+      "2 ≤ χ ≤ 4",
+      "3 ≤ χ ≤ 4",
+      "2 ≤ χ ≤ 3"
+    ],
+    "correctIndex": 1,
+    "explanation": "K2 comme sous-graphe complet → χ ≥ 2. Degré max = 3 → χ ≤ 3+1 = 4. Donc 2 ≤ χ ≤ 4.",
+    "category": "coloration"
+  },
+  {
+    "id": 20,
+    "question": "Quel est le nombre chromatique de K3,3 ?",
+    "options": [
+      "χ = 1",
+      "χ = 2",
+      "χ = 3",
+      "χ = 4"
+    ],
+    "correctIndex": 1,
+    "explanation": "K3,3 est biparti : on colorie un groupe en rouge, l'autre en bleu. 2 couleurs suffisent. Comme χ ≥ 2, c'est optimal. Tout graphe biparti (non stable) a χ = 2.",
+    "category": "coloration"
+  },
+  {
+    "id": 21,
+    "question": "Un graphe 3-régulier d'ordre 6 contient K3. Après Welsh & Powell, on obtient 4 couleurs. Est-ce optimal ?",
+    "options": [
+      "Oui, forcément",
+      "Non, on peut trouver un coloriage à 3 couleurs, et comme χ ≥ 3, c'est optimal avec χ = 3"
+    ],
+    "correctIndex": 1,
+    "explanation": "Welsh & Powell ne donne pas toujours l'optimum. Ici, le graphe contient K3 donc χ ≥ 3. En cherchant manuellement, on trouve un coloriage à 3 couleurs. Donc χ = 3, et Welsh & Powell n'était pas optimal.",
+    "category": "coloration"
+  },
+  {
+    "id": 22,
+    "question": "L'algorithme de Welsh & Powell donne-t-il toujours un coloriage optimal (nombre minimal de couleurs) ?",
+    "options": [
+      "Oui, toujours",
+      "Non, c'est une heuristique qui donne un bon résultat mais pas forcément optimal"
+    ],
+    "correctIndex": 1,
+    "explanation": "Welsh & Powell est un algorithme glouton (heuristique). Il donne une coloration acceptable en temps raisonnable, mais pas toujours optimale. Il n'existe pas d'algorithme polynomial connu pour trouver χ(G) dans le cas général.",
+    "category": "coloration"
+  },
+  {
+    "id": 23,
+    "question": "Problème des films : 7 films (A-G) partagent des figurants/techniciens. On modélise par un graphe d'incompatibilité. Que représentent les sommets et les arêtes ?",
+    "options": [
+      "Sommets = films, arêtes = deux films ayant au moins une personne en commun (incompatibles)",
+      "Sommets = personnes, arêtes = deux personnes travaillant ensemble",
+      "Sommets = jours, arêtes = films tournés le même jour",
+      "Sommets = films, arêtes = films pouvant être tournés ensemble"
+    ],
+    "correctIndex": 0,
+    "explanation": "C'est un graphe d'incompatibilité : chaque film est un sommet, et deux films sont reliés s'ils ont au moins une personne en commun (ne peuvent pas être tournés le même jour). Le nombre chromatique donne le nombre minimal de jours.",
+    "category": "coloration"
+  },
+  {
+    "id": 24,
+    "question": "Dans le problème des films, si le graphe d'incompatibilité contient K4 comme sous-graphe, que peut-on en déduire ?",
+    "options": [
+      "Il faut au minimum 4 jours de tournage (χ ≥ 4)",
+      "Il faut exactement 4 jours",
+      "Il faut au minimum 3 jours",
+      "On ne peut rien en déduire"
+    ],
+    "correctIndex": 0,
+    "explanation": "Si le graphe contient K4, il faut au moins 4 couleurs (4 films mutuellement incompatibles). Donc χ ≥ 4, soit au minimum 4 jours de tournage.",
+    "category": "coloration"
+  },
+  {
+    "id": 25,
+    "question": "Dans le problème des films, Welsh & Powell donne 4 couleurs et on sait que χ ≥ 4 (car K4 est sous-graphe). Ce coloriage est-il optimal ?",
+    "options": [
+      "Oui, car le nombre de couleurs trouvé (4) est égal à la borne inférieure χ ≥ 4",
+      "Non, on peut peut-être faire mieux",
+      "On ne peut pas savoir"
+    ],
+    "correctIndex": 0,
+    "explanation": "Si Welsh & Powell donne k couleurs et qu'on sait que χ ≥ k, alors le coloriage est forcément optimal puisqu'on ne peut pas faire mieux. Ici 4 couleurs trouvées et χ ≥ 4, donc χ = 4.",
+    "category": "coloration"
+  },
+  {
+    "id": 26,
+    "question": "Problème des wagons : 8 produits chimiques, certains incompatibles. Le graphe d'incompatibilité contient K4. Welsh & Powell donne 4 couleurs. Combien de wagons minimum ?",
+    "options": [
+      "3 wagons",
+      "4 wagons",
+      "5 wagons",
+      "8 wagons"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le graphe contient K4 → χ ≥ 4. Welsh & Powell donne 4 couleurs → χ ≤ 4. Donc χ = 4 : il faut exactement 4 wagons minimum.",
+    "category": "coloration"
+  },
+  {
+    "id": 27,
+    "question": "Comment prouver qu'un coloriage obtenu par Welsh & Powell est optimal ?",
+    "options": [
+      "C'est toujours optimal",
+      "Montrer que le nombre de couleurs obtenu égale une borne inférieure connue (ex: taille du plus grand sous-graphe complet)",
+      "Vérifier que le graphe est connexe",
+      "Vérifier que le graphe est planaire"
+    ],
+    "correctIndex": 1,
+    "explanation": "Si on trouve un coloriage à k couleurs et qu'on peut prouver que χ ≥ k (par exemple via un sous-graphe complet Kk), alors χ = k et le coloriage est optimal.",
+    "category": "coloration"
+  },
+  {
+    "id": 28,
+    "question": "Dans un problème de coloration, que représente chaque couleur dans le contexte d'un emploi du temps ?",
+    "options": [
+      "Un créneau horaire / une journée",
+      "Une personne",
+      "Un lieu",
+      "Une tâche"
+    ],
+    "correctIndex": 0,
+    "explanation": "En modélisation par graphe d'incompatibilité : sommets = tâches/activités, arêtes = incompatibilités, couleurs = créneaux/jours. χ(G) = nombre minimal de créneaux nécessaires.",
+    "category": "coloration"
+  },
+  {
+    "id": 29,
+    "question": "Peut-il exister un graphe de nombre chromatique 3 qui ne contient pas K3 (triangle) ?",
+    "options": [
+      "Non, si χ = 3 alors le graphe contient forcément K3",
+      "Oui, le cycle C5 (pentagone) en est un exemple"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le cycle C5 a χ = 3 (un cycle de longueur impaire nécessite 3 couleurs) mais ne contient pas K3 (aucun triangle). La présence de Kn n'est qu'une condition suffisante pour χ ≥ n, pas nécessaire.",
+    "category": "coloration"
+  },
+  {
+    "id": 30,
+    "question": "Peut-on construire un graphe de nombre chromatique 4 qui ne contient pas K4 ?",
+    "options": [
+      "Non, c'est impossible",
+      "Oui, c'est possible (on peut construire un tel graphe à partir du graphe de Mycielski)"
+    ],
+    "correctIndex": 1,
+    "explanation": "Oui. Le nombre chromatique peut être arbitrairement grand sans contenir de grand sous-graphe complet. C'est un résultat classique de théorie des graphes (graphes de Mycielski).",
+    "category": "coloration"
+  },
+  {
+    "id": 31,
+    "question": "Première étape de l'algorithme de Welsh & Powell ?",
+    "options": [
+      "Colorer le sommet de plus petit degré",
+      "Ranger les sommets par ordre de degrés décroissants",
+      "Calculer la matrice d'adjacence",
+      "Trouver le plus grand sous-graphe complet"
+    ],
+    "correctIndex": 1,
+    "explanation": "Welsh & Powell commence par trier les sommets par degrés décroissants. On attribue ensuite la première couleur au premier sommet, puis la même couleur aux sommets non adjacents en suivant la liste.",
+    "category": "coloration"
+  },
+  {
+    "id": 32,
+    "question": "Dans Welsh & Powell, après avoir attribué la couleur 1 au premier sommet A, à qui donne-t-on aussi la couleur 1 ?",
+    "options": [
+      "Au sommet suivant dans la liste, quoi qu'il arrive",
+      "Au premier sommet B de la liste qui n'est pas adjacent à A, puis au premier C non adjacent ni à A ni à B, etc.",
+      "À tous les sommets de même degré que A",
+      "Au sommet de plus petit degré"
+    ],
+    "correctIndex": 1,
+    "explanation": "On parcourt la liste triée et on attribue la même couleur au premier sommet non adjacent aux sommets déjà coloriés avec cette couleur. On continue jusqu'à la fin de la liste, puis on passe à la couleur suivante.",
+    "category": "coloration"
+  },
+  {
+    "id": 33,
+    "question": "Un graphe est connexe et a les degrés : 4, 5, 4, 5, 5, 9. Est-il semi-eulérien ?",
+    "options": [
+      "Oui",
+      "Non, car il a 4 sommets de degré impair (il en faut au maximum 2)"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un graphe connexe est semi-eulérien (traversable) ssi il a au maximum 2 sommets de degré impair. Ici il y en a 4 (degrés 5, 5, 5, 9). Donc pas traversable.",
+    "category": "euler_hamilton"
+  },
+  {
+    "id": 34,
+    "question": "Un graphe complet est-il toujours hamiltonien ?",
+    "options": [
+      "Oui, pour tout Kn avec n ≥ 3",
+      "Non, seulement si n est impair",
+      "Non, seulement si n est pair",
+      "Non, jamais"
+    ],
+    "correctIndex": 0,
+    "explanation": "Tout graphe complet Kn avec n ≥ 3 est hamiltonien. En effet, chaque sommet est de degré n-1 ≥ n/2, ce qui satisfait le théorème suffisant pour être hamiltonien.",
+    "category": "euler_hamilton"
+  },
+  {
+    "id": 35,
+    "question": "Un graphe peut-il être hamiltonien sans être eulérien ?",
+    "options": [
+      "Non, hamiltonien implique eulérien",
+      "Oui, par exemple un hexagone avec des diagonales supplémentaires ayant des sommets de degré impair"
+    ],
+    "correctIndex": 1,
+    "explanation": "Oui. Les propriétés eulérien et hamiltonien sont indépendantes. Un graphe peut être l'un sans l'autre, les deux, ou aucun. Eulérien = tous degrés pairs. Hamiltonien = existence d'un cycle passant par tous les sommets.",
+    "category": "euler_hamilton"
+  },
+  {
+    "id": 36,
+    "question": "Un graphe peut-il être eulérien sans être hamiltonien ?",
+    "options": [
+      "Non, eulérien implique hamiltonien",
+      "Oui, c'est possible"
+    ],
+    "correctIndex": 1,
+    "explanation": "Oui. Un graphe peut avoir tous ses sommets de degré pair (eulérien) sans avoir de cycle passant par tous les sommets (non hamiltonien). Les deux notions sont indépendantes.",
+    "category": "euler_hamilton"
+  },
+  {
+    "id": 37,
+    "question": "Dans le problème des produits chimiques, pourquoi le graphe d'incompatibilité est-il le bon modèle ?",
+    "options": [
+      "Les sommets sont les wagons et les arêtes les produits",
+      "Les sommets sont les produits, les arêtes relient les produits incompatibles, et les couleurs représentent les wagons",
+      "Les sommets sont les incompatibilités et les arêtes les produits",
+      "Les sommets sont les produits et les arêtes relient ceux du même wagon"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sommet = produit, arête = incompatibilité entre 2 produits, couleur = wagon. Deux produits incompatibles (reliés) ont des couleurs différentes (wagons différents). χ(G) = nombre minimal de wagons.",
+    "category": "coloration"
+  },
+  {
+    "id": 38,
+    "question": "Pour l'exercice de la table ronde (9 joueurs), quelle est la configuration du jour 1 avec l'algorithme de génération des cycles ?",
+    "options": [
+      "1, 2, 3, 4, 5, 6, 7, 8, 9",
+      "1, 2, 3, 9, 4, 8, 5, 7, 6",
+      "1, 9, 2, 8, 3, 7, 4, 6, 5",
+      "1, 2, 4, 6, 8, 9, 7, 5, 3"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le cycle de départ est : 1, 2, 3, N, 4, N-1, 5, N-2, ... Avec N=9 : 1, 2, 3, 9, 4, 8, 5, 7, 6. Les jours suivants, on incrémente chaque numéro de 1 (sauf le premier qui reste 1).",
+    "category": "euler_hamilton"
+  },
+  {
+    "id": 39,
+    "question": "Qu'est-ce qu'un graphe d'incompatibilité ?",
+    "options": [
+      "Un graphe où les arêtes relient les éléments compatibles",
+      "Un graphe où les sommets représentent des éléments et les arêtes relient ceux qui ne peuvent pas être ensemble",
+      "Un graphe sans arêtes",
+      "Un graphe complet"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un graphe d'incompatibilité modélise des contraintes : les sommets sont les éléments (films, produits, etc.) et une arête relie deux éléments qui ne peuvent pas coexister. Le nombre chromatique donne le nombre minimal de groupes.",
+    "category": "coloration"
+  },
+  {
+    "id": 40,
+    "question": "Si un coloriage par Welsh & Powell donne k couleurs et que la borne inférieure connue est k-1, peut-on conclure que le coloriage est optimal ?",
+    "options": [
+      "Oui, forcément",
+      "Non, on sait juste que k-1 ≤ χ ≤ k, il faut chercher si un meilleur coloriage existe"
+    ],
+    "correctIndex": 1,
+    "explanation": "On sait que χ ≥ k-1 et χ ≤ k. Donc χ vaut soit k-1 soit k. Il faut essayer de trouver un coloriage à k-1 couleurs pour conclure. Si on n'y arrive pas, on ne peut pas affirmer que χ = k sans preuve supplémentaire.",
+    "category": "coloration"
+  }
+]

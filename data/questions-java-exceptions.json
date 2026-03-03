@@ -1,0 +1,414 @@
+[
+  {
+    "id": 1,
+    "question": "Qu'est-ce qu'une exception en Java ?",
+    "options": [
+      "Une erreur de syntaxe",
+      "Un objet émis par une méthode si un évènement exceptionnel se produit",
+      "Un type primitif",
+      "Un mot-clé réservé"
+    ],
+    "correctIndex": 1,
+    "explanation": "Une exception est un objet qui peut être émis par une méthode si un évènement d'ordre exceptionnel se produit. Dans la plupart des cas, c'est une erreur.",
+    "category": "definitions"
+  },
+  {
+    "id": 2,
+    "question": "Quels sont les objectifs de la gestion des exceptions ?",
+    "options": [
+      "Accélérer l'exécution du programme",
+      "Rendre le programme robuste et séparer la gestion des anomalies du reste du code",
+      "Remplacer les conditions if/else",
+      "Éviter l'utilisation de classes"
+    ],
+    "correctIndex": 1,
+    "explanation": "La gestion des exceptions vise à rendre le programme robuste (éviter les erreurs), limiter les instructions de traitement des cas exceptionnels, et séparer la gestion des anomalies du reste du code.",
+    "category": "definitions"
+  },
+  {
+    "id": 3,
+    "question": "Que se passe-t-il si une exception n'est pas capturée ?\n```java\npublic class Test {\n    public static int divisionEntiere(int x, int y) {\n        return x/y;\n    }\n    public static void main(String[] args) {\n        int a = 2, b = 0;\n        divisionEntiere(a,b);\n        System.out.println(\"Après\");\n    }\n}```",
+    "options": [
+      "Le programme affiche \"Après\"",
+      "Le programme affiche 0",
+      "L'exécution du programme est interrompue",
+      "Le programme entre dans une boucle infinie"
+    ],
+    "correctIndex": 2,
+    "explanation": "Sans try/catch, l'exception ArithmeticException (division par zéro) interrompt l'exécution du programme. \"Après\" ne sera jamais affiché.",
+    "category": "try_catch"
+  },
+  {
+    "id": 4,
+    "question": "De quelle classe héritent toutes les classes d'exceptions ?",
+    "options": [
+      "Object",
+      "Exception",
+      "Throwable",
+      "Error"
+    ],
+    "correctIndex": 2,
+    "explanation": "Toutes les classes d'exceptions héritent de la classe Throwable. Throwable a deux sous-classes directes : Exception et Error.",
+    "category": "hierarchie"
+  },
+  {
+    "id": 5,
+    "question": "Quelle est la différence entre Exception et Error dans la hiérarchie des exceptions ?",
+    "options": [
+      "Il n'y a pas de différence",
+      "Error représente des erreurs graves qu'il est recommandé de ne pas corriger, Exception représente des erreurs récupérables",
+      "Error est pour les erreurs de compilation, Exception pour l'exécution",
+      "Exception est plus grave que Error"
+    ],
+    "correctIndex": 1,
+    "explanation": "Error représente des erreurs graves (OutOfMemoryError...) qu'il est recommandé de ne pas essayer de corriger. Exception représente des erreurs récupérables par le programme.",
+    "category": "hierarchie"
+  },
+  {
+    "id": 6,
+    "question": "Pour créer une nouvelle classe d'exception personnalisée, de quelle classe doit-elle hériter ?",
+    "options": [
+      "Object",
+      "Throwable",
+      "java.lang.Exception",
+      "RuntimeException"
+    ],
+    "correctIndex": 2,
+    "explanation": "Les nouvelles classes d'exceptions personnalisées doivent impérativement hériter de java.lang.Exception.",
+    "category": "hierarchie"
+  },
+  {
+    "id": 7,
+    "question": "Quelle exception est levée lors d'une division par zéro sur des entiers ?",
+    "options": [
+      "NullPointerException",
+      "ArithmeticException",
+      "IOException",
+      "ClassCastException"
+    ],
+    "correctIndex": 1,
+    "explanation": "ArithmeticException est levée lors d'une division par zéro sur des entiers. C'est une RuntimeException (exception prédéfinie).",
+    "category": "exceptions_predefinies"
+  },
+  {
+    "id": 8,
+    "question": "NullPointerException, ArrayIndexOutOfBoundsException et ArithmeticException sont des sous-classes de :",
+    "options": [
+      "Error",
+      "IOException",
+      "RuntimeException",
+      "Exception directement"
+    ],
+    "correctIndex": 2,
+    "explanation": "Ce sont des RuntimeException (erreurs de programmation), elles-mêmes sous-classes de Exception. Elles n'ont pas besoin d'être déclarées avec throws.",
+    "category": "exceptions_predefinies"
+  },
+  {
+    "id": 9,
+    "question": "Quel mot-clé permet de surveiller un bloc de code susceptible de lever une exception ?",
+    "options": [
+      "catch",
+      "try",
+      "throw",
+      "finally"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le mot-clé try permet de surveiller un bloc de code dans lequel des exceptions éventuelles peuvent être lancées.",
+    "category": "try_catch"
+  },
+  {
+    "id": 10,
+    "question": "Quel mot-clé permet de traiter une exception interceptée ?",
+    "options": [
+      "try",
+      "catch",
+      "throw",
+      "throws"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le mot-clé catch permet de traiter une exception qui a été levée dans le bloc try.",
+    "category": "try_catch"
+  },
+  {
+    "id": 11,
+    "question": "Que fait le bloc finally ?",
+    "options": [
+      "Il est exécuté seulement si une exception est levée",
+      "Il est exécuté seulement si aucune exception n'est levée",
+      "Il est exécuté dans tous les cas après le try/catch",
+      "Il empêche les exceptions d'être levées"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le bloc finally est exécuté dans tous les cas après un try/catch, que l'exception ait été levée ou non, et quel que soit le contenu du catch.",
+    "category": "try_catch"
+  },
+  {
+    "id": 12,
+    "question": "Quelle est la différence entre throw et throws ?",
+    "options": [
+      "Il n'y a pas de différence",
+      "throw lance une exception, throws déclare qu'une méthode peut propager une exception",
+      "throws lance une exception, throw déclare la propagation",
+      "Les deux servent à capturer des exceptions"
+    ],
+    "correctIndex": 1,
+    "explanation": "throw sert à lancer/déclarer une exception (throw new Exception(...)). throws dans la signature d'une méthode déclare qu'elle peut propager une exception à la méthode appelante.",
+    "category": "throw_throws"
+  },
+  {
+    "id": 13,
+    "question": "Que fait ce code ?\n```java\nif (k < 0)\n    throw new RuntimeException(\"k négatif\");```",
+    "options": [
+      "Il capture une exception",
+      "Il déclare une variable",
+      "Il lance une exception si k est négatif",
+      "Il propage une exception existante"
+    ],
+    "correctIndex": 2,
+    "explanation": "L'instruction throw new RuntimeException(\"k négatif\") lance (lève) une nouvelle exception avec le message \"k négatif\" si la condition k < 0 est vraie.",
+    "category": "throw_throws"
+  },
+  {
+    "id": 14,
+    "question": "Ce code compile-t-il ?\n```java\npublic static int divisionEntiere(int x, int y) throws Exception {\n    if (y == 0) throw new Exception(\"Division par 0 !\");\n    return x/y;\n}```",
+    "options": [
+      "Vrai - Le code compile",
+      "Faux - Le code ne compile pas"
+    ],
+    "correctIndex": 0,
+    "explanation": "Le code compile. La méthode déclare avec throws qu'elle peut lever une Exception. Le throw crée et lance l'exception si y vaut 0.",
+    "category": "throw_throws"
+  },
+  {
+    "id": 15,
+    "question": "Qu'affiche ce code ?\n```java\nint a = 2, b = 0;\nSystem.out.println(\"Avant l'orage...\");\ntry {\n    divisionEntiere(a,b);\n} catch (ArithmeticException e) {\n    System.out.println(e.getMessage());\n}\nSystem.out.println(\"Apres l'orage...\");```",
+    "options": [
+      "Avant l'orage... puis le programme s'arrête",
+      "Avant l'orage... / by zero Apres l'orage...",
+      "Avant l'orage... Apres l'orage...",
+      "/ by zero"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'exception est capturée par le catch. Le message d'erreur est affiché, puis le programme continue après le bloc catch.",
+    "category": "try_catch"
+  },
+  {
+    "id": 16,
+    "question": "Après une exception capturée, où reprend l'exécution ?",
+    "options": [
+      "Là où l'exception a été levée",
+      "Au début du bloc try",
+      "À la suite du bloc catch (après le catch)",
+      "À la fin de la méthode"
+    ],
+    "correctIndex": 2,
+    "explanation": "Si une exception est levée et capturée, l'exécution reprend à la suite du catch, et non là où l'exception a été levée. Les instructions restantes dans le try sont ignorées.",
+    "category": "try_catch"
+  },
+  {
+    "id": 17,
+    "question": "Qu'affiche ce code si divisionEntiere(a,b) lève une exception ?\n```java\ntry {\n    divisionEntiere(a,b);\n    System.out.println(\"Suite...\");\n} catch (Exception e) {\n    System.out.println(e.getMessage());\n}\nSystem.out.println(\"Apres l'orage...\");```",
+    "options": [
+      "Suite... puis le message d'erreur puis Apres l'orage...",
+      "Le message d'erreur puis Apres l'orage... (Suite... n'est PAS affiché)",
+      "Suite... puis Apres l'orage...",
+      "Seulement Apres l'orage..."
+    ],
+    "correctIndex": 1,
+    "explanation": "\"Suite...\" ne s'affiche pas car l'exception est levée avant cette instruction. L'exécution saute directement au catch, puis continue après le bloc catch.",
+    "category": "try_catch"
+  },
+  {
+    "id": 18,
+    "question": "Peut-on avoir plusieurs blocs catch après un seul bloc try ?",
+    "options": [
+      "Non, un seul catch est autorisé",
+      "Oui, plusieurs blocs catch peuvent se succéder",
+      "Seulement si on utilise finally",
+      "Seulement pour les RuntimeException"
+    ],
+    "correctIndex": 1,
+    "explanation": "Plusieurs blocs catch peuvent se succéder après un try pour gérer différents types d'exceptions. Les exceptions les plus spécifiques doivent être catchées en premier.",
+    "category": "try_catch"
+  },
+  {
+    "id": 19,
+    "question": "Ce code est-il correct ?\n```java\ntry {\n    divisionEntiere(a,b);\n} catch (ArithmeticException e) {\n    System.out.println(e.getMessage());\n} catch (Exception e) {\n    System.out.println(e.getMessage());\n}```",
+    "options": [
+      "Vrai - Le code est correct",
+      "Faux - Le code ne compile pas"
+    ],
+    "correctIndex": 0,
+    "explanation": "Le code est correct. Les catch plus spécifiques (ArithmeticException) doivent être placés avant les plus généraux (Exception).",
+    "category": "try_catch"
+  },
+  {
+    "id": 20,
+    "question": "Que signifie le mot-clé throws dans la signature d'une méthode ?",
+    "options": [
+      "La méthode lance toujours une exception",
+      "La méthode déclare qu'elle peut propager une exception à la méthode appelante",
+      "La méthode capture une exception",
+      "La méthode empêche les exceptions"
+    ],
+    "correctIndex": 1,
+    "explanation": "throws permet de déléguer la responsabilité des erreurs à la méthode appelante. La méthode qui lève une exception doit déclarer cette action potentielle.",
+    "category": "throw_throws"
+  },
+  {
+    "id": 21,
+    "question": "Que se passe-t-il si une exception est propagée avec throws jusqu'à main sans être capturée ?",
+    "options": [
+      "L'exception est ignorée",
+      "Le programme se termine normalement",
+      "Erreur à l'exécution et arrêt du programme",
+      "Java la capture automatiquement"
+    ],
+    "correctIndex": 2,
+    "explanation": "Si une exception remonte la pile d'appels sans jamais être capturée par un try/catch, elle provoque une erreur à l'exécution et l'arrêt du programme.",
+    "category": "throw_throws"
+  },
+  {
+    "id": 22,
+    "question": "Peut-on relancer une exception depuis un bloc catch ?",
+    "options": [
+      "Non, c'est interdit",
+      "Oui, avec throw e; pour propager l'exception au niveau supérieur",
+      "Seulement avec throws",
+      "Seulement pour les Error"
+    ],
+    "correctIndex": 1,
+    "explanation": "On peut relancer une exception depuis un catch avec throw e; (propagation directe). C'est utile si on ne peut résoudre localement qu'une partie du problème.",
+    "category": "throw_throws"
+  },
+  {
+    "id": 23,
+    "question": "Que permet le mécanisme des exceptions par rapport aux tests classiques (if/else) ?",
+    "options": [
+      "Il est plus rapide",
+      "Il dissocie la détection d'une anomalie de son traitement",
+      "Il remplace les boucles",
+      "Il empêche toutes les erreurs"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le mécanisme des exceptions permet de dissocier la détection d'une anomalie de son traitement, et de séparer la gestion des anomalies du reste du code.",
+    "category": "definitions"
+  },
+  {
+    "id": 24,
+    "question": "Quelle méthode de la classe Exception permet de récupérer le message d'erreur ?",
+    "options": [
+      "toString()",
+      "getMessage()",
+      "getError()",
+      "printMessage()"
+    ],
+    "correctIndex": 1,
+    "explanation": "La méthode getMessage() retourne le message d'erreur associé à l'exception (le String passé au constructeur de l'exception).",
+    "category": "exceptions_predefinies"
+  },
+  {
+    "id": 25,
+    "question": "Qu'affiche ce code (b = 1, pas d'exception levée) ?\n```java\nint a = 2, b = 1;\ntry {\n    int c = a / b;\n} catch (Exception e) {\n    System.out.println(e.getMessage());\n} finally {\n    System.out.println(\"Suite...\");\n}\nSystem.out.println(\"Apres l'orage...\");```",
+    "options": [
+      "Seulement Apres l'orage...",
+      "Suite... puis Apres l'orage...",
+      "Le message d'erreur puis Suite... puis Apres l'orage...",
+      "Seulement Suite..."
+    ],
+    "correctIndex": 1,
+    "explanation": "Pas d'exception (b = 1). Le catch n'est pas exécuté. Le finally est toujours exécuté (\"Suite...\"), puis le programme continue (\"Apres l'orage...\").",
+    "category": "try_catch"
+  },
+  {
+    "id": 26,
+    "question": "IOException et AWTException sont des exemples de :",
+    "options": [
+      "Erreurs de programmation (RuntimeException)",
+      "Problèmes d'entrée/sortie",
+      "Problèmes de ressources",
+      "Erreurs de compilation"
+    ],
+    "correctIndex": 1,
+    "explanation": "IOException et AWTException sont des exceptions prédéfinies dans l'API Java liées aux problèmes d'entrée/sortie.",
+    "category": "exceptions_predefinies"
+  },
+  {
+    "id": 27,
+    "question": "OutOfMemoryError et StackOverflowError sont des :",
+    "options": [
+      "Exception",
+      "RuntimeException",
+      "Error (problèmes de ressources)",
+      "IOException"
+    ],
+    "correctIndex": 2,
+    "explanation": "OutOfMemoryError et StackOverflowError sont des Error, liées à des problèmes de ressources. Les Error sont des erreurs graves qu'il est recommandé de ne pas essayer de corriger.",
+    "category": "hierarchie"
+  },
+  {
+    "id": 28,
+    "question": "Le bloc catch peut-il lui-même lever une nouvelle exception ?",
+    "options": [
+      "Non, c'est interdit",
+      "Oui, il peut appeler des méthodes et lever des exceptions",
+      "Seulement avec finally",
+      "Seulement des RuntimeException"
+    ],
+    "correctIndex": 1,
+    "explanation": "La séquence de traitement (catch) peut elle-même appeler des méthodes et lever des exceptions avec throw new Exception();",
+    "category": "try_catch"
+  },
+  {
+    "id": 29,
+    "question": "Si aucune erreur ne se produit dans le bloc try, que se passe-t-il avec le bloc catch ?",
+    "options": [
+      "Le catch est quand même exécuté",
+      "Le catch n'est pas exécuté",
+      "Le programme s'arrête",
+      "Le finally n'est pas exécuté"
+    ],
+    "correctIndex": 1,
+    "explanation": "Si aucune erreur ne se produit dans le bloc try (bloc A), le bloc catch (bloc B) n'est pas exécuté. Le programme continue après le try/catch.",
+    "category": "try_catch"
+  },
+  {
+    "id": 30,
+    "question": "Quelle exception est levée quand on accède à un objet null ?\n```java\nBox b = null;\nb.field = 5;```",
+    "options": [
+      "ArithmeticException",
+      "ArrayIndexOutOfBoundsException",
+      "NullPointerException",
+      "ClassCastException"
+    ],
+    "correctIndex": 2,
+    "explanation": "NullPointerException est levée quand on tente d'accéder à un attribut ou une méthode sur une référence null.",
+    "category": "exceptions_predefinies"
+  },
+  {
+    "id": 31,
+    "question": "Dans la gestion d'erreurs par propagation, si la méthode D lève une exception et que la méthode C a un try/catch :",
+    "options": [
+      "L'exception est ignorée",
+      "L'exception est traitée par le catch de la méthode C",
+      "L'exception remonte jusqu'à main",
+      "Le programme s'arrête immédiatement"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'exception remonte la pile d'appels. Si la méthode C a un bloc try/catch approprié, l'exception y est traitée. Sinon, elle continue à remonter via throws.",
+    "category": "throw_throws"
+  },
+  {
+    "id": 32,
+    "question": "Le bloc finally est utile pour :",
+    "options": [
+      "Déclarer de nouvelles exceptions",
+      "Fermer des flux d'entrée-sortie et libérer des ressources",
+      "Remplacer le catch",
+      "Accélérer le programme"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le bloc finally est utile pour la fermeture des flux d'entrée-sortie, la gestion des threads, et toute opération de nettoyage qui doit être effectuée dans tous les cas.",
+    "category": "try_catch"
+  }
+]
