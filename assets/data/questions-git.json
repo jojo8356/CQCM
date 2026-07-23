@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "question": "Qu'est-ce qu'un VCS (Version Control System) ?",
+    "options": [
+      "Un logiciel de compilation de code source",
+      "Un outil permettant de collaborer, enregistrer et retrouver les différentes versions d'un projet",
+      "Un système d'exploitation pour serveurs",
+      "Un langage de programmation orienté objet"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un VCS (Version Control System) est un outil conçu pour collaborer, enregistrer et retrouver les différentes versions d'un projet, à l'origine utilisé pour le code source."
+  },
+  {
+    "id": 2,
+    "question": "Comment appelle-t-on le contenu d'un projet à un moment donné dans un VCS ?",
+    "options": [
+      "Un dépôt",
+      "Une branche",
+      "Une révision",
+      "Un commit"
+    ],
+    "correctIndex": 2,
+    "explanation": "Une révision représente le contenu d'un projet à un moment donné. C'est un instantané (snapshot) de l'état du projet."
+  },
+  {
+    "id": 3,
+    "question": "Qu'est-ce qu'un dépôt (repository) dans le contexte d'un VCS ?",
+    "options": [
+      "Un fichier contenant les paramètres de configuration",
+      "Le projet accompagné de tout son historique de modifications",
+      "Un serveur distant uniquement",
+      "Un dossier temporaire de travail"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un dépôt (repository) contient le projet ainsi que tout son historique de modifications, permettant de retrouver n'importe quelle version passée."
+  },
+  {
+    "id": 4,
+    "question": "Quel est l'intérêt principal de savoir qui a travaillé sur quoi grâce à un VCS ?",
+    "options": [
+      "Blâmer les développeurs qui font des erreurs",
+      "Calculer le salaire de chaque développeur",
+      "Identifier l'expertise et faciliter la résolution de bugs",
+      "Attribuer des récompenses aux meilleurs développeurs"
+    ],
+    "correctIndex": 2,
+    "explanation": "Savoir qui a travaillé sur quoi permet d'identifier les experts d'une partie du code et de faciliter la résolution de bugs, et non pas de blâmer les développeurs."
+  },
+  {
+    "id": 5,
+    "question": "En quelle année Git a-t-il été créé ?",
+    "options": [
+      "2000",
+      "2003",
+      "2005",
+      "2010"
+    ],
+    "correctIndex": 2,
+    "explanation": "Git a été créé en 2005 par Linus Torvalds, le créateur du noyau Linux."
+  },
+  {
+    "id": 6,
+    "question": "Sous quelle licence Git est-il distribué ?",
+    "options": [
+      "MIT",
+      "Apache 2.0",
+      "GPL v2",
+      "BSD"
+    ],
+    "correctIndex": 2,
+    "explanation": "Git est distribué sous la licence GPL v2 (GNU General Public License version 2)."
+  },
+  {
+    "id": 7,
+    "question": "Quel type de système de gestion de versions est Git ?",
+    "options": [
+      "Centralisé",
+      "Décentralisé",
+      "Linéaire",
+      "Hiérarchique"
+    ],
+    "correctIndex": 1,
+    "explanation": "Git est un système de gestion de versions décentralisé, tout comme Bazaar et Mercurial. Les dépôts existent côté client ET côté serveur."
+  },
+  {
+    "id": 8,
+    "question": "Quelle commande permet de créer un nouveau dépôt Git ?",
+    "options": [
+      "git create",
+      "git new",
+      "git init",
+      "git start"
+    ],
+    "correctIndex": 2,
+    "explanation": "La commande 'git init' permet de créer un nouveau dépôt Git dans le répertoire courant."
+  },
+  {
+    "id": 9,
+    "question": "Quelle commande permet de partir d'un dépôt existant ?",
+    "options": [
+      "git copy <depot>",
+      "git clone <depot>",
+      "git fork <depot>",
+      "git download <depot>"
+    ],
+    "correctIndex": 1,
+    "explanation": "La commande 'git clone <depot>' permet de créer une copie locale d'un dépôt distant existant."
+  },
+  {
+    "id": 10,
+    "question": "Que fait la commande 'git add .' ?",
+    "options": [
+      "Elle crée un nouveau fichier vide",
+      "Elle ajoute tous les fichiers modifiés à la zone de staging",
+      "Elle pousse les modifications vers le serveur",
+      "Elle supprime tous les fichiers du répertoire"
+    ],
+    "correctIndex": 1,
+    "explanation": "La commande 'git add .' ajoute tous les fichiers nouveaux et modifiés du répertoire courant à la zone de staging, les préparant pour le prochain commit."
+  },
+  {
+    "id": 11,
+    "question": "Quelle commande permet de vérifier l'état courant du dépôt ?",
+    "options": [
+      "git log",
+      "git check",
+      "git status",
+      "git info"
+    ],
+    "correctIndex": 2,
+    "explanation": "La commande 'git status' affiche l'état courant du dépôt : fichiers modifiés, fichiers en staging, fichiers non suivis, etc."
+  },
+  {
+    "id": 12,
+    "question": "Quelle commande permet de déclarer un dépôt distant ?",
+    "options": [
+      "git push origin <url>",
+      "git remote add origin <url>",
+      "git connect <url>",
+      "git server add <url>"
+    ],
+    "correctIndex": 1,
+    "explanation": "La commande 'git remote add origin <url>' permet de déclarer un dépôt distant nommé 'origin' associé à l'URL spécifiée."
+  },
+  {
+    "id": 13,
+    "question": "Quelle commande permet de créer une nouvelle branche nommée 'develop' et de basculer dessus immédiatement ?",
+    "options": [
+      "git branch develop && git switch develop",
+      "git checkout -b develop",
+      "git new-branch develop",
+      "git create develop --switch"
+    ],
+    "correctIndex": 1,
+    "explanation": "La commande 'git checkout -b develop' crée une nouvelle branche nommée 'develop' et bascule dessus en une seule opération."
+  },
+  {
+    "id": 14,
+    "question": "Qu'est-ce que HEAD dans Git ?",
+    "options": [
+      "Le premier commit du dépôt",
+      "Le nom du dépôt distant principal",
+      "La référence vers la révision courante",
+      "Le dernier fichier modifié"
+    ],
+    "correctIndex": 2,
+    "explanation": "HEAD est une référence spéciale qui pointe vers la révision (commit) courante sur laquelle on travaille."
+  },
+  {
+    "id": 15,
+    "question": "Dans le modèle Git-Flow, combien y a-t-il de branches permanentes ?",
+    "options": [
+      "1 (Main uniquement)",
+      "2 (Main et Develop)",
+      "3 (Main, Develop et Feature)",
+      "4 (Main, Develop, Feature et Release)"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le modèle Git-Flow repose sur 2 branches permanentes : Main (production) et Develop (développement). Les branches de feature et bug fix sont temporaires."
+  },
+  {
+    "id": 16,
+    "question": "Dans Git-Flow, depuis quelle branche sont créées les branches de feature ?",
+    "options": [
+      "Main",
+      "Develop",
+      "Release",
+      "Hotfix"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dans Git-Flow, les branches de feature (ou bug fix) sont créées depuis la branche Develop, puis fusionnées dans Develop une fois terminées."
+  },
+  {
+    "id": 17,
+    "question": "Quels sont les marqueurs utilisés par Git pour indiquer un conflit de fusion ?",
+    "options": [
+      "<!-- CONFLIT --> et <!-- FIN -->",
+      "<<<< HEAD, =======, >>>> Branch-a",
+      "## DEBUT CONFLIT ## et ## FIN CONFLIT ##",
+      "** MERGE ** et ** END **"
+    ],
+    "correctIndex": 1,
+    "explanation": "Lors d'un conflit de fusion, Git utilise les marqueurs <<<< HEAD, ======= et >>>> Branch-a pour délimiter les versions en conflit. Il faut résoudre manuellement puis faire un commit."
+  },
+  {
+    "id": 18,
+    "question": "Quelle commande permet de créer un tag annoté en Git ?",
+    "options": [
+      "git label -a v2.0 -m \"message\"",
+      "git tag -a v2.0 <hash> -m \"message\"",
+      "git release v2.0 -m \"message\"",
+      "git mark v2.0 <hash>"
+    ],
+    "correctIndex": 1,
+    "explanation": "La commande 'git tag -a v2.0 <hash> -m \"message\"' crée un tag annoté nommé v2.0 sur le commit identifié par le hash, avec un message descriptif."
+  },
+  {
+    "id": 19,
+    "question": "À quoi sert la commande 'git commit --amend' ?",
+    "options": [
+      "À supprimer le dernier commit",
+      "À corriger le dernier commit (par exemple ajouter un fichier oublié)",
+      "À fusionner deux branches",
+      "À revenir à un commit précédent"
+    ],
+    "correctIndex": 1,
+    "explanation": "La commande 'git commit --amend' permet de corriger le dernier commit, par exemple pour ajouter un fichier oublié ou modifier le message de commit."
+  },
+  {
+    "id": 20,
+    "question": "Qu'est-ce qu'un fast-forward merge ?",
+    "options": [
+      "Un merge qui échoue rapidement en cas de conflit",
+      "Un merge accéléré qui ignore les tests",
+      "Un merge possible quand la branche master n'a pas divergé, déplaçant simplement le pointeur",
+      "Un merge qui supprime automatiquement la branche source"
+    ],
+    "correctIndex": 2,
+    "explanation": "Un fast-forward merge est possible lorsque la branche master n'a pas divergé depuis la création de la branche à fusionner. Git déplace simplement le pointeur de la branche en avant, sans créer de commit de merge."
+  }
+]

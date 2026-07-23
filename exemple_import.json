@@ -1,0 +1,53 @@
+{
+  "quiz": {
+    "id": "exemple-import",
+    "title": "Exemple d'import JSON",
+    "description": "Template pret a copier pour ajouter un quiz depuis le bouton Importer ou la CLI.",
+    "category": "Import",
+    "difficulty": "debutant",
+    "questionCount": 3,
+    "fileName": "questions-exemple-import.json",
+    "icon": "I"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Quel est le format attendu pour importer un quiz dans CQCM ?",
+      "options": [
+        "Un objet JSON avec les cles quiz et questions",
+        "Un fichier CSV avec une ligne par question",
+        "Un fichier Markdown libre",
+        "Un dossier zip obligatoire"
+      ],
+      "correctIndex": 0,
+      "explanation": "L'import attend un package JSON contenant un objet quiz et une liste questions."
+    },
+    {
+      "id": 2,
+      "question": "Quels champs de question permettent de definir la bonne reponse ?",
+      "options": [
+        "correctIndex pour une seule bonne reponse",
+        "correctIndices pour plusieurs bonnes reponses",
+        "answerText pour comparer le texte",
+        "isTrue pour toutes les options"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "Utilise correctIndex pour un QCM simple et correctIndices pour un QCM a choix multiples."
+    },
+    {
+      "id": 3,
+      "question": "Que faut-il mettre dans questionCount ?",
+      "options": [
+        "Le nombre exact d'objets dans la liste questions",
+        "Toujours 0, l'application calcule automatiquement",
+        "Le nombre de categories",
+        "Le nombre d'options par question"
+      ],
+      "correctIndex": 0,
+      "explanation": "La validation refuse l'import si questionCount ne correspond pas au nombre de questions."
+    }
+  ]
+}

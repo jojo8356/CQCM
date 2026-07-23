@@ -15,7 +15,8 @@ class Question {
     this.explanation,
   });
 
-  bool get isMultipleChoice => correctIndices != null && correctIndices!.length > 1;
+  bool get isMultipleChoice =>
+      correctIndices != null && correctIndices!.length > 1;
 
   List<int> get allCorrectIndices {
     if (correctIndices != null) return correctIndices!;
@@ -40,5 +41,16 @@ class Question {
           : null,
       explanation: json['explanation'] as String?,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'question': question,
+      'options': options,
+      if (correctIndex != null) 'correctIndex': correctIndex,
+      if (correctIndices != null) 'correctIndices': correctIndices,
+      if (explanation != null) 'explanation': explanation,
+    };
   }
 }

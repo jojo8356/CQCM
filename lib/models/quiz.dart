@@ -31,4 +31,17 @@ class Quiz {
       icon: json['icon'] as String,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'category': category,
+      'difficulty': difficulty,
+      'questionCount': questionCount,
+      'fileName': fileName,
+      'icon': icon,
+    };
+  }
 }

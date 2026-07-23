@@ -1,0 +1,722 @@
+[
+  {
+    "id": 1,
+    "question": "Quelle est la définition d'un réseau ?",
+    "options": [
+      "Un ensemble de fichiers partagés sur un disque dur",
+      "Un ensemble d'objets interconnectés permettant de faire circuler des éléments selon des règles bien définies",
+      "Un logiciel permettant de naviguer sur Internet",
+      "Un câble reliant deux ordinateurs"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un réseau est un ensemble d'objets interconnectés les uns avec les autres, permettant de faire circuler des éléments entre chacun de ces objets selon des règles bien définies."
+  },
+  {
+    "id": 2,
+    "question": "En quelle année l'ARPA a-t-elle été créée ?",
+    "options": [
+      "1961",
+      "1969",
+      "1957",
+      "1974"
+    ],
+    "correctIndex": 2,
+    "explanation": "L'ARPA a été créée en 1957 pour encadrer les programmes de recherche civile et militaire."
+  },
+  {
+    "id": 3,
+    "question": "Qui a imaginé le concept de tronçonner l'information en paquets indépendants ?",
+    "options": [
+      "Paul Baran",
+      "Vinton Cerf",
+      "Léonard Kleinrock",
+      "Bob Kahn"
+    ],
+    "correctIndex": 2,
+    "explanation": "En 1961, Léonard Kleinrock imagine de tronçonner l'information en paquets indépendants qui peuvent prendre des chemins différents d'un point à un autre."
+  },
+  {
+    "id": 4,
+    "question": "Que propose Paul Baran en 1964 ?",
+    "options": [
+      "Le protocole TCP/IP",
+      "Le courrier électronique",
+      "Un réseau à architecture distribuée et maillée, sans hiérarchie",
+      "Le World Wide Web"
+    ],
+    "correctIndex": 2,
+    "explanation": "Paul Baran propose de créer un réseau dont l'architecture distribuée serait constituée d'un maillage d'ordinateurs sans hiérarchie afin de rester opérationnel en cas de destruction partielle."
+  },
+  {
+    "id": 5,
+    "question": "Combien de sites universitaires reliait ARPANET à sa création en 1969 ?",
+    "options": [
+      "2",
+      "4",
+      "8",
+      "16"
+    ],
+    "correctIndex": 1,
+    "explanation": "ARPANET reliait quatre ordinateurs entre les sites de Los Angeles (UCLA), Stanford (SRI), Santa Barbara et l'Utah."
+  },
+  {
+    "id": 6,
+    "question": "Lors de la première communication sur ARPANET en octobre 1969, que s'est-il passé ?",
+    "options": [
+      "Le mot LOGIN a été transmis avec succès",
+      "Le système a crashé après les lettres L et O (LO)",
+      "La connexion n'a jamais été établie",
+      "Seule la lettre L a été transmise"
+    ],
+    "correctIndex": 1,
+    "explanation": "Lors de la première expérience entre UCLA et SRI, les lettres L et O ont été transmises avec succès, mais le système a crashé quand ils ont tapé G (pour LOGIN)."
+  },
+  {
+    "id": 7,
+    "question": "Qui a inventé le courrier électronique (e-mail) en 1971 ?",
+    "options": [
+      "Tim Berners-Lee",
+      "Vinton Cerf",
+      "Ray Tomlinson",
+      "Jonathan Postel"
+    ],
+    "correctIndex": 2,
+    "explanation": "Ray Tomlinson a inventé le courrier électronique en 1971, avec SNDMSG pour envoyer et READMAIL pour lire les messages, et le symbole @ pour séparer l'identifiant de l'ordinateur destination."
+  },
+  {
+    "id": 8,
+    "question": "Pourquoi le symbole @ est-il utilisé dans les adresses e-mail ?",
+    "options": [
+      "C'est un symbole choisi au hasard",
+      "Il sépare l'identifiant de l'émetteur de l'identifiant de l'ordinateur destination",
+      "Il représente le mot 'Internet'",
+      "Il est imposé par le protocole TCP/IP"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le système d'adresse comporte deux parties : l'une identifie l'émetteur du message, l'autre identifie l'ordinateur destination, séparées par @."
+  },
+  {
+    "id": 9,
+    "question": "Qu'interdisait la charte AUP (Acceptable Use Policy) de 1972 ?",
+    "options": [
+      "L'envoi de fichiers volumineux",
+      "L'utilisation du réseau la nuit",
+      "Toute structure commerciale de se connecter au réseau",
+      "L'envoi d'e-mails à l'étranger"
+    ],
+    "correctIndex": 2,
+    "explanation": "La charte AUP interdisait à toute structure commerciale de se connecter sur le réseau. Internet était alors réservé à un usage civil et universitaire."
+  },
+  {
+    "id": 10,
+    "question": "En quelle année le protocole FTP a-t-il été créé ?",
+    "options": [
+      "1971",
+      "1973",
+      "1978",
+      "1984"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le protocole FTP, qui permet de transférer des fichiers par Internet, a été créé en 1973."
+  },
+  {
+    "id": 11,
+    "question": "Qui sont surnommés les « pères de l'Internet » ?",
+    "options": [
+      "Tim Berners-Lee et Marc Andreessen",
+      "Ray Tomlinson et Paul Baran",
+      "Jonathan B. Postel, Vinton Cerf et Bob Kahn",
+      "Léonard Kleinrock et Steve Jobs"
+    ],
+    "correctIndex": 2,
+    "explanation": "Jonathan B. Postel, Vinton Cerf et Bob Kahn, dont les travaux ont abouti à la création du protocole TCP/IP en 1978, sont surnommés les pères de l'Internet."
+  },
+  {
+    "id": 12,
+    "question": "Quel pourcentage du trafic ARPANET les e-mails représentaient-ils en 1973 ?",
+    "options": [
+      "25%",
+      "50%",
+      "75%",
+      "90%"
+    ],
+    "correctIndex": 2,
+    "explanation": "En 1973, les e-mails représentaient 75% du trafic sur ARPANET."
+  },
+  {
+    "id": 13,
+    "question": "Qu'est-ce que le Minitel, sorti en France en 1981 ?",
+    "options": [
+      "Un réseau basé sur TCP/IP",
+      "Un terminal reposant sur le protocole X25, différent du TCP/IP",
+      "Le premier navigateur web français",
+      "Un logiciel de messagerie"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le Minitel, sorti en 1981 en France, repose sur le protocole X25, différent du TCP/IP utilisé sur Internet."
+  },
+  {
+    "id": 14,
+    "question": "Quel réseau a remplacé ARPANET dans les années 80 ?",
+    "options": [
+      "Internet",
+      "RENATER",
+      "NSFnet",
+      "Ethernet"
+    ],
+    "correctIndex": 2,
+    "explanation": "NSFnet (réseau universitaire américain créé en 1984) a pris le pas sur ARPANET, qui a disparu à la fin des années 80."
+  },
+  {
+    "id": 15,
+    "question": "Quelles normes créées en 1991 ont donné naissance au World Wide Web ?",
+    "options": [
+      "TCP et IP",
+      "HTTP et HTML",
+      "FTP et SMTP",
+      "DNS et DHCP"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les normes HTTP et HTML, créées en 1991, ont donné naissance au World Wide Web."
+  },
+  {
+    "id": 16,
+    "question": "Quel est le réseau de recherche et d'éducation français avec 11 900 km de fibres optiques ?",
+    "options": [
+      "ARPANET",
+      "NSFnet",
+      "RENATER",
+      "Ethernet"
+    ],
+    "correctIndex": 2,
+    "explanation": "RENATER est le réseau français de recherche et d'éducation, avec 11 900 km de fibres optiques et 72 points de présence."
+  },
+  {
+    "id": 17,
+    "question": "Quels sont les deux grands types de commutation dans les réseaux de communication ?",
+    "options": [
+      "Commutation analogique et numérique",
+      "Commutation de circuits et commutation par paquets",
+      "Commutation filaire et sans fil",
+      "Commutation locale et distante"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les réseaux de communication utilisent soit la commutation de circuits (téléphone), soit la commutation par paquets (Internet/TCP/IP)."
+  },
+  {
+    "id": 18,
+    "question": "Quel type de commutation utilise Internet (TCP/IP) ?",
+    "options": [
+      "Commutation de circuits",
+      "Commutation par paquets",
+      "Broadcast",
+      "Commutation hybride"
+    ],
+    "correctIndex": 1,
+    "explanation": "Internet utilise la commutation par paquets : les données sont découpées en paquets qui peuvent emprunter des chemins différents."
+  },
+  {
+    "id": 19,
+    "question": "Quelles sont les trois catégories de supports physiques de transmission ?",
+    "options": [
+      "Analogique, numérique, hybride",
+      "Filaires, aériens, optiques",
+      "Cuivre, fibre, satellite",
+      "LAN, MAN, WAN"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les trois catégories sont : filaires (grandeur électrique sur câble métallique), aériens (ondes électromagnétiques dans l'air), et optiques (informations sous forme lumineuse)."
+  },
+  {
+    "id": 20,
+    "question": "La RFC 1149 décrit quel type de support de transmission insolite ?",
+    "options": [
+      "Les câbles sous-marins",
+      "Les satellites",
+      "Les pigeons voyageurs",
+      "Les signaux de fumée"
+    ],
+    "correctIndex": 2,
+    "explanation": "La RFC 1149, testée le 28 avril 2001, décrit la transmission de paquets IP par pigeons voyageurs. C'est un standard humoristique mais réellement testé !"
+  },
+  {
+    "id": 21,
+    "question": "Dans un réseau Client/Serveur, quel est le rôle du serveur ?",
+    "options": [
+      "Il envoie des requêtes aux clients",
+      "Il est organisé autour de serveurs qui fournissent des services aux clients",
+      "Il connecte uniquement deux ordinateurs",
+      "Il remplace le routeur"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dans un réseau Client/Serveur, les serveurs fournissent des services (fichiers, web, mail...) aux clients qui en font la demande."
+  },
+  {
+    "id": 22,
+    "question": "Qu'est-ce qu'un réseau pair à pair (peer to peer) ?",
+    "options": [
+      "Un réseau où chaque machine est à la fois client et serveur",
+      "Un réseau avec un serveur central",
+      "Un réseau réservé aux entreprises",
+      "Un réseau utilisant uniquement la fibre optique"
+    ],
+    "correctIndex": 0,
+    "explanation": "Dans un réseau pair à pair (P2P), chaque machine peut jouer à la fois le rôle de client et de serveur, sans hiérarchie centrale."
+  },
+  {
+    "id": 23,
+    "question": "Parmi les éléments suivants, lequel N'EST PAS nécessaire pour assurer la communication réseau ?",
+    "options": [
+      "Adresser l'information au bon destinataire",
+      "Détecter les erreurs de transmission",
+      "Utiliser obligatoirement la fibre optique",
+      "Gérer les congestions du réseau"
+    ],
+    "correctIndex": 2,
+    "explanation": "La fibre optique n'est qu'un support de transmission parmi d'autres. La communication nécessite : adressage, détection d'erreurs, décomposition/réassemblage des messages, codage et gestion des congestions."
+  },
+  {
+    "id": 24,
+    "question": "Qu'est-ce qu'un protocole de communication ?",
+    "options": [
+      "Un câble réseau spécial",
+      "Un ensemble de règles à suivre pour satisfaire des objectifs de communication",
+      "Un logiciel antivirus",
+      "Un type de serveur"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un protocole est un ensemble de règles à suivre pour satisfaire des objectifs bien déterminés, comme le format des messages, le contrôle d'envoi de données, et les algorithmes de réaction."
+  },
+  {
+    "id": 25,
+    "question": "Combien de couches comporte le modèle OSI ?",
+    "options": [
+      "4",
+      "5",
+      "7",
+      "10"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le modèle OSI (Open System Interconnection) de l'ISO comporte 7 couches hiérarchiques distinctes."
+  },
+  {
+    "id": 26,
+    "question": "Quel est le but du modèle OSI ?",
+    "options": [
+      "Remplacer TCP/IP",
+      "Régler les problèmes d'interconnexion des systèmes hétérogènes",
+      "Accélérer la vitesse d'Internet",
+      "Standardiser les câbles réseau"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le modèle OSI a pour but de régler les problèmes d'interconnexion des systèmes hétérogènes (logiciel et matériel) en segmentant les fonctions en couches superposées."
+  },
+  {
+    "id": 27,
+    "question": "Dans l'ordre du bas vers le haut, quelles sont les 7 couches du modèle OSI ?",
+    "options": [
+      "Physique, Liaison, Réseau, Transport, Session, Présentation, Application",
+      "Application, Présentation, Session, Transport, Réseau, Liaison, Physique",
+      "Physique, Réseau, Liaison, Transport, Présentation, Session, Application",
+      "Physique, Liaison, Transport, Réseau, Session, Application, Présentation"
+    ],
+    "correctIndex": 0,
+    "explanation": "De bas en haut : Physique, Liaison, Réseau, Transport, Session, Présentation, Application. Moyen mnémotechnique : « Partout Le Roi Trouve Sa Place Assise »."
+  },
+  {
+    "id": 28,
+    "question": "Quel moyen mnémotechnique permet de retenir les couches OSI du haut vers le bas ?",
+    "options": [
+      "Partout Le Roi Trouve Sa Place Assise",
+      "Après Plusieurs Semaines Tout Respire La Paix",
+      "Avant Peut-être Sans Toi Rien Liait Paris",
+      "Appliquer Pour Savoir Transmettre Rendrait La Physique"
+    ],
+    "correctIndex": 1,
+    "explanation": "Du haut vers le bas : « Après Plusieurs Semaines Tout Respire La Paix » (Application, Présentation, Session, Transport, Réseau, Liaison, Physique)."
+  },
+  {
+    "id": 29,
+    "question": "Quelle couche OSI est chargée de transmettre des bits bruts sur un support ?",
+    "options": [
+      "Couche Liaison",
+      "Couche Réseau",
+      "Couche Physique",
+      "Couche Transport"
+    ],
+    "correctIndex": 2,
+    "explanation": "La couche Physique (couche 1) transmet des bits de façon brute sur un support. Elle détermine la nature des signaux, la durée des bits et les connecteurs physiques."
+  },
+  {
+    "id": 30,
+    "question": "Quelle couche OSI assure le transfert de l'information sous forme de trames ?",
+    "options": [
+      "Couche Physique",
+      "Couche Liaison",
+      "Couche Réseau",
+      "Couche Transport"
+    ],
+    "correctIndex": 1,
+    "explanation": "La couche Liaison (couche 2) assure le transfert sous forme de trames, la détection/correction d'erreurs, et l'échange entre nœuds voisins avec adressage physique."
+  },
+  {
+    "id": 31,
+    "question": "Quelle couche OSI gère le routage des paquets à travers les réseaux intermédiaires ?",
+    "options": [
+      "Couche Liaison",
+      "Couche Réseau",
+      "Couche Transport",
+      "Couche Session"
+    ],
+    "correctIndex": 1,
+    "explanation": "La couche Réseau (couche 3) achemine des paquets de bout à bout via le routage à travers les réseaux et nœuds intermédiaires, avec adressage logique."
+  },
+  {
+    "id": 32,
+    "question": "Quelle couche OSI assure le transport fiable de bout en bout ?",
+    "options": [
+      "Couche Réseau",
+      "Couche Transport",
+      "Couche Session",
+      "Couche Application"
+    ],
+    "correctIndex": 1,
+    "explanation": "La couche Transport (couche 4) assure le transport de l'information de bout en bout de la connexion, incluant les procédures de connexion et déconnexion."
+  },
+  {
+    "id": 33,
+    "question": "Quelle couche OSI gère le cryptage et la compression des données ?",
+    "options": [
+      "Couche Session",
+      "Couche Présentation",
+      "Couche Application",
+      "Couche Transport"
+    ],
+    "correctIndex": 1,
+    "explanation": "La couche Présentation (couche 6) gère les différences de syntaxe, offre des mécanismes de sécurité, de cryptage et de compression."
+  },
+  {
+    "id": 34,
+    "question": "Comment s'appellent les unités de données échangées à la couche Liaison ?",
+    "options": [
+      "Bits",
+      "Paquets",
+      "Trames",
+      "Segments"
+    ],
+    "correctIndex": 2,
+    "explanation": "Les PDU (Protocol Data Unit) changent de nom selon la couche : bits (Physique), trames (Liaison), paquets (Réseau), segments (Transport)."
+  },
+  {
+    "id": 35,
+    "question": "Comment s'appellent les PDU au niveau de la couche Transport ?",
+    "options": [
+      "Trames",
+      "Paquets",
+      "Segments",
+      "Bits"
+    ],
+    "correctIndex": 2,
+    "explanation": "Au niveau de la couche Transport, les PDU sont appelés segments (ou messages)."
+  },
+  {
+    "id": 36,
+    "question": "Que se passe-t-il lors de l'envoi de données à travers les couches OSI ?",
+    "options": [
+      "Chaque couche supprime un en-tête",
+      "Chaque couche ajoute un en-tête au paquet de données (encapsulation)",
+      "Les données passent directement de la couche Application à la couche Physique",
+      "Seule la couche Réseau modifie les données"
+    ],
+    "correctIndex": 1,
+    "explanation": "Lors de l'émission, chaque couche ajoute un en-tête (encapsulation). À la réception, chaque couche lit puis supprime l'en-tête correspondant."
+  },
+  {
+    "id": 37,
+    "question": "Combien de couches comporte le modèle TCP/IP (modèle hybride) ?",
+    "options": [
+      "4",
+      "5",
+      "7",
+      "3"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le modèle TCP/IP (hybride) comporte 5 couches : Physique, Liaison, Réseau, Transport et Application."
+  },
+  {
+    "id": 38,
+    "question": "Quelles couches du modèle OSI sont fusionnées dans la couche Application du modèle TCP/IP ?",
+    "options": [
+      "Transport et Session",
+      "Session, Présentation et Application",
+      "Liaison et Physique",
+      "Réseau et Transport"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dans le modèle TCP/IP, les couches Session, Présentation et Application du modèle OSI sont fusionnées en une seule couche Application."
+  },
+  {
+    "id": 39,
+    "question": "Quel protocole opère à la couche Réseau du modèle TCP/IP ?",
+    "options": [
+      "TCP",
+      "HTTP",
+      "IP (v4 ou v6)",
+      "Ethernet"
+    ],
+    "correctIndex": 2,
+    "explanation": "La couche Réseau (couche 3) du modèle TCP/IP utilise les protocoles IP (v4 ou v6), ICMP et ARP."
+  },
+  {
+    "id": 40,
+    "question": "Quels protocoles opèrent à la couche Transport du modèle TCP/IP ?",
+    "options": [
+      "HTTP et FTP",
+      "TCP et UDP",
+      "IP et ICMP",
+      "Ethernet et WiFi"
+    ],
+    "correctIndex": 1,
+    "explanation": "La couche Transport du modèle TCP/IP utilise les protocoles TCP (fiable, connecté) et UDP (non fiable, non connecté)."
+  },
+  {
+    "id": 41,
+    "question": "Quel équipement réseau opère au niveau de la couche Réseau (couche 3) ?",
+    "options": [
+      "Hub",
+      "Switch",
+      "Routeur",
+      "Répéteur"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le routeur opère à la couche Réseau (couche 3) et achemine les paquets en utilisant les adresses IP."
+  },
+  {
+    "id": 42,
+    "question": "Quel équipement réseau opère au niveau de la couche Liaison (couche 2) ?",
+    "options": [
+      "Hub",
+      "Switch",
+      "Routeur",
+      "Modem"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le switch (commutateur) opère à la couche Liaison (couche 2) et utilise les adresses MAC pour transférer les trames."
+  },
+  {
+    "id": 43,
+    "question": "Quel équipement réseau opère au niveau de la couche Physique (couche 1) ?",
+    "options": [
+      "Switch",
+      "Routeur",
+      "Hub (concentrateur)",
+      "Firewall"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le hub (concentrateur) opère à la couche Physique (couche 1). Il reçoit les trames et les diffuse (broadcast) sur tous ses ports."
+  },
+  {
+    "id": 44,
+    "question": "Pourquoi le hub est-il considéré comme mauvais du point de vue de la sécurité ?",
+    "options": [
+      "Il ne chiffre pas les données",
+      "Il diffuse les trames sur tous ses ports, donc toutes les stations reçoivent tous les messages",
+      "Il n'a pas de mot de passe",
+      "Il est trop lent"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le hub diffuse (broadcast) les trames sur toutes ses sorties, ce qui signifie que toutes les stations connectées reçoivent tous les messages, posant un problème de sécurité."
+  },
+  {
+    "id": 45,
+    "question": "Pourquoi le modèle OSI ne s'est-il pas imposé en pratique ?",
+    "options": [
+      "Il était trop simple",
+      "Il n'a jamais été standardisé",
+      "Les universités américaines utilisaient déjà TCP/IP et le modèle était trop complexe",
+      "Il ne supportait pas l'e-mail"
+    ],
+    "correctIndex": 2,
+    "explanation": "Lorsque le modèle OSI est sorti, TCP/IP était déjà largement utilisé. De plus, le modèle était trop complet et complexe : les couches Session et Présentation sont peu utilisées."
+  },
+  {
+    "id": 46,
+    "question": "Qu'est-ce que le codage Manchester (biphase) ?",
+    "options": [
+      "Un codage où le 0 est une tension nulle et le 1 une tension positive",
+      "Un codage où le signal change au milieu de chaque intervalle de bit (XOR données/horloge)",
+      "Un codage qui transmet les données en parallèle",
+      "Un codage réservé aux fibres optiques"
+    ],
+    "correctIndex": 1,
+    "explanation": "En codage Manchester, le signal change au milieu de l'intervalle de temps de chaque bit : front montant pour un 0, front descendant pour un 1. C'est un XOR entre les données et l'horloge."
+  },
+  {
+    "id": 47,
+    "question": "Pour quel standard le codage Manchester est-il utilisé ?",
+    "options": [
+      "WiFi",
+      "Ethernet à 10 Mbit/s",
+      "USB",
+      "Bluetooth"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le codage Manchester est utilisé pour Ethernet à 10 Mbit/s."
+  },
+  {
+    "id": 48,
+    "question": "En codage bipolaire, comment est représenté le « 0 » ?",
+    "options": [
+      "Par une tension positive",
+      "Par une tension négative",
+      "Par une tension nulle",
+      "Par une alternance positive/négative"
+    ],
+    "correctIndex": 2,
+    "explanation": "En codage bipolaire, le 0 est représenté par une tension nulle, et le 1 par une tension alternativement positive ou négative."
+  },
+  {
+    "id": 49,
+    "question": "Quel type d'adressage est utilisé à la couche Liaison ?",
+    "options": [
+      "Adressage logique (IP)",
+      "Adressage physique (MAC)",
+      "Adressage par nom de domaine (DNS)",
+      "Adressage par port"
+    ],
+    "correctIndex": 1,
+    "explanation": "La couche Liaison utilise l'adressage physique des nœuds, c'est-à-dire les adresses MAC."
+  },
+  {
+    "id": 50,
+    "question": "Quel type d'adressage est utilisé à la couche Réseau ?",
+    "options": [
+      "Adressage physique (MAC)",
+      "Adressage logique (IP)",
+      "Adressage par nom de domaine",
+      "Adressage par numéro de port"
+    ],
+    "correctIndex": 1,
+    "explanation": "La couche Réseau utilise l'adressage logique des nœuds, c'est-à-dire les adresses IP."
+  },
+  {
+    "id": 51,
+    "question": "Parmi ces protocoles, lesquels appartiennent à la couche Application du modèle TCP/IP ?",
+    "options": [
+      "TCP et UDP",
+      "IP et ICMP",
+      "HTTP, FTP, SMTP, DNS, DHCP",
+      "Ethernet et WiFi"
+    ],
+    "correctIndex": 2,
+    "explanation": "HTTP, FTP, SMTP, POP, IMAP, TELNET, DNS et DHCP sont des protocoles de la couche Application du modèle TCP/IP."
+  },
+  {
+    "id": 52,
+    "question": "Quels protocoles de la couche Liaison sont mentionnés dans le modèle TCP/IP ?",
+    "options": [
+      "TCP et UDP",
+      "Ethernet, WiFi, CSMA/CD et CSMA/CA, VLAN",
+      "HTTP et FTP",
+      "IP et ARP"
+    ],
+    "correctIndex": 1,
+    "explanation": "La couche Liaison du modèle TCP/IP inclut Ethernet, WiFi, les protocoles CSMA/CD et CSMA/CA, ainsi que les VLAN, avec l'adresse MAC."
+  },
+  {
+    "id": 53,
+    "question": "Quelle est la principale raison de structurer un modèle réseau en couches ?",
+    "options": [
+      "Pour ralentir la transmission",
+      "Pour faciliter la maintenance : modifier une couche reste transparent au reste du système",
+      "Pour limiter le nombre d'ordinateurs connectés",
+      "Pour utiliser un seul protocole"
+    ],
+    "correctIndex": 1,
+    "explanation": "La structure en couches et la modularité facilitent la maintenance et la mise à jour : la modification d'une couche reste transparente au reste du système."
+  },
+  {
+    "id": 54,
+    "question": "Un système intermédiaire (routeur) implémente quelles couches du modèle OSI ?",
+    "options": [
+      "Les 7 couches",
+      "Uniquement les couches 1 à 3 (Physique, Liaison, Réseau)",
+      "Uniquement la couche 1 (Physique)",
+      "Les couches 1 à 4"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un système intermédiaire comme un routeur implémente les couches 1 à 3 (Physique, Liaison, Réseau), contrairement à un système terminal qui implémente les 7 couches."
+  },
+  {
+    "id": 55,
+    "question": "Quel est le premier virus informatique à avoir bloqué tout le trafic sur le réseau ?",
+    "options": [
+      "En 1969",
+      "En 1975",
+      "En 1980",
+      "En 1990"
+    ],
+    "correctIndex": 2,
+    "explanation": "En 1980, le premier virus informatique a bloqué tout le trafic sur le réseau."
+  },
+  {
+    "id": 56,
+    "question": "Quelle couche OSI organise l'échange de données et structure le dialogue entre les applications ?",
+    "options": [
+      "Couche Transport",
+      "Couche Session",
+      "Couche Présentation",
+      "Couche Application"
+    ],
+    "correctIndex": 1,
+    "explanation": "La couche Session (couche 5) organise l'échange de données et structure le dialogue entre les applications."
+  },
+  {
+    "id": 57,
+    "question": "Quel navigateur web a été lancé en 1994 ?",
+    "options": [
+      "Internet Explorer",
+      "Mosaic",
+      "Netscape Navigator",
+      "Firefox"
+    ],
+    "correctIndex": 2,
+    "explanation": "Netscape Navigator a été lancé en 1994, et est considéré comme l'un des premiers navigateurs web grand public."
+  },
+  {
+    "id": 58,
+    "question": "Quel est l'avantage du codage bipolaire ?",
+    "options": [
+      "Il est plus rapide que le Manchester",
+      "Il est indépendant de la polarité",
+      "Il ne nécessite pas de câble",
+      "Il corrige automatiquement les erreurs"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'avantage du codage bipolaire est qu'il est indépendant de la polarité. Cependant, il souffre de problèmes de désynchronisation."
+  },
+  {
+    "id": 59,
+    "question": "Qu'est-ce qu'un standard « de facto » ?",
+    "options": [
+      "Un standard imposé par un organisme officiel",
+      "Un standard propriétaire réservé à un constructeur",
+      "Un standard qui s'est imposé par l'usage, sans avoir été formellement normalisé",
+      "Un standard obsolète"
+    ],
+    "correctIndex": 2,
+    "explanation": "Un standard de facto (comme TCP/IP ou Ethernet) s'est imposé par l'usage, contrairement aux standards de jure (comme OSI) normalisés par des organismes officiels."
+  },
+  {
+    "id": 60,
+    "question": "La couche Physique transmet un flot de bits. Connaît-elle la signification des données ?",
+    "options": [
+      "Oui, elle interprète les données pour les router",
+      "Non, elle transmet un flot de bits sans en connaître la signification ni la structure",
+      "Oui, elle détecte les erreurs dans les données",
+      "Oui, elle convertit les données en texte lisible"
+    ],
+    "correctIndex": 1,
+    "explanation": "La couche Physique transmet un flot de bits sans en connaître la signification ou la structure. Elle se contente de coder et transmettre les signaux."
+  }
+]

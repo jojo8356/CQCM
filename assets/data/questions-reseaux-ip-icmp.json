@@ -1,0 +1,722 @@
+[
+  {
+    "id": 1,
+    "question": "Quel est le rôle principal de la couche Réseau ?",
+    "options": [
+      "Transmettre des bits bruts sur le support physique",
+      "Acheminer les données de la source à la destination à travers des réseaux intermédiaires",
+      "Découper les données en trames",
+      "Gérer les applications réseau"
+    ],
+    "correctIndex": 1,
+    "explanation": "La couche Réseau assure l'acheminement des données de la source à la destination à travers un ou plusieurs réseaux intermédiaires, en utilisant l'adressage logique et le routage."
+  },
+  {
+    "id": 2,
+    "question": "Comment s'appelle l'unité d'information à la couche Réseau ?",
+    "options": [
+      "La trame",
+      "Le segment",
+      "Le paquet",
+      "Le bit"
+    ],
+    "correctIndex": 2,
+    "explanation": "L'unité d'information à la couche Réseau est le paquet (ou datagramme pour IP)."
+  },
+  {
+    "id": 3,
+    "question": "La couche Réseau est la première couche dite « de bout en bout ». Qu'est-ce que cela signifie ?",
+    "options": [
+      "Elle ne fonctionne qu'entre deux machines voisines",
+      "Elle assure la communication entre la source et la destination finales, à travers plusieurs réseaux",
+      "Elle ne traite que les bits physiques",
+      "Elle fonctionne uniquement sur le réseau local"
+    ],
+    "correctIndex": 1,
+    "explanation": "La couche Réseau est la première couche de bout en bout : elle assure l'acheminement des données entre l'émetteur et le destinataire à travers différents réseaux."
+  },
+  {
+    "id": 4,
+    "question": "Quel type de service offre IP aux couches supérieures ?",
+    "options": [
+      "Un service orienté connexion et fiable",
+      "Un service à datagrammes, non orienté connexion et non fiable (best effort)",
+      "Un service garanti sans perte de paquets",
+      "Un service avec ordre d'arrivée garanti"
+    ],
+    "correctIndex": 1,
+    "explanation": "IP offre un service à datagrammes, non orienté connexion et non fiable (best effort) : perte et duplication de paquets possibles, arrivée en séquence non garantie."
+  },
+  {
+    "id": 5,
+    "question": "Dans le service IP « best effort », quelles situations sont possibles ?",
+    "options": [
+      "Perte de paquets uniquement",
+      "Perte de paquets, duplication de paquets, et arrivée des paquets dans le désordre",
+      "Aucune perte ni duplication",
+      "Duplication uniquement"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le service IP best effort ne garantit rien : perte de paquets possible, duplication possible, et l'arrivée des paquets en séquence n'est pas garantie."
+  },
+  {
+    "id": 6,
+    "question": "En IP, deux paquets consécutifs envoyés de A vers B peuvent-ils suivre des routes différentes ?",
+    "options": [
+      "Non, ils suivent toujours le même chemin",
+      "Oui, car IP est un service non orienté connexion",
+      "Non, sauf en cas de panne d'un routeur",
+      "Oui, mais uniquement en IPv6"
+    ],
+    "correctIndex": 1,
+    "explanation": "IP est un service non orienté connexion : deux paquets consécutifs peuvent suivre des routes différentes pour aller de A à B."
+  },
+  {
+    "id": 7,
+    "question": "Combien de bits comporte une adresse IPv4 ?",
+    "options": [
+      "16 bits",
+      "32 bits",
+      "48 bits",
+      "128 bits"
+    ],
+    "correctIndex": 1,
+    "explanation": "Une adresse IPv4 comporte 32 bits (4 octets), notée en décimal pointé (ex : 194.214.171.200)."
+  },
+  {
+    "id": 8,
+    "question": "De quoi est composée une adresse IPv4 ?",
+    "options": [
+      "D'un identifiant de fabricant et d'un numéro de série",
+      "D'un identifiant réseau (net-id) et d'un identifiant machine (host-id)",
+      "D'un nom de domaine et d'un numéro de port",
+      "D'une adresse MAC et d'un préfixe"
+    ],
+    "correctIndex": 1,
+    "explanation": "Une adresse IPv4 se compose d'un identifiant réseau (net-id) et d'un identifiant machine (host-id). La taille de chacun dépend du masque."
+  },
+  {
+    "id": 9,
+    "question": "Quel organisme est chargé d'attribuer les adresses IP publiques ?",
+    "options": [
+      "L'IEEE",
+      "L'ISO",
+      "L'ICANN (Internet Corporation for Assigned Names and Numbers)",
+      "L'ARPA"
+    ],
+    "correctIndex": 2,
+    "explanation": "L'ICANN est chargée d'attribuer les adresses IP publiques pour les ordinateurs directement connectés au réseau public Internet."
+  },
+  {
+    "id": 10,
+    "question": "Que représente l'adresse 127.0.0.1 ?",
+    "options": [
+      "L'adresse de broadcast",
+      "L'adresse du routeur par défaut",
+      "La machine locale (localhost)",
+      "L'adresse réseau"
+    ],
+    "correctIndex": 2,
+    "explanation": "L'adresse 127.0.0.1 désigne la machine locale (localhost). Elle est utilisée pour tester la pile TCP/IP de la machine."
+  },
+  {
+    "id": 11,
+    "question": "Que représente l'adresse 0.0.0.0 dans les routeurs ?",
+    "options": [
+      "L'adresse de broadcast",
+      "L'adresse localhost",
+      "La route par défaut",
+      "Une adresse invalide"
+    ],
+    "correctIndex": 2,
+    "explanation": "L'adresse 0.0.0.0 dans les routeurs représente la route par défaut, utilisée quand aucune autre route ne correspond."
+  },
+  {
+    "id": 12,
+    "question": "Avec l'adresse 192.168.1.102 et le masque 255.255.255.0, quelle est l'adresse réseau ?",
+    "options": [
+      "192.168.1.255",
+      "192.168.1.0",
+      "192.168.0.0",
+      "192.168.1.102"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'adresse réseau s'obtient en mettant à 0 les bits du host-id : 192.168.1.0. Le masque 255.255.255.0 indique que le net-id fait 24 bits."
+  },
+  {
+    "id": 13,
+    "question": "Avec l'adresse 192.168.1.102/24, quelle est l'adresse de broadcast ?",
+    "options": [
+      "192.168.1.0",
+      "192.168.1.1",
+      "192.168.1.254",
+      "192.168.1.255"
+    ],
+    "correctIndex": 3,
+    "explanation": "L'adresse de broadcast s'obtient en mettant à 1 tous les bits du host-id : 192.168.1.255."
+  },
+  {
+    "id": 14,
+    "question": "Avec l'adresse 192.168.1.0/24, combien de machines peut-on adresser ?",
+    "options": [
+      "256",
+      "255",
+      "254",
+      "253"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le nombre de machines = 2^(host-id) - 2 = 2^8 - 2 = 254. On retire l'adresse réseau et l'adresse de broadcast."
+  },
+  {
+    "id": 15,
+    "question": "Pourquoi retire-t-on 2 au nombre total d'adresses pour calculer le nombre de machines ?",
+    "options": [
+      "Pour réserver des adresses au routeur",
+      "Parce que l'adresse réseau et l'adresse de broadcast ne peuvent pas être attribuées à des machines",
+      "Pour garder des adresses de secours",
+      "Pour le serveur DHCP et le DNS"
+    ],
+    "correctIndex": 1,
+    "explanation": "On retire 2 car l'adresse réseau (<net-id><0>) et l'adresse de broadcast (<net-id><1>) ne peuvent être attribuées à aucune machine."
+  },
+  {
+    "id": 16,
+    "question": "Avec l'adresse 134.59.1.3/16, quel est le masque ?",
+    "options": [
+      "255.0.0.0",
+      "255.255.0.0",
+      "255.255.255.0",
+      "255.255.255.192"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un net-id de 16 bits donne un masque de 16 bits à 1 suivis de 16 bits à 0 : 255.255.0.0."
+  },
+  {
+    "id": 17,
+    "question": "Avec l'adresse 134.59.1.3/16, quelle est l'adresse de broadcast ?",
+    "options": [
+      "134.59.0.0",
+      "134.59.1.255",
+      "134.59.255.255",
+      "134.255.255.255"
+    ],
+    "correctIndex": 2,
+    "explanation": "Avec un net-id de 16 bits, le broadcast est 134.59.255.255 (les 16 bits du host-id sont tous à 1)."
+  },
+  {
+    "id": 18,
+    "question": "Avec l'adresse 134.59.1.3/16, combien de machines peut-on adresser ?",
+    "options": [
+      "256",
+      "65534",
+      "65536",
+      "16384"
+    ],
+    "correctIndex": 1,
+    "explanation": "Nombre de machines = 2^16 - 2 = 65534. La plage va de 134.59.0.1 à 134.59.255.254."
+  },
+  {
+    "id": 19,
+    "question": "Avec l'adresse 192.44.77.0/26, quel est le masque ?",
+    "options": [
+      "255.255.255.0",
+      "255.255.255.128",
+      "255.255.255.192",
+      "255.255.255.224"
+    ],
+    "correctIndex": 2,
+    "explanation": "26 bits à 1 suivis de 6 bits à 0 : 255.255.255.11000000 = 255.255.255.192."
+  },
+  {
+    "id": 20,
+    "question": "Avec l'adresse 192.44.77.0/26, quelle est l'adresse de broadcast ?",
+    "options": [
+      "192.44.77.31",
+      "192.44.77.63",
+      "192.44.77.127",
+      "192.44.77.255"
+    ],
+    "correctIndex": 1,
+    "explanation": "On recopie les 26 bits du net-id et on complète par des 1 : 192.44.77.00111111 = 192.44.77.63."
+  },
+  {
+    "id": 21,
+    "question": "Avec l'adresse 192.44.77.0/26, combien de machines peut-on adresser ?",
+    "options": [
+      "30",
+      "62",
+      "64",
+      "126"
+    ],
+    "correctIndex": 1,
+    "explanation": "Nombre de machines = 2^6 - 2 = 62. La plage va de 192.44.77.1 à 192.44.77.62."
+  },
+  {
+    "id": 22,
+    "question": "L'adresse 130.79.153.35 fait-elle partie du réseau 130.79.152.0/23 ?",
+    "options": [
+      "Non, car 153 ≠ 152",
+      "Oui, car 130.79.153.35/23 a pour adresse réseau 130.79.152.0",
+      "Non, car le masque ne correspond pas",
+      "Oui, car les deux premiers octets sont identiques"
+    ],
+    "correctIndex": 1,
+    "explanation": "153 = 10011001, en gardant les 23 premiers bits on obtient 10011000 = 152. Donc l'adresse réseau est 130.79.152.0, qui correspond bien au réseau donné."
+  },
+  {
+    "id": 23,
+    "question": "L'adresse 130.79.154.1 fait-elle partie du réseau 130.79.152.0/23 ?",
+    "options": [
+      "Oui",
+      "Non, car 130.79.154.1/23 a pour adresse réseau 130.79.154.0, différent de 130.79.152.0",
+      "Non, car le masque est trop petit",
+      "Oui, car le premier octet est identique"
+    ],
+    "correctIndex": 1,
+    "explanation": "154 = 10011010, en gardant les 23 premiers bits on obtient 10011010 = 154. L'adresse réseau est 130.79.154.0, différente de 130.79.152.0 : elle ne fait pas partie de ce réseau."
+  },
+  {
+    "id": 24,
+    "question": "Quelle classe d'adresses IP a un net-id sur le premier octet et un masque 255.0.0.0 ?",
+    "options": [
+      "Classe A",
+      "Classe B",
+      "Classe C",
+      "Classe D"
+    ],
+    "correctIndex": 0,
+    "explanation": "La classe A a un net-id sur le premier octet (masque 255.0.0.0), le premier bit est à 0. Elle permet 126 réseaux de plus de 16 millions de machines chacun."
+  },
+  {
+    "id": 25,
+    "question": "Quelle classe d'adresses IP a un net-id sur les deux premiers octets et un masque 255.255.0.0 ?",
+    "options": [
+      "Classe A",
+      "Classe B",
+      "Classe C",
+      "Classe D"
+    ],
+    "correctIndex": 1,
+    "explanation": "La classe B a un net-id sur 2 octets (masque 255.255.0.0), les 2 premiers bits sont 10. Elle permet 16384 réseaux de 65534 machines chacun."
+  },
+  {
+    "id": 26,
+    "question": "Quelle classe d'adresses IP a un net-id sur les trois premiers octets et un masque 255.255.255.0 ?",
+    "options": [
+      "Classe A",
+      "Classe B",
+      "Classe C",
+      "Classe D"
+    ],
+    "correctIndex": 2,
+    "explanation": "La classe C a un net-id sur 3 octets (masque 255.255.255.0), les 3 premiers bits sont 110. Elle permet plus de 2 millions de réseaux de 254 machines chacun."
+  },
+  {
+    "id": 27,
+    "question": "Quelle est la plage d'adresses de la classe A ?",
+    "options": [
+      "1.0.0.1 à 126.255.255.254",
+      "128.0.0.1 à 191.255.255.254",
+      "192.0.0.1 à 223.255.255.254",
+      "224.0.0.1 à 239.255.255.254"
+    ],
+    "correctIndex": 0,
+    "explanation": "La classe A va de 1.0.0.1 à 126.255.255.254 (premier bit à 0)."
+  },
+  {
+    "id": 28,
+    "question": "Quelle est la plage d'adresses de la classe B ?",
+    "options": [
+      "1.0.0.1 à 126.255.255.254",
+      "128.0.0.1 à 191.255.255.254",
+      "192.0.0.1 à 223.255.255.254",
+      "224.0.0.1 à 239.255.255.254"
+    ],
+    "correctIndex": 1,
+    "explanation": "La classe B va de 128.0.0.1 à 191.255.255.254 (deux premiers bits à 10)."
+  },
+  {
+    "id": 29,
+    "question": "Quelle est la plage d'adresses de la classe C ?",
+    "options": [
+      "1.0.0.1 à 126.255.255.254",
+      "128.0.0.1 à 191.255.255.254",
+      "192.0.0.1 à 223.255.255.254",
+      "224.0.0.1 à 239.255.255.254"
+    ],
+    "correctIndex": 2,
+    "explanation": "La classe C va de 192.0.0.1 à 223.255.255.254 (trois premiers bits à 110)."
+  },
+  {
+    "id": 30,
+    "question": "À quoi sert la classe D ?",
+    "options": [
+      "À l'adressage des réseaux locaux",
+      "À la diffusion multicast vers les machines d'un même groupe",
+      "À l'adressage des serveurs DNS",
+      "À l'adressage des routeurs"
+    ],
+    "correctIndex": 1,
+    "explanation": "La classe D (224.0.0.1 à 239.255.255.254, premiers bits 1110) est réservée aux adresses de diffusion multicast vers les machines d'un même groupe abonné."
+  },
+  {
+    "id": 31,
+    "question": "Que signifie CIDR ?",
+    "options": [
+      "Central Internet Domain Registry",
+      "Classless Inter-Domain Routing",
+      "Classful IP Data Routing",
+      "Common Internet Distribution Routing"
+    ],
+    "correctIndex": 1,
+    "explanation": "CIDR signifie Classless Inter-Domain Routing. Il a été mis au point pour diminuer la taille des tables de routage et utiliser les adresses plus efficacement."
+  },
+  {
+    "id": 32,
+    "question": "Que signifie la notation /23 dans l'adresse 192.0.2.96/23 ?",
+    "options": [
+      "Le réseau contient 23 machines",
+      "Les 23 premiers bits sont utilisés comme adresse réseau",
+      "Le masque est 255.255.255.23",
+      "Il y a 23 routeurs sur le chemin"
+    ],
+    "correctIndex": 1,
+    "explanation": "La notation /23 indique que les 23 premiers bits de l'adresse sont utilisés comme adresse réseau. Le masque comporte 23 bits à 1 suivis de 9 bits à 0."
+  },
+  {
+    "id": 33,
+    "question": "Quels sont les problèmes des classes A, B, C avant CIDR ?",
+    "options": [
+      "Trop de sécurité",
+      "Utilisation inefficace et peu flexible des adresses",
+      "Vitesse trop faible",
+      "Incompatibilité avec Ethernet"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'adressage par classes (A, B, C) entraînait une utilisation inefficace et peu flexible des adresses. Les évolutions incluent CIDR, les adresses privées + NAT, et IPv6."
+  },
+  {
+    "id": 34,
+    "question": "Quelle est la taille de l'en-tête IP minimum (sans options) ?",
+    "options": [
+      "12 octets",
+      "16 octets",
+      "20 octets",
+      "32 octets"
+    ],
+    "correctIndex": 2,
+    "explanation": "L'en-tête IPv4 minimum fait 20 octets, contenant version, longueur, TTL, protocole, checksum, adresses source et destination, etc."
+  },
+  {
+    "id": 35,
+    "question": "Que contient le champ Version de l'en-tête IP ?",
+    "options": [
+      "Le numéro de version du protocole (4 pour IPv4)",
+      "Le numéro de séquence du paquet",
+      "La version du routeur",
+      "Le numéro du fragment"
+    ],
+    "correctIndex": 0,
+    "explanation": "Le champ Version (4 bits) contient le numéro de version du protocole IP : 4 pour IPv4, 6 pour IPv6."
+  },
+  {
+    "id": 36,
+    "question": "Qu'est-ce que le TTL (Time To Live) dans l'en-tête IP ?",
+    "options": [
+      "Le temps de chiffrement du paquet",
+      "Un compteur décrémenté à chaque routeur traversé, le paquet est détruit quand il atteint 0",
+      "Le temps de réponse du serveur DNS",
+      "La durée de validité de l'adresse IP"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le TTL est initialisé à une valeur > 0 (typiquement 64), décrémenté à chaque routeur. Quand TTL = 0, le paquet est détruit et un message ICMP est envoyé à l'émetteur."
+  },
+  {
+    "id": 37,
+    "question": "Quel est le but du champ TTL ?",
+    "options": [
+      "Accélérer le routage",
+      "Éviter que les paquets bouclent indéfiniment dans le réseau en cas d'erreurs de routage",
+      "Limiter la taille des paquets",
+      "Chiffrer les données"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le TTL évite que les paquets bouclent indéfiniment dans le réseau en cas d'erreurs dans les tables de routage."
+  },
+  {
+    "id": 38,
+    "question": "Quelle est la valeur typique du TTL ?",
+    "options": [
+      "8",
+      "32",
+      "64",
+      "256"
+    ],
+    "correctIndex": 2,
+    "explanation": "La valeur typique du TTL est 64. Elle est décrémentée d'une unité à chaque routeur traversé."
+  },
+  {
+    "id": 39,
+    "question": "Qu'est-ce que la fragmentation IP ?",
+    "options": [
+      "La division d'un paquet en plusieurs fragments quand la MTU de la liaison ne permet pas de le transporter entier",
+      "La compression des données IP",
+      "La division d'une adresse IP en net-id et host-id",
+      "Le découpage d'un réseau en sous-réseaux"
+    ],
+    "correctIndex": 0,
+    "explanation": "La fragmentation IP se fait au niveau des routeurs quand la MTU (Maximum Transmission Unit) de la liaison ne permet pas de transporter le paquet entier."
+  },
+  {
+    "id": 40,
+    "question": "Où se fait le réassemblage des fragments IP ?",
+    "options": [
+      "Au niveau de chaque routeur intermédiaire",
+      "Uniquement par le destinataire final",
+      "Par l'émetteur",
+      "Par le switch"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le réassemblage des fragments est fait uniquement par le destinataire final, pas par les routeurs intermédiaires."
+  },
+  {
+    "id": 41,
+    "question": "La fragmentation existe-t-elle en IPv6 ?",
+    "options": [
+      "Oui, comme en IPv4",
+      "Non, elle n'existe plus en IPv6",
+      "Oui, mais uniquement au niveau du destinataire",
+      "Oui, mais uniquement pour les paquets multicast"
+    ],
+    "correctIndex": 1,
+    "explanation": "La fragmentation n'existe plus en IPv6, car le mécanisme est coûteux pour les routeurs."
+  },
+  {
+    "id": 42,
+    "question": "Que signifie le drapeau DF (Don't Fragment) dans l'en-tête IP ?",
+    "options": [
+      "Le paquet est un fragment",
+      "Le paquet ne doit pas être fragmenté ; s'il doit l'être, il est écarté et un message ICMP est généré",
+      "Le paquet est le dernier fragment",
+      "Le paquet est chiffré"
+    ],
+    "correctIndex": 1,
+    "explanation": "DF = 1 signifie que le paquet ne doit pas être fragmenté. Si la fragmentation est nécessaire, le paquet est écarté et un message ICMP est envoyé à la source."
+  },
+  {
+    "id": 43,
+    "question": "Que signifie le drapeau MF (More Fragments) ?",
+    "options": [
+      "MF = 1 : c'est le dernier fragment",
+      "MF = 0 : c'est le dernier fragment ; MF = 1 : d'autres fragments suivent",
+      "MF indique le nombre de fragments restants",
+      "MF est utilisé uniquement en IPv6"
+    ],
+    "correctIndex": 1,
+    "explanation": "MF = 0 indique que c'est le dernier fragment (ou que le paquet n'est pas fragmenté). MF = 1 indique qu'il y a encore des fragments à venir."
+  },
+  {
+    "id": 44,
+    "question": "À quoi sert le champ Identification dans l'en-tête IP ?",
+    "options": [
+      "À identifier le protocole de la couche supérieure",
+      "À identifier de façon unique un paquet pour permettre le réassemblage de ses fragments",
+      "À identifier le routeur source",
+      "À identifier la version d'IP"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le champ Identification est un numéro unique pour l'émetteur. Si le paquet est fragmenté, tous les fragments portent le même numéro d'identification."
+  },
+  {
+    "id": 45,
+    "question": "À quoi sert le champ « Place du fragment » (Fragment Offset) ?",
+    "options": [
+      "À indiquer la taille du fragment",
+      "À indiquer la position du premier octet du fragment dans le datagramme original",
+      "À indiquer le nombre total de fragments",
+      "À indiquer l'adresse du routeur qui a fragmenté"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le champ Place du fragment indique la position du premier octet du fragment dans le datagramme original (non fragmenté), découpé en multiples de 8 octets."
+  },
+  {
+    "id": 46,
+    "question": "Que signifie ICMP ?",
+    "options": [
+      "Internet Connection Management Protocol",
+      "Internet Control Message Protocol",
+      "Internal Communication Message Protocol",
+      "Internet Cache Management Protocol"
+    ],
+    "correctIndex": 1,
+    "explanation": "ICMP signifie Internet Control Message Protocol (RFC 792). Il permet l'échange de messages d'erreur et de demandes d'information."
+  },
+  {
+    "id": 47,
+    "question": "Dans quel type de paquet est encapsulé un message ICMP ?",
+    "options": [
+      "Dans une trame Ethernet directement",
+      "Dans un segment TCP",
+      "Dans un paquet IP (champ Protocole = 1)",
+      "Dans un datagramme UDP"
+    ],
+    "correctIndex": 2,
+    "explanation": "ICMP est un protocole de niveau 3, encapsulé dans des paquets IP avec le champ Protocole = 1."
+  },
+  {
+    "id": 48,
+    "question": "Sur quels types de messages ICMP est basée la commande ping ?",
+    "options": [
+      "Type 3 (destination unreachable) et type 11 (time exceeded)",
+      "Type 8 (echo request) et type 0 (echo reply)",
+      "Type 1 (host unreachable) et type 5 (redirect)",
+      "Type 11 (time exceeded) et type 0 (echo reply)"
+    ],
+    "correctIndex": 1,
+    "explanation": "La commande ping utilise les messages ICMP de type 8 (echo request) et type 0 (echo reply). La réception d'un type 8 déclenche l'émission d'un type 0."
+  },
+  {
+    "id": 49,
+    "question": "Comment fonctionne la commande traceroute (tracert) ?",
+    "options": [
+      "Elle envoie un ping à chaque routeur connu",
+      "Elle envoie des paquets avec un TTL incrémenté progressivement et collecte les messages ICMP time exceeded",
+      "Elle analyse les tables de routage locales",
+      "Elle utilise le protocole ARP pour trouver chaque routeur"
+    ],
+    "correctIndex": 1,
+    "explanation": "Traceroute envoie des paquets avec TTL=1, puis TTL=2, etc. Chaque routeur dont le TTL expire renvoie un message ICMP time exceeded (type 11), révélant son adresse."
+  },
+  {
+    "id": 50,
+    "question": "Quels messages ICMP sont utilisés par traceroute ?",
+    "options": [
+      "Type 8 (echo request) et type 0 (echo reply)",
+      "Type 11 / code 0 (time exceeded) et type 3 / code 4 (port unreachable)",
+      "Type 5 (redirect) uniquement",
+      "Type 1 (host unreachable) uniquement"
+    ],
+    "correctIndex": 1,
+    "explanation": "Traceroute utilise les messages ICMP type 11 / code 0 (time exceeded) des routeurs intermédiaires et type 3 / code 4 (port unreachable) de la destination finale."
+  },
+  {
+    "id": 51,
+    "question": "Dans traceroute, que se passe-t-il quand le paquet avec TTL=1 arrive au premier routeur ?",
+    "options": [
+      "Le routeur transmet le paquet au suivant",
+      "Le routeur décrémente le TTL à 0, détruit le paquet et renvoie un ICMP time exceeded",
+      "Le routeur ignore le paquet",
+      "Le routeur renvoie le paquet à l'émetteur sans ICMP"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le premier routeur décrémente le TTL de 1 à 0, détruit le paquet et renvoie un message ICMP time exceeded à l'émetteur, révélant ainsi son adresse."
+  },
+  {
+    "id": 52,
+    "question": "Qu'est-ce que le Path MTU Discovery ?",
+    "options": [
+      "Un protocole pour mesurer la latence du réseau",
+      "Un mécanisme pour découvrir la taille maximale des paquets sur la route pour éviter la fragmentation",
+      "Un protocole pour trouver le chemin le plus court",
+      "Un mécanisme de chiffrement des paquets"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le Path MTU Discovery permet de découvrir la taille maximale des paquets le long de la route A→B en envoyant des paquets avec DF=1 et en analysant les messages ICMP de type 3/code 4."
+  },
+  {
+    "id": 53,
+    "question": "Qu'est-ce que le subnetting ?",
+    "options": [
+      "Fusionner plusieurs réseaux en un seul",
+      "Diviser un gros réseau en plusieurs sous-réseaux",
+      "Changer la classe d'un réseau",
+      "Convertir une adresse IPv4 en IPv6"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le subnetting permet de diviser un gros réseau en plusieurs sous-réseaux, réduisant les entrées dans les tables de routage et le trafic broadcast."
+  },
+  {
+    "id": 54,
+    "question": "Comment fonctionne un masque de sous-réseau ?",
+    "options": [
+      "Il chiffre l'adresse IP",
+      "On fait un ET logique entre l'adresse IP et le masque pour obtenir l'adresse réseau",
+      "Il remplace l'adresse MAC",
+      "Il ajoute des bits à l'adresse IP"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le masque contient des 1 aux positions du net-id et des 0 pour le host-id. Un ET logique entre l'adresse et le masque donne l'adresse réseau."
+  },
+  {
+    "id": 55,
+    "question": "À partir du réseau 130.79.152.0/23, si on veut créer 3 sous-réseaux, combien de bits supplémentaires faut-il ?",
+    "options": [
+      "1 bit (2 sous-réseaux)",
+      "2 bits (4 sous-réseaux)",
+      "3 bits (8 sous-réseaux)",
+      "4 bits (16 sous-réseaux)"
+    ],
+    "correctIndex": 1,
+    "explanation": "Pour 3 sous-réseaux, il faut au minimum 2 bits supplémentaires (2^2 = 4 sous-réseaux). On crée ainsi 4 sous-réseaux en /25."
+  },
+  {
+    "id": 56,
+    "question": "En créant 4 sous-réseaux à partir de 130.79.152.0/23 (passage en /25), combien d'hôtes peut adresser chaque sous-réseau ?",
+    "options": [
+      "62",
+      "126",
+      "254",
+      "510"
+    ],
+    "correctIndex": 1,
+    "explanation": "Avec un masque /25, le host-id fait 7 bits : 2^7 - 2 = 126 hôtes par sous-réseau."
+  },
+  {
+    "id": 57,
+    "question": "Quels avantages offre le subnetting ?",
+    "options": [
+      "Augmentation de la vitesse des câbles",
+      "Réduction des entrées dans les tables de routage et réduction du trafic broadcast",
+      "Remplacement des routeurs par des switchs",
+      "Suppression du besoin d'adresses IP"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le subnetting réduit le nombre d'entrées dans les tables de routage (en cachant les sous-réseaux) et réduit le trafic broadcast en divisant le nombre d'hôtes recevant les broadcasts."
+  },
+  {
+    "id": 58,
+    "question": "Quelles sont les trois évolutions proposées pour pallier les limites de l'adressage par classes ?",
+    "options": [
+      "DNS, DHCP, NAT",
+      "CIDR, Adresses privées + NAT, IPv6",
+      "ARP, ICMP, IGMP",
+      "STP, VLAN, Trunk"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les trois évolutions sont : CIDR (routage sans classe), les adresses privées associées au NAT, et IPv6 (adresses sur 128 bits)."
+  },
+  {
+    "id": 59,
+    "question": "Combien de bits comporte une adresse IPv6 ?",
+    "options": [
+      "32 bits",
+      "64 bits",
+      "96 bits",
+      "128 bits"
+    ],
+    "correctIndex": 3,
+    "explanation": "Une adresse IPv6 comporte 128 bits, contre 32 bits pour IPv4, offrant un espace d'adressage considérablement plus grand."
+  },
+  {
+    "id": 60,
+    "question": "Dans l'architecture de la couche 3, quels protocoles utilisent directement IP ?",
+    "options": [
+      "HTTP et FTP",
+      "ICMP et ARP",
+      "DNS et DHCP",
+      "Ethernet et WiFi"
+    ],
+    "correctIndex": 1,
+    "explanation": "ICMP est encapsulé dans IP et ARP fait le lien entre IP et la couche Liaison. Les commandes ping (ICMP) et traceroute (ICMP) utilisent directement ces protocoles."
+  }
+]

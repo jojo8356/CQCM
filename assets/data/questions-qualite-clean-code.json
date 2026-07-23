@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "question": "Quel est l'un des objectifs principaux de la qualite de developpement ?",
+    "options": [
+      "Ecrire le plus de code possible en un minimum de temps",
+      "Ameliorer la lisibilite et la reutilisabilite du code",
+      "Eviter toute forme de documentation",
+      "Utiliser uniquement des langages compiles"
+    ],
+    "correctIndex": 1,
+    "explanation": "La qualite de developpement vise notamment a ameliorer la lisibilite et la reutilisabilite du code, afin de faciliter la collaboration et la maintenance."
+  },
+  {
+    "id": 2,
+    "question": "Selon Grady Booch, comment doit etre le clean code ?",
+    "options": [
+      "Complexe et exhaustif pour couvrir tous les cas",
+      "Simple et direct, se lisant comme de la prose bien ecrite",
+      "Commente sur chaque ligne pour expliquer le fonctionnement",
+      "Le plus court possible, meme au detriment de la lisibilite"
+    ],
+    "correctIndex": 1,
+    "explanation": "Grady Booch a dit que le clean code est 'simple and direct, reads like well-written prose' : il doit etre simple, direct et se lire comme de la prose bien ecrite."
+  },
+  {
+    "id": 3,
+    "question": "Que signifie la citation de Martin Fowler : 'Good programmers write code that humans can understand' ?",
+    "options": [
+      "Le code doit etre optimise uniquement pour la machine",
+      "Un bon programmeur ecrit du code comprehensible par les humains",
+      "Il faut ecrire le plus de commentaires possible",
+      "Le code doit etre ecrit en langage naturel"
+    ],
+    "correctIndex": 1,
+    "explanation": "Martin Fowler souligne que les bons programmeurs ecrivent du code que les humains peuvent comprendre, pas seulement la machine."
+  },
+  {
+    "id": 4,
+    "question": "Lequel de ces elements est un 'code smell' (mauvaise odeur du code) ?",
+    "options": [
+      "Utilisation de constantes nommees",
+      "Methodes courtes avec une seule intention",
+      "Presence de nombres magiques dans le code",
+      "Noms de variables explicites et parlants"
+    ],
+    "correctIndex": 2,
+    "explanation": "Les nombres magiques (valeurs numeriques codees en dur sans explication) sont un code smell classique. Il faut les remplacer par des constantes nommees."
+  },
+  {
+    "id": 5,
+    "question": "Que signifie le principe DRY ?",
+    "options": [
+      "Do Refactor Yourself",
+      "Don't Repeat Yourself",
+      "Design Readable Yields",
+      "Develop Reusable Yields"
+    ],
+    "correctIndex": 1,
+    "explanation": "DRY signifie 'Don't Repeat Yourself' : il ne faut pas dupliquer le code. Chaque connaissance doit avoir une representation unique et non ambigue dans le systeme."
+  },
+  {
+    "id": 6,
+    "question": "Que signifie le principe KISS ?",
+    "options": [
+      "Keep It Strictly Secured",
+      "Know It, Share, Simplify",
+      "Keep It Simple Stupid",
+      "Keep Integrity, Simplify Structure"
+    ],
+    "correctIndex": 2,
+    "explanation": "KISS signifie 'Keep It Simple Stupid' : il faut garder le code le plus simple possible et eviter la complexite inutile."
+  },
+  {
+    "id": 7,
+    "question": "Que dit la regle du Boy Scout appliquee au code ?",
+    "options": [
+      "Toujours commenter chaque methode ajoutee",
+      "Laisser le code plus propre que quand on l'a trouve",
+      "Ne jamais modifier du code existant",
+      "Ecrire des tests avant de coder"
+    ],
+    "correctIndex": 1,
+    "explanation": "La Boy Scout Rule dit 'Leave the campground cleaner than you found it' : chaque fois qu'on touche du code, on doit le laisser dans un meilleur etat qu'on ne l'a trouve."
+  },
+  {
+    "id": 8,
+    "question": "Selon les bonnes pratiques de nommage, comment doit-on nommer les classes ?",
+    "options": [
+      "Avec des verbes (ex: CalculerPrix)",
+      "Avec des noms (ex: Utilisateur, Commande)",
+      "Avec des abreviations courtes (ex: Usr, Cmd)",
+      "Avec des prefixes techniques (ex: ClsUser, ObjOrder)"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les classes representent des entites et doivent etre nommees avec des noms (Utilisateur, Commande, Produit), tandis que les methodes utilisent des verbes."
+  },
+  {
+    "id": 9,
+    "question": "Selon les bonnes pratiques de nommage, comment doit-on nommer les methodes ?",
+    "options": [
+      "Avec des noms (ex: prix, utilisateur)",
+      "Avec des abreviations (ex: gUI, sNm)",
+      "Avec des verbes (ex: getPrice, setName, createUser)",
+      "Avec des numeros (ex: methode1, methode2)"
+    ],
+    "correctIndex": 2,
+    "explanation": "Les methodes representent des actions et doivent etre nommees avec des verbes : getXXX, setXXX, createXXX, validateXXX, etc."
+  },
+  {
+    "id": 10,
+    "question": "Pourquoi l'appel User.getUserInfo() est-il considere comme une mauvaise pratique de nommage ?",
+    "options": [
+      "Le nom de la methode est trop long",
+      "Il contient de l'information redondante avec le nom de la classe",
+      "getUserInfo n'est pas un verbe valide",
+      "Il manque les parametres d'entree"
+    ],
+    "correctIndex": 1,
+    "explanation": "User.getUserInfo() contient une redondance : le 'User' est deja dans le nom de la classe. On devrait ecrire User.getInfo() pour eviter la repetition."
+  },
+  {
+    "id": 11,
+    "question": "Dans quel cas les commentaires sont-ils particulierement utiles et recommandes ?",
+    "options": [
+      "Pour expliquer chaque ligne de code",
+      "Pour compenser un code mal ecrit",
+      "Pour la Javadoc, les algorithmes complexes, les mentions legales ou le contournement de bugs",
+      "Pour decrire ce que fait chaque variable"
+    ],
+    "correctIndex": 2,
+    "explanation": "Les commentaires sont a privilegier pour la Javadoc, l'explication d'algorithmes complexes, le contournement de bugs connus, et les mentions legales/copyright."
+  },
+  {
+    "id": 12,
+    "question": "Pourquoi dit-on que les commentaires 'mentent et vieillissent mal' ?",
+    "options": [
+      "Parce que les commentaires sont supprimes a la compilation",
+      "Parce qu'ils ne sont pas mis a jour quand le code evolue et deviennent obsoletes",
+      "Parce que les IDE ne les affichent pas correctement",
+      "Parce qu'ils ralentissent l'execution du programme"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les commentaires ne sont pas automatiquement mis a jour lorsque le code change. Avec le temps, ils deviennent obsoletes et peuvent decrire un comportement qui n'existe plus."
+  },
+  {
+    "id": 13,
+    "question": "Lequel de ces elements ne devrait PAS se trouver dans un depot de code propre ?",
+    "options": [
+      "Un fichier README",
+      "Un fichier .DS_Store ou des fichiers specifiques a l'IDE",
+      "Un fichier de licence",
+      "Un guide 'Getting Started'"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les fichiers specifiques au systeme d'exploitation (.DS_Store) ou a l'IDE ne doivent pas etre versionnes. Ils doivent etre ignores via un fichier .gitignore."
+  },
+  {
+    "id": 14,
+    "question": "Quel element doit-on retrouver dans un depot de code propre ?",
+    "options": [
+      "Des executables compiles",
+      "Des donnees sensibles comme des mots de passe",
+      "Un README, un Getting Started et une documentation technique",
+      "Des fichiers de configuration de l'IDE de chaque developpeur"
+    ],
+    "correctIndex": 2,
+    "explanation": "Un depot propre doit contenir un README, un Getting Started, une licence, un guide de contribution, de la documentation technique et du code source structure."
+  },
+  {
+    "id": 15,
+    "question": "Que doit-on faire si un morceau de code est incomprehensible malgre les efforts de lecture ?",
+    "options": [
+      "Ajouter beaucoup de commentaires pour l'expliquer",
+      "Refactorer le code pour le rendre plus clair",
+      "Le supprimer et le reecrire entierement depuis zero",
+      "Le laisser tel quel car il fonctionne"
+    ],
+    "correctIndex": 1,
+    "explanation": "Si le code est incomprehensible, les commentaires ne sont pas la solution : il faut refactorer le code pour le rendre plus clair et lisible. Les commentaires ne doivent pas servir d'excuse pour du code sale."
+  }
+]

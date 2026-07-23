@@ -1,84 +1,14 @@
 {
   "quizzes": [
     {
-      "id": "c-functions",
-      "title": "Fonctions en C",
-      "description": "Questions sur les fonctions et procédures en langage C",
-      "category": "Langage C",
+      "id": "bdd-complet",
+      "title": "R2.06 – BDD complet",
+      "description": "Toutes les questions BDD regroupées en une seule série : LDD, requêtes, jointures, administration, fonctions SQL et Python",
+      "category": "Bases de données",
       "difficulty": "intermediaire",
-      "questionCount": 0,
-      "fileName": "questions.json",
-      "icon": "🔧"
-    },
-    {
-      "id": "java-variables",
-      "title": "Variables et types en Java",
-      "description": "Types primitifs, Wrappers, tableaux, passage de paramètres",
-      "category": "Java - POO",
-      "difficulty": "intermediaire",
-      "questionCount": 32,
-      "fileName": "questions-java-variables.json",
-      "icon": "☕"
-    },
-    {
-      "id": "java-oop-basics",
-      "title": "Bases de la POO en Java",
-      "description": "Classes, objets, encapsulation, constructeurs, méthodes",
-      "category": "Java - POO",
-      "difficulty": "debutant",
-      "questionCount": 32,
-      "fileName": "questions-java-oop-basics.json",
-      "icon": "📦"
-    },
-    {
-      "id": "graphes-non-orientes",
-      "title": "Graphes non orientés",
-      "description": "Définitions, cas particuliers, parcours (eulériens, hamiltoniens), coloration",
-      "category": "Graphes",
-      "difficulty": "intermediaire",
-      "questionCount": 70,
-      "fileName": "questions-graphes-non-orientes.json",
-      "icon": "🔗"
-    },
-    {
-      "id": "java-composition",
-      "title": "Composition et Agrégation",
-      "description": "Relation de composition, agrégation, correspondance UML-Java, construction par assemblage",
-      "category": "Java - POO",
-      "difficulty": "intermediaire",
-      "questionCount": 20,
-      "fileName": "questions-java-composition.json",
-      "icon": "🧩"
-    },
-    {
-      "id": "java-exceptions",
-      "title": "Gestion des exceptions",
-      "description": "try/catch/finally, throw/throws, hiérarchie des exceptions, propagation",
-      "category": "Java - POO",
-      "difficulty": "intermediaire",
-      "questionCount": 32,
-      "fileName": "questions-java-exceptions.json",
-      "icon": "⚠️"
-    },
-    {
-      "id": "graphes-td1",
-      "title": "TD1 - Graphes non orientés : généralités",
-      "description": "Exercices : ordre, degré, matrice d'adjacence, graphes simples/complets/connexes, distances, coloration, Ramsey",
-      "category": "Graphes",
-      "difficulty": "intermediaire",
-      "questionCount": 35,
-      "fileName": "questions-graphes-td1.json",
-      "icon": "📝"
-    },
-    {
-      "id": "graphes-td1bis",
-      "title": "TD1-Bis - Isomorphismes, parcours, coloration",
-      "description": "Isomorphismes, graphes eulériens/hamiltoniens, Welsh & Powell, graphes d'incompatibilité, problèmes d'application",
-      "category": "Graphes",
-      "difficulty": "intermediaire",
-      "questionCount": 40,
-      "fileName": "questions-graphes-td1bis.json",
-      "icon": "📝"
+      "questionCount": 120,
+      "fileName": "questions-bdd-complet.json",
+      "icon": "🧠"
     },
     {
       "id": "stats-descriptives",
@@ -89,6 +19,146 @@
       "questionCount": 50,
       "fileName": "questions-stats-descriptives.json",
       "icon": "📊"
+    },
+    {
+      "id": "reseaux-intro",
+      "title": "Introduction aux Réseaux",
+      "description": "Histoire d'Internet, modèle OSI, modèle TCP/IP, couches réseau, supports de transmission, codage",
+      "category": "Réseaux",
+      "difficulty": "intermediaire",
+      "questionCount": 60,
+      "fileName": "questions-reseaux-intro.json",
+      "icon": "🌐"
+    },
+    {
+      "id": "reseaux-ethernet",
+      "title": "Couche Liaison : Ethernet",
+      "description": "Adresses MAC, trames Ethernet, CSMA/CD, CSMA/CA, switch, VLAN, CRC, STP",
+      "category": "Réseaux",
+      "difficulty": "intermediaire",
+      "questionCount": 50,
+      "fileName": "questions-reseaux-ethernet.json",
+      "icon": "🔌"
+    },
+    {
+      "id": "reseaux-arp",
+      "title": "Protocole ARP",
+      "description": "Address Resolution Protocol, cache ARP, requête/réponse ARP, structure du paquet ARP, ARP hors réseau local",
+      "category": "Réseaux",
+      "difficulty": "intermediaire",
+      "questionCount": 40,
+      "fileName": "questions-reseaux-arp.json",
+      "icon": "🔍"
+    },
+    {
+      "id": "reseaux-ip-icmp",
+      "title": "IP, ICMP et Adressage IPv4",
+      "description": "Couche réseau, paquet IP, TTL, fragmentation, ICMP, ping, traceroute, adressage IPv4, classes, CIDR, subnetting",
+      "category": "Réseaux",
+      "difficulty": "intermediaire",
+      "questionCount": 60,
+      "fileName": "questions-reseaux-ip-icmp.json",
+      "icon": "📡"
+    },
+    {
+      "id": "ihm-ergonomie",
+      "title": "Ergonomie des IHM",
+      "description": "Principes d'ergonomie, utilisabilité, conception centrée utilisateur",
+      "category": "IHM",
+      "difficulty": "intermediaire",
+      "questionCount": 15,
+      "fileName": "questions-ihm-ergonomie.json",
+      "icon": "🖥️"
+    },
+    {
+      "id": "ihm-composants-graphiques",
+      "title": "Composants graphiques",
+      "description": "Widgets, composants Swing/JavaFX, conteneurs, layouts, événements graphiques",
+      "category": "IHM",
+      "difficulty": "intermediaire",
+      "questionCount": 15,
+      "fileName": "questions-ihm-composants-graphiques.json",
+      "icon": "🧱"
+    },
+    {
+      "id": "ihm-prog-evenementielle",
+      "title": "Programmation événementielle",
+      "description": "Événements, listeners, callbacks, gestion des interactions utilisateur",
+      "category": "IHM",
+      "difficulty": "intermediaire",
+      "questionCount": 15,
+      "fileName": "questions-ihm-prog-evenementielle.json",
+      "icon": "🎯"
+    },
+    {
+      "id": "ihm-architecture",
+      "title": "Architecture des IHM",
+      "description": "MVC, MVP, MVVM, patterns d'architecture pour interfaces graphiques",
+      "category": "IHM",
+      "difficulty": "intermediaire",
+      "questionCount": 20,
+      "fileName": "questions-ihm-architecture.json",
+      "icon": "🏗️"
+    },
+    {
+      "id": "ihm-architecture-js",
+      "title": "Architecture IHM en JavaScript",
+      "description": "Frameworks JS, composants web, architecture front-end, DOM, SPA",
+      "category": "IHM",
+      "difficulty": "intermediaire",
+      "questionCount": 20,
+      "fileName": "questions-ihm-architecture-js.json",
+      "icon": "⚡"
+    },
+    {
+      "id": "ihm-internationalisation",
+      "title": "Internationalisation des IHM",
+      "description": "i18n, l10n, ResourceBundle, localisation, formats de date/nombre, encodage",
+      "category": "IHM",
+      "difficulty": "intermediaire",
+      "questionCount": 15,
+      "fileName": "questions-ihm-internationalisation.json",
+      "icon": "🌍"
+    },
+    {
+      "id": "ihm-complements-java",
+      "title": "Compléments Java pour IHM",
+      "description": "Classes internes, anonymes, lambdas, streams, concepts Java avancés pour les IHM",
+      "category": "IHM",
+      "difficulty": "intermediaire",
+      "questionCount": 20,
+      "fileName": "questions-ihm-complements-java.json",
+      "icon": "☕"
+    },
+    {
+      "id": "git",
+      "title": "Git",
+      "description": "Commandes Git, branches, merge, rebase, workflow, gestion de versions",
+      "category": "Outils",
+      "difficulty": "intermediaire",
+      "questionCount": 20,
+      "fileName": "questions-git.json",
+      "icon": "🔀"
+    },
+    {
+      "id": "qualite-tests-junit",
+      "title": "Qualité dev – Tests et JUnit",
+      "description": "V&V, vocabulaire (défaillance/faute/erreur), processus de test, niveaux, boîte noire/blanche, JUnit 5, assertions, annotations, Right-BICEP, CORRECT",
+      "category": "Qualité",
+      "difficulty": "intermediaire",
+      "questionCount": 50,
+      "fileName": "questions-qualite-tests-junit.json",
+      "icon": "🧪"
+    },
+    {
+      "id": "qualite-clean-code",
+      "title": "Qualité logicielle et Clean Code",
+      "description": "Principes SOLID, clean code, refactoring, dette technique, bonnes pratiques",
+      "category": "Qualité",
+      "difficulty": "intermediaire",
+      "questionCount": 15,
+      "fileName": "questions-qualite-clean-code.json",
+      "icon": "✨"
     }
   ]
 }

@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "question": "Que signifie l'abréviation « i18n » ?",
+    "options": [
+      "Interface 18 Niveaux",
+      "Internationalisation",
+      "Intégration 18 Normes",
+      "Interopérabilité Numérique"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'abréviation « i18n » correspond à « internationalisation » car il y a 18 lettres entre le « i » initial et le « n » final du mot."
+  },
+  {
+    "id": 2,
+    "question": "Quel est le but principal de l'internationalisation d'un logiciel ?",
+    "options": [
+      "Traduire l'interface dans toutes les langues existantes",
+      "Préparer le logiciel pour qu'il puisse être déployé dans différentes langues en ajoutant un fichier de traduction",
+      "Convertir automatiquement les devises dans le programme",
+      "Ajouter un dictionnaire multilingue au logiciel"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le but de l'internationalisation est de produire un programme qui puisse être immédiatement déployé dans différentes langues en ajoutant simplement un nouveau fichier de traduction."
+  },
+  {
+    "id": 3,
+    "question": "Quelle est la différence principale entre l'internationalisation et la régionalisation ?",
+    "options": [
+      "L'internationalisation est un travail technique de programmeurs, la régionalisation nécessite des compétences en langues",
+      "L'internationalisation concerne les couleurs, la régionalisation concerne le texte",
+      "L'internationalisation est gratuite, la régionalisation est payante",
+      "Il n'y a aucune différence, ce sont des synonymes"
+    ],
+    "correctIndex": 0,
+    "explanation": "L'internationalisation est un travail essentiellement technique mené par des programmeurs, tandis que la régionalisation (traduction) nécessite surtout des compétences en langues."
+  },
+  {
+    "id": 4,
+    "question": "En plus du changement de langue, que peut impliquer la régionalisation ?",
+    "options": [
+      "Uniquement la modification de la taille de la police",
+      "Le changement d'unités de mesures, de monnaies, du sens de lecture et des couleurs",
+      "Uniquement la traduction mot à mot du texte",
+      "Le changement du système d'exploitation"
+    ],
+    "correctIndex": 1,
+    "explanation": "La régionalisation ne se limite pas à un changement de langue : elle peut aussi impliquer des changements d'unités de mesures, de monnaies, du sens de lecture et des couleurs pour une adaptation culturelle."
+  },
+  {
+    "id": 5,
+    "question": "Quel est le format de nommage d'un fichier de propriétés en Java ?",
+    "options": [
+      "nom.txt",
+      "nom.xml",
+      "nom.properties",
+      "nom.config"
+    ],
+    "correctIndex": 2,
+    "explanation": "Un fichier de propriétés est un simple fichier texte nommé avec l'extension .properties."
+  },
+  {
+    "id": 6,
+    "question": "Dans un fichier de propriétés, comment commence une ligne de commentaire ?",
+    "options": [
+      "Par le caractère //",
+      "Par le caractère #",
+      "Par le caractère --",
+      "Par le caractère /*"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dans un fichier de propriétés, les lignes de commentaire commencent par le caractère #, suivi du commentaire sur une seule ligne."
+  },
+  {
+    "id": 7,
+    "question": "Quelle norme définit les codes langue utilisés pour l'internationalisation ?",
+    "options": [
+      "ISO-3166",
+      "ISO-8859",
+      "ISO-639",
+      "ISO-27001"
+    ],
+    "correctIndex": 2,
+    "explanation": "La liste des codes langue est définie par la norme ISO-639, initialement avec 2 caractères (ISO-639.1) puis 3 caractères (ISO-639.2)."
+  },
+  {
+    "id": 8,
+    "question": "Comment est composé un code pays selon la norme ISO-3166 ?",
+    "options": [
+      "2 caractères minuscules",
+      "3 caractères minuscules",
+      "2 caractères majuscules",
+      "3 caractères majuscules"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le code pays est défini par la norme ISO-3166 et est composé de deux caractères en majuscules. Par exemple : « FR » pour la France, « BE » pour la Belgique, « GB » pour le Royaume-Uni."
+  },
+  {
+    "id": 9,
+    "question": "Que représente le code « fr_BE » dans le contexte de l'internationalisation ?",
+    "options": [
+      "Le français parlé en France avec le dialecte belge",
+      "Le belge parlé en France",
+      "Le français parlé en Belgique",
+      "Le flamand parlé en Belgique"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le code fr_BE identifie la langue française parlée en Belgique. « fr » est le code langue pour le français et « BE » est le code pays pour la Belgique."
+  },
+  {
+    "id": 10,
+    "question": "Combien de champs d'application sont définis dans la JavaDoc pour un objet Locale ?",
+    "options": [
+      "2 : langue et pays",
+      "3 : langue, pays et écriture",
+      "5 : langue, écriture, pays/région, variations et extensions",
+      "7 : langue, écriture, pays, région, variations, extensions et format"
+    ],
+    "correctIndex": 2,
+    "explanation": "Un objet Locale possède 5 champs d'application : la langue (language), l'écriture/alphabet (script), le pays/région (region), les variations (variant) et les extensions."
+  },
+  {
+    "id": 11,
+    "question": "Quelle méthode statique de la classe Locale permet de détecter automatiquement la langue du système ?",
+    "options": [
+      "Locale.getSystemLocale()",
+      "Locale.getDefault()",
+      "Locale.detectLanguage()",
+      "Locale.getCurrentLocale()"
+    ],
+    "correctIndex": 1,
+    "explanation": "La méthode statique Locale.getDefault() permet de détecter automatiquement la Locale du système d'exploitation."
+  },
+  {
+    "id": 12,
+    "question": "Quel est l'ordre de recherche du mécanisme de fallback du ResourceBundle pour une Locale fr_FR sur un fichier « Menus » ?",
+    "options": [
+      "Menus.properties → Menus_fr.properties → Menus_fr_FR.properties",
+      "Menus_fr_FR.properties → Menus_fr.properties → Menus.properties",
+      "Menus_fr.properties → Menus_fr_FR.properties → Menus.properties",
+      "Menus_FR.properties → Menus_fr.properties → Menus.properties"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le ResourceBundle cherche d'abord le fichier le plus spécifique (Menus_fr_FR.properties), puis sans le code pays (Menus_fr.properties), et enfin le fichier par défaut (Menus.properties)."
+  },
+  {
+    "id": 13,
+    "question": "Comment récupère-t-on une valeur textuelle depuis un objet ResourceBundle ?",
+    "options": [
+      "mesRessources.getValue(\"clé\")",
+      "mesRessources.getText(\"clé\")",
+      "mesRessources.getString(\"clé\")",
+      "mesRessources.getProperty(\"clé\")"
+    ],
+    "correctIndex": 2,
+    "explanation": "On utilise la méthode getString() du ResourceBundle pour récupérer la valeur associée à une clé : mesRessources.getString(\"la_clé_du_texte\")."
+  },
+  {
+    "id": 14,
+    "question": "Quelle est la version correcte d'un bouton internationalisé en JavaFX ?",
+    "options": [
+      "new Button(\"Quitter\")",
+      "new Button(Locale.getString(\"QuitButton\"))",
+      "new Button(mesRessources.getString(\"QuitButton\"))",
+      "new Button(I18N.translate(\"Quitter\"))"
+    ],
+    "correctIndex": 2,
+    "explanation": "Avec l'internationalisation, on crée le bouton en récupérant le texte depuis le ResourceBundle : new Button(mesRessources.getString(\"QuitButton\")) au lieu de coder le texte en dur."
+  },
+  {
+    "id": 15,
+    "question": "Comment utilise-t-on la liaison de données (data binding) pour changer dynamiquement le texte d'un bouton en JavaFX ?",
+    "options": [
+      "monBouton.setText(I18N.translate(\"OK\"))",
+      "monBouton.textProperty().bind(I18N.createStringBinding(\"OK\"))",
+      "monBouton.setLocale(new Locale(\"OK\"))",
+      "monBouton.addListener(I18N.getBinding(\"OK\"))"
+    ],
+    "correctIndex": 1,
+    "explanation": "On utilise la liaison de données en associant la propriété textuelle du bouton avec la classe I18N : monBouton.textProperty().bind(I18N.createStringBinding(\"OK\")). Ainsi, au changement de Locale, le texte est automatiquement mis à jour."
+  }
+]

@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "question": "Selon Bass et al. (1998), qu'est-ce que l'architecture logicielle ?",
+    "options": [
+      "Un ensemble de dessins, schémas et guides pour organiser le code",
+      "Un langage de programmation orienté objet",
+      "Un outil de déploiement automatisé",
+      "Un framework de développement web"
+    ],
+    "correctIndex": 0,
+    "explanation": "Selon Bass et al. (1998), l'architecture logicielle est une chose abstraite qui regroupe des dessins, schémas, guides et l'organisation du code."
+  },
+  {
+    "id": 2,
+    "question": "Quelle norme internationale de 2011 définit l'architecture logicielle ?",
+    "options": [
+      "IEEE 802.11",
+      "ISO 9001",
+      "ISO/IEC/IEEE 42010",
+      "IEEE 1471"
+    ],
+    "correctIndex": 2,
+    "explanation": "La norme ISO/IEC/IEEE 42010 (2011) est la norme internationale qui définit l'architecture logicielle, succédant à IEEE 1471 (2000)."
+  },
+  {
+    "id": 3,
+    "question": "Quels sont les différents points de vue possibles sur une architecture logicielle ?",
+    "options": [
+      "Fonctionnel, matériel, orienté objet, flux de données",
+      "Backend, frontend, base de données, réseau",
+      "Statique, dynamique, récursif, itératif",
+      "Client, serveur, pair-à-pair, cloud"
+    ],
+    "correctIndex": 0,
+    "explanation": "Une architecture logicielle peut être vue selon plusieurs points de vue : fonctionnel, matériel, orienté objet et flux de données."
+  },
+  {
+    "id": 4,
+    "question": "Quel est l'objectif principal de la séparation entre le code IHM et le code métier ?",
+    "options": [
+      "Améliorer les performances du programme",
+      "Éviter de tout modifier lorsqu'on change la partie fonctionnelle ou l'IHM",
+      "Réduire le nombre de fichiers dans le projet",
+      "Faciliter l'installation du logiciel"
+    ],
+    "correctIndex": 1,
+    "explanation": "La séparation IHM/métier vise à éviter de devoir tout modifier lorsqu'on change la partie fonctionnelle ou la partie interface utilisateur."
+  },
+  {
+    "id": 5,
+    "question": "Quel exemple illustre qu'une même IHM peut servir à différents domaines métier ?",
+    "options": [
+      "Un navigateur web et un éditeur de texte",
+      "Un stock de chaussures et un stock de bibelots",
+      "Un jeu vidéo et un tableur",
+      "Un système d'exploitation et une application mobile"
+    ],
+    "correctIndex": 1,
+    "explanation": "Une même interface de gestion de stock peut être utilisée pour un stock de chaussures comme pour un stock de bibelots, illustrant la séparation IHM/métier."
+  },
+  {
+    "id": 6,
+    "question": "Quel exemple illustre qu'un même système métier peut avoir différentes IHM ?",
+    "options": [
+      "Excel sur Windows et macOS",
+      "GoogleMaps sur Android et sur le Web",
+      "Firefox et Chrome",
+      "Python 2 et Python 3"
+    ],
+    "correctIndex": 1,
+    "explanation": "GoogleMaps sur Android et sur le Web est un exemple où le système métier ne change pas mais l'interface utilisateur est différente."
+  },
+  {
+    "id": 7,
+    "question": "Combien de composants comporte le modèle de Seeheim (1983) ?",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le modèle de Seeheim comporte 4 composants : le Noyau fonctionnel, l'Interface du noyau fonctionnel, le Contrôleur de dialogue et la Présentation."
+  },
+  {
+    "id": 8,
+    "question": "À quel niveau de structuration le modèle de Seeheim est-il destiné ?",
+    "options": [
+      "Au niveau des classes et des fonctions",
+      "Au niveau des modules et des paquetages",
+      "Au niveau des lignes de code",
+      "Au niveau des variables et des types"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le modèle de Seeheim est un modèle abstrait de haut niveau destiné à structurer les modules/paquetages, pas les classes ou les fonctions."
+  },
+  {
+    "id": 9,
+    "question": "Combien de composants comporte le modèle Arch (1992) ?",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le modèle Arch comporte 5 composants : Noyau fonctionnel, Adaptateur du noyau fonctionnel, Contrôleur de dialogue, Présentation logique et Présentation physique."
+  },
+  {
+    "id": 10,
+    "question": "Quel est le rôle de l'Adaptateur du noyau fonctionnel dans le modèle Arch ?",
+    "options": [
+      "Afficher les widgets à l'écran",
+      "Gérer les événements clavier et souris",
+      "Servir de médiateur entre le noyau fonctionnel et le contrôleur de dialogue",
+      "Stocker les données dans la base de données"
+    ],
+    "correctIndex": 2,
+    "explanation": "L'Adaptateur du noyau fonctionnel sert de médiateur entre le noyau fonctionnel et le contrôleur de dialogue, gérant les différences de typage et de structure."
+  },
+  {
+    "id": 11,
+    "question": "Que représente la Présentation physique dans le modèle Arch ?",
+    "options": [
+      "Une représentation abstraite et conceptuelle de l'interface",
+      "Les widgets du toolkit et l'interface concrète",
+      "Le schéma de la base de données",
+      "L'architecture réseau du système"
+    ],
+    "correctIndex": 1,
+    "explanation": "La Présentation physique correspond aux widgets du toolkit et à l'interface concrète telle qu'elle est affichée à l'utilisateur."
+  },
+  {
+    "id": 12,
+    "question": "Qu'est-ce que le modèle Slinky dans le contexte du modèle Arch ?",
+    "options": [
+      "Un modèle où les blocs sont de taille variable et certains peuvent être absents",
+      "Un modèle où tous les composants ont la même taille",
+      "Un modèle de test unitaire",
+      "Un modèle de déploiement continu"
+    ],
+    "correctIndex": 0,
+    "explanation": "Le modèle Slinky est une variante du modèle Arch où les blocs sont de taille variable et certains peuvent être absents."
+  },
+  {
+    "id": 13,
+    "question": "Dans quel langage le patron MVC a-t-il été introduit ?",
+    "options": [
+      "Java",
+      "C++",
+      "Smalltalk",
+      "Python"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le MVC a été introduit dans Smalltalk (76/80) par Trygve Reenskaug au Xerox PARC."
+  },
+  {
+    "id": 14,
+    "question": "Dans le patron MVC, à quoi correspond le Modèle ?",
+    "options": [
+      "À la gestion des événements utilisateur",
+      "À l'affichage de l'interface graphique",
+      "À la gestion des données et l'enregistrement de l'état du système",
+      "À la communication entre les agents"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le Modèle gère les données et enregistre l'état du système. Il correspond au Noyau fonctionnel."
+  },
+  {
+    "id": 15,
+    "question": "Dans le patron MVC, quel composant réagit aux actions de l'utilisateur (clavier, souris) ?",
+    "options": [
+      "Le Modèle",
+      "La Vue",
+      "Le Contrôleur",
+      "Le Présentateur"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le Contrôleur réagit aux actions de l'utilisateur (clavier, souris) et aux événements internes et externes."
+  },
+  {
+    "id": 16,
+    "question": "Qui a proposé le modèle PAC (Présentation-Abstraction-Contrôle) en 1987 ?",
+    "options": [
+      "Trygve Reenskaug",
+      "Joëlle Coutaz",
+      "Martin Fowler",
+      "Erich Gamma"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le modèle PAC a été proposé par Joëlle Coutaz en 1987."
+  },
+  {
+    "id": 17,
+    "question": "Dans le modèle PAC, à quoi correspondent les facettes Présentation (P) et Abstraction (A) par rapport au MVC ?",
+    "options": [
+      "P = Modèle, A = Vue",
+      "P = Contrôleur + Vue, A = Modèle",
+      "P = Vue, A = Contrôleur",
+      "P = Modèle + Contrôleur, A = Vue"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dans PAC, la Présentation correspond au Contrôleur + Vue du MVC, et l'Abstraction correspond au Modèle du MVC."
+  },
+  {
+    "id": 18,
+    "question": "Dans le patron MVP, quel composant récupère les données du modèle et les formate pour la vue ?",
+    "options": [
+      "Le Modèle",
+      "La Vue",
+      "Le Présentateur",
+      "Le Contrôleur"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le Présentateur agit sur le modèle et la vue : il récupère les données du modèle et les formate pour la vue. Il contient le comportement central de l'application."
+  },
+  {
+    "id": 19,
+    "question": "Quelle est une caractéristique clé du patron MVVM introduit par Microsoft en 2004 ?",
+    "options": [
+      "Le modèle et la vue communiquent directement",
+      "Il repose fortement sur le data binding",
+      "La vue contient toute la logique métier",
+      "Il n'utilise pas de ViewModel"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le MVVM repose fortement sur le data binding. Le ViewModel implémente des propriétés et des commandes auxquelles la vue peut se lier (bind)."
+  },
+  {
+    "id": 20,
+    "question": "Pourquoi de nombreux frameworks comme Symfony qui se revendiquent MVC sont en réalité plus proches du MVP ?",
+    "options": [
+      "Parce qu'ils n'utilisent pas de base de données",
+      "Parce qu'il est difficile de définir UNE version du MVC et chaque langage a sa propre interprétation",
+      "Parce qu'ils sont écrits en JavaScript",
+      "Parce que le MVC n'existe plus depuis 2000"
+    ],
+    "correctIndex": 1,
+    "explanation": "Il est difficile de définir UNE version du MVC car chaque langage a sa propre interprétation. De nombreux frameworks comme Symfony se revendiquent MVC mais sont en réalité plus proches du MVP."
+  }
+]

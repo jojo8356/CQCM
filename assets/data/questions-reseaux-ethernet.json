@@ -1,0 +1,602 @@
+[
+  {
+    "id": 1,
+    "question": "Quel est le rôle principal de la couche Liaison ?",
+    "options": [
+      "Transmettre des bits bruts sur le support physique",
+      "Acheminer sans erreur des blocs d'information sur la liaison physique sous forme de trames",
+      "Router les paquets entre réseaux différents",
+      "Gérer les applications réseau"
+    ],
+    "correctIndex": 1,
+    "explanation": "La couche Liaison découpe les données en trames, donne une signification aux bits transmis, et doit acheminer sans erreur des blocs d'information sur la liaison physique."
+  },
+  {
+    "id": 2,
+    "question": "Quels protocoles sont des exemples de la couche Liaison ?",
+    "options": [
+      "TCP, UDP, IP",
+      "HTTP, FTP, SMTP",
+      "HDLC, PPP, Ethernet (IEEE 802.3)",
+      "DNS, DHCP, ARP"
+    ],
+    "correctIndex": 2,
+    "explanation": "HDLC (High Data Link Protocol), PPP (Point to Point Protocol) et Ethernet (IEEE 802.3) sont des protocoles de la couche Liaison."
+  },
+  {
+    "id": 3,
+    "question": "Qu'est-ce qu'une adresse MAC ?",
+    "options": [
+      "Une adresse logique attribuée par le serveur DHCP",
+      "Une adresse matérielle unique stockée sur la ROM de la carte réseau",
+      "Une adresse IP convertie en hexadécimal",
+      "Un nom de domaine associé à une machine"
+    ],
+    "correctIndex": 1,
+    "explanation": "Une adresse MAC est une adresse matérielle unique, stockée sur une mémoire morte (ROM) de la carte réseau, standardisée par l'IEEE 802."
+  },
+  {
+    "id": 4,
+    "question": "Combien de bits comporte une adresse MAC ?",
+    "options": [
+      "32 bits (4 octets)",
+      "48 bits (6 octets)",
+      "64 bits (8 octets)",
+      "128 bits (16 octets)"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les adresses MAC comportent 48 bits (6 octets) et sont exprimées sous forme de 12 chiffres hexadécimaux."
+  },
+  {
+    "id": 5,
+    "question": "Comment est structurée une adresse MAC ?",
+    "options": [
+      "4 chiffres pour le réseau + 8 chiffres pour la machine",
+      "6 chiffres identifiant le fabricant (OUI) + 6 chiffres de numéro de série",
+      "12 chiffres aléatoires",
+      "8 chiffres pour le pays + 4 chiffres pour la carte"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les 6 premiers chiffres hexadécimaux sont administrés par l'IEEE et identifient le fabricant (OUI), les 6 suivants forment le numéro de série de la carte."
+  },
+  {
+    "id": 6,
+    "question": "Quelle adresse MAC correspond à une diffusion généralisée (broadcast) ?",
+    "options": [
+      "00-00-00-00-00-00",
+      "FF-FF-FF-FF-FF-FF",
+      "01-00-5E-00-00-00",
+      "00-00-0C-00-00-00"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'adresse FF-FF-FF-FF-FF-FF est l'adresse de broadcast, utilisée pour la diffusion généralisée à toutes les machines du réseau local."
+  },
+  {
+    "id": 7,
+    "question": "Quel fabricant est identifié par le code OUI 00-00-0C ?",
+    "options": [
+      "Apple",
+      "IBM",
+      "Cisco",
+      "Sun"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le code OUI 00-00-0C identifie Cisco. Chaque fabricant de carte réseau possède un identifiant unique attribué par l'IEEE."
+  },
+  {
+    "id": 8,
+    "question": "Quels sont les trois champs principaux de l'en-tête d'une trame Ethernet ?",
+    "options": [
+      "IP source, IP destination, TTL",
+      "Adresse MAC destination (6 octets), adresse MAC source (6 octets), Type (2 octets)",
+      "Port source, port destination, checksum",
+      "Préambule, données, CRC"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'en-tête Ethernet contient : adresse MAC destination (6 octets), adresse MAC source (6 octets) et Type (2 octets) qui indique le protocole de la couche supérieure."
+  },
+  {
+    "id": 9,
+    "question": "Quelle valeur hexadécimale du champ Type indique qu'une trame Ethernet encapsule un paquet IPv4 ?",
+    "options": [
+      "0x0806",
+      "0x86DD",
+      "0x0800",
+      "0x809B"
+    ],
+    "correctIndex": 2,
+    "explanation": "La valeur 0x0800 dans le champ Type indique que la trame encapsule un paquet IPv4."
+  },
+  {
+    "id": 10,
+    "question": "Quelle valeur du champ Type correspond au protocole ARP ?",
+    "options": [
+      "0x0800",
+      "0x0806",
+      "0x86DD",
+      "0x8864"
+    ],
+    "correctIndex": 1,
+    "explanation": "La valeur 0x0806 dans le champ Type correspond au protocole ARP (Address Resolution Protocol)."
+  },
+  {
+    "id": 11,
+    "question": "Quelle valeur du champ Type correspond à IPv6 ?",
+    "options": [
+      "0x0800",
+      "0x0806",
+      "0x86DD",
+      "0x809B"
+    ],
+    "correctIndex": 2,
+    "explanation": "La valeur 0x86DD dans le champ Type indique que la trame encapsule un paquet IPv6."
+  },
+  {
+    "id": 12,
+    "question": "Quelle est la taille maximale d'une trame Ethernet (IEEE 802.3) ?",
+    "options": [
+      "512 octets",
+      "1024 octets",
+      "1518 octets",
+      "2048 octets"
+    ],
+    "correctIndex": 2,
+    "explanation": "La taille maximale d'une trame Ethernet est de 1518 octets, pour empêcher une station de monopoliser le canal pendant trop longtemps."
+  },
+  {
+    "id": 13,
+    "question": "Quelle est la taille minimale d'une trame Ethernet ?",
+    "options": [
+      "32 octets",
+      "46 octets",
+      "64 octets",
+      "128 octets"
+    ],
+    "correctIndex": 2,
+    "explanation": "La taille minimale d'une trame Ethernet est de 64 octets (MAC et CRC inclus). Avec les 8 octets de préambule, cela fait 72 octets sur la ligne."
+  },
+  {
+    "id": 14,
+    "question": "Pourquoi la trame Ethernet a-t-elle une taille minimale de 64 octets ?",
+    "options": [
+      "Pour optimiser la compression des données",
+      "Pour permettre la détection des collisions",
+      "Pour des raisons de compatibilité avec IPv6",
+      "Pour stocker l'en-tête complet du protocole HTTP"
+    ],
+    "correctIndex": 1,
+    "explanation": "La taille minimale de 64 octets permet la détection des collisions sur le réseau Ethernet."
+  },
+  {
+    "id": 15,
+    "question": "Que fait-on si la quantité de données transportées ne permet pas de remplir une trame minimale ?",
+    "options": [
+      "On envoie la trame telle quelle",
+      "On ajoute des octets de bourrage (padding)",
+      "On fusionne plusieurs trames",
+      "On utilise un protocole différent"
+    ],
+    "correctIndex": 1,
+    "explanation": "Si la quantité de données ne permet pas d'atteindre la taille minimale de la trame, on ajoute des octets de bourrage (padding) pour compléter."
+  },
+  {
+    "id": 16,
+    "question": "Qu'est-ce qu'une collision dans un réseau Ethernet ?",
+    "options": [
+      "Un câble physiquement endommagé",
+      "Deux ou plusieurs stations qui essaient de transmettre en même temps sur le canal partagé",
+      "Un paquet qui dépasse la taille maximale",
+      "Une erreur dans l'adresse MAC"
+    ],
+    "correctIndex": 1,
+    "explanation": "Une collision se produit lorsque deux ou plusieurs stations essaient de transmettre en même temps : les messages se superposent et deviennent illisibles."
+  },
+  {
+    "id": 17,
+    "question": "Que signifie CSMA/CD ?",
+    "options": [
+      "Carrier Sense Multiple Access / Collision Detection",
+      "Central System Multiple Access / Collision Distribution",
+      "Carrier Signal Management Algorithm / Collision Defense",
+      "Channel Sharing Multiple Access / Collision Delay"
+    ],
+    "correctIndex": 0,
+    "explanation": "CSMA/CD signifie Carrier Sense Multiple Access / Collision Detection. L'émetteur écoute le canal avant d'émettre et détecte les collisions pendant l'émission."
+  },
+  {
+    "id": 18,
+    "question": "Quel réseau utilise la méthode d'accès CSMA/CD ?",
+    "options": [
+      "WiFi (802.11)",
+      "Ethernet",
+      "Token Ring",
+      "Bluetooth"
+    ],
+    "correctIndex": 1,
+    "explanation": "CSMA/CD est la méthode d'accès utilisée par Ethernet. Le WiFi utilise CSMA/CA car on ne peut pas détecter les collisions en même temps que l'on émet en sans-fil."
+  },
+  {
+    "id": 19,
+    "question": "Que fait une station Ethernet selon CSMA/CD lorsqu'elle détecte une collision ?",
+    "options": [
+      "Elle continue d'émettre en augmentant la puissance",
+      "Elle arrête l'émission et attend un temps aléatoire avant de réessayer",
+      "Elle envoie un message d'erreur au destinataire",
+      "Elle change de canal de transmission"
+    ],
+    "correctIndex": 1,
+    "explanation": "En cas de collision, la station arrête l'émission, attend un temps aléatoire avant de réessayer. Si le nombre de collisions dépasse un seuil, c'est une erreur fatale (excessive collisions)."
+  },
+  {
+    "id": 20,
+    "question": "Selon CSMA/CD, que fait une station si le canal est libre ?",
+    "options": [
+      "Elle attend un délai fixe puis émet",
+      "Elle émet une trame immédiatement",
+      "Elle envoie d'abord un RTS",
+      "Elle demande l'autorisation au serveur"
+    ],
+    "correctIndex": 1,
+    "explanation": "Selon CSMA/CD, si le canal est libre, la station émet immédiatement. Si le canal est occupé, elle attend sa libération puis émet aussitôt."
+  },
+  {
+    "id": 21,
+    "question": "Pourquoi CSMA/CD ne peut-il pas être utilisé dans les réseaux sans fil ?",
+    "options": [
+      "Les ondes radio sont trop lentes",
+      "On ne peut pas détecter les collisions en même temps que l'on émet en sans-fil",
+      "Le sans-fil n'a pas de canal partagé",
+      "Le sans-fil utilise la commutation de circuits"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dans un environnement sans fil, CSMA/CD ne peut pas être appliqué car on ne peut pas détecter les collisions en même temps que l'on émet."
+  },
+  {
+    "id": 22,
+    "question": "Que signifie CSMA/CA ?",
+    "options": [
+      "Carrier Sense Multiple Access / Collision Avoidance",
+      "Central System Multiple Access / Collision Analysis",
+      "Carrier Signal Management Algorithm / Collision Alert",
+      "Channel Sharing Multiple Access / Collision Anticipation"
+    ],
+    "correctIndex": 0,
+    "explanation": "CSMA/CA signifie Carrier Sense Multiple Access with Collision Avoidance. C'est la méthode utilisée par le WiFi (norme 802.11)."
+  },
+  {
+    "id": 23,
+    "question": "Dans CSMA/CA, que signifie le sigle RTS ?",
+    "options": [
+      "Request To Switch",
+      "Ready To Send",
+      "Receive Then Send",
+      "Retry Transmission Signal"
+    ],
+    "correctIndex": 1,
+    "explanation": "RTS signifie Ready To Send. C'est un message envoyé par la station qui souhaite émettre, contenant des informations sur le volume de données et la vitesse de transmission."
+  },
+  {
+    "id": 24,
+    "question": "Dans CSMA/CA, que signifie CTS ?",
+    "options": [
+      "Control Transfer Signal",
+      "Clear To Send",
+      "Collision Timing Signal",
+      "Channel Transmission Start"
+    ],
+    "correctIndex": 1,
+    "explanation": "CTS signifie Clear To Send. C'est la réponse du récepteur (souvent un point d'accès) au RTS, autorisant la station à commencer l'émission."
+  },
+  {
+    "id": 25,
+    "question": "Quel est l'ordre correct du mécanisme CSMA/CA ?",
+    "options": [
+      "Écoute → Émission directe → ACK",
+      "Écoute → RTS → CTS → Émission des données → ACK",
+      "RTS → Écoute → Émission → CTS",
+      "CTS → RTS → Émission → Écoute"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le mécanisme CSMA/CA suit l'ordre : écoute du réseau, si libre pendant DIFS → envoi RTS → réception CTS → émission des données → réception ACK."
+  },
+  {
+    "id": 26,
+    "question": "Qu'est-ce que le DIFS dans CSMA/CA ?",
+    "options": [
+      "Un protocole de chiffrement WiFi",
+      "Le temps pendant lequel le média doit être libre avant qu'une station puisse émettre",
+      "Un type de trame d'erreur",
+      "Un identifiant de réseau sans fil"
+    ],
+    "correctIndex": 1,
+    "explanation": "DIFS (Distributed Inter Frame Space) est le temps pendant lequel le média doit être libre avant qu'une station puisse émettre dans le protocole CSMA/CA."
+  },
+  {
+    "id": 27,
+    "question": "Quelle est la différence entre un accès aléatoire et un accès déterministe ?",
+    "options": [
+      "L'accès aléatoire est plus rapide",
+      "En accès aléatoire toute station peut tenter d'émettre ; en accès déterministe, il faut posséder le jeton",
+      "L'accès déterministe n'utilise pas de câbles",
+      "Il n'y a aucune différence"
+    ],
+    "correctIndex": 1,
+    "explanation": "En accès aléatoire (CSMA/CD, CSMA/CA), toute station peut tenter d'émettre. En accès déterministe (Token Ring, Token Bus), une machine ne peut émettre que si elle possède le jeton."
+  },
+  {
+    "id": 28,
+    "question": "Qu'est-ce qu'un switch (commutateur) ?",
+    "options": [
+      "Un équipement de couche Physique qui diffuse sur tous les ports",
+      "Un équipement de couche Liaison qui envoie les trames uniquement vers le port de destination",
+      "Un équipement de couche Réseau qui route les paquets IP",
+      "Un logiciel de gestion réseau"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le switch est un équipement de couche Liaison qui reçoit les trames et les envoie uniquement vers le port connectant la destination, en se basant sur l'adresse MAC."
+  },
+  {
+    "id": 29,
+    "question": "Comment le switch sait-il vers quel port envoyer une trame ?",
+    "options": [
+      "Il utilise les adresses IP",
+      "Il diffuse sur tous les ports comme un hub",
+      "Il utilise une table MAC/port qui associe les adresses MAC aux ports",
+      "Il demande au routeur"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le switch utilise une table contenant les adresses MAC et les ports correspondants. Cette table est remplie automatiquement en inspectant les adresses source des trames reçues."
+  },
+  {
+    "id": 30,
+    "question": "Quels sont les avantages du switch par rapport au hub ?",
+    "options": [
+      "Le switch est moins cher",
+      "Le switch élimine les collisions, augmente la bande passante et améliore la sécurité",
+      "Le switch fonctionne sans câbles",
+      "Le switch est plus simple à configurer"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le switch élimine les collisions (chaque échange s'effectue à débit nominal), augmente la bande passante disponible et améliore la sécurité car le trafic n'est plus diffusé sur tous les ports."
+  },
+  {
+    "id": 31,
+    "question": "Qu'est-ce que le mode full-duplex dans un réseau commuté ?",
+    "options": [
+      "Les machines ne peuvent qu'émettre",
+      "Les machines peuvent émettre et recevoir en même temps",
+      "Les machines alternent entre émission et réception",
+      "Deux machines partagent le même câble en half-duplex"
+    ],
+    "correctIndex": 1,
+    "explanation": "En mode full-duplex, les machines peuvent émettre et recevoir en même temps grâce à des circuits séparés pour la transmission et la réception. Les collisions disparaissent."
+  },
+  {
+    "id": 32,
+    "question": "Pourquoi est-il plus difficile de faire du sniffing sur un réseau commuté (avec switch) ?",
+    "options": [
+      "Le switch chiffre toutes les données",
+      "Le trafic émis et reçu n'est plus transmis sur tous les ports",
+      "Le switch bloque automatiquement les logiciels de capture",
+      "Le switch utilise un pare-feu intégré"
+    ],
+    "correctIndex": 1,
+    "explanation": "Comme le switch n'envoie les trames que vers le port de destination, le trafic n'est plus visible sur tous les ports, rendant l'espionnage (sniffing) beaucoup plus difficile."
+  },
+  {
+    "id": 33,
+    "question": "Qu'est-ce qu'un VLAN (Virtual Local Area Network) ?",
+    "options": [
+      "Un réseau physique séparé",
+      "Un ensemble d'unités regroupées logiquement, indépendamment de leur emplacement physique",
+      "Un réseau utilisant uniquement le WiFi",
+      "Un protocole de routage"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un VLAN est un ensemble d'unités regroupées logiquement, quel que soit l'emplacement de leur segment physique. Il définit un nouveau réseau au-dessus du réseau physique."
+  },
+  {
+    "id": 34,
+    "question": "Quels sont les avantages des VLANs ?",
+    "options": [
+      "Augmentation de la vitesse du processeur",
+      "Souplesse d'administration, gain en sécurité, réduction de la diffusion du trafic",
+      "Suppression du besoin de câbles réseau",
+      "Remplacement des routeurs"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les VLAN offrent : plus de souplesse pour l'administration (modifications par paramétrage des commutateurs), gain en sécurité (encapsulation supplémentaire), et réduction de la diffusion du trafic."
+  },
+  {
+    "id": 35,
+    "question": "Comment les machines de deux VLANs différents peuvent-elles communiquer entre elles ?",
+    "options": [
+      "Directement via le switch",
+      "Elles doivent passer par une passerelle (routeur)",
+      "Elles ne peuvent jamais communiquer",
+      "Via un hub"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les machines de VLANs différents sont isolées. Pour communiquer entre elles, elles doivent passer par une passerelle (routeur). Au sein du même VLAN, le switch suffit."
+  },
+  {
+    "id": 36,
+    "question": "Qu'est-ce qu'un VLAN statique ?",
+    "options": [
+      "Un VLAN qui ne change jamais de vitesse",
+      "Un VLAN où les ports du commutateur sont affectés manuellement aux différents VLANs",
+      "Un VLAN sans adresse MAC",
+      "Un VLAN qui utilise uniquement des adresses IP"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dans un VLAN statique, les ports du commutateur sont affectés manuellement aux différents VLANs. C'est facile à administrer et adapté aux réseaux où les déplacements sont contrôlés."
+  },
+  {
+    "id": 37,
+    "question": "Sur quoi peut se baser le filtrage d'un VLAN dynamique ?",
+    "options": [
+      "Uniquement sur le numéro de port physique",
+      "Sur les adresses MAC, l'adressage IP ou d'autres paramètres",
+      "Uniquement sur le nom de la machine",
+      "Sur la vitesse de connexion"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un VLAN dynamique peut déterminer automatiquement l'appartenance à un VLAN en se basant sur les adresses MAC, l'adressage IP ou d'autres paramètres."
+  },
+  {
+    "id": 38,
+    "question": "Qu'est-ce qu'un lien trunk entre deux switchs ?",
+    "options": [
+      "Un câble réseau plus rapide",
+      "Un lien qui transporte les trames de plusieurs VLANs grâce à l'étiquetage (802.1q)",
+      "Un lien réservé au VLAN 1 uniquement",
+      "Un lien de secours en cas de panne"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un lien trunk transporte les trames de plusieurs VLANs entre switchs grâce à l'étiquetage des trames (protocole 802.1q ou ISL). Le tag est ajouté à l'entrée et enlevé à la sortie du trunk."
+  },
+  {
+    "id": 39,
+    "question": "Que se passe-t-il avec le tag VLAN lorsqu'une trame emprunte un lien trunk ?",
+    "options": [
+      "Le tag est permanent et reste dans la trame",
+      "Un tag est ajouté à l'entrée du trunk et enlevé à la sortie",
+      "Le tag remplace l'adresse MAC",
+      "Le tag est envoyé dans une trame séparée"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un tag est ajouté dans la trame lorsqu'elle emprunte le lien trunk, puis il est enlevé à la sortie. Le switch peut ainsi connaître le VLAN auquel la trame est destinée."
+  },
+  {
+    "id": 40,
+    "question": "Qu'est-ce que le CRC (Cyclic Redundancy Code) ?",
+    "options": [
+      "Un protocole de routage",
+      "Un mécanisme de contrôle d'erreurs basé sur une fonction mathématique appliquée aux données",
+      "Un type de câble réseau",
+      "Un algorithme de chiffrement"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le CRC est une fonction mathématique calculée sur la valeur binaire du paquet, permettant de détecter les erreurs de transmission et éventuellement de les réparer."
+  },
+  {
+    "id": 41,
+    "question": "Comment fonctionne le contrôle CRC ?",
+    "options": [
+      "L'expéditeur chiffre les données et le récepteur les déchiffre",
+      "L'expéditeur calcule le CRC et l'ajoute à la trame ; le récepteur recalcule et compare",
+      "Le récepteur envoie les données au routeur pour vérification",
+      "Le CRC est vérifié uniquement par le switch"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'expéditeur calcule le CRC et l'ajoute à la fin de la trame. Le récepteur recalcule le CRC : si les valeurs correspondent, le paquet est considéré correct ; sinon, il est rejeté."
+  },
+  {
+    "id": 42,
+    "question": "Que fait le récepteur si le CRC ne correspond pas ?",
+    "options": [
+      "Il accepte le paquet quand même",
+      "Il peut demander le renvoi immédiat, attendre plusieurs paquets puis demander les renvois, ou ignorer l'erreur",
+      "Il éteint la connexion",
+      "Il corrige automatiquement l'erreur dans tous les cas"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le récepteur peut : demander immédiatement le renvoi (accusé de réception), attendre plusieurs paquets et demander les renvois (TCP/IP), ou ignorer l'erreur et laisser les applications gérer (UDP/IP)."
+  },
+  {
+    "id": 43,
+    "question": "Qu'est-ce que le protocole STP (Spanning Tree Protocol) ?",
+    "options": [
+      "Un protocole de routage entre réseaux",
+      "Un protocole permettant une topologie sans boucle dans les LAN avec pont",
+      "Un protocole de chiffrement des trames",
+      "Un protocole d'attribution d'adresses MAC"
+    ],
+    "correctIndex": 1,
+    "explanation": "STP (défini dans IEEE 802.1D) est un protocole qui garantit un unique chemin entre deux points du réseau (topologie sans boucle), évitant les tempêtes de diffusion (broadcast storms)."
+  },
+  {
+    "id": 44,
+    "question": "Que provoquent les boucles dans un réseau LAN ?",
+    "options": [
+      "Une augmentation de la vitesse",
+      "Des tempêtes de diffusion (broadcast storms)",
+      "Une meilleure redondance sans inconvénient",
+      "Un chiffrement automatique des données"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les boucles dans un réseau LAN provoquent des tempêtes de diffusion (broadcast storms) où les trames circulent indéfiniment, saturant le réseau."
+  },
+  {
+    "id": 45,
+    "question": "Comment STP résout-il le problème des boucles ?",
+    "options": [
+      "Il supprime physiquement les câbles en double",
+      "Il bloque certains ports pour garantir un unique chemin, tout en maintenant la redondance",
+      "Il désactive tous les switchs sauf un",
+      "Il redirige tout le trafic vers le routeur"
+    ],
+    "correctIndex": 1,
+    "explanation": "STP affecte un port dédié (root port) à chaque segment et bloque les ports redondants. Les chemins alternatifs restent disponibles en cas de panne."
+  },
+  {
+    "id": 46,
+    "question": "Quelle est la fonction du contrôle d'intégrité à la couche Liaison ?",
+    "options": [
+      "Chiffrer les données",
+      "Détecter et corriger les erreurs dues au support physique imparfait",
+      "Attribuer les adresses IP",
+      "Compresser les données"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le contrôle d'intégrité de la couche Liaison assure la détection et la correction d'erreurs élémentaires dues au support physique imparfait, et signale les erreurs irrécupérables à la couche réseau."
+  },
+  {
+    "id": 47,
+    "question": "Dans un réseau Token Ring, comment une machine obtient-elle le droit d'émettre ?",
+    "options": [
+      "Elle écoute le canal et émet si libre (CSMA)",
+      "Elle doit posséder le jeton qui circule dans l'ordre physique des stations",
+      "Elle envoie un RTS au point d'accès",
+      "Elle attend un temps aléatoire"
+    ],
+    "correctIndex": 1,
+    "explanation": "En Token Ring, le jeton circule dans l'ordre physique des stations. Une machine ne peut émettre que lorsqu'elle possède le jeton (accès déterministe)."
+  },
+  {
+    "id": 48,
+    "question": "Quelles sont les vitesses d'évolution d'Ethernet ?",
+    "options": [
+      "1 Mbit/s, 5 Mbit/s, 50 Mbit/s",
+      "10 Mbit/s, 100 Mbit/s, 1 Gbit/s",
+      "56 Kbit/s, 128 Kbit/s, 512 Kbit/s",
+      "100 Mbit/s, 10 Gbit/s, 100 Gbit/s uniquement"
+    ],
+    "correctIndex": 1,
+    "explanation": "Ethernet a évolué de 10 Mbit/s à 100 Mbit/s, puis 1 Gbit/s et au-delà, notamment grâce à l'utilisation de commutateurs."
+  },
+  {
+    "id": 49,
+    "question": "Qu'est-ce qui distingue les adresses de groupe (multicast) des adresses unicast dans les adresses MAC ?",
+    "options": [
+      "Les adresses de groupe commencent par 00",
+      "Les adresses de groupe ont le bit I/G (Individual/Group) à 1",
+      "Les adresses de groupe sont plus courtes",
+      "Il n'y a aucune différence"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les adresses de groupe (multicast/broadcast) ont le bit I/G (Individual/Group) positionné à 1, contrairement aux adresses unicast où il est à 0."
+  },
+  {
+    "id": 50,
+    "question": "Que se passe-t-il quand le nombre de collisions dépasse un certain seuil en CSMA/CD ?",
+    "options": [
+      "La station change de canal",
+      "L'émission s'interrompt avec la condition « excessive collisions » (erreur fatale)",
+      "Le switch prend le relais",
+      "Le temps d'attente aléatoire est remis à zéro"
+    ],
+    "correctIndex": 1,
+    "explanation": "Si le nombre de collisions dépasse un certain seuil, on considère qu'il y a une erreur fatale et l'émission s'interrompt avec la condition « excessive collisions »."
+  }
+]

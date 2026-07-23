@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/quiz.dart';
 import '../models/question.dart';
 import '../services/quiz_service.dart';
+import '../widgets/markdown_text.dart';
 import '../widgets/option_tile.dart';
 import '../widgets/progress_bar.dart';
 import 'result_screen.dart';
@@ -130,9 +131,9 @@ class _QuizScreenState extends State<QuizScreen> {
                             ),
                       ),
                       const SizedBox(height: 8),
-                      Text(
-                        question.question,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      MarkdownText(
+                        data: question.question,
+                        textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
                       ),
@@ -197,7 +198,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                     ?.copyWith(fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(height: 8),
-                              Text(question.explanation!),
+                              MarkdownText(data: question.explanation!),
                             ],
                           ),
                         ),

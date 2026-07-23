@@ -1,0 +1,602 @@
+[
+  {
+    "id": 1,
+    "question": "Quelle est la différence entre Vérification et Validation ?",
+    "options": [
+      "Vérification = bon produit pour le client, Validation = conformité à la spécification",
+      "Vérification = conformité aux exigences de la spécification, Validation = bon produit pour le client",
+      "Les deux termes sont synonymes en génie logiciel",
+      "Vérification est dynamique, Validation est statique"
+    ],
+    "correctIndex": 1,
+    "explanation": "La Vérification s'assure que le logiciel est construit correctement (conforme aux exigences). La Validation s'assure qu'on a construit le bon produit (conforme aux besoins clients)."
+  },
+  {
+    "id": 2,
+    "question": "Qu'est-ce qu'une technique d'analyse statique ?",
+    "options": [
+      "Elle exécute le programme pour observer son comportement",
+      "Elle porte sur des documents (code, spécifications) sans exécuter le logiciel",
+      "Elle génère aléatoirement des cas de tests",
+      "Elle mesure les performances du logiciel en production"
+    ],
+    "correctIndex": 1,
+    "explanation": "Une technique statique porte sur des documents sans exécuter le logiciel. L'analyse statique déduit le comportement à partir du code et/ou des spécifications."
+  },
+  {
+    "id": 3,
+    "question": "Qu'est-ce qu'un test selon l'approche dynamique ?",
+    "options": [
+      "Une analyse du code source sans exécution",
+      "Une vérification formelle mathématique",
+      "Une approche par expérimentation qui observe le comportement lors d'une exécution du logiciel",
+      "Une revue de code par un pair"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le test est une approche dynamique par expérimentation : on exécute le programme et on observe son comportement pour voir s'il se comporte comme prévu."
+  },
+  {
+    "id": 4,
+    "question": "Quelle célèbre citation de Dijkstra (1972) résume la limite des tests ?",
+    "options": [
+      "« Les tests garantissent l'absence totale de bugs »",
+      "« Le test peut être utilisé pour montrer la présence d'erreurs mais pas prouver leur absence »",
+      "« Un programme sans tests est un programme sans qualité »",
+      "« Tester c'est douter »"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dijkstra (1972) : « Le test peut être utilisé pour montrer la présence d'erreurs mais pas prouver leur absence. » Les tests augmentent la confiance mais ne garantissent pas la perfection."
+  },
+  {
+    "id": 5,
+    "question": "Quels sont les deux objectifs principaux des tests ?",
+    "options": [
+      "Mesurer les performances et documenter le code",
+      "Trouver des défaillances avant la production et augmenter la confiance dans la qualité du logiciel",
+      "Remplacer la conception et accélérer le développement",
+      "Générer automatiquement la documentation et les spécifications"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les tests visent à trouver des défaillances avant que l'application ne soit en production (avant qu'elle ne soit entre les mains des utilisateurs) et à augmenter la confiance dans la qualité du logiciel."
+  },
+  {
+    "id": 6,
+    "question": "Quelle est la définition d'une « défaillance » en tests logiciels ?",
+    "options": [
+      "L'erreur humaine commise par un développeur (bug)",
+      "Un état interne incorrect dans lequel un programme se trouve",
+      "L'incapacité d'un système à exécuter la fonction requise conformément à ses spécifications",
+      "Un cas de test qui échoue"
+    ],
+    "correctIndex": 2,
+    "explanation": "Une défaillance est l'incapacité d'un système à exécuter la fonction requise conformément à ses spécifications. Elle est la conséquence observable d'une faute."
+  },
+  {
+    "id": 7,
+    "question": "Quelle est la définition d'une « faute » en tests logiciels ?",
+    "options": [
+      "L'erreur humaine commise lors du développement",
+      "L'incapacité du système à respecter ses spécifications",
+      "Un état interne incorrect dans lequel un programme se trouve",
+      "Un cas de test manquant"
+    ],
+    "correctIndex": 2,
+    "explanation": "Une faute est un état interne incorrect dans lequel un programme se trouve. Elle est causée par une erreur humaine et peut provoquer une défaillance."
+  },
+  {
+    "id": 8,
+    "question": "Dans la chaîne Erreur → Faute → Défaillance, quelle affirmation est correcte ?",
+    "options": [
+      "Toute erreur entraîne toujours une faute, qui entraîne toujours une défaillance",
+      "Une erreur ne conduit pas toujours à une faute, et une faute ne conduit pas toujours à une défaillance",
+      "Une défaillance entraîne toujours une faute et une erreur",
+      "Les trois termes sont équivalents"
+    ],
+    "correctIndex": 1,
+    "explanation": "La chaîne n'est pas systématique dans ce sens : une erreur (bug humain) ne cause pas toujours une faute activée, et une faute n'entraîne pas toujours une défaillance observable."
+  },
+  {
+    "id": 9,
+    "question": "Qu'est-ce qu'un oracle dans le contexte des tests ?",
+    "options": [
+      "Un outil qui génère automatiquement des cas de tests",
+      "La prédiction des résultats attendus lors de l'exécution du programme",
+      "Un développeur expérimenté qui valide le code",
+      "Un base de données de bugs connus"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'oracle est la prédiction des résultats attendus lors de l'exécution du programme. C'est ce qui permet de vérifier si le comportement observé est correct ou non."
+  },
+  {
+    "id": 10,
+    "question": "Quels sont les trois éléments d'un cas de test (TestCase) ?",
+    "options": [
+      "Données de test, oracle, et jeu de tests",
+      "Contexte initial, traitements, et vérification du résultat (oracle)",
+      "Code de test, assertion, et rapport",
+      "Spécification, implémentation, et validation"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le processus de test : (1) définir un état initial (données de test / contexte), (2) réaliser des traitements, (3) vérifier le résultat via un oracle. Le résultat doit être reproductible si le contexte ne change pas."
+  },
+  {
+    "id": 11,
+    "question": "Qu'est-ce qu'un jeu de tests ?",
+    "options": [
+      "Un seul cas de test très complet",
+      "Un ensemble de cas de tests",
+      "Un outil de génération automatique de tests",
+      "Une liste de bugs à corriger"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un jeu de tests (test suite) est un ensemble de cas de tests. Chaque cas de test couvre un objectif de test particulier avec ses données de test et son oracle."
+  },
+  {
+    "id": 12,
+    "question": "Pourquoi ne peut-on pas tout tester ?",
+    "options": [
+      "Parce que les tests sont trop coûteux à écrire",
+      "Parce que la vérification complète d'un logiciel est un problème indécidable — on ne peut pas tester toutes les conditions possibles",
+      "Parce que les IDE ne supportent pas autant de tests",
+      "Parce que les développeurs n'ont pas le temps"
+    ],
+    "correctIndex": 1,
+    "explanation": "Globalement, la vérification complète d'un logiciel est un problème indécidable. On ne peut pas tester toutes les conditions possibles, il faut donc choisir des cas pertinents."
+  },
+  {
+    "id": 13,
+    "question": "Qu'est-ce que l'approche par partitions dans la sélection des cas de tests ?",
+    "options": [
+      "Diviser le code en plusieurs fichiers pour faciliter les tests",
+      "Créer des ensembles de cas similaires et tester quelques cas dans/couvrant chaque ensemble",
+      "Exécuter les tests sur plusieurs serveurs en parallèle",
+      "Partager les tests entre développeurs et testeurs"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'approche par partitions regroupe les cas de tests similaires en ensembles (partitions) et teste quelques représentants de chaque partition, plutôt que tous les cas possibles."
+  },
+  {
+    "id": 14,
+    "question": "Quels sont les trois niveaux de tests, du plus général au plus précis ?",
+    "options": [
+      "Unitaire → Intégration → Validation",
+      "Validation → Intégration → Unitaire",
+      "Intégration → Validation → Unitaire",
+      "Unitaire → Validation → Intégration"
+    ],
+    "correctIndex": 1,
+    "explanation": "Du plus général au plus précis : Validation (application entière, vue utilisateur) → Intégration (interaction entre composants) → Unitaire (au niveau du code ou d'une unité de code)."
+  },
+  {
+    "id": 15,
+    "question": "Que vérifie un test d'intégration ?",
+    "options": [
+      "Le comportement global de l'application du point de vue utilisateur",
+      "Le code d'une fonction individuelle",
+      "Que les composants interagissent correctement entre eux",
+      "Les performances du système sous charge"
+    ],
+    "correctIndex": 2,
+    "explanation": "Les tests d'intégration vérifient que les composants interagissent correctement. Par exemple : est-ce que le composant A fournit ce qu'il faut au composant B ?"
+  },
+  {
+    "id": 16,
+    "question": "Que vérifie un test unitaire ?",
+    "options": [
+      "Que l'application entière fonctionne comme attendu par l'utilisateur",
+      "Que les composants communiquent correctement",
+      "Le code au niveau d'une unité de code (méthode, classe) pour trouver des bugs",
+      "Les performances réseau du système"
+    ],
+    "correctIndex": 2,
+    "explanation": "Les tests unitaires se situent au niveau du code ou d'une unité de code. Ils cherchent des bugs dans le code de façon isolée, sans dépendances externes."
+  },
+  {
+    "id": 17,
+    "question": "Quelle est la différence entre un test boîte noire et un test boîte blanche ?",
+    "options": [
+      "Boîte noire teste le code, boîte blanche teste les spécifications",
+      "Boîte noire se base sur les spécifications sans connaître le code interne, boîte blanche se base sur la structure interne du programme",
+      "Boîte noire est pour les tests unitaires, boîte blanche pour les tests d'intégration",
+      "Il n'y a aucune différence pratique entre les deux"
+    ],
+    "correctIndex": 1,
+    "explanation": "Test boîte noire (fonctionnel) : basé sur les spécifications, sans information sur le code interne — permet de détecter les oublis. Test boîte blanche (structurel) : basé sur la structure du programme, mesure la couverture des instructions."
+  },
+  {
+    "id": 18,
+    "question": "Qu'est-ce que JUnit ?",
+    "options": [
+      "Un IDE Java développé par Eclipse",
+      "Un framework pour les tests unitaires en Java",
+      "Un outil de build et de gestion des dépendances Java",
+      "Un débogueur Java intégré à IntelliJ"
+    ],
+    "correctIndex": 1,
+    "explanation": "JUnit est le framework de référence pour les tests unitaires en Java. Actuellement en version 5, il est intégré dans la plupart des IDE (BlueJ, IntelliJ, Eclipse, NetBeans)."
+  },
+  {
+    "id": 19,
+    "question": "Quelle annotation JUnit 5 désigne une méthode comme méthode de test ?",
+    "options": [
+      "@TestMethod",
+      "@JUnit",
+      "@Test",
+      "@Run"
+    ],
+    "correctIndex": 2,
+    "explanation": "L'annotation @Test (de org.junit.jupiter.api.Test en JUnit 5) désigne une méthode comme méthode de test. Chaque méthode annotée sera exécutée par le runner JUnit."
+  },
+  {
+    "id": 20,
+    "question": "Quelle différence existe entre JUnit 4 et JUnit 5 pour la définition d'une classe de test ?",
+    "options": [
+      "En JUnit 5 la classe doit étendre TestCase, en JUnit 4 elle n'en a pas besoin",
+      "En JUnit 4 la classe doit étendre TestCase, en JUnit 5 ce n'est plus nécessaire",
+      "Les deux versions sont identiques pour la définition de classe",
+      "JUnit 5 n'utilise plus de classes de test"
+    ],
+    "correctIndex": 1,
+    "explanation": "En JUnit 4, la classe de test doit étendre TestCase (`extends TestCase`). En JUnit 5, cette héritage n'est plus nécessaire — une classe normale avec @Test suffit."
+  },
+  {
+    "id": 21,
+    "question": "Quel import est nécessaire pour utiliser les assertions en JUnit 5 ?",
+    "options": [
+      "import org.junit.Assert.*",
+      "import static org.junit.jupiter.api.Assertions.*",
+      "import junit.framework.TestCase",
+      "import org.junit.test.Assertions.*"
+    ],
+    "correctIndex": 1,
+    "explanation": "`import static org.junit.jupiter.api.Assertions.*` importe toutes les méthodes d'assertion de JUnit 5 (assertTrue, assertEquals, etc.) avec un import statique pour les utiliser directement."
+  },
+  {
+    "id": 22,
+    "question": "Que fait l'assertion assertTrue(condition) ?",
+    "options": [
+      "Elle retourne TRUE si la condition est vraie",
+      "Elle fait échouer le test si la condition est fausse",
+      "Elle fait échouer le test si la condition est vraie",
+      "Elle vérifie que deux objets sont identiques"
+    ],
+    "correctIndex": 1,
+    "explanation": "assertTrue(condition) fait échouer le test si la condition évaluée est fausse. C'est une assertion positive : le test passe si la condition est vraie."
+  },
+  {
+    "id": 23,
+    "question": "Quelle assertion vérifie que deux objets sont égaux (via equals()) ?",
+    "options": [
+      "assertSame(exp, actual)",
+      "assertTrue(exp == actual)",
+      "assertEquals(exp, actual)",
+      "assertIdentical(exp, actual)"
+    ],
+    "correctIndex": 2,
+    "explanation": "assertEquals(exp, actual) échoue si les deux objets ne sont pas égaux selon la méthode equals(). assertSame() vérifie l'identité (même référence mémoire, ==)."
+  },
+  {
+    "id": 24,
+    "question": "Quelle est la différence entre assertEquals et assertSame ?",
+    "options": [
+      "assertEquals compare les types, assertSame compare les valeurs",
+      "assertEquals utilise equals() (équivalence), assertSame vérifie que c'est la même instance (==)",
+      "Les deux sont identiques pour les types primitifs et les objets",
+      "assertSame est déprécié en JUnit 5"
+    ],
+    "correctIndex": 1,
+    "explanation": "assertEquals(a, b) utilise a.equals(b) — les objets peuvent être distincts mais équivalents. assertSame(a, b) utilise a == b — les deux références doivent pointer vers le même objet."
+  },
+  {
+    "id": 25,
+    "question": "Comment tester qu'une exception est levée en JUnit 5 ?",
+    "options": [
+      "@Test(expected=MyException.class)",
+      "try { code; } catch(Exception e) { assertTrue(e instanceof MyException); }",
+      "assertThrows(MyException.class, () -> { code_qui_doit_lancer; })",
+      "expectException(MyException.class)"
+    ],
+    "correctIndex": 2,
+    "explanation": "En JUnit 5, `assertThrows(ExceptionClass.class, () -> { code; })` vérifie qu'une exception du bon type est levée. En JUnit 4, on utilisait @Test(expected=MyException.class)."
+  },
+  {
+    "id": 26,
+    "question": "Quelle annotation JUnit 5 correspond à @Before de JUnit 4 ?",
+    "options": [
+      "@BeforeAll",
+      "@BeforeEach",
+      "@Setup",
+      "@Init"
+    ],
+    "correctIndex": 1,
+    "explanation": "@BeforeEach (JUnit 5) est exécuté avant chaque méthode de test, comme @Before en JUnit 4. @BeforeAll correspond à @BeforeClass en JUnit 4."
+  },
+  {
+    "id": 27,
+    "question": "Quand est-ce que @BeforeAll est exécuté ?",
+    "options": [
+      "Avant chaque méthode de test",
+      "Après tous les tests de la classe",
+      "Une seule fois avant tous les tests de la classe",
+      "Avant le premier test uniquement"
+    ],
+    "correctIndex": 2,
+    "explanation": "@BeforeAll est exécuté une seule fois avant tous les tests de la classe de test. Il est utilisé pour des initialisations coûteuses partagées par tous les tests (connexion DB, etc.)."
+  },
+  {
+    "id": 28,
+    "question": "Quel est l'ordre d'exécution correct des annotations JUnit ?",
+    "options": [
+      "@BeforeEach → @BeforeAll → @Test → @AfterEach → @AfterAll",
+      "@BeforeAll → (@BeforeEach → @Test → @AfterEach) pour chaque test → @AfterAll",
+      "@Test → @BeforeEach → @AfterEach → @BeforeAll → @AfterAll",
+      "@BeforeAll → @Test → @BeforeEach → @AfterEach → @AfterAll"
+    ],
+    "correctIndex": 1,
+    "explanation": "Ordre : (1) @BeforeAll, (2) pour chaque @Test : @BeforeEach puis @Test puis @AfterEach, (3) @AfterAll. BeforeAll et AfterAll encadrent toute la classe, BeforeEach/AfterEach encadrent chaque test."
+  },
+  {
+    "id": 29,
+    "question": "Pourquoi utilise-t-on @BeforeEach pour initialiser les objets de test ?",
+    "options": [
+      "Pour économiser de la mémoire",
+      "Pour garantir que chaque test part d'un état propre et indépendant des autres tests",
+      "Parce que JUnit l'exige obligatoirement",
+      "Pour partager les mêmes instances entre tous les tests"
+    ],
+    "correctIndex": 1,
+    "explanation": "@BeforeEach réinitialise les objets avant chaque test, garantissant l'isolation des tests. Un test ne doit pas être affecté par l'état laissé par un test précédent."
+  },
+  {
+    "id": 30,
+    "question": "À quelle annotation correspond @AfterEach en JUnit 4 ?",
+    "options": [
+      "@After",
+      "@TearDown",
+      "@AfterTest",
+      "@Cleanup"
+    ],
+    "correctIndex": 0,
+    "explanation": "@AfterEach (JUnit 5) est exécuté après chaque méthode de test, équivalent à @After en JUnit 4. @AfterAll correspond à @AfterClass en JUnit 4."
+  },
+  {
+    "id": 31,
+    "question": "Quelle annotation permet de désactiver temporairement un test en JUnit ?",
+    "options": [
+      "@Skip",
+      "@Disabled ou @Ignore",
+      "@Pause",
+      "@NotRun"
+    ],
+    "correctIndex": 1,
+    "explanation": "@Ignore est utilisé en JUnit 4 et @Disabled en JUnit 5 pour désactiver un test. Le test existe dans le code mais n'est pas exécuté."
+  },
+  {
+    "id": 32,
+    "question": "Selon la structure Maven, où placer le code des tests ?",
+    "options": [
+      "src/main/java/",
+      "src/test/resources/",
+      "src/test/java/",
+      "test/src/java/"
+    ],
+    "correctIndex": 2,
+    "explanation": "Avec Maven, la structure standard sépare : `src/main/java/` pour le code de l'application et `src/test/java/` pour le code des tests. Cette séparation est une bonne pratique."
+  },
+  {
+    "id": 33,
+    "question": "Pourquoi séparer le code des tests du code de l'application ?",
+    "options": [
+      "Parce que JUnit l'exige techniquement",
+      "Pour des raisons de sécurité uniquement",
+      "Parce que les tests et l'application n'ont pas les mêmes préoccupations et pour faciliter la navigation dans le code",
+      "Pour réduire la taille du fichier JAR final"
+    ],
+    "correctIndex": 2,
+    "explanation": "On sépare tests et code applicatif car ils n'ont pas les mêmes préoccupations, pour faciliter la navigation dans le code, et généralement pour ne pas livrer les tests avec l'application en production."
+  },
+  {
+    "id": 34,
+    "question": "Que signifie l'acronyme BICEP dans Right-BICEP ?",
+    "options": [
+      "Boolean, Integer, Condition, Exception, Performance",
+      "Boundary, Inverse relationship, Cross-check, Error, Performance",
+      "Bug, Integration, Coverage, Execution, Partition",
+      "Base, Interface, Class, Entry, Point"
+    ],
+    "correctIndex": 1,
+    "explanation": "BICEP = Boundary (cas aux limites), Inverse relationship (relation inverse), Cross-check (vérification croisée), Error (cas d'erreurs), Performance. Right = les cas normaux qui doivent fonctionner."
+  },
+  {
+    "id": 35,
+    "question": "Que représente le « Right » dans Right-BICEP ?",
+    "options": [
+      "Tester uniquement les cas qui sont à droite dans le code",
+      "Ne pas oublier de tester les cas normaux qui sont censés fonctionner",
+      "Vérifier que le code est correct syntaxiquement",
+      "Tester les droits d'accès et permissions"
+    ],
+    "correctIndex": 1,
+    "explanation": "« Right » rappelle de ne pas oublier de tester les cas de base qui sont censés marcher ! On se concentre parfois tellement sur les cas limites qu'on oublie les cas nominaux."
+  },
+  {
+    "id": 36,
+    "question": "Que représente le « B » (Boundary) dans BICEP ?",
+    "options": [
+      "Tester les comportements de base (baseline)",
+      "Tester les cas aux limites : index < 0, index > longueur, dépassement mémoire, etc.",
+      "Tester les performances sur de grandes données",
+      "Tester les bugs connus"
+    ],
+    "correctIndex": 1,
+    "explanation": "Boundary = cas aux limites. Par exemple : index < 0, index > tab.length, utilisation de plus de mémoire que ce qui est alloué, valeurs min/max, etc."
+  },
+  {
+    "id": 37,
+    "question": "Que signifie « I » (Inverse relationship) dans BICEP ?",
+    "options": [
+      "Tester le comportement inverse du programme attendu",
+      "Vérifier un comportement en appliquant sa logique inverse (ex: vérifier une multiplication avec une division)",
+      "Tester les cas où les entrées sont inversées (ordre inverse)",
+      "Vérifier que les logs sont dans l'ordre inverse chronologique"
+    ],
+    "correctIndex": 1,
+    "explanation": "Inverse relationship : vérifier un comportement par sa logique inverse. Ex : vérifier que sqrt(x)² ≈ x, ou vérifier une addition avec une soustraction. Cela permet de tester des propriétés mathématiques."
+  },
+  {
+    "id": 38,
+    "question": "Que représente « C » (Cross-check) dans BICEP ?",
+    "options": [
+      "Vérifier la couverture de code (code coverage)",
+      "Comparer le résultat avec une autre implémentation de référence",
+      "Tester les cas de conflit entre threads",
+      "Vérifier la cohérence des données entre tables"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cross-check : comparer son implémentation avec une autre implémentation (si possible de référence). Ex : comparer MySqrt(250) avec Math.sqrt(250) pour vérifier que les résultats concordent."
+  },
+  {
+    "id": 39,
+    "question": "Que représente « E » (Error) dans BICEP ?",
+    "options": [
+      "Tester uniquement les exceptions connues documentées",
+      "Lancer explicitement des tests sur des cas d'erreur pour vérifier si ces cas sont gérés correctement",
+      "Compter le nombre d'erreurs dans le code",
+      "Vérifier que les messages d'erreur sont corrects grammaticalement"
+    ],
+    "correctIndex": 1,
+    "explanation": "Error : tester ce qui se passe dans les cas d'erreur (division par zéro, racine de nombre négatif, perte de réseau). Même si on pense que ce cas n'arrivera jamais, il faut le tester !"
+  },
+  {
+    "id": 40,
+    "question": "Que vérifie le « P » (Performance) dans BICEP ?",
+    "options": [
+      "Que le code est bien formaté et lisible",
+      "Que les performances sont correctes et prévisibles, même dans des conditions dégradées",
+      "Que la mémoire utilisée est inférieure à 1 Go",
+      "Que les tests s'exécutent en moins de 1 seconde"
+    ],
+    "correctIndex": 1,
+    "explanation": "Performance : vérifier que les performances sont correctes et prévisibles. Que se passe-t-il si le réseau est coupé, le disque saturé ? Les performances restent-elles dans les limites acceptables ?"
+  },
+  {
+    "id": 41,
+    "question": "Que signifie l'acronyme CORRECT dans le contexte des tests ?",
+    "options": [
+      "Code, Output, Runtime, Reference, Exception, Coverage, Test",
+      "Conformance, Ordering, Range, Reference, Existence, Cardinality, Time",
+      "Compilation, Object, Result, Run, Error, Check, Type",
+      "Condition, Operation, Regex, Return, Execution, Case, Timeout"
+    ],
+    "correctIndex": 1,
+    "explanation": "CORRECT = Conformance (format), Ordering (ordre), Range (plage de valeurs), Reference (dépendances externes), Existence (valeur existe ?), Cardinality (bon nombre de valeurs ?), Time (ordre temporel)."
+  },
+  {
+    "id": 42,
+    "question": "Que teste le « C » de CORRECT (Conformance) ?",
+    "options": [
+      "Que le code se compile sans erreur",
+      "Que la valeur respecte un format attendu (ex: format d'email, de date)",
+      "Que le nombre de lignes de code est inférieur à une limite",
+      "Que les commentaires sont conformes aux normes"
+    ],
+    "correctIndex": 1,
+    "explanation": "Conformance : la valeur respecte-t-elle un format attendu ? Ex : une date au format JJ/MM/AAAA, un email avec @ et domaine, un numéro de téléphone valide."
+  },
+  {
+    "id": 43,
+    "question": "Que teste le « R » de CORRECT (Range) ?",
+    "options": [
+      "La longueur des chaînes de caractères",
+      "Si la valeur est dans une plage de valeurs raisonnables (minimum et maximum)",
+      "Le nombre de lignes retournées par une requête",
+      "La portée des variables dans le code"
+    ],
+    "correctIndex": 1,
+    "explanation": "Range : la valeur est-elle dans une plage raisonnable ? Ex : un âge doit être entre 0 et 150, une température en degrés Celsius entre -273 et une valeur maximale."
+  },
+  {
+    "id": 44,
+    "question": "Que teste le « E » de CORRECT (Existence) ?",
+    "options": [
+      "Que les tests existent pour chaque méthode",
+      "Si la valeur existe : non-null, non-zéro, présente dans un ensemble",
+      "Que la base de données existe",
+      "Que les fichiers de configuration existent"
+    ],
+    "correctIndex": 1,
+    "explanation": "Existence : la valeur existe-t-elle ? Est-elle non-null, non-zéro, présente dans un ensemble ? Tester le comportement quand une valeur est null ou absente."
+  },
+  {
+    "id": 45,
+    "question": "Que teste le « C » de CORRECT (Cardinality) ?",
+    "options": [
+      "Le nombre de tests dans une suite",
+      "S'il y a exactement le bon nombre de valeurs (ni trop, ni trop peu)",
+      "La cardinalité des relations dans la base de données",
+      "Le nombre de caractères dans une chaîne"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cardinality : y a-t-il exactement le bon nombre de valeurs ? Tester les cas 0 élément, 1 élément, n éléments. Ex : une liste vide, une liste à un élément, une liste pleine."
+  },
+  {
+    "id": 46,
+    "question": "Que teste le « T » de CORRECT (Time) ?",
+    "options": [
+      "La durée d'exécution des tests",
+      "Que tout se passe dans le bon ordre, au bon moment, et dans les délais attendus",
+      "La synchronisation entre le serveur et le client",
+      "Le fuseau horaire des dates"
+    ],
+    "correctIndex": 1,
+    "explanation": "Time : tout se passe-t-il dans le bon ordre ? Au bon moment ? Dans les délais ? Ex : une transaction doit être atomique, un timeout doit se déclencher après x millisecondes."
+  },
+  {
+    "id": 47,
+    "question": "Quelle bonne pratique s'applique lors de l'utilisation de données aléatoires dans les tests ?",
+    "options": [
+      "Ne jamais utiliser de données aléatoires dans les tests",
+      "Les données aléatoires sont idéales pour des tests déterministes",
+      "Lancer les tests plusieurs fois et utiliser un seed fixe pour la reproductibilité",
+      "Les données aléatoires remplacent les cas limites"
+    ],
+    "correctIndex": 2,
+    "explanation": "Avec des données aléatoires, les tests doivent être lancés plusieurs fois pour couvrir différents cas. On peut fixer un seed aléatoire pour rendre les tests reproductibles lors du debugging."
+  },
+  {
+    "id": 48,
+    "question": "Selon les bonnes pratiques, quelles classes faut-il prioriser pour les tests unitaires si on doit choisir ?",
+    "options": [
+      "Les classes avec le plus de lignes de code",
+      "Les classes contenant uniquement des setters et getters",
+      "Les classes complexes plutôt que les classes avec uniquement des setters et getters",
+      "Les classes créées en dernier dans le projet"
+    ],
+    "correctIndex": 2,
+    "explanation": "On priorise les classes complexes pour les tests car elles ont plus de risques de contenir des bugs. Une classe avec uniquement des setters/getters a peu de logique à tester."
+  },
+  {
+    "id": 49,
+    "question": "Que faut-il vérifier quand on teste un objet (bonne pratique sur les objets) ?",
+    "options": [
+      "Uniquement le constructeur",
+      "Toutes les méthodes et les effets de bord (interactions entre méthodes)",
+      "Uniquement les méthodes publiques",
+      "Uniquement les méthodes qui peuvent lever des exceptions"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sur les objets : tester toutes les méthodes ET les effets de bord — vérifier les interactions entre les méthodes. Ex : appeler add() puis size() pour vérifier que la taille a bien changé."
+  },
+  {
+    "id": 50,
+    "question": "Quelle assertion JUnit 5 fait échouer le test inconditionnellement ?",
+    "options": [
+      "assertFail()",
+      "fail(string)",
+      "throwError()",
+      "assertError()"
+    ],
+    "correctIndex": 1,
+    "explanation": "fail(string) fait échouer le test inconditionnellement avec un message. C'est utile pour signaler une situation qui ne devrait jamais être atteinte (ex: dans un catch qui ne devrait pas s'exécuter)."
+  }
+]

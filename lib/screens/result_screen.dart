@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/quiz.dart';
 import '../models/question.dart';
+import '../widgets/markdown_text.dart';
 
 class ResultScreen extends StatelessWidget {
   final Quiz quiz;
@@ -88,11 +89,7 @@ class ResultScreen extends StatelessWidget {
                       'Q${index + 1}',
                       style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
-                    subtitle: Text(
-                      question.question,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                    subtitle: MarkdownText(data: question.question),
                     children: [
                       Padding(
                         padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
@@ -144,9 +141,9 @@ class ResultScreen extends StatelessWidget {
                             }),
                             if (question.explanation != null) ...[
                               const SizedBox(height: 8),
-                              Text(
-                                question.explanation!,
-                                style: TextStyle(
+                              MarkdownText(
+                                data: question.explanation!,
+                                textStyle: TextStyle(
                                   fontStyle: FontStyle.italic,
                                   color: colorScheme.outline,
                                 ),

@@ -1,0 +1,1695 @@
+[
+  {
+    "id": 1,
+    "question": "Quel modèle a été introduit par Edgar F. Codd dans les années 1970 ?",
+    "options": [
+      "Le modèle hiérarchique",
+      "Le modèle relationnel",
+      "Le modèle réseau"
+    ],
+    "correctIndex": 1,
+    "explanation": "Edgar F. Codd a introduit le modèle relationnel dans les années 1970."
+  },
+  {
+    "id": 2,
+    "question": "Quels sont les principaux avantages des bases de données pour la gestion des données ?",
+    "options": [
+      "Elles permettent uniquement de stocker des fichiers texte simples.",
+      "Elles permettent une gestion efficace de données complexes et en grand volume.",
+      "Elles garantissent l'intégrité des données grâce à des contraintes (clés, règles).",
+      "Elles offrent des mécanismes de contrôle d'accès pour la sécurité.",
+      "Elles remplacent totalement les systèmes d'exploitation.",
+      "Elles empêchent toute modification des données après leur création."
+    ],
+    "correctIndices": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "Les bases de données permettent de gérer efficacement des données complexes et volumineuses, d'assurer leur intégrité avec des contraintes et de contrôler les accès."
+  },
+  {
+    "id": 3,
+    "question": "Quelles sont les règles de normalisation pour les bases de données relationnelles ?",
+    "options": [
+      "La première forme normale (1NF) garantit que toutes les colonnes non-clés dépendent de la clé primaire complète.",
+      "La première forme normale (1NF) garantit que chaque champ contient des valeurs atomiques (pas de listes ni de répétitions).",
+      "La deuxième forme normale (2NF) impose que toutes les tables soient fusionnées en une seule.",
+      "La deuxième forme normale (2NF) supprime les dépendances partielles en garantissant que toutes les colonnes non-clés dépendent de la clé primaire complète.",
+      "La troisième forme normale (3NF) élimine les dépendances transitives entre les colonnes non-clés.",
+      "La troisième forme normale (3NF) autorise les dépendances transitives pour simplifier les requêtes.",
+      "La normalisation consiste uniquement à ajouter des index pour améliorer les performances."
+    ],
+    "correctIndices": [
+      1,
+      3,
+      4
+    ],
+    "explanation": "La 1NF impose des valeurs atomiques, la 2NF supprime les dépendances partielles et la 3NF élimine les dépendances transitives."
+  },
+  {
+    "id": 4,
+    "question": "Quelles sont les caractéristiques de PostgreSQL ?",
+    "options": [
+      "PostgreSQL est open-source et gratuit à utiliser.",
+      "PostgreSQL ne supporte pas les types de données JSON et JSONB.",
+      "PostgreSQL offre des mécanismes de sécurité robustes, incluant l'authentification et l'autorisation."
+    ],
+    "correctIndices": [
+      0,
+      2
+    ],
+    "explanation": "PostgreSQL est open-source, gratuit, prend en charge JSON/JSONB et propose des mécanismes de sécurité comme l'authentification et l'autorisation."
+  },
+  {
+    "id": 5,
+    "question": "Indique quelles affirmations sont correctes concernant la commande CREATE TABLE :",
+    "options": [
+      "Elle permet de définir les colonnes de la table.",
+      "Elle permet de supprimer une table existante.",
+      "Elle peut inclure des contraintes comme PRIMARY KEY.",
+      "Elle doit inclure le type des colonnes définies.",
+      "Elle est utilisée pour modifier une table existante."
+    ],
+    "correctIndices": [
+      0,
+      2,
+      3
+    ],
+    "explanation": "CREATE TABLE sert à créer une table en définissant ses colonnes, leurs types et éventuellement des contraintes comme PRIMARY KEY."
+  },
+  {
+    "id": 6,
+    "question": "Quelle est la syntaxe correcte pour ajouter une colonne à une table existante ?",
+    "options": [
+      "ALTER TABLE personnes ADD Department VARCHAR(50);",
+      "ALTER TABLE personnes ADD COLUMN Department VARCHAR(50);",
+      "ALTER TABLE personnes ADD Department;"
+    ],
+    "correctIndex": 1,
+    "explanation": "La syntaxe standard explicite est ALTER TABLE personnes ADD COLUMN Department VARCHAR(50);"
+  },
+  {
+    "id": 7,
+    "question": "Indique quelles affirmations sont correctes concernant les instructions SQL pour manipuler les tables :",
+    "options": [
+      "ALTER TABLE permet de modifier la structure d'une table existante.",
+      "DROP TABLE permet de vider une table de toutes ses données.",
+      "TRUNCATE TABLE permet de modifier la structure d'une table existante.",
+      "CREATE TABLE permet de créer une nouvelle table avec des colonnes spécifiées."
+    ],
+    "correctIndices": [
+      0,
+      3
+    ],
+    "explanation": "ALTER TABLE modifie la structure d'une table existante et CREATE TABLE crée une nouvelle table. DROP TABLE supprime la table, tandis que TRUNCATE TABLE vide ses données."
+  },
+  {
+    "id": 8,
+    "question": "Quelle est la syntaxe correcte pour insérer une nouvelle personne dans la table personnes avec les valeurs 'Bob', '1985-05-15' ?",
+    "options": [
+      "INSERT personnes (nom, birthdate, is_active) VALUES ('Bob', '1985-05-15');",
+      "INSERT INTO personnes VALUES ('Bob', '1985-05-15');",
+      "INSERT INTO personnes (nom, birthdate, is_active) VALUES ('Bob', '1985-05-15');"
+    ],
+    "correctIndex": 2,
+    "explanation": "La syntaxe correcte est INSERT INTO table (colonnes) VALUES (valeurs)."
+  },
+  {
+    "id": 9,
+    "question": "Quelle est la syntaxe correcte pour supprimer une personne de la table personnes dont le nom est 'Alice' ?",
+    "options": [
+      "DELETE nom = 'Alice' FROM personnes;",
+      "DELETE personnes WHERE nom = 'Alice';",
+      "DELETE FROM personnes nom = 'Alice';",
+      "DELETE FROM personnes WHERE nom = 'Alice';"
+    ],
+    "correctIndex": 3,
+    "explanation": "La syntaxe correcte est DELETE FROM personnes WHERE nom = 'Alice';"
+  },
+  {
+    "id": 10,
+    "question": "Quelle est la syntaxe correcte pour mettre à jour le statut is_active à FALSE pour une personne dont le nom est 'Alice' dans la table personnes ?",
+    "options": [
+      "UPDATE personnes SET is_active = FALSE nom = 'Alice';",
+      "UPDATE personnes SET is_active = FALSE WHERE nom = 'Alice';",
+      "UPDATE personnes is_active = FALSE WHERE nom = 'Alice';"
+    ],
+    "correctIndex": 1,
+    "explanation": "La syntaxe correcte est UPDATE personnes SET is_active = FALSE WHERE nom = 'Alice';"
+  },
+  {
+    "id": 11,
+    "question": "Quel type de données en PostgreSQL permet de stocker une chaîne de caractères de taille fixe de longueur n ?",
+    "options": [
+      "VARCHAR(n)",
+      "CHAR(n)",
+      "TEXT(n)"
+    ],
+    "correctIndex": 1,
+    "explanation": "CHAR(n) stocke une chaîne de longueur fixe n. VARCHAR(n) stocke une chaîne de longueur variable limitée à n caractères."
+  },
+  {
+    "id": 12,
+    "question": "Quels types de données numériques sont disponibles en PostgreSQL ?",
+    "options": [
+      "FLOAT",
+      "INTEGER",
+      "NUMERIC(p, s)",
+      "STRING"
+    ],
+    "correctIndices": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "PostgreSQL propose des types numériques comme FLOAT, INTEGER et NUMERIC(p, s). STRING n'est pas un type numérique PostgreSQL."
+  },
+  {
+    "id": 13,
+    "question": "Indique quelles affirmations sont correctes concernant les types temporels en PostgreSQL :",
+    "options": [
+      "DATE stocke la date et l'heure.",
+      "TIMESTAMP stocke la date et l'heure combinés.",
+      "INTERVAL stocke une date spécifique.",
+      "TIME WITH TIME ZONE stocke l'heure avec le fuseau horaire."
+    ],
+    "correctIndices": [
+      1,
+      3
+    ],
+    "explanation": "TIMESTAMP stocke une date et une heure. TIME WITH TIME ZONE stocke une heure avec fuseau horaire. DATE ne stocke que la date et INTERVAL représente une durée."
+  },
+  {
+    "id": 14,
+    "question": "Quelle est la syntaxe SQL correcte pour définir une contrainte de colonne NOT NULL ?",
+    "options": [
+      "CREATE TABLE exemple (id SERIAL, nom VARCHAR(100) NULL);",
+      "CREATE TABLE exemple (id SERIAL, nom VARCHAR(100) NOT NULL);",
+      "CREATE TABLE exemple (id SERIAL, nom VARCHAR(100) DEFAULT NULL);"
+    ],
+    "correctIndex": 1,
+    "explanation": "La contrainte NOT NULL se place après le type de la colonne : nom VARCHAR(100) NOT NULL."
+  },
+  {
+    "id": 15,
+    "question": "Comment définir une clé étrangère via une contrainte de colonne ?",
+    "options": [
+      "En utilisant la clause PRIMARY KEY.",
+      "En utilisant la clause FOREIGN KEY.",
+      "En utilisant la clause REFERENCES.",
+      "En utilisant la clause UNIQUE."
+    ],
+    "correctIndex": 2,
+    "explanation": "Dans une contrainte de colonne, une clé étrangère se définit avec REFERENCES, par exemple departement_id INTEGER REFERENCES departement(id)."
+  },
+  {
+    "id": 16,
+    "question": "Indique quelles affirmations sont correctes concernant l'insertion de données dans une table avec une clé étrangère :",
+    "options": [
+      "La valeur de la clé étrangère doit exister dans la table référencée.",
+      "Une erreur est générée si la valeur de la clé étrangère n'existe pas dans la table référencée.",
+      "Par défaut, les valeurs nulles sont autorisées pour les clés étrangères.",
+      "Par défaut, les valeurs nulles sont interdites pour les clés étrangères."
+    ],
+    "correctIndices": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "Une clé étrangère non nulle doit référencer une valeur existante, sinon une erreur est générée. Par défaut, NULL reste autorisé sauf contrainte NOT NULL."
+  },
+  {
+    "id": 17,
+    "question": "Quelle action est effectuée par la clause ON DELETE CASCADE ?",
+    "options": [
+      "Elle définit la clé étrangère sur NULL lorsque la ligne référencée est supprimée.",
+      "Elle propage la suppression aux lignes référencées.",
+      "Elle définit la clé étrangère sur sa valeur par défaut lorsque la ligne référencée est supprimée."
+    ],
+    "correctIndex": 1,
+    "explanation": "ON DELETE CASCADE supprime automatiquement les lignes dépendantes quand la ligne référencée est supprimée."
+  },
+  {
+    "id": 18,
+    "question": "Quels sont les avantages des types énumérés (ENUM) en SQL ?",
+    "options": [
+      "Sécurité : empêche les valeurs non autorisées.",
+      "Performance : améliore la vitesse des requêtes.",
+      "Lisibilité : rend le schéma explicite."
+    ],
+    "correctIndices": [
+      0,
+      2
+    ],
+    "explanation": "Un ENUM limite les valeurs possibles et rend le schéma plus explicite. Il ne garantit pas à lui seul une amélioration générale des performances des requêtes."
+  },
+  {
+    "id": 19,
+    "question": "Indique quelles affirmations sont correctes concernant les tableaux (ARRAY) en SQL :",
+    "options": [
+      "Les tableaux permettent de stocker plusieurs valeurs de même type dans une seule colonne.",
+      "Les tableaux sont utilisés pour stocker des valeurs de types différents.",
+      "Les index des tableaux commencent à 1."
+    ],
+    "correctIndices": [
+      0,
+      2
+    ],
+    "explanation": "Un ARRAY PostgreSQL contient plusieurs valeurs du même type dans une colonne. Les indices des tableaux PostgreSQL commencent à 1."
+  },
+  {
+    "id": 20,
+    "question": "Quel est l'objectif principal de l'utilisation des index dans les bases de données ?",
+    "options": [
+      "Augmenter la taille de la base de données",
+      "Améliorer les performances des requêtes",
+      "Réduire le temps de mise à jour des données"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les index servent principalement à accélérer les recherches et améliorer les performances des requêtes, au prix d'un espace disque supplémentaire et d'un coût sur certaines écritures."
+  },
+  {
+    "id": 21,
+    "question": "Quelle est la signification de DQL en SQL ?",
+    "options": [
+      "Permet de manipuler des données.",
+      "Permet de sélectionner des données.",
+      "Permet de définir des données."
+    ],
+    "correctIndex": 1,
+    "explanation": "DQL signifie Data Query Language. Il sert à interroger et sélectionner des données, principalement avec SELECT."
+  },
+  {
+    "id": 22,
+    "question": "Quelle clause SQL est utilisée pour filtrer les résultats après un regroupement ?",
+    "options": [
+      "WHERE",
+      "HAVING",
+      "GROUP BY"
+    ],
+    "correctIndex": 1,
+    "explanation": "HAVING filtre les groupes après GROUP BY, tandis que WHERE filtre les lignes avant le regroupement."
+  },
+  {
+    "id": 23,
+    "question": "Quelles valeurs sont retournées par la condition WHERE val BETWEEN 14 AND 18 ?",
+    "options": [
+      "14, 15, 16, 17, 18",
+      "14, 15, 16, 17",
+      "15, 16, 17, 18",
+      "15, 16, 17"
+    ],
+    "correctIndex": 0,
+    "explanation": "BETWEEN est inclusif : val BETWEEN 14 AND 18 inclut les bornes 14 et 18."
+  },
+  {
+    "id": 24,
+    "question": "Cocher toutes les opérations booléennes qui renvoient TRUE en SQL.",
+    "options": [
+      "true AND null",
+      "false AND null",
+      "null AND null",
+      "true OR null",
+      "false OR null",
+      "null OR null",
+      "NOT null",
+      "NOT true",
+      "NOT false"
+    ],
+    "correctIndices": [
+      3,
+      8
+    ],
+    "explanation": "En logique SQL à trois valeurs, true OR null vaut TRUE et NOT false vaut TRUE. Les expressions impliquant NULL retournent souvent UNKNOWN, sauf si le résultat est déterminé par l'autre opérande."
+  },
+  {
+    "id": 25,
+    "question": "Cocher toutes les opérations booléennes qui renvoient FALSE en SQL.",
+    "options": [
+      "true AND null",
+      "false AND null",
+      "null AND null",
+      "true OR null",
+      "false OR null",
+      "null OR null",
+      "NOT null",
+      "NOT true",
+      "NOT false"
+    ],
+    "correctIndices": [
+      1,
+      7
+    ],
+    "explanation": "false AND null vaut FALSE, car un AND avec FALSE ne peut pas devenir TRUE. NOT true vaut FALSE."
+  },
+  {
+    "id": 26,
+    "question": "Quel opérateur est utilisé pour comparer une valeur avec NULL en SQL ?",
+    "options": [
+      "EQUALS",
+      "=",
+      "IS",
+      "!="
+    ],
+    "correctIndex": 2,
+    "explanation": "On teste NULL avec IS NULL ou IS NOT NULL. Les comparaisons avec = ou != ne conviennent pas pour NULL."
+  },
+  {
+    "id": 27,
+    "question": "Quelle fonction SQL retourne le premier argument non NULL dans une liste ?",
+    "options": [
+      "NULLIF",
+      "COALESCE",
+      "ISNULL"
+    ],
+    "correctIndex": 1,
+    "explanation": "COALESCE retourne le premier argument non NULL de la liste."
+  },
+  {
+    "id": 28,
+    "question": "Quelle fonction SQL est utilisée pour obtenir le plus grand entier inférieur ou égal à un nombre ?",
+    "options": [
+      "floor",
+      "ceil",
+      "trunc"
+    ],
+    "correctIndex": 0,
+    "explanation": "floor(x) retourne le plus grand entier inférieur ou égal à x."
+  },
+  {
+    "id": 29,
+    "question": "Quelles fonctions SQL peuvent être utilisées pour obtenir la date et l'heure actuelles au format TIMESTAMP ?",
+    "options": [
+      "current_date AND current time",
+      "current_date + current_time",
+      "current_timestamp"
+    ],
+    "correctIndices": [
+      1,
+      2
+    ],
+    "explanation": "current_timestamp retourne directement un timestamp. En PostgreSQL, current_date + current_time permet aussi de combiner la date et l'heure actuelles."
+  },
+  {
+    "id": 30,
+    "question": "Quelles fonctions SQL peuvent être utilisées pour extraire l'année d'une date ?",
+    "options": [
+      "extract(year FROM date)",
+      "year(date)",
+      "date_part('year', date)"
+    ],
+    "correctIndices": [
+      0,
+      2
+    ],
+    "explanation": "En PostgreSQL, extract(year FROM date) et date_part('year', date) permettent d'extraire l'année."
+  },
+  {
+    "id": 31,
+    "question": "Quel opérateur est utilisé pour concaténer deux chaînes de caractères en SQL ?",
+    "options": [
+      "+",
+      "CONCAT",
+      "||",
+      "."
+    ],
+    "correctIndex": 2,
+    "explanation": "L'opérateur SQL standard de concaténation est ||. PostgreSQL propose aussi la fonction concat(), mais ce n'est pas un opérateur."
+  },
+  {
+    "id": 32,
+    "question": "Comment obtenir 'World' à partir de 'Hello World!' en SQL ?",
+    "options": [
+      "substring('Hello World!' FROM 6)",
+      "substring('Hello World!' FROM 7 FOR 5)",
+      "substring('Hello World!' FROM 6 FOR 5)",
+      "substr('Hello World!', 7, 5)"
+    ],
+    "correctIndices": [
+      1,
+      3
+    ],
+    "explanation": "Dans PostgreSQL, les positions commencent à 1. Le W de World est en position 7, et il faut extraire 5 caractères."
+  },
+  {
+    "id": 33,
+    "question": "Pour la chaîne 'ab123cd', quels patterns SIMILAR TO renvoient TRUE ?",
+    "options": [
+      "[0-9]+%",
+      "[0-9]*%",
+      "[a-z]+[0-9]+[a-z]+",
+      "[a-z]{2}[0-9]{3}[a-z]{2}",
+      "[0-9]*[a-z]+[0-9]+[a-z]+",
+      "[0-9]+[a-z]+[0-9]+[a-z]+"
+    ],
+    "correctIndices": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "explanation": "La chaîne 'ab123cd' commence par des lettres, contient ensuite des chiffres, puis finit par des lettres. Les patterns avec [0-9]* au début peuvent aussi correspondre, car * autorise zéro chiffre."
+  },
+  {
+    "id": 34,
+    "question": "La requête suivante est-elle une requête corrélée ?\n\nSELECT\n    i1.name,\n    (\n        SELECT\n            avg(i2.salary)\n        FROM\n            instructor i2\n        WHERE\n            i2.dept_name = i1.dept_name) AS avg_dept_salary\nFROM\n    instructor i1;",
+    "options": [
+      "Vrai",
+      "Faux"
+    ],
+    "correctIndex": 0,
+    "explanation": "La sous-requête est corrélée, car elle référence i1.dept_name, qui vient de la requête externe."
+  },
+  {
+    "id": 35,
+    "question": "La requête suivante est-elle une requête corrélée ?\n\nSELECT\n    name\nFROM\n    instructor\nWHERE\n    salary > (\n        SELECT\n            avg(salary)\n        FROM\n            instructor);",
+    "options": [
+      "Vrai",
+      "Faux"
+    ],
+    "correctIndex": 1,
+    "explanation": "La sous-requête n'est pas corrélée, car elle ne dépend d'aucune colonne de la requête externe."
+  },
+  {
+    "id": 36,
+    "question": "Quel type de sous-requête est utilisé dans l'exemple suivant ?\n\nSELECT\n    dept_name,\n    (\n        SELECT\n            count(*)\n        FROM\n            instructor\n        WHERE\n            department.dept_name = instructor.dept_name) AS num_instructors\nFROM\n    department;",
+    "options": [
+      "Sous-requête de ligne",
+      "Sous-requête scalaire",
+      "Sous-requête de table"
+    ],
+    "correctIndex": 1,
+    "explanation": "La sous-requête retourne une seule valeur, le count(*), pour chaque ligne de department : c'est une sous-requête scalaire."
+  },
+  {
+    "id": 37,
+    "question": "Quel type de sous-requête est utilisé dans l'exemple suivant ?\n\nSELECT\n    name,\n    salary,\n    dept_name\nFROM\n    instructor\nWHERE (salary, dept_name) = (\n    SELECT\n        max(salary),\n        dept_name\n    FROM\n        instructor\n    WHERE\n        dept_name = 'Physics'\n    GROUP BY\n        dept_name);",
+    "options": [
+      "Sous-requête de ligne",
+      "Sous-requête scalaire",
+      "Sous-requête de table"
+    ],
+    "correctIndex": 0,
+    "explanation": "La sous-requête retourne une ligne composée de deux valeurs, comparée au tuple (salary, dept_name)."
+  },
+  {
+    "id": 38,
+    "question": "Quel type de sous-requête est utilisé dans l'exemple suivant ?\n\nSELECT DISTINCT\n    course_id\nFROM\n    section\nWHERE\n    semester = 'Fall'\n    AND year = 2017\n    AND course_id IN (\n        SELECT\n            course_id\n        FROM\n            section\n        WHERE\n            semester = 'Spring'\n            AND year = 2018);",
+    "options": [
+      "Sous-requête de ligne",
+      "Sous-requête scalaire",
+      "Sous-requête de table"
+    ],
+    "correctIndex": 2,
+    "explanation": "La sous-requête utilisée avec IN peut retourner plusieurs lignes : c'est une sous-requête de table."
+  },
+  {
+    "id": 39,
+    "question": "Que retourne cette requête ?\n\nSELECT\n    dept_name\nFROM\n    instructor\nGROUP BY\n    dept_name\nHAVING\n    avg(salary) >= ALL (\n        SELECT\n            avg(salary)\n        FROM\n            instructor\n        GROUP BY\n            dept_name);",
+    "options": [
+      "Les départements dont le salaire moyen est supérieur à tous les salaires individuels.",
+      "Les départements dont le salaire moyen est égal au salaire le plus élevé.",
+      "Les départements avec le salaire moyen le plus élevé.",
+      "Les départements dont le salaire moyen est supérieur à la moyenne globale des salaires."
+    ],
+    "correctIndex": 2,
+    "explanation": "La condition avg(salary) >= ALL compare chaque moyenne de département à toutes les moyennes de départements. Elle garde donc le ou les départements avec la moyenne maximale."
+  },
+  {
+    "id": 40,
+    "question": "Que retourne cette requête ?\n\nSELECT\n    name,\n    dept_name,\n    salary\nFROM\n    instructor i1\nWHERE\n    salary <= ALL (\n        SELECT\n            salary\n        FROM\n            instructor i2\n        WHERE\n            i1.dept_name = i2.dept_name);",
+    "options": [
+      "Les instructeurs ayant le salaire le plus bas de toute l'université.",
+      "Les instructeurs dont le salaire est inférieur à la moyenne de leur département.",
+      "Les instructeurs ayant le salaire le plus élevé de leur département.",
+      "Les instructeurs ayant le salaire le plus bas de leur département."
+    ],
+    "correctIndex": 3,
+    "explanation": "La sous-requête récupère les salaires du même département. salary <= ALL sélectionne les instructeurs dont le salaire est inférieur ou égal à tous les autres salaires du département."
+  },
+  {
+    "id": 41,
+    "question": "Quelle clause permet de spécifier explicitement la condition de jointure dans une requête SQL ?",
+    "options": [
+      "ON",
+      "USING",
+      "NATURAL"
+    ],
+    "correctIndex": 0,
+    "explanation": "La clause ON permet d'écrire explicitement la condition de jointure, par exemple ON t1.id = t2.id."
+  },
+  {
+    "id": 42,
+    "question": "Quelle clause permet de spécifier les colonnes qui doivent être égales dans une jointure en utilisant les mêmes noms de colonnes des deux côtés ?",
+    "options": [
+      "ON",
+      "USING",
+      "NATURAL"
+    ],
+    "correctIndex": 1,
+    "explanation": "USING indique les colonnes communes à utiliser pour la jointure, par exemple USING(id)."
+  },
+  {
+    "id": 43,
+    "question": "Quelle jointure est basée sur l'égalité des colonnes de même nom des deux tables ?",
+    "options": [
+      "ON",
+      "USING",
+      "NATURAL"
+    ],
+    "correctIndex": 2,
+    "explanation": "NATURAL JOIN utilise automatiquement toutes les colonnes qui ont le même nom dans les deux tables."
+  },
+  {
+    "id": 44,
+    "question": "Quelle opération permet de combiner toutes les lignes de deux tables sans condition ?",
+    "options": [
+      "Division relationnelle",
+      "Jointure",
+      "Union",
+      "Intersection",
+      "Produit cartésien",
+      "Différence"
+    ],
+    "correctIndex": 4,
+    "explanation": "Le produit cartésien combine chaque ligne de la première table avec chaque ligne de la seconde table, sans condition de jointure."
+  },
+  {
+    "id": 45,
+    "question": "Indiquez le nombre de lignes, de colonnes et de valeurs nulles dans le résultat de la requête suivante SELECT * FROM t1 NATURAL JOIN t2; sur les tableaux suivants.\n\nTable t1\nid | lettre\n1  | a\n2  | b\n3  | c\n4  | d\n\nTable t2\nid | grec | smiley\n1  | α    | 😃\n3  | γ    | 😐\n5  | ε    | ☹️",
+    "options": [
+      "2 lignes, 4 colonnes et 0 valeurs nulles.",
+      "4 lignes, 4 colonnes et 4 valeurs nulles.",
+      "4 lignes, 5 colonnes et 6 valeurs nulles.",
+      "3 lignes, 4 colonnes et 1 valeur nulle.",
+      "3 lignes, 5 colonnes et 2 valeurs nulles.",
+      "5 lignes, 4 colonnes et 5 valeurs nulles.",
+      "5 lignes, 5 colonnes et 8 valeurs nulles.",
+      "12 lignes, 5 colonnes et 0 valeurs nulles."
+    ],
+    "correctIndex": 0,
+    "explanation": "NATURAL JOIN joint sur id et fusionne la colonne id. Seuls les ids 1 et 3 correspondent, donc le résultat contient 2 lignes, 4 colonnes et aucune valeur NULL."
+  },
+  {
+    "id": 46,
+    "question": "Indiquez le nombre de lignes, de colonnes et de valeurs nulles dans le résultat de la requête suivante SELECT * FROM t1 NATURAL LEFT JOIN t2; sur les tableaux suivants.\n\nTable t1\nid | lettre\n1  | a\n2  | b\n3  | c\n4  | d\n\nTable t2\nid | grec | smiley\n1  | α    | 😃\n3  | γ    | 😐\n5  | ε    | ☹️",
+    "options": [
+      "2 lignes, 4 colonnes et 0 valeurs nulles.",
+      "4 lignes, 4 colonnes et 4 valeurs nulles.",
+      "4 lignes, 5 colonnes et 6 valeurs nulles.",
+      "3 lignes, 4 colonnes et 1 valeur nulle.",
+      "3 lignes, 5 colonnes et 2 valeurs nulles.",
+      "5 lignes, 4 colonnes et 5 valeurs nulles.",
+      "5 lignes, 5 colonnes et 8 valeurs nulles.",
+      "12 lignes, 5 colonnes et 0 valeurs nulles."
+    ],
+    "correctIndex": 1,
+    "explanation": "NATURAL LEFT JOIN conserve les 4 lignes de t1 et fusionne id. Les ids 2 et 4 n'ont pas de correspondance dans t2, donc grec et smiley valent NULL pour ces 2 lignes : 4 valeurs NULL."
+  },
+  {
+    "id": 47,
+    "question": "Indiquez le nombre de lignes, de colonnes et de valeurs nulles dans le résultat de la requête suivante SELECT * FROM t1 LEFT JOIN t2 ON t1.id = t2.id; sur les tableaux suivants.\n\nTable t1\nid | lettre\n1  | a\n2  | b\n3  | c\n4  | d\n\nTable t2\nid | grec | smiley\n1  | α    | 😃\n3  | γ    | 😐\n5  | ε    | ☹️",
+    "options": [
+      "2 lignes, 4 colonnes et 0 valeurs nulles.",
+      "4 lignes, 4 colonnes et 4 valeurs nulles.",
+      "4 lignes, 5 colonnes et 6 valeurs nulles.",
+      "3 lignes, 4 colonnes et 1 valeur nulle.",
+      "3 lignes, 5 colonnes et 2 valeurs nulles.",
+      "5 lignes, 4 colonnes et 5 valeurs nulles.",
+      "5 lignes, 5 colonnes et 8 valeurs nulles.",
+      "12 lignes, 5 colonnes et 0 valeurs nulles."
+    ],
+    "correctIndex": 2,
+    "explanation": "LEFT JOIN conserve les 4 lignes de t1. Avec ON, les deux colonnes id sont conservées, donc il y a 5 colonnes. Les ids 2 et 4 n'ont pas de correspondance : t2.id, grec et smiley valent NULL, soit 6 valeurs NULL."
+  },
+  {
+    "id": 48,
+    "question": "Indiquez le nombre de lignes, de colonnes et de valeurs nulles dans le résultat de la requête suivante SELECT * FROM t1 RIGHT JOIN t2 USING(id); sur les tableaux suivants.\n\nTable t1\nid | lettre\n1  | a\n2  | b\n3  | c\n4  | d\n\nTable t2\nid | grec | smiley\n1  | α    | 😃\n3  | γ    | 😐\n5  | ε    | ☹️",
+    "options": [
+      "2 lignes, 4 colonnes et 0 valeurs nulles.",
+      "4 lignes, 4 colonnes et 4 valeurs nulles.",
+      "4 lignes, 5 colonnes et 6 valeurs nulles.",
+      "3 lignes, 4 colonnes et 1 valeur nulle.",
+      "3 lignes, 5 colonnes et 2 valeurs nulles.",
+      "5 lignes, 4 colonnes et 5 valeurs nulles.",
+      "5 lignes, 5 colonnes et 8 valeurs nulles.",
+      "12 lignes, 5 colonnes et 0 valeurs nulles."
+    ],
+    "correctIndex": 3,
+    "explanation": "RIGHT JOIN conserve les 3 lignes de t2. USING(id) fusionne la colonne id, donc le résultat a 4 colonnes. L'id 5 n'a pas de correspondance dans t1 : lettre vaut NULL, soit 1 valeur NULL."
+  },
+  {
+    "id": 49,
+    "question": "Indiquez le nombre de lignes, de colonnes et de valeurs nulles dans le résultat de la requête suivante SELECT * FROM t1 RIGHT JOIN t2 ON t1.id = t2.id; sur les tableaux suivants.\n\nTable t1\nid | lettre\n1  | a\n2  | b\n3  | c\n4  | d\n\nTable t2\nid | grec | smiley\n1  | α    | 😃\n3  | γ    | 😐\n5  | ε    | ☹️",
+    "options": [
+      "2 lignes, 4 colonnes et 0 valeurs nulles.",
+      "4 lignes, 4 colonnes et 4 valeurs nulles.",
+      "4 lignes, 5 colonnes et 6 valeurs nulles.",
+      "3 lignes, 4 colonnes et 1 valeur nulle.",
+      "3 lignes, 5 colonnes et 2 valeurs nulles.",
+      "5 lignes, 4 colonnes et 5 valeurs nulles.",
+      "5 lignes, 5 colonnes et 8 valeurs nulles.",
+      "12 lignes, 5 colonnes et 0 valeurs nulles."
+    ],
+    "correctIndex": 4,
+    "explanation": "RIGHT JOIN conserve les 3 lignes de t2. Avec ON, les deux colonnes id sont conservées, donc il y a 5 colonnes. Pour l'id 5, t1.id et lettre valent NULL : 2 valeurs NULL."
+  },
+  {
+    "id": 50,
+    "question": "Indiquez le nombre de lignes, de colonnes et de valeurs nulles dans le résultat de la requête suivante SELECT * FROM t1 FULL JOIN t2 USING(id); sur les tableaux suivants.\n\nTable t1\nid | lettre\n1  | a\n2  | b\n3  | c\n4  | d\n\nTable t2\nid | grec | smiley\n1  | α    | 😃\n3  | γ    | 😐\n5  | ε    | ☹️",
+    "options": [
+      "2 lignes, 4 colonnes et 0 valeurs nulles.",
+      "4 lignes, 4 colonnes et 4 valeurs nulles.",
+      "4 lignes, 5 colonnes et 6 valeurs nulles.",
+      "3 lignes, 4 colonnes et 1 valeur nulle.",
+      "3 lignes, 5 colonnes et 2 valeurs nulles.",
+      "5 lignes, 4 colonnes et 5 valeurs nulles.",
+      "5 lignes, 5 colonnes et 8 valeurs nulles.",
+      "12 lignes, 5 colonnes et 0 valeurs nulles."
+    ],
+    "correctIndex": 5,
+    "explanation": "FULL JOIN conserve tous les ids : 1, 2, 3, 4 et 5. USING(id) fusionne id, donc il y a 4 colonnes. Les ids 2 et 4 ont grec et smiley à NULL (4 NULL), et l'id 5 a lettre à NULL (1 NULL), soit 5 valeurs NULL."
+  },
+  {
+    "id": 51,
+    "question": "Indiquez le nombre de lignes, de colonnes et de valeurs nulles dans le résultat de la requête suivante SELECT * FROM t1 FULL JOIN t2 ON t1.id = t2.id; sur les tableaux suivants.\n\nTable t1\nid | lettre\n1  | a\n2  | b\n3  | c\n4  | d\n\nTable t2\nid | grec | smiley\n1  | α    | 😃\n3  | γ    | 😐\n5  | ε    | ☹️",
+    "options": [
+      "2 lignes, 4 colonnes et 0 valeurs nulles.",
+      "4 lignes, 4 colonnes et 4 valeurs nulles.",
+      "4 lignes, 5 colonnes et 6 valeurs nulles.",
+      "3 lignes, 4 colonnes et 1 valeur nulle.",
+      "3 lignes, 5 colonnes et 2 valeurs nulles.",
+      "5 lignes, 4 colonnes et 5 valeurs nulles.",
+      "5 lignes, 5 colonnes et 8 valeurs nulles.",
+      "12 lignes, 5 colonnes et 0 valeurs nulles."
+    ],
+    "correctIndex": 6,
+    "explanation": "FULL JOIN conserve les ids 1, 2, 3, 4 et 5. Avec ON, les deux colonnes id sont conservées, donc il y a 5 colonnes. Les ids 2 et 4 ont 3 valeurs NULL côté t2, et l'id 5 a 2 valeurs NULL côté t1 : 8 valeurs NULL."
+  },
+  {
+    "id": 52,
+    "question": "Indiquez le nombre de lignes, de colonnes et de valeurs nulles dans le résultat de la requête suivante SELECT * FROM t1 CROSS JOIN t2; sur les tableaux suivants.\n\nTable t1\nid | lettre\n1  | a\n2  | b\n3  | c\n4  | d\n\nTable t2\nid | grec | smiley\n1  | α    | 😃\n3  | γ    | 😐\n5  | ε    | ☹️",
+    "options": [
+      "2 lignes, 4 colonnes et 0 valeurs nulles.",
+      "4 lignes, 4 colonnes et 4 valeurs nulles.",
+      "4 lignes, 5 colonnes et 6 valeurs nulles.",
+      "3 lignes, 4 colonnes et 1 valeur nulle.",
+      "3 lignes, 5 colonnes et 2 valeurs nulles.",
+      "5 lignes, 4 colonnes et 5 valeurs nulles.",
+      "5 lignes, 5 colonnes et 8 valeurs nulles.",
+      "12 lignes, 5 colonnes et 0 valeurs nulles."
+    ],
+    "correctIndex": 7,
+    "explanation": "CROSS JOIN produit toutes les combinaisons : 4 lignes dans t1 × 3 lignes dans t2 = 12 lignes. Avec SELECT *, les deux colonnes id sont conservées, donc 5 colonnes, sans valeur NULL."
+  },
+  {
+    "id": 53,
+    "question": "Quelle opération permet de trouver les éléments communs entre deux ensembles de résultats ?",
+    "options": [
+      "Division relationnelle",
+      "Jointure",
+      "Union",
+      "Intersection",
+      "Produit cartésien",
+      "Différence"
+    ],
+    "correctIndex": 3,
+    "explanation": "L'intersection retourne les éléments présents dans les deux ensembles de résultats."
+  },
+  {
+    "id": 54,
+    "question": "Quelle opération permet de trouver les éléments présents dans un ensemble, mais pas dans un autre ?",
+    "options": [
+      "Division relationnelle",
+      "Jointure",
+      "Union",
+      "Intersection",
+      "Produit cartésien",
+      "Différence"
+    ],
+    "correctIndex": 5,
+    "explanation": "La différence retourne les éléments présents dans un ensemble et absents de l'autre."
+  },
+  {
+    "id": 55,
+    "question": "Quelle opération permet de trouver l'ensemble de tous les éléments présents dans l'un ou l'autre des ensembles de résultats ?",
+    "options": [
+      "Division relationnelle",
+      "Jointure",
+      "Union",
+      "Intersection",
+      "Produit cartésien",
+      "Différence"
+    ],
+    "correctIndex": 2,
+    "explanation": "L'union retourne les éléments présents dans l'un ou l'autre des ensembles de résultats."
+  },
+  {
+    "id": 56,
+    "question": "Indiquez le nombre de lignes dans le résultat de la requête suivante SELECT id from t1 UNION ALL SELECT id from t2; sur les tableaux suivants.\n\nTable t1\nid | lettre\n1  | a\n2  | b\n3  | c\n4  | d\n\nTable t2\nid | grec | smiley\n1  | α    | 😃\n3  | γ    | 😐\n5  | ε    | ☹️",
+    "options": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "correctIndex": 7,
+    "explanation": "UNION ALL conserve les doublons. t1 contient 4 ids et t2 en contient 3, donc le résultat contient 7 lignes."
+  },
+  {
+    "id": 57,
+    "question": "Indiquez les valeurs présentes dans le résultat de la requête suivante SELECT id from t1 UNION SELECT id from t2; sur les tableaux suivants.\n\nTable t1\nid | lettre\n1  | a\n2  | b\n3  | c\n4  | d\n\nTable t2\nid | grec | smiley\n1  | α    | 😃\n3  | γ    | 😐\n5  | ε    | ☹️",
+    "options": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "correctIndices": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "explanation": "UNION supprime les doublons et retourne les ids présents dans t1 ou t2 : 1, 2, 3, 4 et 5."
+  },
+  {
+    "id": 58,
+    "question": "Indiquez les valeurs présentes dans le résultat de la requête suivante SELECT id from t1 INTERSECT SELECT id from t2; sur les tableaux suivants.\n\nTable t1\nid | lettre\n1  | a\n2  | b\n3  | c\n4  | d\n\nTable t2\nid | grec | smiley\n1  | α    | 😃\n3  | γ    | 😐\n5  | ε    | ☹️",
+    "options": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "correctIndices": [
+      1,
+      3
+    ],
+    "explanation": "INTERSECT retourne les ids présents dans les deux tables : 1 et 3."
+  },
+  {
+    "id": 59,
+    "question": "Indiquez les valeurs présentes dans le résultat de la requête suivante SELECT id from t1 EXCEPT SELECT id from t2; sur les tableaux suivants.\n\nTable t1\nid | lettre\n1  | a\n2  | b\n3  | c\n4  | d\n\nTable t2\nid | grec | smiley\n1  | α    | 😃\n3  | γ    | 😐\n5  | ε    | ☹️",
+    "options": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "correctIndices": [
+      2,
+      4
+    ],
+    "explanation": "EXCEPT retourne les ids présents dans t1 mais absents de t2 : 2 et 4."
+  },
+  {
+    "id": 60,
+    "question": "Quelle opération permet de trouver les enregistrements dans une relation R pour lesquels toutes les combinaisons possibles avec les enregistrements d'une autre relation S sont présentes dans R ?",
+    "options": [
+      "Division relationnelle",
+      "Jointure",
+      "Union",
+      "Intersection",
+      "Produit cartésien",
+      "Différence"
+    ],
+    "correctIndex": 0,
+    "explanation": "La division relationnelle permet de trouver les éléments liés à tous les éléments d'un autre ensemble."
+  },
+  {
+    "id": 61,
+    "question": "Quels sont les rôles principaux de l'administrateur de base de données (DBA) ?",
+    "options": [
+      "Développer des applications",
+      "Gérer et maintenir l'intégrité et la performance des bases de données",
+      "Assurer la sécurité des données",
+      "Effectuer des sauvegardes et des restaurations de données",
+      "Analyser les données pour les entreprises",
+      "Assurer la sécurité des réseaux"
+    ],
+    "correctIndices": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "Le DBA gère l'intégrité, la performance, la sécurité, les sauvegardes et les restaurations des bases de données. Le développement applicatif, l'analyse métier et la sécurité réseau relèvent d'autres rôles."
+  },
+  {
+    "id": 62,
+    "question": "Quelles sont les deux commandes principales du DCL pour attribuer et retirer des droits ?",
+    "options": [
+      "GRANT",
+      "ALTER",
+      "REVOKE",
+      "DROP"
+    ],
+    "correctIndices": [
+      0,
+      2
+    ],
+    "explanation": "GRANT permet d'accorder des privilèges, tandis que REVOKE permet de les retirer."
+  },
+  {
+    "id": 63,
+    "question": "Quel est le principe du moindre privilège ?",
+    "options": [
+      "Accorder tous les privilèges à tous les utilisateurs",
+      "Accorder des privilèges en fonction de l'ancienneté",
+      "Accorder uniquement les privilèges nécessaires pour accomplir les fonctions légitimes",
+      "Accorder des privilèges aléatoires",
+      "Accorder des privilèges en fonction de la popularité",
+      "Limiter les privilèges aux besoins spécifiques de chaque utilisateur"
+    ],
+    "correctIndices": [
+      2,
+      5
+    ],
+    "explanation": "Le principe du moindre privilège consiste à ne donner à chaque utilisateur que les droits strictement nécessaires à ses tâches."
+  },
+  {
+    "id": 64,
+    "question": "Quel rôle est créé par défaut lors du premier démarrage de PostgreSQL avec tous les privilèges ?",
+    "options": [
+      "admin",
+      "postgres",
+      "root"
+    ],
+    "correctIndex": 1,
+    "explanation": "PostgreSQL crée généralement le superutilisateur postgres lors de l'initialisation du serveur."
+  },
+  {
+    "id": 65,
+    "question": "Quelle commande permet de voir tous les rôles existants en psql ?",
+    "options": [
+      "\\listroles",
+      "\\du+",
+      "SELECT roles FROM pg_roles;"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dans psql, la méta-commande \\du+ liste les rôles avec des informations détaillées."
+  },
+  {
+    "id": 66,
+    "question": "Quelle commande SQL permet de créer un rôle avec authentification par mot de passe ?",
+    "options": [
+      "CREATE USER max PASSWORD 'azerty';",
+      "CREATE USER max WITH PASSWORD 'azerty';",
+      "CREATE LOGIN max PASSWORD 'azerty';",
+      "CREATE LOGIN max WITH PASSWORD 'azerty';",
+      "CREATE ROLE max WITH PASSWORD 'azerty';",
+      "CREATE ROLE max LOGIN PASSWORD 'azerty';",
+      "CREATE ROLE max WITH LOGIN PASSWORD 'azerty';"
+    ],
+    "correctIndices": [
+      0,
+      1,
+      5,
+      6
+    ],
+    "explanation": "CREATE USER crée un rôle avec LOGIN par défaut et peut recevoir un mot de passe. Avec CREATE ROLE, il faut ajouter LOGIN pour permettre l'authentification."
+  },
+  {
+    "id": 67,
+    "question": "Quelle commande permet de changer de rôle en psql ?",
+    "options": [
+      "CHANGE ROLE",
+      "SET ROLE",
+      "ALTER ROLE",
+      "SWITCH ROLE",
+      "USE ROLE",
+      "UPDATE ROLE"
+    ],
+    "correctIndex": 1,
+    "explanation": "SET ROLE permet de changer temporairement de rôle dans une session SQL."
+  },
+  {
+    "id": 68,
+    "question": "Quelle commande SQL permet de donner tous les droits sur la base de données ventes au rôle alice ?",
+    "options": [
+      "GRANT ALL ON DATABASE ventes TO alice;",
+      "GRANT ALL PRIVILEGES ON DATABASE ventes TO alice;",
+      "ALTER DATABASE ventes OWNER TO alice;"
+    ],
+    "correctIndices": [
+      0,
+      1
+    ],
+    "explanation": "GRANT ALL et GRANT ALL PRIVILEGES sont équivalents pour accorder tous les privilèges applicables sur la base de données. ALTER DATABASE change le propriétaire, ce n'est pas un GRANT."
+  },
+  {
+    "id": 69,
+    "question": "Quelle commande SQL permet de donner les droits de lecture et d'écriture sur la table student au rôle max ?",
+    "options": [
+      "GRANT READ, WRITE ON TABLE student TO max;",
+      "ALTER TABLE student GRANT READ, WRITE TO max;",
+      "GRANT FULL ACCESS ON DATABASE ventes TO alice;",
+      "GRANT SELECT, INSERT, UPDATE ON TABLE student TO max;",
+      "GRANT ALL PERMISSIONS ON DATABASE ventes TO alice;",
+      "SET PRIVILEGES ON DATABASE ventes TO alice;"
+    ],
+    "correctIndex": 3,
+    "explanation": "Sur une table, SELECT donne le droit de lecture, tandis que INSERT et UPDATE donnent des droits d'écriture courants."
+  },
+  {
+    "id": 70,
+    "question": "Quelles commandes SQL permettent de révoquer tous les droits de alice sur la table vente ?",
+    "options": [
+      "REVOKE ALL ON vente TO alice;",
+      "REVOKE ALL ON vente FROM alice;",
+      "REVOKE ALL ON TABLE vente TO alice;",
+      "REVOKE ALL ON TABLE vente FROM alice;",
+      "REVOKE ALL PRIVILEGES ON vente TO alice;",
+      "REVOKE ALL PRIVILEGES ON vente FROM alice;",
+      "REVOKE ALL PRIVILEGES ON TABLE vente TO alice;",
+      "REVOKE ALL PRIVILEGES ON TABLE vente FROM alice;"
+    ],
+    "correctIndices": [
+      1,
+      3,
+      5,
+      7
+    ],
+    "explanation": "REVOKE retire les privilèges avec FROM, pas TO. Le mot-clé TABLE est optionnel et ALL peut être écrit ALL PRIVILEGES."
+  },
+  {
+    "id": 71,
+    "question": "Quelle commande SQL permet d'ajouter alice et max au groupe admins ?",
+    "options": [
+      "ADD alice, max TO admins;",
+      "INSERT INTO admins VALUES (alice, max);",
+      "GRANT admins TO alice, max;",
+      "ALTER GROUP admins ADD alice, max;",
+      "UPDATE admins SET members = members + (alice, max);"
+    ],
+    "correctIndex": 2,
+    "explanation": "Dans PostgreSQL, l'appartenance à un rôle/groupe s'accorde avec GRANT nom_du_role TO utilisateur."
+  },
+  {
+    "id": 72,
+    "question": "Quelle commande SQL permet de supprimer un rôle ?",
+    "options": [
+      "DELETE ROLE role_name;",
+      "ERASE ROLE role_name;",
+      "DROP ROLE role_name;",
+      "REMOVE ROLE role_name;",
+      "REVOKE ROLE role_name;"
+    ],
+    "correctIndex": 2,
+    "explanation": "DROP ROLE supprime un rôle PostgreSQL."
+  },
+  {
+    "id": 73,
+    "question": "Quelle commande SQL permet de créer un schéma magasin appartenant au rôle vendeurs ?",
+    "options": [
+      "CREATE SCHEMA magasin FOR vendeurs;",
+      "CREATE SCHEMA magasin WITH OWNER vendeurs;",
+      "CREATE SCHEMA magasin AUTHORIZATION vendeurs;",
+      "ALTER SCHEMA magasin OWNER TO vendeurs;",
+      "SET SCHEMA magasin OWNER vendeurs;"
+    ],
+    "correctIndex": 2,
+    "explanation": "CREATE SCHEMA magasin AUTHORIZATION vendeurs crée le schéma et définit vendeurs comme propriétaire."
+  },
+  {
+    "id": 74,
+    "question": "Quelle commande SQL permet de créer une table livre dans le schéma magasin ?",
+    "options": [
+      "CREATE TABLE magasin:livre (...);",
+      "CREATE TABLE magasin->livre (...);",
+      "CREATE TABLE magasin.livre (...);",
+      "ALTER SCHEMA magasin ADD TABLE livre (...);",
+      "INSERT INTO magasin TABLE livre (...);"
+    ],
+    "correctIndex": 2,
+    "explanation": "On qualifie une table par son schéma avec la notation schema.table, par exemple magasin.livre."
+  },
+  {
+    "id": 75,
+    "question": "Quelle commande SQL permet de modifier le search_path pour un utilisateur ?",
+    "options": [
+      "ALTER USER alice SET search_path = 'magasin', 'public';",
+      "SET search_path = 'magasin', 'public' FOR alice;",
+      "ALTER ROLE alice SET search_path = 'magasin', 'public';",
+      "UPDATE alice SET search_path = 'magasin', 'public';",
+      "CHANGE ROLE alice search_path TO 'magasin', 'public';"
+    ],
+    "correctIndices": [
+      0,
+      2
+    ],
+    "explanation": "ALTER USER et ALTER ROLE permettent de définir des paramètres de session par défaut pour un rôle, dont search_path."
+  },
+  {
+    "id": 76,
+    "question": "Quelle commande SQL permet de créer une vue ventes_du_jour ?",
+    "options": [
+      "CREATE TABLE ventes_du_jour AS SELECT ...;",
+      "ALTER TABLE ventes CREATE VIEW ventes_du_jour AS SELECT ...;",
+      "INSERT VIEW ventes_du_jour AS SELECT ...;",
+      "CREATE VIEW ventes_du_jour AS SELECT ...;",
+      "SELECT INTO ventes_du_jour FROM instructor WHERE ...;"
+    ],
+    "correctIndex": 3,
+    "explanation": "CREATE VIEW nom_vue AS SELECT ... crée une vue SQL."
+  },
+  {
+    "id": 77,
+    "question": "Quelle commande SQL permet de créer une vue matérialisée ?",
+    "options": [
+      "CREATE MATERIALIZED TABLE AS SELECT ...;",
+      "CREATE MATERIALIZED VIEW AS SELECT ...;",
+      "ALTER TABLE CREATE MATERIALIZED VIEW AS SELECT ...;"
+    ],
+    "correctIndex": 1,
+    "explanation": "PostgreSQL utilise CREATE MATERIALIZED VIEW nom_vue AS SELECT ... pour créer une vue matérialisée."
+  },
+  {
+    "id": 78,
+    "question": "Quelle condition doit être satisfaite pour qu'une vue SQL soit mise à jour ?",
+    "options": [
+      "La vue contient des sous-requêtes dans la clause WHERE.",
+      "La clause FROM n'a qu'une seule relation de base de données.",
+      "La requête utilise des jointures complexes.",
+      "La requête n'a pas de clause GROUP BY ou HAVING.",
+      "La clause SELECT contient des fonctions d'agrégation.",
+      "Les colonnes non sélectionnées peuvent être mises à NULL ou avoir une valeur par défaut."
+    ],
+    "correctIndices": [
+      1,
+      3,
+      5
+    ],
+    "explanation": "Une vue automatiquement modifiable doit notamment reposer sur une seule table, ne pas utiliser GROUP BY/HAVING ni agrégats, et les colonnes non exposées doivent pouvoir recevoir NULL ou une valeur par défaut."
+  },
+  {
+    "id": 79,
+    "question": "Quelle commande SQL permet de créer une règle pour les insertions dans une vue ?",
+    "options": [
+      "CREATE INSERT RULE AS ON INSERT TO view_name DO INSTEAD ...;",
+      "CREATE RULE insert_rule AS ON INSERT TO view_name DO INSTEAD ...;",
+      "ALTER VIEW view_name ADD RULE insert_rule AS ON INSERT DO INSTEAD ...;"
+    ],
+    "correctIndex": 1,
+    "explanation": "La syntaxe PostgreSQL est CREATE RULE nom_regle AS ON INSERT TO nom_vue DO INSTEAD ..."
+  },
+  {
+    "id": 80,
+    "question": "Quelle commande SQL permet de rafraîchir une vue matérialisée ?",
+    "options": [
+      "UPDATE MATERIALIZED VIEW view_name;",
+      "REFRESH MATERIALIZED VIEW view_name;",
+      "ALTER MATERIALIZED VIEW view_name REFRESH;"
+    ],
+    "correctIndex": 1,
+    "explanation": "REFRESH MATERIALIZED VIEW recharge les données stockées dans une vue matérialisée."
+  },
+  {
+    "id": 81,
+    "question": "Quelle est la principale limitation de SQL en tant que langage déclaratif ?",
+    "options": [
+      "SQL ne peut pas être utilisé pour accéder à des bases de données externes.",
+      "SQL ne permet pas de définir des fonctions et procédures.",
+      "SQL est limité dans sa capacité à effectuer des traitements complexes et procéduraux."
+    ],
+    "correctIndex": 2,
+    "explanation": "SQL est un langage déclaratif : il décrit le résultat attendu, mais il est moins adapté seul aux traitements complexes et procéduraux."
+  },
+  {
+    "id": 82,
+    "question": "Quels sont les avantages d'utiliser des fonctions et procédures en SQL ?",
+    "options": [
+      "Encapsuler des logiques complexes.",
+      "Améliorer la lisibilité du code.",
+      "Réduire la performance de la base de données.",
+      "Faciliter la maintenance."
+    ],
+    "correctIndices": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "Les fonctions et procédures permettent d'encapsuler la logique, de rendre le code plus lisible et de faciliter sa maintenance."
+  },
+  {
+    "id": 83,
+    "question": "Quelle(s) commande(s) SQL peut/peuvent être utilisée(s) pour créer une fonction ?",
+    "options": [
+      "CREATE PROCEDURE",
+      "CREATE FUNCTION",
+      "CREATE VIEW",
+      "CREATE OR REPLACE FUNCTION"
+    ],
+    "correctIndices": [
+      1,
+      3
+    ],
+    "explanation": "CREATE FUNCTION crée une fonction, et CREATE OR REPLACE FUNCTION permet de la créer ou de la remplacer si elle existe déjà."
+  },
+  {
+    "id": 84,
+    "question": "Quelle(s) est/sont la/les syntaxe(s) de base pour créer une fonction en SQL ?",
+    "options": [
+      "CREATE FUNCTION function_name () AS $$ -- Corps de la fonction $$ LANGUAGE SQL;",
+      "CREATE FUNCTION function_name (arguments) RETURNS return_type AS $$ -- Corps de la fonction $$ LANGUAGE SQL;",
+      "CREATE OR REPLACE FUNCTION function_name (arguments) RETURNS return_type AS $$ -- Corps de la fonction $$ LANGUAGE SQL;",
+      "CREATE FUNCTION function_name (arguments, OUT arguments) AS $$ -- Corps de la fonction $$ LANGUAGE SQL;"
+    ],
+    "correctIndices": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "Une fonction SQL précise généralement ses arguments, son type de retour avec RETURNS, ou des paramètres OUT. CREATE OR REPLACE FUNCTION est aussi valide."
+  },
+  {
+    "id": 85,
+    "question": "Parmi les types de retour suivants en SQL, lesquels permettent de retourner plusieurs lignes ?",
+    "options": [
+      "RETURNS INTEGER",
+      "RETURNS TABLE (col1 type1, col2 type2)",
+      "RETURNS SETOF table_name",
+      "RETURNS RECORD"
+    ],
+    "correctIndices": [
+      1,
+      2
+    ],
+    "explanation": "RETURNS TABLE et RETURNS SETOF permettent de retourner plusieurs lignes. RETURNS INTEGER et RETURNS RECORD décrivent un seul résultat."
+  },
+  {
+    "id": 86,
+    "question": "Quelles affirmations parmi les suivantes concernant les fonctions et procédures SQL sont correctes ?",
+    "options": [
+      "Les fonctions peuvent être appelées avec CALL, tandis que les procédures ne le peuvent pas.",
+      "Les fonctions retournent une valeur, tandis que les procédures ne retournent pas de valeur.",
+      "Les fonctions sont toujours exécutées dans le contexte d'une transaction, tandis que les procédures ne le sont pas.",
+      "Les fonctions peuvent être utilisées dans une clause SELECT, tandis que les procédures non."
+    ],
+    "correctIndices": [
+      1,
+      3
+    ],
+    "explanation": "Les fonctions retournent une valeur et peuvent être utilisées dans SELECT. Les procédures s'appellent avec CALL et ne s'utilisent pas comme expressions dans SELECT."
+  },
+  {
+    "id": 87,
+    "question": "Quelle commande est utilisée pour appeler une procédure en SQL ?",
+    "options": [
+      "SELECT",
+      "CALL",
+      "EXECUTE",
+      "RUN"
+    ],
+    "correctIndex": 1,
+    "explanation": "Une procédure SQL s'appelle avec CALL."
+  },
+  {
+    "id": 88,
+    "question": "Quelle est la différence entre les arguments nommés et les arguments positionnels dans une fonction SQL ?",
+    "options": [
+      "Les arguments nommés ne peuvent pas être utilisés dans les fonctions SQL.",
+      "Les arguments nommés sont toujours obligatoires, tandis que les arguments positionnels sont optionnels.",
+      "Les arguments nommés sont désignés par leur nom, tandis que les arguments positionnels sont désignés par leur position.",
+      "Les arguments positionnels sont toujours plus performants que les arguments nommés."
+    ],
+    "correctIndex": 2,
+    "explanation": "Les arguments nommés sont référencés par leur nom, alors que les arguments positionnels sont référencés selon leur ordre."
+  },
+  {
+    "id": 89,
+    "question": "Comment désigne-t-on le deuxième argument d'une fonction SQL ?",
+    "options": [
+      "args[2]",
+      "$1",
+      "$2",
+      "args[1]"
+    ],
+    "correctIndex": 2,
+    "explanation": "Dans une fonction SQL PostgreSQL, le deuxième argument positionnel est désigné par $2."
+  },
+  {
+    "id": 90,
+    "question": "Quel(s) est/sont parmi les suivants, le(s) avantage(s) d'utiliser un client externe pour traiter les données en dehors de la base de données ?",
+    "options": [
+      "Réduire la performance de la base de données.",
+      "Effectuer des traitements intensifs en dehors de la base de données.",
+      "Augmenter la complexité du code.",
+      "Utiliser des bibliothèques externes pour des traitements spécifiques."
+    ],
+    "correctIndices": [
+      1,
+      3
+    ],
+    "explanation": "Un client externe permet de déporter des traitements intensifs et d'utiliser des bibliothèques spécialisées hors de la base."
+  },
+  {
+    "id": 91,
+    "question": "Quelle(s) bibliothèque(s) Python peut/peuvent être utilisée(s) pour interagir avec une base de données PostgreSQL ?",
+    "options": [
+      "SQLite",
+      "psycopg",
+      "OracleDB",
+      "SQLAlchemy"
+    ],
+    "correctIndices": [
+      1,
+      3
+    ],
+    "explanation": "psycopg est un pilote PostgreSQL pour Python. SQLAlchemy peut aussi interagir avec PostgreSQL via un pilote adapté."
+  },
+  {
+    "id": 92,
+    "question": "Quelle méthode de l'objet psycopg.Cursor est utilisée pour exécuter une requête ou une commande sur la base de données ?",
+    "options": [
+      "commit()",
+      "fetchone()",
+      "execute()",
+      "close()"
+    ],
+    "correctIndex": 2,
+    "explanation": "cursor.execute() exécute une requête ou une commande SQL."
+  },
+  {
+    "id": 93,
+    "question": "Quel place réservée (placeholder) utilise-t-on pour passer des paramètres à une requête paramétrée en Python avec psycopg ?",
+    "options": [
+      "?",
+      "%d",
+      "%s",
+      "$1"
+    ],
+    "correctIndex": 2,
+    "explanation": "Avec psycopg, les paramètres de requêtes s'écrivent avec le placeholder %s, quel que soit le type de donnée."
+  },
+  {
+    "id": 94,
+    "question": "Quelle pratique permet de prévenir les injections SQL en Python avec psycopg ?",
+    "options": [
+      "Concaténer directement les variables dans la requête SQL.",
+      "Utiliser des requêtes paramétrées avec des placeholders %s.",
+      "Valider manuellement les entrées utilisateur.",
+      "Passer les paramètres via le second argument de execute()."
+    ],
+    "correctIndices": [
+      1,
+      3
+    ],
+    "explanation": "Les requêtes paramétrées avec %s et le passage des valeurs dans le second argument de execute() évitent de concaténer directement les entrées dans le SQL."
+  },
+  {
+    "id": 95,
+    "question": "Quelle est la méthode de l'objet psycopg.Cursor utilisée pour récupérer le prochain enregistrement d'un curseur en Python avec psycopg ?",
+    "options": [
+      "execute()",
+      "fetchone()",
+      "close()",
+      "fetchall()"
+    ],
+    "correctIndex": 1,
+    "explanation": "fetchone() récupère le prochain enregistrement du curseur."
+  },
+  {
+    "id": 96,
+    "question": "Quelle(s) méthode(s) peut/peuvent être utilisée(s) pour fermer une connexion à une base de données en Python avec psycopg ?",
+    "options": [
+      "disconnect()",
+      "close()",
+      "quit()",
+      "Utiliser le contexte with pour une fermeture automatique"
+    ],
+    "correctIndices": [
+      1,
+      3
+    ],
+    "explanation": "Une connexion psycopg peut être fermée avec close(), ou automatiquement en utilisant un gestionnaire de contexte with."
+  },
+  {
+    "id": 97,
+    "question": "Comment fermer automatiquement un curseur à la fin d'un bloc de code en Python avec psycopg ?",
+    "options": [
+      "open cursor() as cur:",
+      "with conn.cursor() as cur:",
+      "with cursor() as cur:",
+      "create cursor() as cur:"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le gestionnaire de contexte with conn.cursor() as cur ferme automatiquement le curseur à la fin du bloc."
+  },
+  {
+    "id": 98,
+    "question": "Quelle est la méthode utilisée pour récupérer tous les enregistrements restants d'un curseur en Python avec psycopg ?",
+    "options": [
+      "getall()",
+      "all()",
+      "fetchall()",
+      "retrieveall()"
+    ],
+    "correctIndex": 2,
+    "explanation": "fetchall() récupère tous les enregistrements restants du curseur."
+  },
+  {
+    "id": 99,
+    "question": "Quelle est la méthode permettant de valider les modifications apportées à la base de données en Python avec psycopg ?",
+    "options": [
+      "execute()",
+      "validate()",
+      "conn.commit()",
+      "cur.commit()"
+    ],
+    "correctIndex": 2,
+    "explanation": "conn.commit() valide la transaction et rend les modifications persistantes."
+  },
+  {
+    "id": 100,
+    "question": "Avec un curseur nommé cur, quel(s) code(s) permet(ent) d'itérer sur les résultats d'une requête SQL en Python avec psycopg ?",
+    "options": [
+      "for row in cur.fetchall(sql):",
+      "for row in cur:",
+      "for row in cur.fetchall():",
+      "for row in cur.execute(sql):"
+    ],
+    "correctIndices": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "On peut itérer directement sur le curseur, sur la liste retournée par fetchall(), ou sur le curseur retourné par execute(sql)."
+  },
+  {
+    "id": 101,
+    "question": "Quelle bibliothèque est utilisée avec SQLAlchemy pour se connecter à PostgreSQL ?",
+    "options": [
+      "pymysql",
+      "psycopg",
+      "sqlite3",
+      "pyodbc"
+    ],
+    "correctIndex": 1,
+    "explanation": "psycopg est un pilote PostgreSQL utilisable avec SQLAlchemy."
+  },
+  {
+    "id": 102,
+    "question": "Quelle fonction de SQLAlchemy permet de travailler avec une base de données ?",
+    "options": [
+      "execute() seul",
+      "create_engine()",
+      "read_sql() seul",
+      "connect()"
+    ],
+    "correctIndices": [
+      1,
+      3
+    ],
+    "explanation": "create_engine() crée l'objet moteur SQLAlchemy, et connect() permet d'ouvrir une connexion à la base."
+  },
+  {
+    "id": 103,
+    "question": "Quelle fonction de SQLAlchemy doit être utilisée pour éviter l'injection SQL ?",
+    "options": [
+      "execute()",
+      "text()",
+      "connect()",
+      "bindparams() seul"
+    ],
+    "correctIndex": 1,
+    "explanation": "text() permet de déclarer une requête textuelle paramétrable avec des placeholders nommés, utilisée ensuite avec des paramètres liés."
+  },
+  {
+    "id": 104,
+    "question": "Comment passer des paramètres de manière sécurisée à une requête SQL avec SQLAlchemy ?",
+    "options": [
+      "Concaténer les paramètres directement dans la chaîne SQL",
+      "Utiliser text() pour la requête",
+      "Utiliser des f-strings avec les paramètres",
+      "Utiliser bindparams() pour lier les paramètres"
+    ],
+    "correctIndices": [
+      1,
+      3
+    ],
+    "explanation": "Une requête text() avec des paramètres liés, par exemple via bindparams(), évite de concaténer directement les valeurs dans le SQL."
+  },
+  {
+    "id": 105,
+    "question": "Quelle fonction de pandas récupère des données dans un DataFrame à partir d'une requête SQL ?",
+    "options": [
+      "read_csv()",
+      "read_sql()",
+      "read_excel()",
+      "from_sql()"
+    ],
+    "correctIndex": 1,
+    "explanation": "pd.read_sql() exécute une requête SQL et retourne le résultat dans un DataFrame."
+  },
+  {
+    "id": 106,
+    "question": "Quel objet doit être passé à pd.read_sql() pour exécuter une requête sécurisée ?",
+    "options": [
+      "Une chaîne SQL brute",
+      "Un objet text() de SQLAlchemy",
+      "Un curseur psycopg",
+      "Une connexion SQLAlchemy"
+    ],
+    "correctIndices": [
+      1,
+      3
+    ],
+    "explanation": "pd.read_sql() peut recevoir une requête SQLAlchemy text() paramétrée et une connexion SQLAlchemy pour l'exécuter proprement."
+  },
+  {
+    "id": 107,
+    "question": "Que désigne le terme « DataFrame » dans pandas ?",
+    "options": [
+      "Une fonction de pandas qui exécute des requêtes SQL",
+      "Une structure de données en deux dimensions, similaire à une table",
+      "Une structure pouvant contenir des données de types variés (numériques, chaînes, etc.)",
+      "Un objet spécifique à SQLAlchemy pour préparer les requêtes",
+      "Un type de graphique généré par df.plot()"
+    ],
+    "correctIndices": [
+      1,
+      2
+    ],
+    "explanation": "Un DataFrame pandas est une structure tabulaire en deux dimensions, dont les colonnes peuvent contenir des types de données variés."
+  },
+  {
+    "id": 108,
+    "question": "Quelle bibliothèque est utilisée par défaut par la méthode plot() de pandas ?",
+    "options": [
+      "Plotly",
+      "Matplotlib",
+      "Seaborn",
+      "Bokeh"
+    ],
+    "correctIndex": 1,
+    "explanation": "La méthode plot() de pandas s'appuie par défaut sur Matplotlib."
+  },
+  {
+    "id": 109,
+    "question": "Parmi les valeurs suivantes de kind pour df.plot(kind=...), lesquelles sont reconnues par pandas ?",
+    "options": [
+      "'line'",
+      "'bubble'",
+      "'bar'",
+      "'contour'",
+      "'hist'",
+      "'violin'",
+      "'scatter'",
+      "'heatmap'"
+    ],
+    "correctIndices": [
+      0,
+      2,
+      4,
+      6
+    ],
+    "explanation": "pandas reconnaît notamment line, bar, hist et scatter pour df.plot(kind=...)."
+  },
+  {
+    "id": 110,
+    "question": "Quels types de graphiques sont utilisés pour visualiser les tendances au fil du temps ?",
+    "options": [
+      "Bar plot",
+      "Line plot",
+      "Area plot",
+      "Pie plot"
+    ],
+    "correctIndices": [
+      1,
+      2
+    ],
+    "explanation": "Les line plots et area plots sont adaptés pour représenter l'évolution d'une variable au fil du temps."
+  },
+  {
+    "id": 111,
+    "question": "Quels types de graphiques sont utilisés pour visualiser la distribution d'une variable quantitative ?",
+    "options": [
+      "Histogram",
+      "Line plot",
+      "Box plot",
+      "KDE (Kernel Density Estimation)"
+    ],
+    "correctIndices": [
+      0,
+      2,
+      3
+    ],
+    "explanation": "Un histogramme, une boîte à moustaches ou une courbe KDE permettent d'étudier la distribution d'une variable quantitative."
+  },
+  {
+    "id": 112,
+    "question": "Quel graphique permet de visualiser la distribution d'une variable quantitative et d'identifier les valeurs aberrantes ?",
+    "options": [
+      "Camembert (pie)",
+      "Boîte à moustaches (box plot)",
+      "Nuage de points (scatter)",
+      "Histogramme (hist)"
+    ],
+    "correctIndices": [
+      1
+    ],
+    "explanation": "La boîte à moustaches est particulièrement adaptée pour visualiser la distribution et repérer les valeurs aberrantes."
+  },
+  {
+    "id": 113,
+    "question": "Quel type de graphique est utilisé pour visualiser les proportions de différentes catégories ?",
+    "options": [
+      "Bar plot",
+      "Pie plot",
+      "Scatter plot",
+      "Line plot"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un pie plot permet de représenter des proportions entre catégories."
+  },
+  {
+    "id": 114,
+    "question": "Quel type de graphique est utilisé pour visualiser la relation entre deux variables quantitatives ?",
+    "options": [
+      "Line plot",
+      "Scatter plot",
+      "Bar plot",
+      "Histogram"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un scatter plot permet d'étudier la relation entre deux variables quantitatives."
+  },
+  {
+    "id": 115,
+    "question": "Pour chaque opération suivante, dans quelle techno la réalisez-vous dans l'approche du chapitre ?",
+    "options": [
+      "Python : Trier les données",
+      "SQL : Filtrer les lignes selon une condition",
+      "Python: Calculer une moyenne",
+      "SQL : Agréger des valeurs par groupe",
+      "Python : Produire un graphique à partir des résultats"
+    ],
+    "correctIndices": [
+      1,
+      3,
+      4
+    ],
+    "explanation": "Dans une approche SQL-centrique, on filtre et agrège côté SQL, puis Python sert notamment à exploiter et visualiser les résultats."
+  },
+  {
+    "id": 116,
+    "question": "Comment combiner plusieurs graphiques dans une seule figure avec matplotlib ?",
+    "options": [
+      "plt.figure() seul",
+      "plt.subplots(nrows, ncols)",
+      "plt.combine()",
+      "Passer ax=axes[i,j] à df.plot()"
+    ],
+    "correctIndices": [
+      1,
+      3
+    ],
+    "explanation": "plt.subplots() crée une grille d'axes, et l'argument ax permet de dessiner chaque graphique pandas dans l'axe voulu."
+  },
+  {
+    "id": 117,
+    "question": "Quelle bibliothèque permet de créer des graphiques interactifs directement à partir de pandas ?",
+    "options": [
+      "Seaborn",
+      "Plotly",
+      "Matplotlib",
+      "Bokeh"
+    ],
+    "correctIndex": 1,
+    "explanation": "Plotly permet de produire des graphiques interactifs et peut être utilisé avec des DataFrames pandas."
+  },
+  {
+    "id": 118,
+    "question": "Quelle bibliothèque permet de créer une interface utilisateur avec des widgets dans Jupyter ?",
+    "options": [
+      "Tkinter",
+      "ipywidgets",
+      "Flask",
+      "Dash"
+    ],
+    "correctIndex": 1,
+    "explanation": "ipywidgets permet d'ajouter des widgets interactifs dans les notebooks Jupyter."
+  },
+  {
+    "id": 119,
+    "question": "Quelles affirmations sur les types de cartes sont correctes ?",
+    "options": [
+      "Les cartes contours utilisent des données vectorielles pour les frontières",
+      "Les cartes contours chargent dynamiquement les tuiles selon le niveau de zoom",
+      "Les cartes tuilées affichent uniquement les parties nécessaires en fonction du zoom et de la position",
+      "Les cartes tuilées décrivent les frontières avec des données vectorielles"
+    ],
+    "correctIndices": [
+      0,
+      2
+    ],
+    "explanation": "Les cartes contours reposent sur des géométries vectorielles, tandis que les cartes tuilées chargent les tuiles nécessaires selon la zone et le niveau de zoom."
+  },
+  {
+    "id": 120,
+    "question": "Pourquoi privilégier une approche SQL-centrique plutôt qu'une approche pandas pour le traitement des données ?",
+    "options": [
+      "Syntaxe plus simple que celle de pandas",
+      "Meilleures performances (calculs côté serveur)",
+      "Meilleure scalabilité sur de grands volumes de données",
+      "Respect natif des contraintes d'intégrité de la base"
+    ],
+    "correctIndices": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "Une approche SQL-centrique exploite le serveur de base de données, passe mieux à l'échelle sur de gros volumes et respecte les contraintes d'intégrité."
+  }
+]

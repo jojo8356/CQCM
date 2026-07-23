@@ -1,0 +1,482 @@
+[
+  {
+    "id": 1,
+    "question": "Que signifie ARP ?",
+    "options": [
+      "Application Resolution Protocol",
+      "Address Resolution Protocol",
+      "Automatic Routing Protocol",
+      "Address Retrieval Process"
+    ],
+    "correctIndex": 1,
+    "explanation": "ARP signifie Address Resolution Protocol, défini dans la RFC 826."
+  },
+  {
+    "id": 2,
+    "question": "Quel est le rôle du protocole ARP ?",
+    "options": [
+      "Traduire un nom de domaine en adresse IP",
+      "Faire la correspondance entre une adresse IP et une adresse MAC sur le réseau local",
+      "Attribuer automatiquement des adresses IP",
+      "Router les paquets entre deux réseaux différents"
+    ],
+    "correctIndex": 1,
+    "explanation": "ARP permet la correspondance entre une adresse réseau (IP) du réseau local et une adresse MAC, car les trames Ethernet utilisent des adresses MAC."
+  },
+  {
+    "id": 3,
+    "question": "Pourquoi le protocole ARP est-il nécessaire ?",
+    "options": [
+      "Parce que les adresses IP sont trop longues",
+      "Parce que les applications manipulent des adresses IP mais les trames utilisent des adresses MAC",
+      "Parce que les adresses MAC changent à chaque connexion",
+      "Parce que le routeur ne connaît pas les adresses IP"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les applications ne manipulent que des adresses IP, mais les trames Ethernet sont échangées en utilisant les adresses MAC. ARP fait le lien entre les deux."
+  },
+  {
+    "id": 4,
+    "question": "Qu'est-ce que le cache ARP ?",
+    "options": [
+      "Un fichier de configuration réseau statique",
+      "Une table de correspondance dynamique entre adresses IP et adresses MAC",
+      "Un buffer de stockage des trames en attente",
+      "Un registre dans le processeur dédié au réseau"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le cache ARP est une table de correspondance dynamique, construite et mise à jour par le système, où chaque entrée a une durée de vie finie."
+  },
+  {
+    "id": 5,
+    "question": "Lorsqu'un ordinateur A veut envoyer une trame à B sur le même réseau local, que fait-il en premier ?",
+    "options": [
+      "Il envoie un broadcast à toutes les machines",
+      "Il interroge son cache ARP à la recherche d'une entrée pour B",
+      "Il contacte le serveur DNS",
+      "Il envoie la trame directement avec l'adresse IP de B"
+    ],
+    "correctIndex": 1,
+    "explanation": "A interroge d'abord son cache ARP à la recherche d'une entrée pour l'adresse IP de B. Si l'entrée existe, il utilise l'adresse MAC correspondante."
+  },
+  {
+    "id": 6,
+    "question": "Que se passe-t-il si l'adresse IP de B est présente dans le cache ARP de A ?",
+    "options": [
+      "A envoie quand même une requête ARP pour vérifier",
+      "A lit l'adresse MAC correspondante et envoie directement la trame Ethernet à B",
+      "A demande au routeur de transmettre la trame",
+      "A attend que B confirme sa présence sur le réseau"
+    ],
+    "correctIndex": 1,
+    "explanation": "Si l'adresse IP de B est dans le cache ARP de A, il lit directement l'adresse MAC correspondante et envoie la trame Ethernet à B."
+  },
+  {
+    "id": 7,
+    "question": "Que se passe-t-il si l'adresse IP de B est absente du cache ARP de A ?",
+    "options": [
+      "A abandonne l'envoi",
+      "A met son émission en attente et effectue une requête ARP en broadcast",
+      "A envoie la trame avec une adresse MAC aléatoire",
+      "A contacte le serveur DHCP"
+    ],
+    "correctIndex": 1,
+    "explanation": "A met son émission en attente et effectue une requête ARP en broadcast : « Quelle est l'adresse MAC correspondant à @IP_B ? Répondez à @MAC_A »."
+  },
+  {
+    "id": 8,
+    "question": "Comment est envoyée une requête ARP ?",
+    "options": [
+      "En unicast vers le destinataire",
+      "En broadcast à toutes les machines du réseau local",
+      "En multicast à un groupe spécifique",
+      "Directement au routeur"
+    ],
+    "correctIndex": 1,
+    "explanation": "La requête ARP est envoyée en broadcast (diffusion) : tous les ordinateurs connectés au support physique vont la recevoir."
+  },
+  {
+    "id": 9,
+    "question": "Qui répond à une requête ARP ?",
+    "options": [
+      "Toutes les machines du réseau",
+      "Le routeur uniquement",
+      "Seule la machine dont l'adresse IP correspond à celle demandée",
+      "Le serveur DNS"
+    ],
+    "correctIndex": 2,
+    "explanation": "Seul l'ordinateur possédant l'adresse IP demandée répond avec une réponse ARP contenant son adresse MAC."
+  },
+  {
+    "id": 10,
+    "question": "Comment est envoyée une réponse ARP ?",
+    "options": [
+      "En broadcast à tout le réseau",
+      "En point à point (unicast) vers la machine qui a fait la requête",
+      "En multicast",
+      "Via le routeur"
+    ],
+    "correctIndex": 1,
+    "explanation": "La réponse ARP est envoyée en point à point (unicast) directement à la machine qui a émis la requête, car B connaît l'adresse MAC de A grâce à la requête reçue."
+  },
+  {
+    "id": 11,
+    "question": "Que contient une réponse ARP ?",
+    "options": [
+      "L'adresse IP du routeur",
+      "« Je suis @IP_B, mon adresse MAC est @MAC_B »",
+      "La liste de toutes les machines du réseau",
+      "Le nom de domaine de la machine"
+    ],
+    "correctIndex": 1,
+    "explanation": "La réponse ARP est du type : « je suis @IP_B, mon adresse MAC est @MAC_B », permettant à A de mettre à jour son cache ARP."
+  },
+  {
+    "id": 12,
+    "question": "Que fait B lorsqu'il reçoit une requête ARP de A ?",
+    "options": [
+      "Il ignore la requête et ne répond pas",
+      "Il crée une entrée dans son propre cache ARP avec les informations de A, puis répond",
+      "Il transmet la requête au routeur",
+      "Il envoie une erreur ICMP"
+    ],
+    "correctIndex": 1,
+    "explanation": "B crée une entrée dans son cache ARP à partir des données reçues (adresse IP et MAC de A), puis envoie sa réponse ARP."
+  },
+  {
+    "id": 13,
+    "question": "Que fait A après avoir reçu la réponse ARP de B ?",
+    "options": [
+      "Il renvoie une nouvelle requête ARP pour confirmer",
+      "Il met à jour son cache ARP et envoie le message qu'il avait mis en attente",
+      "Il demande au routeur de valider l'adresse",
+      "Il attend 5 secondes avant d'envoyer"
+    ],
+    "correctIndex": 1,
+    "explanation": "A reçoit la réponse, met à jour son cache ARP avec l'entrée IP→MAC de B, et peut donc envoyer le message initialement mis en attente."
+  },
+  {
+    "id": 14,
+    "question": "Quelle valeur du champ Type de la trame Ethernet identifie le protocole ARP ?",
+    "options": [
+      "0x0800",
+      "0x0806",
+      "0x86DD",
+      "0x8864"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le champ Type de la trame Ethernet vaut 0x0806 pour ARP (0x0800 pour IPv4, 0x86DD pour IPv6)."
+  },
+  {
+    "id": 15,
+    "question": "Quelle est la taille d'un paquet ARP (pour Ethernet et IP) ?",
+    "options": [
+      "14 octets",
+      "20 octets",
+      "28 octets",
+      "64 octets"
+    ],
+    "correctIndex": 2,
+    "explanation": "Un paquet ARP (pour Ethernet et IP) fait 28 octets, encapsulé dans une trame Ethernet."
+  },
+  {
+    "id": 16,
+    "question": "Quelle est l'adresse MAC destination dans l'en-tête Ethernet d'une requête ARP ?",
+    "options": [
+      "L'adresse MAC de la machine destinataire",
+      "00-00-00-00-00-00",
+      "FF-FF-FF-FF-FF-FF",
+      "L'adresse MAC du routeur"
+    ],
+    "correctIndex": 2,
+    "explanation": "Dans une requête ARP, l'adresse MAC destination de l'en-tête Ethernet est FF-FF-FF-FF-FF-FF (broadcast), car on ne connaît pas encore la MAC du destinataire."
+  },
+  {
+    "id": 17,
+    "question": "Dans un paquet ARP, quelle est l'adresse MAC destinataire lorsqu'il s'agit d'une requête ?",
+    "options": [
+      "FF-FF-FF-FF-FF-FF",
+      "00-00-00-00-00-00",
+      "L'adresse MAC du routeur",
+      "L'adresse MAC source"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dans le paquet ARP lui-même, l'adresse MAC destinataire est 00-00-00-00-00-00 lors d'une requête, car c'est précisément cette adresse que l'on cherche à découvrir."
+  },
+  {
+    "id": 18,
+    "question": "Quel est le code dans le paquet ARP pour une requête ARP ?",
+    "options": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le code 1 dans le paquet ARP correspond à une requête ARP, et le code 2 correspond à une réponse ARP."
+  },
+  {
+    "id": 19,
+    "question": "Quel est le code dans le paquet ARP pour une réponse ARP ?",
+    "options": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le code 2 correspond à une réponse ARP (ARP reply), tandis que le code 1 correspond à une requête ARP (ARP request)."
+  },
+  {
+    "id": 20,
+    "question": "Dans le paquet ARP, quelle valeur indique que le type d'adresse MAC est Ethernet ?",
+    "options": [
+      "0",
+      "1",
+      "6",
+      "0x800"
+    ],
+    "correctIndex": 1,
+    "explanation": "La valeur 1 dans le champ « type d'adresse MAC » indique Ethernet. Le champ « type d'adresse réseau » vaut 0x800 pour IP."
+  },
+  {
+    "id": 21,
+    "question": "Quelle est la taille d'une adresse MAC dans le paquet ARP ?",
+    "options": [
+      "4 octets",
+      "6 octets",
+      "8 octets",
+      "12 octets"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le champ « taille @ MAC » du paquet ARP vaut 6 (octets), ce qui correspond aux 48 bits d'une adresse MAC Ethernet."
+  },
+  {
+    "id": 22,
+    "question": "Quelle est la taille d'une adresse IP dans le paquet ARP ?",
+    "options": [
+      "2 octets",
+      "4 octets",
+      "6 octets",
+      "16 octets"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le champ « taille @ IP » du paquet ARP vaut 4 (octets), ce qui correspond aux 32 bits d'une adresse IPv4."
+  },
+  {
+    "id": 23,
+    "question": "Les entrées du cache ARP sont-elles permanentes ?",
+    "options": [
+      "Oui, elles restent indéfiniment",
+      "Non, chaque ligne a une durée de vie finie",
+      "Oui, sauf si on redémarre la machine",
+      "Non, elles sont supprimées après chaque trame envoyée"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le cache ARP est dynamique : il est construit et mis à jour par le système, et chaque ligne a une durée de vie finie (généralement quelques minutes)."
+  },
+  {
+    "id": 24,
+    "question": "Où est encapsulé le paquet ARP ?",
+    "options": [
+      "Dans un paquet IP",
+      "Dans un segment TCP",
+      "Dans une trame Ethernet (trame de liaison de données)",
+      "Dans un datagramme UDP"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le paquet ARP est encapsulé directement dans une trame Ethernet (couche liaison de données), identifié par le champ Type = 0x0806."
+  },
+  {
+    "id": 25,
+    "question": "Lorsque A veut envoyer une trame à E qui est sur un autre réseau, que fait A avec ARP ?",
+    "options": [
+      "A fait une requête ARP pour l'adresse MAC de E directement",
+      "A fait une requête ARP pour l'adresse MAC du routeur (passerelle) qui mène vers E",
+      "A n'a pas besoin d'ARP pour communiquer hors du réseau local",
+      "A envoie la trame sans adresse MAC"
+    ],
+    "correctIndex": 1,
+    "explanation": "Pour atteindre E sur un autre réseau, A doit passer par le routeur (passerelle). A fait donc une requête ARP pour obtenir l'adresse MAC du routeur, pas celle de E."
+  },
+  {
+    "id": 26,
+    "question": "Lorsque A communique avec E via le routeur B, quelle adresse MAC destination met-il dans la trame Ethernet ?",
+    "options": [
+      "L'adresse MAC de E",
+      "L'adresse MAC de B (le routeur)",
+      "FF-FF-FF-FF-FF-FF",
+      "00-00-00-00-00-00"
+    ],
+    "correctIndex": 1,
+    "explanation": "A met l'adresse MAC du routeur B dans la trame Ethernet. L'adresse IP destination reste celle de E, mais la trame est envoyée au routeur B qui la relaiera."
+  },
+  {
+    "id": 27,
+    "question": "Dans le cas d'une communication avec une machine hors du réseau local, que cherche A dans son cache ARP ?",
+    "options": [
+      "L'adresse MAC de la machine distante",
+      "L'adresse MAC du routeur (passerelle par défaut)",
+      "L'adresse IP de la machine distante",
+      "L'adresse MAC du serveur DNS"
+    ],
+    "correctIndex": 1,
+    "explanation": "A cherche l'adresse MAC du routeur B (passerelle par défaut) dans son cache ARP, car c'est par lui que la trame doit transiter pour atteindre le réseau distant."
+  },
+  {
+    "id": 28,
+    "question": "ARP opère à quelle couche du modèle TCP/IP ?",
+    "options": [
+      "Couche Application",
+      "Couche Transport",
+      "Entre la couche Réseau et la couche Liaison",
+      "Couche Physique"
+    ],
+    "correctIndex": 2,
+    "explanation": "ARP fait le lien entre la couche Réseau (adresses IP) et la couche Liaison (adresses MAC). Il opère entre ces deux couches."
+  },
+  {
+    "id": 29,
+    "question": "La requête ARP contient-elle l'adresse MAC de l'émetteur ?",
+    "options": [
+      "Non, elle ne contient que l'adresse IP de l'émetteur",
+      "Oui, elle contient l'adresse MAC source pour que le destinataire puisse répondre",
+      "Non, le destinataire fait une nouvelle requête ARP pour trouver l'émetteur",
+      "Oui, mais uniquement dans la réponse"
+    ],
+    "correctIndex": 1,
+    "explanation": "La requête ARP contient l'adresse MAC source (et l'adresse IP source) de l'émetteur, permettant au destinataire de répondre directement en unicast."
+  },
+  {
+    "id": 30,
+    "question": "Que se passe-t-il si aucune machine ne répond à une requête ARP ?",
+    "options": [
+      "La trame est envoyée quand même avec une adresse MAC vide",
+      "L'émission reste en attente et la communication échoue (timeout)",
+      "Le routeur répond à la place",
+      "Un broadcast est envoyé sur tous les réseaux"
+    ],
+    "correctIndex": 1,
+    "explanation": "Si aucune machine ne répond à la requête ARP, l'émission mise en attente ne peut pas être envoyée et la communication échoue après un timeout."
+  },
+  {
+    "id": 31,
+    "question": "Comment le cache ARP est-il mis à jour ?",
+    "options": [
+      "Manuellement par l'administrateur uniquement",
+      "Automatiquement par le système lors des échanges ARP, avec des entrées à durée de vie limitée",
+      "Par le serveur DHCP",
+      "Il n'est jamais mis à jour, il est statique"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le cache ARP est dynamique : il est construit et mis à jour automatiquement par le système lors des échanges ARP. Chaque entrée a une durée de vie finie."
+  },
+  {
+    "id": 32,
+    "question": "Dans le paquet ARP, que vaut le champ « type d'adresse réseau » pour IP ?",
+    "options": [
+      "0x0806",
+      "0x0800",
+      "0x86DD",
+      "1"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le champ « type d'adresse réseau » vaut 0x0800 pour IP dans le paquet ARP (même valeur que le champ Type Ethernet pour IPv4)."
+  },
+  {
+    "id": 33,
+    "question": "Une requête ARP peut-elle traverser un routeur ?",
+    "options": [
+      "Oui, elle est routée comme un paquet IP",
+      "Non, le broadcast ARP est limité au réseau local (domaine de broadcast)",
+      "Oui, si le routeur supporte ARP proxy",
+      "Non, sauf si on utilise IPv6"
+    ],
+    "correctIndex": 1,
+    "explanation": "Une requête ARP en broadcast est limitée au réseau local (domaine de broadcast). Elle ne traverse pas les routeurs, c'est pourquoi on utilise ARP pour trouver la MAC du routeur."
+  },
+  {
+    "id": 34,
+    "question": "Quel est l'ordre correct du processus ARP complet (quand l'entrée n'est pas en cache) ?",
+    "options": [
+      "Envoi de la trame → Requête ARP → Réponse ARP → Mise à jour du cache",
+      "Requête ARP en broadcast → Réponse ARP en unicast → Mise à jour du cache → Envoi de la trame",
+      "Consultation DNS → Requête ARP → Envoi de la trame",
+      "Mise à jour du cache → Envoi de la trame → Requête ARP"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'ordre est : 1) requête ARP en broadcast, 2) réponse ARP en unicast par la machine cible, 3) mise à jour du cache ARP, 4) envoi de la trame mise en attente."
+  },
+  {
+    "id": 35,
+    "question": "Quels champs sont présents dans un paquet ARP ?",
+    "options": [
+      "Port source, port destination, checksum",
+      "Type d'adresse MAC, type d'adresse réseau, taille MAC, taille IP, code, adresses MAC/IP source et destination",
+      "TTL, protocole, checksum, adresse IP source et destination",
+      "Numéro de séquence, numéro d'acquittement, fenêtre"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le paquet ARP contient : type d'adresse MAC (Ethernet=1), type d'adresse réseau (IP=0x800), taille MAC (6), taille IP (4), code (1=requête, 2=réponse), et les adresses MAC et IP source/destination."
+  },
+  {
+    "id": 36,
+    "question": "Dans la numérotation des adresses au sein d'un sous-réseau IP, qu'est-ce qui est vrai ?",
+    "options": [
+      "Les adresses IP et MAC suivent les mêmes règles",
+      "Les adresses IP suivent certaines règles tandis que les adresses MAC ont une numérotation aléatoire (indépendante du réseau)",
+      "Les adresses MAC sont attribuées par le serveur DHCP",
+      "Les adresses IP sont gravées dans la carte réseau"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dans un sous-réseau IP, les adresses IP sont affectées en suivant certaines règles (plan d'adressage), tandis que les adresses MAC sont attribuées par le fabricant de façon indépendante du réseau."
+  },
+  {
+    "id": 37,
+    "question": "Lorsque la trame Ethernet contenant un paquet ARP arrive à destination, comment la couche Liaison sait-elle qu'il s'agit d'ARP ?",
+    "options": [
+      "Grâce à l'adresse MAC destination",
+      "Grâce au champ Type de la trame Ethernet qui vaut 0x0806",
+      "Grâce à la taille du paquet",
+      "Grâce à l'adresse IP source"
+    ],
+    "correctIndex": 1,
+    "explanation": "La couche Liaison détermine l'entité responsable du message encapsulé grâce au champ Type de la trame Ethernet, qui vaut 0x0806 pour ARP."
+  },
+  {
+    "id": 38,
+    "question": "Quelle est la RFC qui définit le protocole ARP ?",
+    "options": [
+      "RFC 791",
+      "RFC 826",
+      "RFC 1149",
+      "RFC 2131"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le protocole ARP est défini dans la RFC 826."
+  },
+  {
+    "id": 39,
+    "question": "Dans un scénario ARP, si A envoie un broadcast et que B, C et D reçoivent la requête, qui met à jour son cache ARP ?",
+    "options": [
+      "Uniquement A",
+      "Toutes les machines B, C et D",
+      "A et la machine dont l'adresse IP correspond (ex : B)",
+      "Aucune machine ne met à jour son cache"
+    ],
+    "correctIndex": 2,
+    "explanation": "La machine cible (B) crée une entrée dans son cache ARP avec les informations de A (pour pouvoir répondre), et A met à jour son cache avec les informations de B à la réception de la réponse."
+  },
+  {
+    "id": 40,
+    "question": "Pourquoi B crée-t-il une entrée dans son cache ARP lorsqu'il reçoit une requête ARP de A ?",
+    "options": [
+      "Pour bloquer les futures requêtes de A",
+      "Pour pouvoir émettre sa réponse ARP au bon ordinateur (A)",
+      "Pour signaler une erreur réseau",
+      "C'est obligatoire pour toutes les machines qui reçoivent un broadcast"
+    ],
+    "correctIndex": 1,
+    "explanation": "B crée une entrée dans son cache ARP à partir des données reçues dans la requête (IP et MAC de A) afin de pouvoir émettre sa réponse directement à A en unicast."
+  }
+]

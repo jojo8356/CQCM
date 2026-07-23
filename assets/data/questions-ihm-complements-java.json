@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "question": "Que se passe-t-il si on appelle `EColor.valueOf(\"red\")` alors que l'enum est definie comme `enum EColor {RED, BLUE, GREEN}` ?",
+    "options": [
+      "Retourne `RED` car la methode ignore la casse",
+      "Retourne `null`",
+      "Leve une `IllegalArgumentException`",
+      "Leve une `NullPointerException`"
+    ],
+    "correctIndex": 2,
+    "explanation": "La methode `valueOf()` est sensible a la casse (case-sensitive). Comme \"red\" ne correspond pas exactement a \"RED\", une `IllegalArgumentException` est levee."
+  },
+  {
+    "id": 2,
+    "question": "Ou peut-on definir une enumeration en Java ?",
+    "options": [
+      "Dans une classe ou dans un fichier separe, mais pas dans une methode",
+      "Uniquement dans un fichier separe",
+      "Dans une classe, un fichier separe ou une methode",
+      "Uniquement a l'interieur d'une classe"
+    ],
+    "correctIndex": 0,
+    "explanation": "Une enumeration peut etre definie a l'interieur d'une classe ou dans une unite de compilation separee (fichier .java), mais elle ne peut pas etre definie dans une methode."
+  },
+  {
+    "id": 3,
+    "question": "Quel est le resultat de l'appel `EColor.BLUE.ordinal()` si l'enum est definie comme `enum EColor {RED, BLUE, GREEN, YELLOW}` ?",
+    "options": [
+      "0",
+      "1",
+      "2",
+      "\"BLUE\""
+    ],
+    "correctIndex": 1,
+    "explanation": "La methode `ordinal()` retourne la position de l'element dans la declaration, en commencant a zero. BLUE est le deuxieme element, donc `ordinal()` retourne 1."
+  },
+  {
+    "id": 4,
+    "question": "Comment eviter la notation prefixee (ex: `EColor.RED`) lors de l'utilisation d'un type enum ?",
+    "options": [
+      "En utilisant `import EColor.*`",
+      "En utilisant `import static ex.chap02.EColor.*`",
+      "En declarant l'enum dans la meme classe",
+      "C'est impossible, la notation prefixee est obligatoire"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'importation statique (`import static`) des elements du type enum permet d'utiliser directement les constantes sans la notation prefixee."
+  },
+  {
+    "id": 5,
+    "question": "Quel est le resultat du code suivant ?\n```java\npublic class Box<T> {\n    T temp = new T();\n}\n```",
+    "options": [
+      "Le code compile et cree une instance du type T",
+      "Erreur a la compilation a cause de l'effacement de type (type erasure)",
+      "Erreur a l'execution (RuntimeException)",
+      "Le code compile avec un avertissement (warning)"
+    ],
+    "correctIndex": 1,
+    "explanation": "A cause de l'effacement de type (type erasure), les informations generiques sont perdues apres la compilation. L'instruction `new T()` est donc illegale et provoque une erreur de compilation."
+  },
+  {
+    "id": 6,
+    "question": "Quelle est la difference entre `List<?>` et `List<Object>` ?",
+    "options": [
+      "Ce sont des notations equivalentes",
+      "`List<?>` est une liste d'elements de n'importe quel type, `List<Object>` est une liste d'elements de type Object",
+      "`List<Object>` accepte tous les types, `List<?>` n'accepte aucun type",
+      "`List<?>` est une syntaxe invalide en Java"
+    ],
+    "correctIndex": 1,
+    "explanation": "`List<?>` represente une liste d'elements de n'importe quel type (wildcard non borne), tandis que `List<Object>` est specifiquement une liste d'elements de type Object. De plus, `List<Integer>` n'est pas une sous-classe de `List<Object>`."
+  },
+  {
+    "id": 7,
+    "question": "Dans une methode generique, ou se place le parametre de type `<T>` ?",
+    "options": [
+      "Apres le nom de la methode",
+      "Apres le type de retour",
+      "Apres les modificateurs et avant le type de retour",
+      "Avant les modificateurs"
+    ],
+    "correctIndex": 2,
+    "explanation": "Dans une methode generique, le ou les types generiques `<T>` se placent apres les modificateurs (public, static, etc.) et avant le type de retour. Exemple : `public static <T> boolean contains(...)`"
+  },
+  {
+    "id": 8,
+    "question": "Selon les recommandations, quel type de wildcard utiliser pour un parametre generique 'in' (consomme des elements) ?",
+    "options": [
+      "`<? super type>`",
+      "`<? extends type>`",
+      "Pas de wildcard",
+      "`<?>`"
+    ],
+    "correctIndex": 1,
+    "explanation": "Pour les parametres 'in' (valeurs consommees en entree), il est recommande d'utiliser `extends` (upper-bound). Pour les parametres 'out', on utilise `super` (lower-bound). Pour les parametres 'in/out', on n'utilise pas de wildcard."
+  },
+  {
+    "id": 9,
+    "question": "Que signifie le terme 'raw type' en Java ?",
+    "options": [
+      "Un type primitif comme int ou double",
+      "Un type generique utilise sans specifier le parametre de type effectif",
+      "Un type qui ne peut pas etre instancie",
+      "Un type special pour les tableaux"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un raw type est un type generique utilise sans specifier le parametre de type effectif (ex: `Box b = new Box()` au lieu de `Box<Integer> b = new Box<>()`). Le type est implicitement Object, pour assurer la compatibilite avec le code pre-JDK 5.0."
+  },
+  {
+    "id": 10,
+    "question": "Quel est le role de l'annotation `@Override` ?",
+    "options": [
+      "Empecher la redefinition d'une methode",
+      "Indiquer au compilateur que la methode redefinit une methode heritee, pour verifier que l'en-tete est correcte",
+      "Rendre la methode finale",
+      "Generer automatiquement la methode toString()"
+    ],
+    "correctIndex": 1,
+    "explanation": "`@Override` indique au compilateur que la methode redefinit une methode heritee. Le compilateur peut ainsi generer une erreur si l'en-tete ne correspond pas (par exemple en cas de faute de frappe dans le nom)."
+  },
+  {
+    "id": 11,
+    "question": "Quelle est la syntaxe correcte d'une expression lambda sans parametre qui retourne 123 ?",
+    "options": [
+      "`-> 123`",
+      "`() -> 123`",
+      "`(void) -> 123`",
+      "`() => 123`"
+    ],
+    "correctIndex": 1,
+    "explanation": "Quand il n'y a aucun parametre, les parentheses vides sont obligatoires : `() -> 123`. La syntaxe `->` (sans parentheses) et `=>` (syntaxe JavaScript) sont invalides en Java."
+  },
+  {
+    "id": 12,
+    "question": "Dans quel cas peut-on omettre les parentheses autour du parametre d'une expression lambda ?",
+    "options": [
+      "Quand il y a exactement un parametre et que son type est infere",
+      "Quand il y a exactement un parametre, meme si le type est explicite",
+      "Quand il n'y a aucun parametre",
+      "On ne peut jamais omettre les parentheses"
+    ],
+    "correctIndex": 0,
+    "explanation": "Les parentheses sont optionnelles uniquement s'il y a un seul parametre et que son type est infere. Avec zero ou plusieurs parametres, ou avec un type explicite, les parentheses sont obligatoires."
+  },
+  {
+    "id": 13,
+    "question": "Qu'est-ce qu'une interface fonctionnelle en Java ?",
+    "options": [
+      "Une interface qui contient uniquement des methodes statiques",
+      "Une interface qui ne comporte qu'une seule methode d'instance abstraite",
+      "Une interface annotee avec `@Deprecated`",
+      "Une interface qui herite de `Function`"
+    ],
+    "correctIndex": 1,
+    "explanation": "Une interface fonctionnelle est une interface qui ne comporte qu'une seule methode d'instance abstraite. Elle peut etre implementee par une expression lambda."
+  },
+  {
+    "id": 14,
+    "question": "Quelle reference de methode est equivalente a l'expression lambda `(s) -> s.toString()` ?",
+    "options": [
+      "`String::valueOf`",
+      "`s::toString`",
+      "`String::toString`",
+      "`Object::new`"
+    ],
+    "correctIndex": 2,
+    "explanation": "La variante `Class::instanceMethodName` (ici `String::toString`) est equivalente a `(s) -> s.toString()`. Le premier parametre represente l'objet sur lequel la methode sera invoquee."
+  },
+  {
+    "id": 15,
+    "question": "Quel est le resultat de ce code ?\n```java\nList<String> list = Arrays.asList(\"a1\", \"c2\", \"b1\", \"c1\");\nlist.stream()\n    .filter(s -> s.startsWith(\"c\"))\n    .map(String::toUpperCase)\n    .sorted()\n    .forEach(System.out::println);\n```",
+    "options": [
+      "c1 c2",
+      "C2 C1",
+      "C1 C2",
+      "c2 c1"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le filtre garde les elements commencant par \"c\" (c2, c1), `map` les convertit en majuscules (C2, C1), `sorted` les trie par ordre alphabetique (C1, C2), et `forEach` les affiche."
+  },
+  {
+    "id": 16,
+    "question": "Que se passe-t-il si on tente de reutiliser un stream apres une operation terminale ?",
+    "options": [
+      "Le stream est reinitialise automatiquement",
+      "Une `IllegalStateException` est levee car le stream est ferme",
+      "Le stream retourne des resultats vides",
+      "Le stream recommence depuis le debut"
+    ],
+    "correctIndex": 1,
+    "explanation": "Apres une operation terminale, un stream est ferme et ne peut plus etre reutilise. Toute tentative de reutilisation leve une exception. Il faut creer un nouveau stream."
+  },
+  {
+    "id": 17,
+    "question": "Qu'est-ce qu'une 'capturing lambda' (closure) ?",
+    "options": [
+      "Une lambda qui capture les exceptions",
+      "Une lambda qui utilise des variables locales externes effectivement finales",
+      "Une lambda qui capture le resultat d'un stream",
+      "Une lambda qui est stockee dans une variable"
+    ],
+    "correctIndex": 1,
+    "explanation": "Une capturing lambda (ou closure) est une expression lambda qui utilise (capture) des variables locales du code englobant. Ces variables doivent etre effectivement finales, c'est-a-dire declarees `final` ou non modifiees apres leur premiere affectation."
+  },
+  {
+    "id": 18,
+    "question": "Quelle syntaxe utilise-t-on pour une reference de constructeur ?",
+    "options": [
+      "`Class::constructor`",
+      "`Class::new`",
+      "`new::Class`",
+      "`Class.new()`"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les references de constructeurs utilisent la syntaxe `Class::new`. Par exemple, `Button::new` est equivalent a `(s) -> new Button(s)` si le constructeur accepte un parametre String."
+  },
+  {
+    "id": 19,
+    "question": "Pourquoi est-il recommande de placer les operations `filter` le plus tot possible dans un pipeline de stream ?",
+    "options": [
+      "Pour eviter les erreurs de compilation",
+      "Pour reduire le nombre d'elements a traiter par les operations suivantes (performance)",
+      "Parce que `filter` est une operation terminale",
+      "Parce que `filter` ne fonctionne qu'en premiere position"
+    ],
+    "correctIndex": 1,
+    "explanation": "Placer un filtrage tot dans la chaine des operations reduit le nombre d'elements que les operations suivantes doivent traiter, ce qui ameliore les performances. `filter` est une operation intermediaire, pas terminale."
+  },
+  {
+    "id": 20,
+    "question": "Quel code permet de creer un stream a partir d'une collection `maListe` ?",
+    "options": [
+      "`Stream.of(maListe)`",
+      "`Arrays.stream(maListe)`",
+      "`maListe.stream()`",
+      "`new Stream(maListe)`"
+    ],
+    "correctIndex": 2,
+    "explanation": "Pour creer un stream a partir d'une collection, on utilise la methode `.stream()` de l'interface Collection. `Arrays.stream()` est utilise pour les tableaux, et `Stream.of()` pour une sequence de valeurs individuelles."
+  }
+]

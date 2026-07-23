@@ -1,0 +1,24 @@
+{
+  "quiz": {
+    "id": "cli-sample",
+    "title": "CLI Sample",
+    "description": "Quiz ajoute par la CLI",
+    "category": "CLI",
+    "difficulty": "debutant",
+    "questionCount": 1,
+    "fileName": "questions-cli-sample.json",
+    "icon": "C"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "La CLI peut-elle ajouter un quiz sans rebuild ?",
+      "options": [
+        "Oui, via le dossier runtime",
+        "Non, uniquement via assets"
+      ],
+      "correctIndex": 0,
+      "explanation": "L'application lit le dossier runtime en plus des assets embarques."
+    }
+  ]
+}

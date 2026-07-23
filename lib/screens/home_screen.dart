@@ -1,6 +1,8 @@
+import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import '../models/quiz.dart';
 import '../services/quiz_service.dart';
+import '../services/runtime_quiz_store.dart';
 import '../widgets/quiz_card.dart';
 import 'quiz_screen.dart';
 
@@ -12,8 +14,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _quizService = QuizService();
+  QuizService _quizService = QuizService();
   late Future<List<Quiz>> _quizzesFuture;
+  bool _isImporting = false;
 
   @override
   void initState() {
@@ -27,6 +30,18 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('CQCM'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            tooltip: 'Importer un quiz JSON',
+            onPressed: _isImporting ? null : _importQuiz,
+            icon: _isImporting
+                ? const SizedBox.square(
+                    dimension: 20,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : const Icon(Icons.upload_file),
+          ),
+        ],
       ),
       body: FutureBuilder<List<Quiz>>(
         future: _quizzesFuture,
@@ -60,8 +75,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Text(
                       category,
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   ...categoryQuizzes.map(
@@ -83,10 +98,57 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _startQuiz(Quiz quiz) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => QuizScreen(quiz: quiz),
-      ),
-    );
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (_) => QuizScreen(quiz: quiz)));
+  }
+
+  Future<void> _importQuiz() async {
+    setState(() {
+      _isImporting = true;
+    });
+
+    try {
+      const typeGroup = XTypeGroup(
+        label: 'Quiz JSON',
+        extensions: ['json'],
+        mimeTypes: ['application/json'],
+        uniformTypeIdentifiers: ['public.json'],
+        webWildCards: ['application/json'],
+      );
+      final file = await openFile(acceptedTypeGroups: [typeGroup]);
+      if (file == null) {
+        return;
+      }
+
+      final quiz = await importQuizPackageJson(await file.readAsString());
+      final runtimeDataDirectory = await resolveRuntimeDataDirectory(
+        _quizService.runtimeDataDirectory,
+      );
+      if (!mounted) {
+        return;
+      }
+
+      setState(() {
+        _quizService = QuizService(runtimeDataDirectory: runtimeDataDirectory);
+        _quizzesFuture = _quizService.loadQuizzes();
+      });
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Quiz importé : ${quiz.title}')));
+    } catch (error) {
+      if (!mounted) {
+        return;
+      }
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Import impossible : $error')));
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isImporting = false;
+        });
+      }
+    }
   }
 }

@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "question": "Quel problème fondamental la programmation séquentielle pose-t-elle pour un lecteur audio ?",
+    "options": [
+      "Le son est de mauvaise qualité",
+      "L'attente d'une action utilisateur bloque le programme, empêchant de mettre en pause ou changer le volume pendant la lecture",
+      "Le fichier audio ne peut pas être lu",
+      "Le programme consomme trop de mémoire"
+    ],
+    "correctIndex": 1,
+    "explanation": "En programmation séquentielle, si le programme attend une action de l'utilisateur, il bloque l'exécution. Cela empêche par exemple de mettre en pause ou de changer le volume pendant la lecture audio."
+  },
+  {
+    "id": 2,
+    "question": "Quelle solution est proposée pour résoudre le problème du blocage en programmation séquentielle ?",
+    "options": [
+      "Utiliser des threads multiples",
+      "Augmenter la puissance du processeur",
+      "Adopter la programmation événementielle",
+      "Compiler le programme en code natif"
+    ],
+    "correctIndex": 2,
+    "explanation": "La programmation événementielle est le mécanisme non bloquant proposé pour résoudre le problème du blocage rencontré en programmation séquentielle."
+  },
+  {
+    "id": 3,
+    "question": "En programmation séquentielle, comment le flux d'exécution est-il contrôlé ?",
+    "options": [
+      "Par la survenue d'événements",
+      "Par l'ordre des instructions écrites dans le programme",
+      "Par les actions de l'utilisateur uniquement",
+      "Par le système d'exploitation"
+    ],
+    "correctIndex": 1,
+    "explanation": "En programmation séquentielle, les instructions s'exécutent dans l'ordre où elles ont été écrites. Le flux est contrôlé par la séquence d'instructions du programme."
+  },
+  {
+    "id": 4,
+    "question": "En programmation événementielle, qu'est-ce qui contrôle le flux d'exécution ?",
+    "options": [
+      "L'ordre des instructions dans le code source",
+      "Le compilateur",
+      "La survenue d'événements, y compris les actions de l'utilisateur",
+      "Le nombre de processeurs disponibles"
+    ],
+    "correctIndex": 2,
+    "explanation": "En programmation événementielle, le flux d'exécution est contrôlé par la survenue d'événements, qui peuvent inclure des actions de l'utilisateur ou des changements d'état du programme."
+  },
+  {
+    "id": 5,
+    "question": "Quel est le principe fondamental de la programmation événementielle ?",
+    "options": [
+      "Exécuter les instructions le plus rapidement possible",
+      "S'abonner à des événements sur une ressource observable et être notifié quand l'événement survient",
+      "Créer un thread par événement possible",
+      "Utiliser des fichiers de configuration pour définir les réactions"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le principe de la programmation événementielle repose sur l'abonnement à des événements sur une ressource observable. Quand l'événement survient, les abonnés (observateurs) sont notifiés."
+  },
+  {
+    "id": 6,
+    "question": "Qu'est-ce qu'un événement en programmation événementielle ?",
+    "options": [
+      "Une erreur dans le programme",
+      "Un message transmis par un sujet pour signaler la survenue d'une action ou d'un changement d'état",
+      "Une instruction spéciale du processeur",
+      "Un fichier de log"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un événement est un message transmis par un sujet (objet) pour signaler la survenue d'une action ou d'un changement d'état."
+  },
+  {
+    "id": 7,
+    "question": "Quels sont les deux types d'actions pouvant déclencher un événement ?",
+    "options": [
+      "Des actions réseau et des actions disque",
+      "Des actions déclenchées par l'utilisateur (clic bouton) et des actions levées par la logique du programme (changement de propriété)",
+      "Des actions synchrones et asynchrones",
+      "Des actions locales et distantes"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les événements peuvent être déclenchés par des actions de l'utilisateur (comme un clic sur un bouton) ou levés par la logique du programme (comme un changement de valeur d'une propriété)."
+  },
+  {
+    "id": 8,
+    "question": "L'émetteur d'un événement connaît-il l'objet ou la méthode qui va traiter l'événement ?",
+    "options": [
+      "Oui, il doit connaître tous les récepteurs",
+      "Oui, mais seulement le premier récepteur",
+      "Non, l'émetteur ne sait pas quel objet ou méthode traitera l'événement",
+      "Oui, grâce à une table de correspondance"
+    ],
+    "correctIndex": 2,
+    "explanation": "L'émetteur de l'événement ne sait pas quel objet ou quelle méthode va traiter les événements. C'est un des principes clés qui permet le découplage."
+  },
+  {
+    "id": 9,
+    "question": "Quelles sont les 4 étapes du processus événementiel dans l'ordre ?",
+    "options": [
+      "Créer, émettre, recevoir, détruire",
+      "S'abonner, attendre, être notifié, réagir",
+      "Détecter, analyser, transmettre, exécuter",
+      "Observer, filtrer, traiter, archiver"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le processus événementiel se déroule en 4 étapes : s'abonner à un événement, attendre, être notifié quand l'événement survient, puis réagir."
+  },
+  {
+    "id": 10,
+    "question": "Comment les événements sont-ils organisés dans la boucle événementielle ?",
+    "options": [
+      "Dans une pile LIFO (dernier arrivé, premier traité)",
+      "Dans une liste FIFO (premier arrivé, premier traité)",
+      "Dans un arbre binaire",
+      "De manière aléatoire"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les événements sont placés dans une liste FIFO (First In, First Out), et la boucle événementielle les traite dans l'ordre d'arrivée."
+  },
+  {
+    "id": 11,
+    "question": "Quelle est la boucle événementielle utilisée en JavaFX ?",
+    "options": [
+      "gtk_main",
+      "Event Dispatch Thread",
+      "JavaFX Application Thread",
+      "XtAppMainLoop"
+    ],
+    "correctIndex": 2,
+    "explanation": "En JavaFX, la boucle événementielle s'appelle JavaFX Application Thread. L'Event Dispatch Thread est celle de Swing, gtk_main celle de GTK+, et XtAppMainLoop celle du C."
+  },
+  {
+    "id": 12,
+    "question": "Dans le patron Observateur/Observable, quels sont les deux acteurs principaux ?",
+    "options": [
+      "Le client et le serveur",
+      "Le sujet (observable) et les observateurs",
+      "L'émetteur et le récepteur",
+      "Le producteur et le consommateur"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le patron Observateur/Observable met en jeu deux acteurs : le sujet (l'observable) et les observateurs qui s'abonnent pour recevoir des notifications."
+  },
+  {
+    "id": 13,
+    "question": "Quel est l'objectif principal du patron Observateur/Observable ?",
+    "options": [
+      "Augmenter la vitesse d'exécution du programme",
+      "Augmenter la réutilisabilité en réduisant le couplage entre les classes",
+      "Simplifier le code en réduisant le nombre de classes",
+      "Garantir la sécurité des données échangées"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le patron Observateur/Observable vise à augmenter la réutilisabilité du code en réduisant le couplage entre les classes. Le couplage est réduit aux seuls phénomènes observés."
+  },
+  {
+    "id": 14,
+    "question": "Pourquoi dit-on qu'un widget bouton peut être utilisé dans plusieurs projets grâce au patron Observateur ?",
+    "options": [
+      "Parce que le bouton est compilé une seule fois",
+      "Parce qu'il n'y a pas de lien entre le widget et les fonctions appelées, le couplage est réduit",
+      "Parce que le bouton est stocké dans une bibliothèque partagée",
+      "Parce que le bouton utilise l'héritage multiple"
+    ],
+    "correctIndex": 1,
+    "explanation": "Grâce au patron Observateur, il n'y a pas de lien direct entre le widget bouton et les fonctions appelées. Le couplage est réduit aux seuls phénomènes observés, ce qui permet de réutiliser le widget dans différents projets."
+  },
+  {
+    "id": 15,
+    "question": "Quelle boucle événementielle est associée au framework Swing en Java ?",
+    "options": [
+      "JavaFX Application Thread",
+      "UI thread",
+      "Event Dispatch Thread",
+      "gtk_main"
+    ],
+    "correctIndex": 2,
+    "explanation": "En Swing (Java), la boucle événementielle s'appelle l'Event Dispatch Thread (EDT). Elle est responsable du traitement des événements de l'interface graphique."
+  }
+]

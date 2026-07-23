@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "question": "Que retourne la fonction setTimeout en JavaScript ?",
+    "options": [
+      "Un booléen indiquant si le délai est valide",
+      "Un identifiant (id) permettant d'annuler le timeout",
+      "Une promesse (Promise)",
+      "Le résultat de la fonction passée en paramètre"
+    ],
+    "correctIndex": 1,
+    "explanation": "setTimeout retourne un identifiant (id) qui peut être utilisé avec clearTimeout pour annuler l'exécution programmée."
+  },
+  {
+    "id": 2,
+    "question": "Quel est le second paramètre de setTimeout ?",
+    "options": [
+      "Le nombre de répétitions",
+      "Le délai en secondes",
+      "Le délai en millisecondes",
+      "Le nom de la fonction à appeler"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le second paramètre de setTimeout est le délai en millisecondes avant l'exécution du code passé en premier paramètre."
+  },
+  {
+    "id": 3,
+    "question": "Quelle fonction utilise-t-on pour arrêter un setInterval en cours ?",
+    "options": [
+      "stopInterval()",
+      "clearTimeout()",
+      "cancelInterval()",
+      "clearInterval()"
+    ],
+    "correctIndex": 3,
+    "explanation": "On utilise clearInterval() en lui passant l'identifiant retourné par setInterval pour arrêter l'exécution répétitive."
+  },
+  {
+    "id": 4,
+    "question": "Quelle est la différence principale entre setTimeout et setInterval ?",
+    "options": [
+      "setTimeout est plus rapide que setInterval",
+      "setTimeout déclenche une action une seule fois après un délai, setInterval la répète",
+      "setInterval ne peut pas être annulé",
+      "setTimeout accepte uniquement des fonctions, setInterval accepte aussi du code en chaîne"
+    ],
+    "correctIndex": 1,
+    "explanation": "setTimeout déclenche une action une seule fois après un délai donné, tandis que setInterval répète l'action à intervalles réguliers."
+  },
+  {
+    "id": 5,
+    "question": "Dans le pattern MVC en JavaScript, que doit être le Modèle ?",
+    "options": [
+      "Du code dépendant du navigateur",
+      "Du JavaScript indépendant du navigateur",
+      "Un fichier CSS",
+      "Un composant graphique HTML"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le Modèle en MVC JavaScript doit être du JavaScript indépendant du navigateur. Il gère les données et la logique métier."
+  },
+  {
+    "id": 6,
+    "question": "Dans MVC en JS, quelle méthode la Vue doit-elle implémenter pour être notifiée par le Modèle ?",
+    "options": [
+      "notify()",
+      "render()",
+      "update()",
+      "refresh()"
+    ],
+    "correctIndex": 2,
+    "explanation": "La Vue implémente la méthode 'update' qui est appelée par le Modèle lorsqu'il est mis à jour, afin de notifier les vues abonnées."
+  },
+  {
+    "id": 7,
+    "question": "Dans l'exemple du chronomètre MVC, quel est le rôle du Contrôleur ?",
+    "options": [
+      "Gérer le temps et les listeners",
+      "Afficher le temps à l'écran",
+      "Gérer le click (démarrer ou arrêter le chrono) via addEventListener",
+      "Calculer les heures, minutes et secondes"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le Contrôleur gère le 'click' pour démarrer ou arrêter le chrono. Il s'abonne sur l'élément HTML via addEventListener et appelle stopOuRelancer() sur le modèle."
+  },
+  {
+    "id": 8,
+    "question": "Dans la classe ChronoModele, que fait la méthode prevenirLesEcouteurs() ?",
+    "options": [
+      "Elle supprime tous les écouteurs",
+      "Elle appelle la méthode update() sur chaque écouteur avec les valeurs du temps",
+      "Elle réinitialise le chronomètre",
+      "Elle ajoute un nouvel écouteur à la liste"
+    ],
+    "correctIndex": 1,
+    "explanation": "La méthode prevenirLesEcouteurs() parcourt le tableau d'écouteurs et appelle update() sur chacun en passant les heures, minutes, secondes et dixièmes."
+  },
+  {
+    "id": 9,
+    "question": "Dans l'exemple MVC du chronomètre, quel intervalle (en ms) est utilisé pour le setInterval dans la méthode stopOuRelancer() ?",
+    "options": [
+      "1000 ms",
+      "500 ms",
+      "100 ms",
+      "10 ms"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le setInterval est paramétré à 100 ms (this.interval = setInterval(() => this.incrementer(), 100)), ce qui permet de compter les dixièmes de seconde."
+  },
+  {
+    "id": 10,
+    "question": "Concernant MVC et le réseau, quelle affirmation est correcte ?",
+    "options": [
+      "Le Contrôleur doit toujours être sur le serveur",
+      "Si M et V sont dans le navigateur, il n'y a pas d'intérêt à mettre C sur un serveur",
+      "La Vue doit toujours être sur le serveur",
+      "Le Modèle ne peut jamais être sur le serveur"
+    ],
+    "correctIndex": 1,
+    "explanation": "Si le Modèle et la Vue sont dans le navigateur, il n'y a pas d'intérêt à mettre le Contrôleur sur un serveur. La Vue doit être au moins partiellement sur le navigateur."
+  },
+  {
+    "id": 11,
+    "question": "Dans le contexte MVC et réseau, qu'est-ce que le 'code réseau' côté navigateur ?",
+    "options": [
+      "Un framework JavaScript complet",
+      "Une façade qui présente les mêmes méthodes mais fait des appels réseau en interne",
+      "Un serveur HTTP intégré au navigateur",
+      "Un compilateur JavaScript côté client"
+    ],
+    "correctIndex": 1,
+    "explanation": "Côté navigateur, le code réseau est une façade qui présente les mêmes méthodes que la facette distante, mais en interne effectue des appels réseau au lieu de traiter localement."
+  },
+  {
+    "id": 12,
+    "question": "Avec SocketIO, comment fonctionne la communication entre client et serveur ?",
+    "options": [
+      "Par requêtes HTTP classiques (requête/réponse)",
+      "Par abonnement : d'un côté on 'emit' ou 'sendEvent', de l'autre on s'abonne avec 'on' ou 'addEventListener'",
+      "Par polling toutes les secondes",
+      "Par envoi de fichiers binaires uniquement"
+    ],
+    "correctIndex": 1,
+    "explanation": "SocketIO fonctionne par abonnement avec une connexion permanente. D'un côté on 'emit' ou 'sendEvent' (ou broadCast), de l'autre on s'abonne avec 'on' ou 'addEventListener'."
+  },
+  {
+    "id": 13,
+    "question": "Quelle librairie assure le mapping automatique JSON - Objet Java avec SocketIO ?",
+    "options": [
+      "Gson",
+      "Jackson",
+      "Moshi",
+      "JSON.org"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le mapping JSON - Objet Java est fait automatiquement via la librairie Jackson, qui utilise l'introspection des getter/setter pour déterminer les noms des propriétés."
+  },
+  {
+    "id": 14,
+    "question": "Dans le modèle PAC, quelles sont les trois facettes ?",
+    "options": [
+      "Page, Action, Composant",
+      "Présentation, Abstraction, Contrôle",
+      "Processus, Architecture, Communication",
+      "Production, Analyse, Conception"
+    ],
+    "correctIndex": 1,
+    "explanation": "PAC signifie Présentation (équivalent C+V de MVC), Abstraction (équivalent M de MVC) et Contrôle (communication inter-agents et liaison entre A et P)."
+  },
+  {
+    "id": 15,
+    "question": "Quelle est la différence principale entre la coopération en MVC et en PAC ?",
+    "options": [
+      "MVC utilise des messages, PAC utilise des appels directs",
+      "La coopération entre MVC est non définie, celle entre PAC est un échange de messages à travers la hiérarchie",
+      "PAC n'a pas de mécanisme de coopération",
+      "MVC impose une hiérarchie stricte, PAC est plat"
+    ],
+    "correctIndex": 1,
+    "explanation": "La coopération entre agents MVC n'est pas définie dans le modèle, tandis que la coopération entre agents PAC passe par un échange de messages à travers la hiérarchie d'agents."
+  },
+  {
+    "id": 16,
+    "question": "Où se trouvent les listeners graphiques dans PAC par rapport à MVC ?",
+    "options": [
+      "Dans le Contrôle (C) de PAC et dans la Vue (V) de MVC",
+      "Dans la Présentation (P) de PAC et dans le Contrôleur (C) de MVC",
+      "Dans l'Abstraction (A) de PAC et dans le Modèle (M) de MVC",
+      "Au même endroit dans les deux architectures"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les listeners graphiques sont dans le Contrôleur (C) de MVC, mais dans la Présentation (P) de PAC, généralement pour envoyer un message au Contrôle."
+  },
+  {
+    "id": 17,
+    "question": "Concernant l'indépendance vis-à-vis du navigateur, quelle affirmation est vraie ?",
+    "options": [
+      "Seul le V de MVC est indépendant du navigateur",
+      "Seul le C de PAC est dépendant du navigateur",
+      "Seul le M de MVC est indépendant du navigateur ; seul le P de PAC est dépendant du navigateur",
+      "Toutes les facettes de MVC et PAC sont indépendantes du navigateur"
+    ],
+    "correctIndex": 2,
+    "explanation": "Seul le Modèle (M) de MVC est indépendant du navigateur. Inversement, seule la Présentation (P) de PAC est dépendante du navigateur."
+  },
+  {
+    "id": 18,
+    "question": "Selon l'heuristique R1, qu'est-ce qui correspond à un agent PAC ?",
+    "options": [
+      "Un bouton",
+      "Une fenêtre",
+      "Un fichier JavaScript",
+      "Une classe CSS"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'heuristique R1 stipule qu'une fenêtre correspond à un agent PAC."
+  },
+  {
+    "id": 19,
+    "question": "Que dit l'heuristique R9 (Ciment syntaxique) dans PAC ?",
+    "options": [
+      "Un agent fils unique peut être fusionné avec son père",
+      "Un superagent cimente les actions distribuées pour l'analyse syntaxique distribuée",
+      "Une barre de menu correspond à un agent",
+      "Un concept complexe correspond à un agent"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'heuristique R9 définit le concept de 'ciment syntaxique' : un superagent qui cimente les actions distribuées entre ses enfants pour réaliser une analyse syntaxique distribuée."
+  },
+  {
+    "id": 20,
+    "question": "Concernant PAC et le réseau, quelle affirmation est correcte ?",
+    "options": [
+      "Les facettes P doivent être sur le serveur",
+      "Toutes les facettes C doivent obligatoirement être sur le serveur",
+      "Les facettes P sont a priori sur le navigateur et il est plus simple que toutes les facettes C soient au même endroit",
+      "Les facettes A doivent toujours rester sur le navigateur"
+    ],
+    "correctIndex": 2,
+    "explanation": "Les facettes Présentation (P) sont a priori sur le navigateur. Il est plus simple que toutes les facettes Contrôle (C) soient au même endroit pour limiter les échanges client-serveur. Les facettes Abstraction (A) peuvent être côté serveur avec des adapteurs côté client."
+  }
+]

@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "question": "Combien de principes Donald Norman a-t-il défini en 1990 pour la conception d'interfaces ?",
+    "options": [
+      "2",
+      "3",
+      "5",
+      "8"
+    ],
+    "correctIndex": 1,
+    "explanation": "Donald Norman a défini 3 principes en 1990 : rendre les choses visibles, la correspondance entre actions et résultats, et le feedback utilisateur."
+  },
+  {
+    "id": 2,
+    "question": "Selon le principe de Norman « Rendre les choses visibles », que doit-on faire des actions indisponibles dans une interface ?",
+    "options": [
+      "Les supprimer complètement de l'interface",
+      "Les afficher en grisé ou désactivées",
+      "Les cacher dans un menu secondaire",
+      "Les remplacer par un message d'erreur"
+    ],
+    "correctIndex": 1,
+    "explanation": "Selon le principe de visibilité de Norman, les actions indisponibles doivent être grisées ou désactivées pour que l'utilisateur comprenne qu'elles existent mais ne sont pas accessibles dans le contexte actuel."
+  },
+  {
+    "id": 3,
+    "question": "Quel élément est un exemple du principe de visibilité de Norman ?",
+    "options": [
+      "Un raccourci clavier Ctrl+Z",
+      "Un indicateur de progression (barre de chargement)",
+      "Un message de confirmation en fin de processus",
+      "Une macro personnalisée"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un indicateur de progression est un exemple du principe « rendre les choses visibles » car il permet à l'utilisateur de percevoir facilement l'état du système."
+  },
+  {
+    "id": 4,
+    "question": "Que signifie le principe d'honnêteté dans la correspondance actions/résultats de Norman ?",
+    "options": [
+      "L'interface ne doit pas contenir de publicité",
+      "L'état du système visible doit correspondre à l'état réel du système",
+      "Le logiciel doit être open source",
+      "Les prix affichés doivent être exacts"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le principe d'honnêteté signifie que ce que le système affiche à l'utilisateur doit correspondre à son état réel. L'état visible doit refléter fidèlement l'état interne du système."
+  },
+  {
+    "id": 5,
+    "question": "Quel est un exemple de feedback utilisateur selon les principes de Norman ?",
+    "options": [
+      "Griser un bouton indisponible",
+      "Le changement du curseur de la souris selon le contexte",
+      "Afficher un menu cohérent avec le système d'exploitation",
+      "Proposer des raccourcis clavier"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le changement du curseur (flèche, main, sablier, etc.) est un exemple de feedback qui aide l'utilisateur à interpréter l'état du système et le type d'interaction possible."
+  },
+  {
+    "id": 6,
+    "question": "Combien de Golden Rules Ben Shneiderman a-t-il défini en 1998 ?",
+    "options": [
+      "3",
+      "5",
+      "8",
+      "10"
+    ],
+    "correctIndex": 2,
+    "explanation": "Ben Shneiderman a défini 8 Golden Rules (règles d'or) en 1998 pour la conception d'interfaces homme-machine."
+  },
+  {
+    "id": 7,
+    "question": "Selon la règle de cohérence de Shneiderman, avec quoi l'interface doit-elle être cohérente ?",
+    "options": [
+      "Uniquement avec les autres applications de la même entreprise",
+      "Avec le style de l'interface, les menus contenant des éléments du même type, et le système d'exploitation",
+      "Uniquement avec la charte graphique du client",
+      "Avec les tendances actuelles du design web"
+    ],
+    "correctIndex": 1,
+    "explanation": "La cohérence doit s'appliquer au style de l'interface elle-même (menus regroupant des éléments du même type) et être cohérente avec le système d'exploitation utilisé."
+  },
+  {
+    "id": 8,
+    "question": "À qui les raccourcis sont-ils principalement destinés selon les Golden Rules de Shneiderman ?",
+    "options": [
+      "Aux utilisateurs débutants",
+      "Aux développeurs uniquement",
+      "Aux utilisateurs experts",
+      "Aux testeurs qualité"
+    ],
+    "correctIndex": 2,
+    "explanation": "Les raccourcis (conformes aux standards, macros) sont destinés aux utilisateurs experts pour leur permettre d'être plus efficaces dans leur utilisation de l'interface."
+  },
+  {
+    "id": 9,
+    "question": "Quel est un contre-exemple de retour informatif adapté selon Shneiderman ?",
+    "options": [
+      "Un message de confirmation après une sauvegarde",
+      "Une sirène stridente lors de la simple utilisation d'un menu",
+      "Un changement de couleur lors du survol d'un bouton",
+      "Un son discret lors de la réception d'un message"
+    ],
+    "correctIndex": 1,
+    "explanation": "Une sirène stridente pour la simple utilisation d'un menu est un contre-exemple : le retour informatif doit être adapté au type et à l'importance de l'action réalisée."
+  },
+  {
+    "id": 10,
+    "question": "Que désigne la règle « Fins d'étapes » de Shneiderman ?",
+    "options": [
+      "Le logiciel doit pouvoir se fermer à tout moment",
+      "Les séquences d'actions doivent avoir un début, un milieu et une fin, procurant un sentiment d'accomplissement",
+      "Chaque page doit avoir un bouton de retour",
+      "L'utilisateur doit pouvoir quitter sans sauvegarder"
+    ],
+    "correctIndex": 1,
+    "explanation": "La règle des fins d'étapes stipule que les séquences d'actions doivent être organisées avec un début, un milieu et une fin, procurant à l'utilisateur un sentiment de satisfaction et d'accomplissement."
+  },
+  {
+    "id": 11,
+    "question": "Selon Shneiderman, comment le système doit-il gérer les erreurs utilisateur ?",
+    "options": [
+      "Afficher un code d'erreur technique",
+      "Fermer l'application pour éviter les corruptions de données",
+      "Prévenir les erreurs, les détecter et proposer des mécanismes de réparation simples en indiquant où se situe l'erreur",
+      "Ignorer les erreurs et continuer le traitement"
+    ],
+    "correctIndex": 2,
+    "explanation": "Le système doit anticiper les erreurs pour les prévenir, les détecter quand elles surviennent, proposer des mécanismes de réparation simples et indiquer clairement où se situe l'erreur."
+  },
+  {
+    "id": 12,
+    "question": "Pourquoi la réversibilité des actions (Ctrl+Z) est-elle importante selon Shneiderman ?",
+    "options": [
+      "Elle permet d'économiser de la mémoire",
+      "Elle soulage l'anxiété de l'utilisateur et encourage l'exploration",
+      "Elle accélère les performances du système",
+      "Elle est uniquement utile pour les développeurs"
+    ],
+    "correctIndex": 1,
+    "explanation": "La réversibilité des actions (comme Ctrl+Z) soulage l'anxiété de l'utilisateur face aux erreurs potentielles et l'encourage à explorer l'interface sans crainte de conséquences irréversibles."
+  },
+  {
+    "id": 13,
+    "question": "Quelle est la différence entre une maquette basse fidélité et une maquette haute fidélité ?",
+    "options": [
+      "La basse fidélité est interactive, la haute fidélité est statique",
+      "La basse fidélité est un wireframe (fil de fer), la haute fidélité inclut les couleurs et les images",
+      "La basse fidélité est faite par le client, la haute fidélité par le développeur",
+      "Il n'y a aucune différence, ce sont des synonymes"
+    ],
+    "correctIndex": 1,
+    "explanation": "Une maquette basse fidélité (wireframe) représente la structure en fil de fer, tandis qu'une maquette haute fidélité intègre les couleurs, les images et les détails visuels finaux."
+  },
+  {
+    "id": 14,
+    "question": "Quel est l'ordre correct du processus de maquettage ?",
+    "options": [
+      "Prototype → Haute fidélité → Basse fidélité → Widget tree",
+      "Basse fidélité → Haute fidélité → Prototype → Widget tree",
+      "Widget tree → Prototype → Haute fidélité → Basse fidélité",
+      "Haute fidélité → Basse fidélité → Widget tree → Prototype"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le processus de maquettage suit l'ordre : basse fidélité (wireframe) → haute fidélité (couleurs, images) → prototype (interactif) → widget tree (arbre de composants pour le développement)."
+  },
+  {
+    "id": 15,
+    "question": "Pourquoi la règle de réduction de la charge cognitive de Shneiderman recommande-t-elle des interfaces simples ?",
+    "options": [
+      "Pour réduire le coût de développement",
+      "Pour que l'interface soit compatible avec tous les navigateurs",
+      "En raison de la limitation de la mémoire à court terme de l'utilisateur",
+      "Pour faciliter la traduction de l'interface"
+    ],
+    "correctIndex": 2,
+    "explanation": "La mémoire à court terme humaine est limitée. Il faut donc concevoir des interfaces simples, décomposer l'information sur plusieurs pages et garder le même composant au même endroit pour réduire la charge cognitive."
+  }
+]

@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "question": "Quel est le nom anglais du composant graphique 'case à cocher' ?",
+    "options": ["RadioButton", "CheckBox", "ComboBox", "ToggleButton"],
+    "correctIndex": 1,
+    "explanation": "La case à cocher se traduit en anglais par CheckBox (ou ChoiceBox selon les frameworks)."
+  },
+  {
+    "id": 2,
+    "question": "Comment appelle-t-on un composant de type 'curseur de défilement' en anglais ?",
+    "options": ["ScrollBar", "Slider", "ProgressBar", "Spinner"],
+    "correctIndex": 1,
+    "explanation": "Le curseur de défilement correspond au composant Slider. La ScrollBar est la barre de défilement, qui est un composant différent."
+  },
+  {
+    "id": 3,
+    "question": "Quel composant graphique est désigné par le terme 'étiquette' ?",
+    "options": ["TextBox", "Button", "Label", "Tag"],
+    "correctIndex": 2,
+    "explanation": "L'étiquette correspond au composant Label, qui sert à afficher du texte non modifiable par l'utilisateur."
+  },
+  {
+    "id": 4,
+    "question": "Quel est le nom anglais du composant 'liste déroulante' ?",
+    "options": ["ListView", "ListBox", "ComboBox", "DropList"],
+    "correctIndex": 2,
+    "explanation": "La liste déroulante correspond au composant ComboBox. ListView et ListBox désignent une zone de liste (non déroulante)."
+  },
+  {
+    "id": 5,
+    "question": "Comment appelle-t-on un menu circulaire en anglais ?",
+    "options": ["Context Menu", "Ribbon", "Pie Menu / Radial Menu", "Wheel Menu"],
+    "correctIndex": 2,
+    "explanation": "Le menu circulaire se traduit par Pie Menu ou Radial Menu en anglais."
+  },
+  {
+    "id": 6,
+    "question": "Que sont les 'interacteurs' (widgets) dans une interface graphique ?",
+    "options": [
+      "Des conteneurs qui organisent les composants",
+      "Des éléments de base avec lesquels l'utilisateur va interagir",
+      "Des gestionnaires d'agencement",
+      "Des algorithmes de configuration"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les interacteurs (widgets) sont les éléments de base avec lesquels l'utilisateur va interagir : boutons, champs textes, étiquettes, menus, etc."
+  },
+  {
+    "id": 7,
+    "question": "Quelle affirmation est vraie concernant les interacteurs (widgets) ?",
+    "options": [
+      "Ils sont toujours graphiques",
+      "Ils ne peuvent contenir d'autres composants",
+      "Certains ne sont pas forcément graphiques, comme un audio-player ou un buzzer",
+      "Ils organisent les composants dans un conteneur"
+    ],
+    "correctIndex": 2,
+    "explanation": "Certains interacteurs ne sont pas forcément graphiques, comme un audio-player ou un buzzer. Ils restent néanmoins des widgets."
+  },
+  {
+    "id": 8,
+    "question": "Quel rôle jouent les conteneurs (Container/Pane/Box) dans une interface ?",
+    "options": [
+      "Ils définissent la couleur de fond de l'application",
+      "Ils contiennent d'autres conteneurs ou des interacteurs et forment une structure hiérarchique",
+      "Ils gèrent les événements utilisateur",
+      "Ils pilotent uniquement le positionnement absolu"
+    ],
+    "correctIndex": 1,
+    "explanation": "Les conteneurs sont des objets qui contiennent d'autres conteneurs ou des interacteurs. Ils forment une structure hiérarchique (containment hierarchy) très proche de l'arbre de widgets."
+  },
+  {
+    "id": 9,
+    "question": "Où se situent les éléments de configuration (bordure, groupe de boutons radio) dans la structure de l'interface ?",
+    "options": [
+      "Ils sont à la racine de l'arbre de widgets",
+      "Ils font partie de la structure hiérarchique de l'interface",
+      "Ils ne font PAS partie de la structure hiérarchique, ce sont des algorithmes de configuration",
+      "Ils remplacent les conteneurs"
+    ],
+    "correctIndex": 2,
+    "explanation": "Les éléments de configuration ne sont pas dans la structure hiérarchique qui définit l'interface. Ce ne sont que des algorithmes de configuration appliqués aux interacteurs ou conteneurs."
+  },
+  {
+    "id": 10,
+    "question": "Quel est le principal inconvénient du positionnement absolu/fixe des composants ?",
+    "options": [
+      "Il est impossible à mettre en place",
+      "Il est très complexe en cas de modification de la taille ou de changement d'orientation",
+      "Il ne fonctionne qu'avec un seul type de composant",
+      "Il nécessite obligatoirement un gestionnaire d'agencement"
+    ],
+    "correctIndex": 1,
+    "explanation": "Le positionnement absolu est simple pour une interface de taille fixe, mais devient très complexe en cas de modifications de la taille ou de changement d'orientation de l'écran."
+  },
+  {
+    "id": 11,
+    "question": "Dans l'approche dynamique/découplée des gestionnaires d'agencement, quelle affirmation est correcte ?",
+    "options": [
+      "Chaque conteneur a un gestionnaire d'agencement fixe et ne peut pas en changer",
+      "Il y a autant de conteneurs différents que de gestionnaires d'agencement",
+      "Le conteneur est sans gestionnaire d'agencement prédéfini, le développeur associe celui de son choix",
+      "Le positionnement est toujours absolu"
+    ],
+    "correctIndex": 2,
+    "explanation": "Dans l'approche dynamique/découplée, le conteneur est sans gestionnaire d'agencement prédéfini. Le développeur associe le gestionnaire de son choix au conteneur. Un seul type de conteneur est nécessaire."
+  },
+  {
+    "id": 12,
+    "question": "Dans l'approche statique/couplée des gestionnaires d'agencement, quelle affirmation est correcte ?",
+    "options": [
+      "Un seul type de conteneur suffit pour tous les agencements",
+      "Le développeur peut changer dynamiquement le gestionnaire d'agencement",
+      "Il y a autant de conteneurs différents que de gestionnaires d'agencement, et chacun ne peut pas en changer",
+      "Les conteneurs n'ont pas de gestionnaire d'agencement"
+    ],
+    "correctIndex": 2,
+    "explanation": "Dans l'approche statique/couplée, il y a autant de conteneurs différents que de gestionnaires d'agencement. Chaque conteneur a son propre gestionnaire et ne peut pas en changer."
+  },
+  {
+    "id": 13,
+    "question": "Dans un arbre de widgets, que représente la racine ?",
+    "options": [
+      "Un bouton principal",
+      "Le conteneur principal (la fenêtre)",
+      "Le gestionnaire d'événements",
+      "Un élément de configuration"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'arbre de widgets débute de la racine qui est le conteneur principal, c'est-à-dire la fenêtre (Window/Frame) de l'application."
+  },
+  {
+    "id": 14,
+    "question": "Dans un arbre de widgets, que représentent les feuilles (noeuds terminaux) ?",
+    "options": [
+      "Des gestionnaires d'agencement",
+      "Des conteneurs contenant d'autres conteneurs",
+      "Des conteneurs vides ou des interacteurs",
+      "Des éléments de configuration uniquement"
+    ],
+    "correctIndex": 2,
+    "explanation": "Les feuilles (noeuds terminaux) de l'arbre de widgets sont des conteneurs vides ou des interacteurs (widgets). Les noeuds non terminaux sont des conteneurs contenant d'autres éléments."
+  },
+  {
+    "id": 15,
+    "question": "Quel outil est un GUI Builder spécifiquement conçu pour JavaFX ?",
+    "options": ["WindowBuilder", "Glade", "SceneBuilder", "Visual Studio"],
+    "correctIndex": 2,
+    "explanation": "SceneBuilder est le GUI Builder dédié à JavaFX. WindowBuilder est utilisé pour Java Swing/AWT sous Eclipse, Glade pour GTK+, et Visual Studio pour C++ et .Net."
+  }
+]
