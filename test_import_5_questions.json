@@ -1,0 +1,77 @@
+{
+  "quiz": {
+    "id": "test-import-5-questions",
+    "title": "Test import - 5 questions",
+    "description": "Petit quiz de validation pour tester le bouton d'import JSON dans CQCM.",
+    "category": "Import",
+    "difficulty": "debutant",
+    "questionCount": 5,
+    "fileName": "questions-test-import-5-questions.json",
+    "icon": "T"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Quel bouton permet d'importer un quiz JSON dans CQCM ?",
+      "options": [
+        "Le bouton avec l'icone d'envoi de fichier",
+        "Le bouton Retour",
+        "Le bouton Valider",
+        "Le bouton Suivant"
+      ],
+      "correctIndex": 0,
+      "explanation": "Le bouton d'import est dans la barre du haut de l'accueil."
+    },
+    {
+      "id": 2,
+      "question": "Quel format de fichier est attendu pour l'import ?",
+      "options": [
+        "JSON",
+        "CSV",
+        "PDF",
+        "PNG"
+      ],
+      "correctIndex": 0,
+      "explanation": "L'import lit un fichier JSON contenant un objet quiz et une liste de questions."
+    },
+    {
+      "id": 3,
+      "question": "Quelles cles principales doivent exister dans le fichier d'import ?",
+      "options": [
+        "quiz",
+        "questions",
+        "screens",
+        "theme"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "Le fichier doit contenir quiz pour les metadonnees et questions pour le contenu."
+    },
+    {
+      "id": 4,
+      "question": "A quoi doit correspondre questionCount ?",
+      "options": [
+        "Au nombre exact de questions dans la liste",
+        "Au nombre de reponses possibles",
+        "Au nombre de categories",
+        "A la difficulte du quiz"
+      ],
+      "correctIndex": 0,
+      "explanation": "La validation compare questionCount avec la longueur de la liste questions."
+    },
+    {
+      "id": 5,
+      "question": "Que se passe-t-il apres un import reussi ?",
+      "options": [
+        "La liste des quiz est rechargee",
+        "L'application doit obligatoirement etre rebuild",
+        "Le fichier pubspec.yaml est modifie",
+        "Les anciens quiz sont tous supprimes"
+      ],
+      "correctIndex": 0,
+      "explanation": "Le quiz importe est sauvegarde dans le dossier runtime, puis l'accueil recharge la liste."
+    }
+  ]
+}

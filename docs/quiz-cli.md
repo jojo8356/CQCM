@@ -1,10 +1,16 @@
-# CQCM Quiz CLI
+# CQCM Quiz CLI et import JSON
 
-CQCM embarque toujours les quiz de `assets/data/`, mais peut aussi charger des quiz depuis un dossier runtime externe. Ce dossier est choisi au lancement avec la variable d'environnement `CQCM_DATA_DIR`.
+CQCM embarque toujours les quiz de `assets/data/`, mais peut aussi charger des quiz depuis un dossier runtime externe. Ce dossier peut être choisi au lancement avec la variable d'environnement `CQCM_DATA_DIR`.
 
 L'application propose aussi un bouton d'import dans l'accueil. Il ouvre un sélecteur de fichier JSON, valide le package, l'écrit dans le dossier runtime applicatif, puis recharge la liste des quiz sans rebuild.
 
-## Lancer la production avec un dossier modifiable
+## Choisir le bon chemin
+
+- Sur Android/iOS : utiliser le bouton d'import dans l'application.
+- Sur desktop ou environnement administré : utiliser la CLI avec `--dir` ou `CQCM_DATA_DIR`.
+- Pour préparer un fichier : partir de `exemple_import.json` ou `test_import_5_questions.json`.
+
+## Lancer une production desktop avec un dossier modifiable
 
 ```bash
 CQCM_DATA_DIR=/var/lib/cqcm/quizzes ./cqcm
@@ -127,4 +133,11 @@ dart run bin/cqcm_quiz.dart --dir /var/lib/cqcm/quizzes add-question \
 
 ## Limite importante
 
-Cette approche est directe pour une production desktop ou serveur lancee depuis un shell. Sur Android/iOS, une application installee n'a pas un dossier arbitraire modifiable par une CLI locale classique ; il faudra soit une fonctionnalite d'import dans l'application, soit une synchronisation reseau, soit une commande d'administration specifique a l'environnement de deploiement.
+Cette approche est directe pour une production desktop ou serveur lancée depuis un shell. Sur Android/iOS, une application installée n'a pas un dossier arbitraire modifiable par une CLI locale classique ; utiliser le bouton d'import intégré, une synchronisation réseau ou une commande d'administration spécifique à l'environnement de déploiement.
+
+## Voir aussi
+
+- `README.md` : démarrage rapide.
+- `DOC.md` : documentation technique complète.
+- `exemple_import.json` : template court.
+- `test_import_5_questions.json` : fichier d'essai prêt à importer.
