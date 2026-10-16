@@ -150,19 +150,56 @@ android {
     compileSdk = maxOf(35, flutter.compileSdkVersion) // 35 minimum pour la 19.x
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     defaultConfig { multiDexEnabled = true }
 }
 
+kotlin {
+    compilerOptions { jvmTarget = JvmTarget.JVM_17 }
+}
+
 dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+    implementation("androidx.window:window:1.0.0")
+    implementation("androidx.window:window-java:1.0.0")
 }
 ```
 
-AGP ≥ 8.6.0 requis (le projet utilise 8.9.1). Le desugaring est obligatoire même
-sans rappel programmé.
+Le desugaring est obligatoire même sans rappel programmé. Les deux dépendances
+`androidx.window` sont le contournement documenté par le plugin contre un plantage
+sur Android 12L+ lié au desugaring (bogue Flutter
+[#110658](https://github.com/flutter/flutter/issues/110658)).
+
+### Android : versions Gradle / AGP / Kotlin
+
+Flutter refuse de démarrer le build si la chaîne Android est trop ancienne
+(message « Your project's Gradle version (…) is lower than Flutter's minimum
+supported version »). Les valeurs du projet et leurs bornes :
+
+| Fichier | Réglage | Minimum imposé par Flutter | Valeur du projet |
+| --- | --- | --- | --- |
+| `android/gradle/wrapper/gradle-wrapper.properties` | `distributionUrl` | 8.14.0 | **8.14.3** |
+| `android/settings.gradle.kts` | `com.android.application` | 8.11.1 | **8.11.1** |
+| `android/settings.gradle.kts` | `org.jetbrains.kotlin.android` | 2.2.20 | **2.4.0** |
+| `android/app/build.gradle.kts` | `compileOptions` / `jvmTarget` | Java 17 | **17** |
+
+Ces versions restent dans les plages déclarées compatibles par Flutter
+(AGP 8.11.1 ↔ Gradle 8.13–9.3, Kotlin 2.4.0 ↔ AGP 8.2.2–9.2) et correspondent à
+la configuration testée par `flutter_local_notifications` 22.x.
+
+Attendu au premier `flutter run` : deux avertissements de *version* (Gradle et
+AGP en dessous des seuils « recommandé » de Flutter, qui poussent déjà vers
+AGP 9). Ce ne sont pas des erreurs, le build continue. Pour les faire
+disparaître il faudra la bascule AGP 9 / Gradle 9, qui implique aussi une
+montée de `flutter_local_notifications` en 22.x (son `android/build.gradle`
+passe alors de l'AGP 8.6.0 à 8.11.1) et de `timezone` en 0.11.
+
+`android/gradle.properties` ne contient plus `android.enableJetifier` (inutile
+ici, retirée par l'AGP 9) mais déclare `android.newDsl=false` et
+`android.builtInKotlin=false`, les deux options que les migrations de
+`flutter run` ajoutent d'elles-mêmes sur les projets AGP 9.
 
 ### Android (`android/app/src/main/AndroidManifest.xml`)
 

@@ -19,8 +19,15 @@ pluginManagement {
 
 plugins {
     id("dev.flutter.flutter-plugin-loader") version "1.0.0"
-    id("com.android.application") version "8.9.1" apply false
-    id("org.jetbrains.kotlin.android") version "2.1.0" apply false
+    // Versions minimales imposées par les Flutter récents :
+    //   - AGP >= 8.11.1 (sinon « Your project's Android Gradle Plugin
+    //     version (...) is lower than Flutter's minimum supported version »),
+    //   - Kotlin >= 2.2.20 (même message pour KGP).
+    // 8.11.1 / 2.4.0 restent dans les plages déclarées compatibles par Flutter
+    // et par AGP, et correspondent à la configuration testée par
+    // flutter_local_notifications 22.x.
+    id("com.android.application") version "8.11.1" apply false
+    id("org.jetbrains.kotlin.android") version "2.4.0" apply false
 }
 
 include(":app")
