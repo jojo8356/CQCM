@@ -36,7 +36,47 @@ adb install -r build/app/outputs/flutter-apk/app-release.apk
 Sans `--target-platform`, Flutter compile **les trois** architectures dans un
 même APK : inutile pour un appareil précis, et sensiblement plus lourd.
 
-## 2. Options du script
+## 2. Le cas de l'Oukitel WP32
+
+Caractéristiques utiles pour le build (fiche technique du WP32) :
+
+| Élément | Valeur | Conséquence |
+| --- | --- | --- |
+| SoC | Unisoc T606 / UMS9230, 8 cœurs 64 bits (Cortex-A75 + A55) | `arm64-v8a` → `--target-platform android-arm64` |
+| Système | Android 13 (API 33) | `minSdk` 24 et `compileSdk` 36 du projet conviennent ; aucun réglage à changer |
+| Mémoire | 4 Go de RAM | écart debug/release très net : la release (AOT) est la seule version fluide |
+| Écran | 5,93" 720×1440, densité 320 dpi | 720 ÷ 2 = **360 dp de large** — exactement la largeur des tests « écrans étroits » (`test/narrow_screens_test.dart`) |
+
+Vérification des valeurs sur l'appareil (les mêmes commandes que le script) :
+
+```bash
+adb shell getprop ro.product.cpu.abi       # arm64-v8a
+adb shell getprop ro.product.cpu.abilist   # arm64-v8a,armeabi-v7a,armeabi
+adb shell wm size                          # Physical size: 720x1440
+adb shell wm density                       # Physical density: 320  → 360 dp de large
+```
+
+Commande recommandée pour ce téléphone (une seule architecture, symboles de
+débogage sortis du binaire, installation) :
+
+```bash
+tools/build-apk.sh --install --symbols
+```
+
+Équivalent à la main :
+
+```bash
+flutter build apk --release --target-platform android-arm64 \
+  --split-debug-info=build/symbols
+adb install -r build/app/outputs/flutter-apk/app-release.apk
+```
+
+Android 13 exige l'autorisation `POST_NOTIFICATIONS` à l'exécution : au
+premier lancement, passer par l'écran des rappels (bouton **Autorisation**)
+puis **Notification de test** pour la valider — les rappels ne s'affichent
+pas sans elle.
+
+## 3. Options du script
 
 | Commande | Effet |
 | --- | --- |
@@ -53,7 +93,7 @@ même APK : inutile pour un appareil précis, et sensiblement plus lourd.
 
 À la fin, le script affiche le chemin, la taille et le `sha256` de chaque APK.
 
-## 3. Pourquoi la release est plus rapide
+## 4. Pourquoi la release est plus rapide
 
 En debug, Dart tourne dans une machine virtuelle (JIT) avec les assertions :
 c'est ce qui permet le hot reload. En release, le code est compilé en natif
@@ -80,7 +120,33 @@ flutter build apk --release --target-platform android-arm64 --analyze-size
 `build/symbols` doit être conservé pour décoder un rapport de plantage : à
 sauvegarder à côté de l'APK si l'application est distribuée.
 
-## 4. Signature : la clé de débogage, puis la vraie
+### Ce qui réduit déjà le poids sans rien faire
+
+- **R8** (rétrécissement, optimisation, renommage du bytecode) et le **retrait
+  des ressources inutilisées** sont actifs par défaut dès qu'un build release
+  est demandé : le plugin Gradle de Flutter positionne `minifyEnabled` et
+  `shrinkResources` sur le type de build `release`. `shrink=false` dans
+  `android/gradle.properties` les désactiverait (le script avertit dans ce cas).
+- **Retrait des icônes non utilisées** (`tree-shake-icons`, actif par défaut).
+- **Bibliothèques natives** : seule l'architecture visée est embarquée.
+- Les données de l'application ne pèsent que **360 Ko** (`assets/data`,
+  16 fichiers JSON) : l'essentiel du poids est le moteur Flutter lui-même.
+
+### R8 et les notifications
+
+`flutter_local_notifications` enregistre ses rappels programmés dans les
+`SharedPreferences` en JSON, produit et relu **par réflexion** avec Gson. R8
+renommant les champs par défaut, un rappel écrit par une version du binaire
+peut devenir illisible après une mise à jour — le rappel disparaît alors sans
+message. `android/app/proguard-rules.pro` (versionné) contient les règles qui
+figent les noms nécessaires ; le rétrécissement et les optimisations restent
+actifs. Ce fichier est lu automatiquement par le plugin Flutter, il n'y a rien
+à déclarer côté Gradle.
+
+En cas de doute après un build release, lancer **Notification de test** depuis
+l'écran des rappels et vérifier `adb logcat | grep -i cqcm`.
+
+## 5. Signature : la clé de débogage, puis la vraie
 
 Par défaut (`android/app/build.gradle.kts`), la release est **signée avec la clé
 de débogage** : l'APK s'installe très bien sur son propre téléphone, mais
@@ -121,7 +187,7 @@ adb uninstall com.cqcm.cqcm
 tools/build-apk.sh --install
 ```
 
-## 5. Autres façons d'installer
+## 6. Autres façons d'installer
 
 ```bash
 # build + install en une commande Flutter (release)
@@ -139,7 +205,7 @@ Pour tester le comportement exact de la version de production **avec** les logs
 et le hot reload, `flutter run --release` compile en release et le lance sur
 l'appareil branché.
 
-## 6. Dépannage
+## 7. Dépannage
 
 | Message | Cause | Remède |
 | --- | --- | --- |

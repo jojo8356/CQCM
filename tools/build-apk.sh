@@ -128,6 +128,28 @@ target_for_abi() {
   esac
 }
 
+# Interroge une propriété du téléphone (vide si absente ou pas d'appareil).
+device_getprop() {
+  "${ADB[@]}" shell getprop "$1" 2>/dev/null | tr -d '\r' | head -n 1 || true
+}
+
+# Affiche la taille et la densité logiques : c'est ce qui fixe la largeur en dp
+# (un écran 720 px à 320 dpi = 360 dp de large, comme les tests écrans étroits).
+report_screen() {
+  local size density width_px density_dpi
+  size="$("${ADB[@]}" shell wm size 2>/dev/null | tr -d '\r' | head -n 1 ||
+    true)"
+  density="$("${ADB[@]}" shell wm density 2>/dev/null | tr -d '\r' |
+    head -n 1 || true)"
+  width_px="$(printf '%s' "$size" | sed -n 's/.*: *\([0-9]\+\)x[0-9]\+.*/\1/p')"
+  density_dpi="$(printf '%s' "$density" | sed -n 's/.*: *\([0-9]\+\).*/\1/p')"
+  if [ -n "$width_px" ] && [ -n "$density_dpi" ] && [ "$density_dpi" != "0" ]
+  then
+    log "écran : ${size#*: }, densité ${density_dpi} dpi \
+→ $((width_px * 160 / density_dpi)) dp de large"
+  fi
+}
+
 DEVICE_ABI=""
 if [ "$ABI" = "auto" ]; then
   if [ -z "$ADB_BIN" ]; then
@@ -135,13 +157,18 @@ if [ "$ABI" = "auto" ]; then
   else
     ADB=("$ADB_BIN")
     [ -n "$DEVICE" ] && ADB+=("-s" "$DEVICE")
-    DEVICE_ABI="$("${ADB[@]}" shell getprop ro.product.cpu.abi 2>/dev/null |
-      tr -d '\r' | head -n 1 || true)"
+    # `ro.product.cpu.abi` (ABI principale) puis, en secours, la première
+    # entrée de `ro.product.cpu.abilist`.
+    DEVICE_ABI="$(device_getprop ro.product.cpu.abi)"
+    if [ -z "$DEVICE_ABI" ]; then
+      DEVICE_ABI="$(device_getprop ro.product.cpu.abilist | cut -d, -f1)"
+    fi
     if [ -z "$DEVICE_ABI" ]; then
       warn "aucun téléphone détecté par adb (ou pas de réponse) : \
 utilise --abi, ou branche-le et accepte le débogage USB"
     else
       log "téléphone détecté : architecture $DEVICE_ABI"
+      report_screen
     fi
   fi
 fi
@@ -161,6 +188,14 @@ TARGET="$(target_for_abi "$ABI")"
 # ---------------------------------------------------------------------------
 # Préparation
 # ---------------------------------------------------------------------------
+
+# Le rétrécissement R8 (code) et le retrait des ressources inutilisées sont
+# actifs par défaut en release ; `shrink=false` les désactiverait.
+if grep -qE '^[[:space:]]*shrink[[:space:]]*=[[:space:]]*false' \
+  android/gradle.properties 2>/dev/null; then
+  warn "shrink=false dans android/gradle.properties : R8 et le retrait des \
+ressources sont désactivés, l'APK sera plus lourd"
+fi
 
 if [ "$CLEAN" = "1" ]; then
   log "flutter clean"

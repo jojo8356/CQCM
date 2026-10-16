@@ -94,9 +94,16 @@ architecture, installation directe) :
 tools/build-apk.sh --install
 ```
 
-Le script lit `ro.product.cpu.abi` du téléphone connecté, compile en release
-avec `--target-platform` correspondant, puis installe l'APK par `adb install -r`.
-Sans téléphone branché : `tools/build-apk.sh --abi arm64`.
+Le script lit `ro.product.cpu.abi` du téléphone connecté (ainsi que sa taille
+et sa densité d'écran), compile en release avec `--target-platform`
+correspondant, puis installe l'APK par `adb install -r`. Sans téléphone branché :
+`tools/build-apk.sh --abi arm64`.
+
+Ajouter `--symbols` (recommandé) sort les symboles de débogage du binaire et
+allège l'APK ; `--obfuscate --symbols` va plus loin. Le rétrécissement R8 et le
+retrait des ressources inutilisées sont déjà actifs en release ; les règles
+nécessaires à `flutter_local_notifications` (sérialisation Gson relue par
+réflexion) sont dans `android/app/proguard-rules.pro`.
 
 À la main :
 
