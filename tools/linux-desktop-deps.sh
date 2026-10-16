@@ -11,6 +11,8 @@
 #   tools/linux-desktop-deps.sh              # GTK 3 (+ lzma) : l'essentiel
 #   tools/linux-desktop-deps.sh --all        # + clang/ninja/cmake/pkg-config
 #   tools/linux-desktop-deps.sh --mesa-utils # + eglinfo (avertissement doctor)
+#   tools/linux-desktop-deps.sh --with-runtime  # + bibliothèques d'exécution
+#                                            #   (si un .so manque au link)
 #   tools/linux-desktop-deps.sh --clean      # repart de zéro
 #   tools/linux-desktop-deps.sh --root DIR   # autre emplacement du sysroot
 #
@@ -46,12 +48,14 @@ usage() {
 ROOT="${CQCM_LINUX_DEPS_DIR:-$HOME/.cqcm/linux-deps}"
 WITH_ALL=0
 WITH_MESA=0
+WITH_RUNTIME=0
 CLEAN=0
 
 while [ $# -gt 0 ]; do
   case "$1" in
     --all) WITH_ALL=1 ;;
     --mesa-utils) WITH_MESA=1 ;;
+    --with-runtime) WITH_RUNTIME=1 ;;
     --clean) CLEAN=1 ;;
     --root)
       shift
@@ -109,7 +113,9 @@ if [ "$WITH_MESA" = 1 ]; then
 fi
 
 for wanted in "${PACKAGES[@]}"; do
-  apt-cache policy "$wanted" 2>/dev/null | grep -q 'Candidate: [0-9]' ||
+  # `apt-cache show` évite toute dépendance à la langue de sortie
+  # (« Candidate: » / « Candidat : » selon la locale).
+  apt-cache show "$wanted" >/dev/null 2>&1 ||
     warn "aucun paquet candidat pour « $wanted » (listes apt à rafraîchir ?)"
 done
 
@@ -130,12 +136,19 @@ mapfile -t CLOSURE < <(
 )
 
 TO_FETCH=()
-for pkg in "${CLOSURE[@]}"; do
-  if dpkg -s "$pkg" 2>/dev/null | grep -q '^Status: install ok installed'; then
-    continue
-  fi
-  TO_FETCH+=("$pkg")
-done
+if [ "$WITH_RUNTIME" = 1 ]; then
+  # Repli : on extrait aussi les paquets déjà installés (bibliothèques
+  # d'exécution), utile si un lien symbolique du sysroot pointe vers une
+  # bibliothèque absente du système.
+  TO_FETCH=("${CLOSURE[@]}")
+else
+  for pkg in "${CLOSURE[@]}"; do
+    if dpkg -s "$pkg" 2>/dev/null | grep -q '^Status: install ok installed'; then
+      continue
+    fi
+    TO_FETCH+=("$pkg")
+  done
+fi
 
 if [ "${#TO_FETCH[@]}" -eq 0 ]; then
   log "Toutes les dépendances sont déjà présentes sur le système"
@@ -190,15 +203,77 @@ ok "$COUNT paquet(s) extrait(s)"
 
 MULTIARCH="$(gcc -print-multiarch 2>/dev/null || true)"
 if [ -z "$MULTIARCH" ]; then
-  MULTIARCH="$(basename "$(find /usr/lib -maxdepth 1 -name '*-linux-gnu' 2>/dev/null | head -1)")"
+  MULTIARCH="$(basename "$(
+    find /usr/lib -maxdepth 1 -name '*-linux-gnu' 2>/dev/null | head -1
+  )")"
 fi
 if [ -z "$MULTIARCH" ]; then
-  MULTIARCH="$(basename "$(find "$SYSROOT/usr/lib" -maxdepth 1 -name '*-linux-gnu' | head -1)")"
+  MULTIARCH="$(basename "$(
+    find "$SYSROOT/usr/lib" -maxdepth 1 -name '*-linux-gnu' 2>/dev/null | head -1
+  )")"
 fi
 [ -n "$MULTIARCH" ] || die "architecture multiarch indéterminée"
 
 LIBDIR="$SYSROOT/usr/lib/$MULTIARCH"
 INCDIR="$SYSROOT/usr/include"
+
+# ---------------------------------------------------------------------------
+# Réécriture des fichiers .pc
+#
+# Les paquets de développement sont compilés pour un préfixe /usr : leurs .pc
+# déclarent `includedir=/usr/include`, donc `pkg-config --cflags gtk+-3.0`
+# renvoie « -I/usr/include/gtk-3.0 ». Ce dossier n'existe pas sur une machine
+# sans libgtk-3-dev, et CMake refuse alors la cible Imported
+# « PkgConfig::GTK includes non-existent path ». On réécrit donc les .pc de
+# façon à ce qu'ils désignent le sysroot.
+# ---------------------------------------------------------------------------
+
+log "Réécriture des fichiers .pc vers le sysroot"
+PC_COUNT=0
+shopt -s nullglob
+for pc in "$SYSROOT"/usr/lib/*/pkgconfig/*.pc \
+  "$SYSROOT"/usr/lib/pkgconfig/*.pc \
+  "$SYSROOT"/usr/share/pkgconfig/*.pc; do
+  sed -i \
+    -e "s|=\s*/usr|=$SYSROOT/usr|g" \
+    -e "s| -I/usr/| -I$SYSROOT/usr/|g" \
+    -e "s| -L/usr/| -L$SYSROOT/usr/|g" \
+    -e "s|=/lib|=$SYSROOT/lib|g" \
+    "$pc"
+  PC_COUNT=$((PC_COUNT + 1))
+done
+shopt -u nullglob
+ok "$PC_COUNT fichier(s) .pc pointé(s) vers $SYSROOT"
+
+# ---------------------------------------------------------------------------
+# Réparation des liens symboliques fournis par les paquets -dev
+#
+# `libgtk-3.so` est un lien vers `libgtk-3.so.0`, que seul le paquet
+# d'exécution fournit — et il est déjà installé dans /usr, donc non extrait
+# ici. Sans ce lien rétabli, l'édition de liens échouerait sur « -lgtk-3 ».
+# ---------------------------------------------------------------------------
+
+log "Rétablissement des liens vers les bibliothèques du système"
+LINK_COUNT=0
+shopt -s nullglob
+for libdir in "$SYSROOT"/usr/lib/*-linux-gnu "$SYSROOT"/usr/lib "$SYSROOT"/usr/lib64; do
+  [ -d "$libdir" ] || continue
+  for link in "$libdir"/*.so; do
+    # Un lien qui se résout n'a pas besoin d'aide.
+    [ -L "$link" ] && [ ! -e "$link" ] || continue
+    target="$(basename "$(readlink "$link")")"
+    for sysdir in "/usr/lib/$MULTIARCH" "/lib/$MULTIARCH" /usr/lib /lib \
+      /usr/lib64 /lib64; do
+      if [ -e "$sysdir/$target" ]; then
+        ln -sfn "$sysdir/$target" "$link"
+        LINK_COUNT=$((LINK_COUNT + 1))
+        break
+      fi
+    done
+  done
+done
+shopt -u nullglob
+ok "$LINK_COUNT lien(s) rétabli(s)"
 
 # ---------------------------------------------------------------------------
 # Fichier d'environnement
@@ -259,6 +334,49 @@ else
     *) ok "fourni par le système ($ORIGIN)" ;;
   esac
   ok "les drapeaux de compilation GTK 3 sont disponibles"
+
+  # CMake refuse qu'une cible déclare un dossier d'en-têtes inexistant :
+  # on vérifie donc chaque -I et chaque -l avant de lancer Flutter.
+  MISSING_INCLUDE=()
+  for include in $(pkg-config --cflags-only-I gtk+-3.0 2>/dev/null |
+    tr ' ' '\n' | sed -n 's/^-I//p'); do
+    [ -d "$include" ] || MISSING_INCLUDE+=("$include")
+  done
+
+  MISSING_LIB=()
+  LIBS="$(pkg-config --libs gtk+-3.0 2>/dev/null || true)"
+  LIB_DIRS=()
+  while IFS= read -r dir; do
+    [ -n "$dir" ] && LIB_DIRS+=("$dir")
+  done < <(printf '%s' "$LIBS" | tr ' ' '\n' | sed -n 's/^-L//p')
+
+  while IFS= read -r name; do
+    [ -n "$name" ] || continue
+    FOUND=0
+    for dir in "${LIB_DIRS[@]:-}" "/usr/lib/$MULTIARCH" "/lib/$MULTIARCH" \
+      /usr/lib /lib; do
+      [ -e "$dir/lib$name.so" ] && {
+        FOUND=1
+        break
+      }
+    done
+    [ "$FOUND" = 1 ] || MISSING_LIB+=("$name")
+  done < <(printf '%s' "$LIBS" | tr ' ' '\n' | sed -n 's/^-l//p')
+
+  if [ "${#MISSING_INCLUDE[@]}" -gt 0 ]; then
+    warn "dossier(s) d'en-têtes introuvable(s) :"
+    printf '   %s\n' "${MISSING_INCLUDE[@]}" >&2
+    warn "CMake échouerait avec « non-existent path »."
+  else
+    ok "tous les dossiers d'en-têtes déclarés existent"
+  fi
+
+  if [ "${#MISSING_LIB[@]}" -gt 0 ]; then
+    warn "bibliothèque(s) introuvable(s) : ${MISSING_LIB[*]}"
+    warn "l'édition de liens risque d'échouer."
+  else
+    ok "toutes les bibliothèques déclarées sont résolues"
+  fi
 fi
 
 if command -v eglinfo >/dev/null 2>&1; then

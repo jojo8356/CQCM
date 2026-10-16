@@ -28,8 +28,39 @@ Le script :
 3. télécharge les `.deb` manquants avec `apt-get download` (aucun privilège
    requis, les fichiers vont dans le dossier courant) ;
 4. les extrait avec `dpkg -x` dans `~/.cqcm/linux-deps/sysroot` ;
-5. écrit `~/.cqcm/linux-deps/env.sh`, qui expose en-têtes, `.pc` et
-   bibliothèques de développement.
+5. **réécrit les `.pc`** extraits pour qu'ils désignent le sysroot (voir
+   ci-dessous) ;
+6. **rétablit les liens symboliques** fournis par les paquets `-dev`
+   (`libgtk-3.so` → la bibliothèque d'exécution du système) ;
+7. écrit `~/.cqcm/linux-deps/env.sh`, qui expose en-têtes, `.pc` et
+   bibliothèques de développement, puis **vérifie** que chaque `-I` et chaque
+   `-l` déclarés par `pkg-config` existent réellement.
+
+### Pourquoi réécrire les `.pc` ?
+
+Les paquets de développement sont compilés pour un préfixe `/usr` : leurs
+`.pc` déclarent `includedir=/usr/include`, donc `pkg-config --cflags gtk+-3.0`
+renvoie `-I/usr/include/gtk-3.0`. Ce dossier n'existe pas sur une machine sans
+`libgtk-3-dev` et CMake refuse alors la cible :
+
+```
+Imported target "PkgConfig::GTK" includes non-existent path
+  "/usr/include/gtk-3.0"
+```
+
+Le script réécrit donc `prefix=/usr` (et les chemins absolus codés en dur) en
+`prefix=$SYSROOT/usr`, ce qui rend tous les `-I` et `-L` valides.
+
+### Pourquoi rétablir les liens ?
+
+Un paquet `-dev` fournit `libgtk-3.so` comme lien vers `libgtk-3.so.0`, que
+seul le paquet **d'exécution** livre — et celui-ci est déjà installé dans
+`/usr`, donc non extrait. Le script pointe donc ces liens vers le système :
+l'édition de liens trouve `libgtk-3.so`, et le binaire final utilise la
+bibliothèque d'exécution normale.
+
+Si une bibliothèque reste introuvable (message explicite du script), relancer
+avec `--with-runtime`, qui extrait **aussi** les paquets déjà installés.
 
 Options :
 
@@ -37,6 +68,7 @@ Options :
 | --- | --- |
 | `--all` | ajoute `pkg-config`, `ninja-build`, `cmake`, `clang` s'ils manquent |
 | `--mesa-utils` | ajoute `eglinfo` (avertissement non bloquant de `flutter doctor`) |
+| `--with-runtime` | extrait aussi les paquets déjà installés (repli si une bibliothèque manque) |
 | `--clean` | supprime le sysroot avant de recommencer |
 | `--root DIR` | autre emplacement du sysroot |
 
@@ -45,8 +77,12 @@ Options :
 ```bash
 source ~/.cqcm/linux-deps/env.sh
 flutter doctor          # « Linux toolchain » doit passer au vert
+flutter clean           # après un premier échec de CMake : purge le cache
 flutter run -d linux
 ```
+
+Après un échec de configuration CMake, `flutter clean` est conseillé : le
+dossier `build/` conserve la configuration fautive.
 
 Ou, en une commande, avec le wrapper fourni (il source l'environnement à votre
 place et transmet tous les arguments à `flutter`) :
@@ -104,5 +140,11 @@ compatibilité en dessous de 3.5 uniquement. Le plugin Linux des notifications
   inutile ; il peut alors être supprimé (ou gardé, il est inoffensif).
 - **eglinfo** : l'avertissement `Unable to access driver information` n'empêche
   pas la compilation ; `--mesa-utils` fournit le binaire si besoin.
+- **`Imported target "PkgConfig::GTK" includes non-existent path /usr/include/…`** :
+  les `.pc` pointaient encore vers le système ; relancer le script (il réécrit
+  les fichiers) puis `flutter clean`.
+- **Le script est rejouable** : chaque exécution réextrait les `.deb` et
+  réapplique réécritures et liens, ce qui corrige aussi une modification
+  accidentelle du sysroot.
 - **Recommandation** : pour les rappels de notifications réellement programmés,
   Android reste la cible la plus complète — voir `docs/notifications.md`.
