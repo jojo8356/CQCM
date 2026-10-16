@@ -4,7 +4,8 @@
 /// Règles appliquées ici :
 ///
 /// 1. fenêtre agrandie (`useLargeSurface`) plutôt que défilements inutiles ;
-/// 2. écran précédent attendu avant de naviguer (`openMenu`, `settleNavigation`) ;
+/// 2. écran précédent attendu avant de naviguer (`openMenu`,
+///    `settleNavigation`) ;
 /// 3. finders limités à l'écran concerné (`withinScreen`) ;
 /// 4. défilement jamais envoyé à une liste qui ne défile pas ou qui n'est pas
 ///    l'écran courant (`reveal`).
