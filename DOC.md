@@ -92,7 +92,7 @@ lib/
 
 `revision_plan.dart` assemble catalogue, progression et décisions de séance, et construit les rappels (`RevisionReminder`).
 
-`revision_store_io.dart` / `revision_store_stub.dart` persistent la progression (`revision-progress.json`) et la configuration de notifications selon la plateforme.
+`revision_store_io.dart` / `revision_store_stub.dart` persistent la progression (`revision-progress.json`) et la configuration de notifications selon la plateforme. Sans dossier disponible (web, tests), la progression reste en mémoire pour la session ; sous `flutter test`, le dossier système n'est pas demandé.
 
 `notification_plan.dart` transforme les échéances en rappels (`ReminderNotification`) datés ; `notification_service.dart` parle au plugin `flutter_local_notifications` (initialisation, autorisations, `zonedSchedule`, annulation) ; `notification_settings_store.dart` lit `assets/data/notifications.json` puis la surcharge locale.
 

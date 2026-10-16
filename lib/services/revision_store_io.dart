@@ -13,6 +13,18 @@ import '../models/revision_progress.dart';
 String? _resolvedDefaultDirectory;
 bool _defaultDirectoryResolved = false;
 
+/// Progression de la session courante, utilisée quand aucun fichier n'est
+/// disponible (tests, plateforme sans stockage) : l'application reste
+/// cohérente d'un écran à l'autre.
+Map<String, RevisionProgress> _memoryProgress = {};
+
+/// `flutter test` exécute les tests avec `FLUTTER_TEST` défini. Dans ce
+/// contexte, aucun plugin de plateforme ne répond : demander le dossier de
+/// données laisserait une attente (et son minuteur de sécurité) en suspens au
+/// lieu de rendre la main.
+bool get _isTestEnvironment =>
+    (Platform.environment['FLUTTER_TEST'] ?? '').isNotEmpty;
+
 /// Dossier de données de révision. Surchargeable par la variable
 /// d'environnement `CQCM_REVISION_DIR` (desktop, CLI, tests).
 String? defaultRevisionDataDirectory() {
@@ -46,6 +58,12 @@ Future<String?> resolveRevisionDataDirectory(String? directoryPath) async {
 }
 
 Future<String?> _resolveDefaultDirectory() async {
+  if (_isTestEnvironment) {
+    _resolvedDefaultDirectory = null;
+    _defaultDirectoryResolved = true;
+    return null;
+  }
+
   try {
     final supportDirectory = await getApplicationSupportDirectory().timeout(
       const Duration(milliseconds: 500),
@@ -136,7 +154,7 @@ Future<Map<String, RevisionProgress>> loadRevisionProgress({
 }) async {
   final path = await revisionProgressFilePath(directoryPath);
   if (path == null) {
-    return {};
+    return Map<String, RevisionProgress>.from(_memoryProgress);
   }
 
   final file = File(path);
@@ -173,6 +191,10 @@ Future<void> saveRevisionProgress(
   Map<String, RevisionProgress> progress, {
   String? directoryPath,
 }) async {
+  // Copie en mémoire dans tous les cas : même si l'écriture échoue, la
+  // session en cours garde une progression cohérente.
+  _memoryProgress = Map<String, RevisionProgress>.from(progress);
+
   final path = await revisionProgressFilePath(directoryPath);
   if (path == null) {
     return;

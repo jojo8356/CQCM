@@ -115,8 +115,11 @@ La progression est enregistrée dans un fichier JSON :
   l'application (`cqcm-revision-data`) ;
 - surchargeable par la variable d'environnement `CQCM_REVISION_DIR`
   (desktop, CLI, tests) ;
-- sur les plateformes sans `dart:io` (web), la progression reste en mémoire
-  pour la session en cours.
+- quand aucun dossier n'est disponible (web, plateforme sans stockage, tests),
+  la progression reste en mémoire pour la session en cours : l'application
+  garde un état cohérent d'un écran à l'autre, même sans écriture sur disque ;
+- sous `flutter test`, le dossier du système n'est pas demandé (`FLUTTER_TEST`) :
+  aucun plugin ne répond dans ce contexte, et l'attente resterait en suspens.
 
 Contenu : une entrée par phrase avec l'historique complet des tentatives
 (date, taux, mots justes, intervalle appliqué, facteur de facilité).

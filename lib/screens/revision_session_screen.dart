@@ -43,7 +43,6 @@ class _RevisionSessionScreenState extends State<RevisionSessionScreen> {
   RevisionProgress? _updatedProgress;
   bool _revealed = false;
   bool _isFinished = false;
-  bool _isSaving = false;
 
   RevisionItem get _item => widget.items[_index];
 
@@ -57,37 +56,47 @@ class _RevisionSessionScreenState extends State<RevisionSessionScreen> {
     super.dispose();
   }
 
+  /// Valide la recopie en cours.
+  ///
+  /// Le score, les contraintes et le diff s'affichent **immédiatement** :
+  /// l'enregistrement de la progression se poursuit en arrière-plan, car un
+  /// stockage lent ne doit ni bloquer la séance ni désactiver le bouton
+  /// « Valider » de la phrase suivante.
   Future<void> _validate() async {
     final typed = _controller.text;
-    if (typed.trim().isEmpty || _isSaving) return;
+    if (typed.trim().isEmpty) return;
 
-    final score = TextScorer.score(typed, _item.answers);
+    final item = _item;
+    final score = TextScorer.score(typed, item.answers);
     final constraints = ConstraintCheck.evaluate(
-      constraints: _item.constraints,
+      constraints: item.constraints,
       typed: typed,
-      references: _item.answers,
+      references: item.answers,
     );
+    final startedAt = _startedAt;
 
     setState(() {
       _score = score;
       _constraints = constraints;
       _structure = UserStoryStructure.of(typed);
-      _isSaving = true;
     });
+    _results.add(_SessionResult(item: item, score: score));
 
-    final updated = await widget.plan.record(
-      item: _item,
-      score: score,
-      reviewedAt: DateTime.now(),
-      durationSeconds: DateTime.now().difference(_startedAt).inSeconds,
-    );
-    if (!mounted) return;
-
-    setState(() {
-      _updatedProgress = updated;
-      _results.add(_SessionResult(item: _item, score: score));
-      _isSaving = false;
-    });
+    try {
+      final updated = await widget.plan.record(
+        item: item,
+        score: score,
+        reviewedAt: DateTime.now(),
+        durationSeconds: DateTime.now().difference(startedAt).inSeconds,
+      );
+      if (!mounted) return;
+      // L'utilisateur a pu passer à la phrase suivante pendant l'écriture.
+      if (identical(_item, item) && _score == score) {
+        setState(() => _updatedProgress = updated);
+      }
+    } catch (_) {
+      // Enregistrement impossible : la séance et le bilan restent justes.
+    }
   }
 
   void _reveal() {
@@ -242,8 +251,7 @@ class _RevisionSessionScreenState extends State<RevisionSessionScreen> {
                   children: [
                     Expanded(
                       child: FilledButton(
-                        onPressed:
-                            _controller.text.trim().isEmpty || _isSaving
+                        onPressed: _controller.text.trim().isEmpty
                             ? null
                             : _validate,
                         child: const Text('Valider'),

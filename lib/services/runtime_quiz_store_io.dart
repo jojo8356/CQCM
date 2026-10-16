@@ -39,6 +39,14 @@ Future<String?> resolveRuntimeDataDirectory(String? directoryPath) async {
 }
 
 Future<String?> _resolveDefaultDirectory() async {
+  // Sous `flutter test`, aucun plugin ne répond : inutile d'attendre (voir
+  // `revision_store_io.dart`).
+  if ((Platform.environment['FLUTTER_TEST'] ?? '').isNotEmpty) {
+    _resolvedDefaultDirectory = null;
+    _defaultDirectoryResolved = true;
+    return null;
+  }
+
   try {
     final supportDirectory = await getApplicationSupportDirectory().timeout(
       const Duration(milliseconds: 500),

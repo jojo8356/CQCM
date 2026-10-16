@@ -66,9 +66,25 @@ void main() {
       await tester.tap(find.text('Valider'));
       await pumpUntilFound(tester, find.text('100 %'));
 
-      expect(find.text('Structure de la user story'), findsOneWidget);
-      expect(find.text('Ta copie'), findsOneWidget);
-      expect(find.text('Réponse attendue'), findsOneWidget);
+      // Assertions limitées à l'écran de séance : l'écran du programme, resté
+      // sous la route ouverte, désigne lui aussi la réponse officielle.
+      expect(
+        withinScreen(
+          RevisionSessionScreen,
+          find.text('Structure de la user story'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        withinScreen(RevisionSessionScreen, find.text('Ta copie')),
+        findsOneWidget,
+      );
+      // « Réponse attendue » apparaît deux fois dans la séance : l'en-tête du
+      // diff mot à mot, puis la carte qui rappelle la réponse officielle.
+      expect(
+        withinScreen(RevisionSessionScreen, find.text('Réponse attendue')),
+        findsNWidgets(2),
+      );
       expect(find.textContaining('« payer » est toléré'), findsOneWidget);
     });
 
