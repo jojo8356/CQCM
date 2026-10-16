@@ -138,8 +138,17 @@ sdk_report() {
     licenses="oui ($listing fichier(s))"
   fi
   if [ -d "$dir/ndk" ]; then
-    ndk="$(find "$dir/ndk" -maxdepth 1 -mindepth 1 -type d -printf '%f ' \
-      2>/dev/null | sed 's/ $//' || true)"
+    ndk=""
+    local version
+    for version in $(find "$dir/ndk" -maxdepth 1 -mindepth 1 -type d \
+      -printf '%f ' 2>/dev/null || true); do
+      if [ -d "$dir/ndk/$version/toolchains" ]; then
+        ndk="$ndk $version"
+      else
+        ndk="$ndk $version (marqueur)"
+      fi
+    done
+    ndk="$(printf '%s\n' $ndk | tr -s '\n' ' ' | sed 's/^ *//')"
     [ -n "$ndk" ] || ndk="aucun"
   fi
   platforms="$(find "$dir/platforms" -maxdepth 1 -mindepth 1 -type d \
@@ -257,10 +266,11 @@ licences)"
   warn "  sans cela, Gradle échoue sur « licences have not been accepted » dès \
 qu'il doit installer le NDK"
   printf '    remèdes :\n'
-  printf '      a) installer les cmdline-tools puis relancer --fix :\n'
-  printf '         dl.google.com/android/repository/\n'
-  printf '           commandlinetools-linux-*_latest.zip → <sdk>/cmdline-tools/latest/\n'
-  printf '      b) indiquer un SDK complet : tools/android-sdk-doctor.sh --set <sdk>\n'
+  printf '      a) créer un SDK utilisateur complet (recommandé) :\n'
+  printf '         tools/android-sdk-install.sh --zip <cmdline-tools.zip>\n'
+  printf '         (ou --url <lien copié sur developer.android.com/studio>)\n'
+  printf '      b) indiquer un SDK complet déjà installé :\n'
+  printf '         tools/android-sdk-doctor.sh --set <dossier_du_sdk>\n'
 }
 
 if [ "$MODE" = "fix" ] && [ -n "$TARGET_SDK" ]; then
@@ -288,9 +298,22 @@ else
 fi
 
 # Un NDK déjà présent mais d'une autre version : le configurer évite un
-# téléchargement d'environ 1 Go.
-NDK_INSTALLED="$(find "$BEST/ndk" -maxdepth 1 -mindepth 1 -type d -printf '%f ' \
+# téléchargement d'environ 1 Go. Un dossier sans `toolchains/` est un marqueur
+# posé par tools/android-sdk-install.sh --fake-ndk, pas un vrai NDK.
+NDK_ALL="$(find "$BEST/ndk" -maxdepth 1 -mindepth 1 -type d -printf '%f ' \
   2>/dev/null | sed 's/ $//' || true)"
+NDK_INSTALLED=""
+for candidate in $NDK_ALL; do
+  if [ -d "$BEST/ndk/$candidate/toolchains" ]; then
+    NDK_INSTALLED="$NDK_INSTALLED $candidate"
+  else
+    warn "NDK $candidate dans $BEST : marqueur (aucun binaire, pas de toolchains/)"
+    warn "  suffisant tant qu'aucun plugin ne compile de code natif ; pour un"
+    warn "  vrai NDK : supprimer $BEST/ndk/$candidate puis --fix"
+  fi
+done
+NDK_INSTALLED="$(printf '%s\n' $NDK_INSTALLED | tr -s '\n' ' ' |
+  sed 's/^ *//' | sed 's/ *$//')"
 if [ -n "$NDK_INSTALLED" ] &&
   ! printf '%s\n' $NDK_INSTALLED | grep -qx "$NDK_EXPECTED"; then
   warn "NDK présent ($NDK_INSTALLED) mais différent de l'attendu \
@@ -303,11 +326,11 @@ fi
 if [ "$MODE" = "fix" ]; then
   printf '\n'
   log "acceptation des licences (oui à tout, dans $BEST)"
-  if printf 'y\n' |
+  if printf 'y\n%.0s' {1..60} |
     "$SDKMANAGER" --sdk_root="$BEST" --licenses >/dev/null; then
     ok "licences traitées"
   else
-    warn "certaines licences n'ont pas été acceptées"
+    warn "certaines licences n'ont pas été acceptées : relancer --fix"
   fi
 
   log "installation des composants attendus"

@@ -363,6 +363,58 @@ tel quel et éviter le téléchargement.
 
 Après réparation : `tools/build-apk.sh --install --symbols`.
 
+### Partir d'un SDK vide (aucun cmdline-tools sur la machine)
+
+Cas d'une machine où le seul SDK est celui du paquet de la distribution
+(`/usr/lib/android-sdk`) : sans `cmdline-tools` ni licences, Gradle ne peut
+rien y installer, et le build échoue sur le NDK. Le remède est un **SDK
+utilisateur complet**, sans root et sans toucher au SDK système :
+
+```bash
+# 1. télécharger le zip des outils en ligne de commande
+#    developer.android.com/studio → « Command line tools only » (Linux)
+#    (fichier du genre commandlinetools-linux-<numéro>_latest.zip)
+
+# 2. créer le SDK et tout installer
+tools/android-sdk-install.sh --zip ~/Téléchargements/commandlinetools-linux-*.zip
+#    ou directement, avec le lien copié sur la page :
+tools/android-sdk-install.sh --url 'https://dl.google.com/android/repository/…zip'
+```
+
+Ce que fait l'installeur : extraction des `cmdline-tools` dans
+`<sdk>/cmdline-tools/latest`, acceptation des licences, puis installation de
+`platform-tools`, `platforms;android-36`, `build-tools;36.0.0` et du NDK
+attendu — versions lues dans le SDK Flutter épinglé. Dossier par défaut
+`~/Android/Sdk`, celui que Flutter cherche seul sous Linux ; à la fin,
+`flutter config --android-sdk` est réglé pour que Flutter et Gradle l'utilisent.
+Prérequis : une JVM 17 ou plus récente (`--java-home` sinon).
+
+### L'astuce du NDK si le disque est juste
+
+Le NDK demandé pèse **~1 Go à télécharger** et **~4 Go une fois installé**.
+Or, ce projet ne compile **aucun** code natif : Flutter exige le NDK pour tout
+projet d'application (il configure un CMake factice pour le forcer), mais rien
+n'est jamais compilé avec. Le contrôle de Flutter est la simple présence de
+`ndk/<version>/source.properties` :
+
+```bash
+tools/android-sdk-install.sh --fake-ndk   # pose ce marqueur au lieu du NDK
+```
+
+Marche à suivre si l'espace manque, avec ses limites :
+
+- le marqueur (quelques octets) suffit tant qu'aucun plugin ne compile de code
+  natif — c'est le cas de tous les plugins de ce projet ;
+- le jour où un plugin natif est ajouté, supprimer `<sdk>/ndk/<version>` puis
+  relancer sans `--fake-ndk` : l'installeur téléchargera le vrai NDK ;
+- `tools/android-sdk-doctor.sh` signale ces marqueurs (`(marqueur)`) pour
+  qu'ils ne passent pas inaperçus.
+
+`--no-ndk` est le troisième choix : installer tout le reste maintenant et
+laisser le NDK pour plus tard (Gradle le réclamera au premier build).
+
+Après réparation : `tools/build-apk.sh --install --symbols`.
+
 ## 9. Dépannage
 
 | Message | Cause | Remède |
