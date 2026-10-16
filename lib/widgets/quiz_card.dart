@@ -41,14 +41,17 @@ class QuizCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 8),
-                    Row(
+                    // Wrap plutôt que Row : sur un écran étroit, la seconde
+                    // étiquette passe à la ligne au lieu de déborder.
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 4,
                       children: [
                         _Chip(
                           label: '${quiz.questionCount} questions',
                           color: colorScheme.primaryContainer,
                           textColor: colorScheme.onPrimaryContainer,
                         ),
-                        const SizedBox(width: 8),
                         _Chip(
                           label: quiz.difficulty,
                           color: colorScheme.secondaryContainer,

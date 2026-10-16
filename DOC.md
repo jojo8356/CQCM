@@ -325,7 +325,21 @@ Couverture fonctionnelle actuelle :
 - réglages JSON des rappels et fusion des surcharges
   (`notification_settings_test.dart`) ;
 - plan de rappels système, gabarits et plafond (`notification_plan_test.dart`) ;
-- écran Rappels depuis le menu (`notifications_screen_test.dart`).
+- écran Rappels depuis le menu (`notifications_screen_test.dart`) ;
+- mise en page sur écrans de téléphone (`narrow_screens_test.dart`).
+
+### Tests en fenêtre large et écrans étroits
+
+La plupart des tests de widgets agrandissent la fenêtre (`useLargeSurface`,
+1200 x 2400) pour éviter les défilements : un débordement de mise en page sur un
+téléphone y est donc invisible. `test/narrow_screens_test.dart` rejoue le menu
+(320 dp) et le parcours complet GP (360 et 411 dp) sur des largeurs de
+téléphone ; un `RenderFlex overflowed` y fait échouer le test avec le nom de
+l'écran fautif.
+
+Règle pour les nouveaux écrans : éviter une `Row` dont les enfants sont tous de
+taille libre (titres, étiquettes, boutons) — passer par `Flexible`/`Expanded`
+(avec `maxLines` et `TextOverflow.ellipsis` pour les textes) ou par un `Wrap`.
 
 ## Développement Linux sans droits root
 

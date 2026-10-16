@@ -167,29 +167,38 @@ class _RevisionSessionScreenState extends State<RevisionSessionScreen> {
           child: ListView(
             padding: const EdgeInsets.all(16),
             children: [
+              // Étroit : l'étiquette du projet cède la place (ellipse) et la
+              // mention de droite passe à la ligne au lieu de déborder.
               Row(
                 children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: colorScheme.secondaryContainer,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      _item.project,
-                      style: theme.textTheme.labelMedium?.copyWith(
-                        color: colorScheme.onSecondaryContainer,
+                  Flexible(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: colorScheme.secondaryContainer,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        _item.project,
+                        style: theme.textTheme.labelMedium?.copyWith(
+                          color: colorScheme.onSecondaryContainer,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ),
-                  const Spacer(),
-                  Text(
-                    'à recopier au mot près',
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: colorScheme.outline,
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      'à recopier au mot près',
+                      textAlign: TextAlign.end,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: colorScheme.outline,
+                      ),
                     ),
                   ),
                 ],
@@ -538,10 +547,12 @@ class _RevisionSessionScreenState extends State<RevisionSessionScreen> {
                         ),
                       ),
                       const SizedBox(width: 12),
-                      Text(
-                        'recopie moyenne\n$validated/$scored validée'
-                        '${validated > 1 ? 's' : ''} (seuil 95 %)',
-                        style: theme.textTheme.bodyMedium,
+                      Expanded(
+                        child: Text(
+                          'recopie moyenne\n$validated/$scored validée'
+                          '${validated > 1 ? 's' : ''} (seuil 95 %)',
+                          style: theme.textTheme.bodyMedium,
+                        ),
                       ),
                     ],
                   ),
