@@ -47,15 +47,15 @@ Pro) :
 | SoC | Unisoc T606 / UMS9230, 8 cœurs **64 bits** (2×Cortex-A75 + 6×Cortex-A55) | `arm64-v8a` → `--target-platform android-arm64` |
 | Système | Android 14 (WP32 Pro) / Android 13 (WP32) | `minSdk` 24 et `compileSdk` 36 du projet conviennent ; aucun réglage à changer |
 | Mémoire | 6 Go (Pro) / 4 Go de RAM | écart debug/release très net : la release (AOT) est la seule version fluide |
-| Écran | 5,93" 720×1440, densité 320 dpi | 720 ÷ 2 = **360 dp de large** — exactement la largeur des tests « écrans étroits » (`test/narrow_screens_test.dart`) |
+| Écran | relevé par le script sur l'appareil : **576×1152, densité 260 dpi** | 576 ÷ 1,625 = **354 dp de large** — entre les 320 et 360 dp des tests « écrans étroits » (`test/narrow_screens_test.dart`) |
 
 Vérification des valeurs sur l'appareil (les mêmes commandes que le script) :
 
 ```bash
 adb shell getprop ro.product.cpu.abi       # arm64-v8a
 adb shell getprop ro.product.cpu.abilist   # arm64-v8a,armeabi-v7a,armeabi
-adb shell wm size                          # Physical size: 720x1440
-adb shell wm density                       # Physical density: 320  → 360 dp de large
+adb shell wm size                          # Physical size: 576x1152
+adb shell wm density                       # Physical density: 260 → 354 dp de large
 ```
 
 Commande recommandée pour ce téléphone (une seule architecture, symboles de
@@ -93,6 +93,7 @@ pas sans elle.
 | `tools/build-apk.sh --device SERIAL` | plusieurs appareils branchés |
 | `tools/build-apk.sh --clean` | `flutter clean` avant de compiler |
 | `tools/build-apk.sh --any-flutter` | accepter un SDK autre que l'épinglé |
+| `tools/build-apk.sh --reinstall` | désinstaller l'application avant d'installer (signature différente) |
 
 À la fin, le script affiche le chemin, la taille et le `sha256` de chaque APK.
 
@@ -181,14 +182,38 @@ débogage (le développement reste inchangé). Sauvegardez `cqcm-release.jks` et
 ses mots de passe ailleurs : sans eux, impossible de mettre à jour
 l'application.
 
-⚠️ Le passage clé de débogage → vraie clé change la signature : la première
-installation échouera avec `INSTALL_FAILED_UPDATE_INCOMPATIBLE`. Il faut
-désinstaller l'ancienne application (elle perd sa progression locale) :
+### Signature différente : `INSTALL_FAILED_UPDATE_INCOMPATIBLE`
+
+Toute application déjà installée avec une autre clé (clé de débogage d'une
+autre machine, APK signé d'un keystore différent, version publiée ailleurs)
+bloque la mise à jour. Le remède tient en une commande, que le script propose
+lui-même :
 
 ```bash
-adb uninstall com.cqcm.cqcm
-tools/build-apk.sh --install
+tools/build-apk.sh --install --symbols --reinstall
 ```
+
+`--reinstall` désinstalle `com.cqcm.cqcm` puis installe l'APK neuf. À savoir :
+**la progression de révision vit dans l'application** (`files/cqcm-revision-data`),
+donc la désinstallation la supprime. Les QCM et le contenu de base sont dans
+l'APK : ils reviennent tout seuls.
+
+Sauvegarder la progression avant, si l'ancienne version est débogable :
+
+```bash
+adb shell run-as com.cqcm.cqcm ls files/cqcm-revision-data
+adb exec-out run-as com.cqcm.cqcm cat \
+  files/cqcm-revision-data/progress.json > progress.json
+```
+
+La restauration, en revanche, n'est possible que dans une version **débogable**
+(`flutter run` / `flutter build apk --debug`) : `run-as` refuse sur une release.
+Autrement dit, une sauvegarde sert surtout à consulter l'historique, pas à le
+réinjecter dans l'APK de production.
+
+Pour ne plus jamais revoir cette erreur, configurer une **clé de release
+stable** (§5, ci-dessus) : tous les APK suivants, signés de la même clé,
+s'installeront par-dessus sans désinstallation.
 
 ## 6. Autres façons d'installer
 
@@ -522,7 +547,7 @@ Après réparation : `tools/build-apk.sh --install --symbols`.
 | Message | Cause | Remède |
 | --- | --- | --- |
 | `INSTALL_FAILED_NO_MATCHING_ABIS` | APK compilé pour une autre architecture | relancer `tools/build-apk.sh` (détection automatique) ou `--abi` |
-| `INSTALL_FAILED_UPDATE_INCOMPATIBLE` | application déjà installée, autre signature | `adb uninstall com.cqcm.cqcm` puis réinstaller |
+| `INSTALL_FAILED_UPDATE_INCOMPATIBLE` | application déjà installée, autre signature | `tools/build-apk.sh --install --reinstall` (§5) |
 | `INSTALL_FAILED_INSUFFICIENT_STORAGE` | espace libre | libérer de la place sur le téléphone |
 | `device unauthorized` | autorisation USB non accordée | accepter « Autoriser le débogage USB » sur le téléphone |
 | `insufficient permissions for device` | règles udev (Linux) | §7 : débogage sans fil, règle udev, ou transfert manuel de l'APK |

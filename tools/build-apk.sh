@@ -20,6 +20,8 @@
 #   tools/build-apk.sh --device SERIAL    # plusieurs appareils branchés
 #   tools/build-apk.sh --clean            # flutter clean avant compilation
 #   tools/build-apk.sh --any-flutter      # accepter un SDK autre que l'épinglé
+#   tools/build-apk.sh --reinstall        # désinstaller avant d'installer
+#                                         # (signature différente)
 #
 # Options d'architecture (--abi) : auto (défaut), arm64, arm, x64.
 #
@@ -55,6 +57,7 @@ SYMBOLS=0
 OBFUSCATE=0
 CLEAN=0
 ANY_FLUTTER=0
+REINSTALL=0
 EXTRA=()
 
 while [ $# -gt 0 ]; do
@@ -76,6 +79,7 @@ while [ $# -gt 0 ]; do
     --obfuscate) OBFUSCATE=1 ;;
     --clean) CLEAN=1 ;;
     --any-flutter) ANY_FLUTTER=1 ;;
+    --reinstall) REINSTALL=1 ;;
     --build-name | --build-number | --dart-define | --flavor)
       [ $# -ge 2 ] || die "$1 attend une valeur"
       EXTRA+=("$1" "$2")
@@ -457,15 +461,60 @@ if [ "$INSTALL" = "1" ]; then
   ADB=("$ADB_BIN")
   [ -n "$DEVICE" ] && ADB+=("-s" "$DEVICE")
 
+  install_once() {
+    local logfile="$1"
+    "${ADB[@]}" install -r "$APK" >"$logfile" 2>&1
+  }
+
+  install_log="$(mktemp -t cqcm-install-XXXXXX.log)"
   log "adb install -r $APK"
-  if ! "${ADB[@]}" install -r "$APK"; then
-    adb_hint
-    warn "installation refusée. Deux causes fréquentes :"
-    warn "  1. l'application est déjà installée avec une autre signature"
-    warn "     → ${ADB[*]} uninstall com.cqcm.cqcm puis relancer"
-    warn "  2. le téléphone n'est pas accessible (voir messages ci-dessus)"
+  if ! install_once "$install_log"; then
+    cat "$install_log" >&2
+    case "$(cat "$install_log")" in
+      *UPDATE_INCOMPATIBLE* | *"do not match newer version"*)
+        if [ "$REINSTALL" = "1" ]; then
+          warn "signature différente : désinstallation de l'application existante"
+          warn "  la progression de révision enregistrée dans l'application est \
+perdue"
+          "${ADB[@]}" uninstall com.cqcm.cqcm || true
+          if install_once "$install_log"; then
+            rm -f "$install_log"
+            ok "installé sur le téléphone (progression réinitialisée)"
+            printf '    %s\n' \
+              "lancer : ${ADB[*]} shell monkey -p com.cqcm.cqcm 1"
+            exit 0
+          fi
+          cat "$install_log" >&2
+          die "installation toujours refusée après désinstallation"
+        fi
+        warn "l'application installée sur le téléphone est signée autrement"
+        warn "  (clé de débogage d'une autre machine, ou keystore de release)"
+        warn "  remèdes :"
+        warn "    ${ADB[*]} uninstall com.cqcm.cqcm && \
+tools/build-apk.sh --install --symbols"
+        warn "    ou relancer avec --reinstall (fait la désinstallation) :"
+        warn "      tools/build-apk.sh --install --symbols --reinstall"
+        warn "  la progression de révision vivant dans l'application, elle part"
+        warn "  avec la désinstallation. Avant cela, si l'ancienne version est"
+        warn "  débogable, sauvegarde possible :"
+        warn "    ${ADB[*]} exec-out run-as com.cqcm.cqcm cat \\
+files/cqcm-revision-data/progress.json > progress.json"
+        warn "  pour que cela ne se reproduise plus : docs/android-release.md §5"
+        warn "  (keystore de release stable)"
+        ;;
+      *VERSION_DOWNGRADE*)
+        warn "version plus ancienne que celle installée : ajouter -d"
+        warn "  ${ADB[*]} install -r -d $APK"
+        ;;
+      *)
+        adb_hint
+        warn "installation refusée (voir la sortie ci-dessus)"
+        ;;
+    esac
+    rm -f "$install_log"
     exit 1
   fi
+  rm -f "$install_log"
   ok "installé sur le téléphone"
   printf '    %s\n' "lancer : ${ADB[*]} shell monkey -p com.cqcm.cqcm 1"
 fi
