@@ -176,8 +176,9 @@ adb_hint() {
   case "$out" in
     *"insufficient permissions"* | *"no permissions"*)
       warn "le téléphone est vu par adb mais Linux refuse l'accès (règles udev)"
-      warn "  avec sudo : règle udev du fabricant (docs/android-release.md § 7b)"
-      warn "  sans root : débogage SANS FIL sur le téléphone"
+      warn "  le câble fonctionne : il manque juste l'autorisation Linux"
+      warn "  avec sudo : tools/android-udev-rule.sh --install"
+      warn "  sans sudo : débogage SANS FIL sur le téléphone"
       warn "    Options pour les développeurs → Débogage sans fil → activer,"
       warn "    « Associer l'appareil avec un code » → puis sur le PC :"
       warn "    adb pair <ip>:<port_association>      (port d'ASSOCIATION)"

@@ -219,10 +219,39 @@ are your udev rules wrong?
 
 Le téléphone **est** branché et vu par Linux : ce sont les règles udev qui
 donnent l'accès USB à `root` seulement. Le fabricant du WP32 (Unisoc) n'est pas
-dans les règles installées par Android Studio. Trois issues, de la plus simple
-à la plus lourde.
+dans les règles installées par Android Studio.
 
-### a) Débogage sans fil (aucun root, recommandé)
+**En USB, aucune adresse IP n'est nécessaire** : seul le droit d'accès au
+périphérique manque. Le débogage sans fil (§7b) n'est qu'un contournement pour
+les machines sans `sudo`.
+
+### a) Règle udev pour l'USB (recommandé, si sudo est disponible)
+
+```bash
+tools/android-udev-rule.sh            # détecte le fabricant et affiche la règle
+tools/android-udev-rule.sh --install  # la pose (sudo demandé), recharge udev
+```
+
+Le script lit `lsusb`, reconnaît le téléphone (Unisoc/Spreadtrum, WP32 Pro),
+écrit `/etc/udev/rules.d/51-android.rules`, recharge les règles et redémarre le
+serveur adb. Ensuite : **débrancher/rebrancher le câble**, puis `adb devices`
+doit afficher `device`. Aucun redémarrage de session nécessaire.
+
+À la main, si tu préfères :
+
+```bash
+lsusb | grep -iE 'unisoc|spreadtrum'   # relever l'idVendor (1782 pour Unisoc)
+echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="1782", MODE="0666", GROUP="plugdev"' \
+  | sudo tee /etc/udev/rules.d/51-android.rules
+sudo udevadm control --reload-rules && sudo udevadm trigger
+adb kill-server && adb devices
+```
+
+Si l'ajout au groupe `plugdev` est récent, une reconnexion de session peut être
+nécessaire (vérifier avec `groups | grep plugdev`) — le script détecte ce cas et
+utilise le groupe principal à la place.
+
+### b) Débogage sans fil (uniquement sans sudo)
 
 Android 11+ le permet ; le WP32 Pro est sous Android 14. Sur le téléphone :
 **Paramètres → Système → Options pour les développeurs → Débogage sans fil**
@@ -268,20 +297,7 @@ est sur le même réseau (`ip -4 addr | grep 192.168`). `No route to host` =
 mauvaise IP, débogage sans fil désactivé, ou réseaux différents (certains
 Wi-Fi invités isolent les clients entre eux).
 
-### b) Règle udev (si tu as sudo)
-
-```bash
-lsusb | grep -iE 'unisoc|spreadtrum|oukitel'   # relever l'idVendor (1782 ?)
-echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="1782", MODE="0666", GROUP="plugdev"' \
-  | sudo tee /etc/udev/rules.d/51-android.rules
-sudo udevadm control --reload-rules && sudo udevadm trigger
-adb kill-server && adb devices
-```
-
-Si l'ajout au groupe `plugdev` est récent, une reconnexion de session est
-nécessaire (vérifier avec `groups | grep plugdev`).
-
-### c) Se passer complètement d'adb
+### c) Se passer complètement d'adb (aucun câble requis)
 
 La compilation n'a pas besoin du téléphone : seule la détection de
 l'architecture et l'installation l'utilisent.

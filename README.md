@@ -283,6 +283,7 @@ Les scripts d'environnement (aucun privilège requis) :
 
 ```text
 tools/android-stack-check.sh   diagnostic Gradle / AGP / Kotlin / Java
+tools/android-udev-rule.sh     accès USB du téléphone (règle udev)
 tools/build-apk.sh             APK release pour l'architecture du téléphone
 tools/flutter-pinned.sh        lance le SDK Flutter de .flutter-version
 tools/dev-disk-report.sh       rapport d'occupation disque (n'efface rien)
