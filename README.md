@@ -71,6 +71,10 @@ APK attendu :
 build/app/outputs/flutter-apk/app-release.apk
 ```
 
+La chaîne de compilation Android (Gradle 8.14.3, AGP 8.11.1, Kotlin 2.4.0,
+Java 17) est décrite dans `docs/android-gradle.md`, y compris le masquage des
+deux avertissements de version et la bascule future vers AGP 9.
+
 ## Mode recopier texte (GP)
 
 Depuis le menu d'accueil :
@@ -196,6 +200,7 @@ Documentation détaillée :
 - `docs/quiz-cli.md`
 - `docs/mode-recopier-texte.md`
 - `docs/notifications.md`
+- `docs/android-gradle.md`
 - `docs/linux-sans-root.md`
 
 ## Structure utile

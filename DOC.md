@@ -342,6 +342,16 @@ tools/flutter-linux.sh run -d linux
 
 Documentation complète : `docs/linux-sans-root.md`.
 
+## Chaîne de build Android (Gradle / AGP / Kotlin)
+
+Le projet compile avec Gradle 8.14.3, AGP 8.11.1, Kotlin 2.4.0 et Java 17 : les
+minimums actuellement exigés par Flutter, dans des plages déclarées compatibles.
+Les deux avertissements « will soon be dropped » affichés par `flutter run` sont
+masqués par `skipDependencyChecks=true` (`android/gradle.properties`).
+
+Documentation complète (versions, masquage, bascule AGP 9 et ses conséquences) :
+`docs/android-gradle.md`.
+
 ## Build release
 
 Compiler un APK release :
