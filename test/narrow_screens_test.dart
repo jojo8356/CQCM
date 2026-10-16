@@ -1,3 +1,4 @@
+import 'package:cqcm/screens/quiz_catalog_screen.dart';
 import 'package:cqcm/screens/text_revision_screen.dart';
 import 'package:cqcm/widgets/option_tile.dart';
 import 'package:flutter/material.dart';
@@ -96,20 +97,25 @@ void main() {
       final qcm = find.text('QCM');
       await reveal(tester, qcm);
       await tester.tap(qcm);
-      await pumpUntilFound(tester, find.text(_quizTitle));
+      await pumpUntilFound(tester, find.byType(QuizCatalogScreen));
       await settleNavigation(tester);
+
+      // Le catalogue est long : à 360 dp, la carte du quiz visé est sous la
+      // ligne de flottaison et n'est donc pas construite sans défilement.
+      final quiz = find.text(_quizTitle);
+      await reveal(tester, quiz);
       expect(tester.takeException(), isNull, reason: 'catalogue QCM');
 
-      await tester.tap(find.text(_quizTitle));
+      await tester.tap(quiz);
       await pumpUntilFound(tester, find.textContaining('Question 1/'));
       await settleNavigation(tester);
       expect(tester.takeException(), isNull, reason: 'première question');
 
       // Une réponse, puis la correction : la carte d'explication s'ajoute sous
       // les options, c'est là que la mise en page est la plus tendue.
-      final option = find.byType(OptionTile).first;
-      await reveal(tester, option);
-      await tester.tap(option);
+      final options = find.byType(OptionTile);
+      await reveal(tester, options);
+      await tester.tap(options.first);
       await tester.pump();
 
       final validate = find.text('Valider');
