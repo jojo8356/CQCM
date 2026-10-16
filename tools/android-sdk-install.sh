@@ -168,6 +168,48 @@ log "java : $JAVA_BIN (version $JAVA_MAJOR)"
 # cmdline-tools : présent, ou à récupérer
 # ---------------------------------------------------------------------------
 
+# Nouveau CLI Android (« android sdk install ») : remplace sdkmanager, qui
+# reste fourni et fonctionnel mais affiche un avertissement de dépréciation.
+android_cli_in() {
+  local dir="$1" candidate
+  for candidate in \
+    "$dir/cmdline-tools/latest/bin/android" \
+    "$dir"/cmdline-tools/*/bin/android; do
+    [ -x "$candidate" ] && printf '%s\n' "$candidate" && return 0
+  done
+  command -v android 2>/dev/null || return 1
+}
+
+# Accepte les licences avec sdkmanager, en filtrant son avertissement de
+# dépréciation (le nouvel Android CLI n'a pas de sous-commande « licenses »).
+run_licenses() {
+  local dir="$1" tool="$2" err status
+  err="$(mktemp)"
+  printf 'y\n%.0s' {1..60} | "$tool" --sdk_root="$dir" --licenses >/dev/null 2>"$err"
+  status=$?
+  grep -vE 'deprecated|replacement for .sdkmanager|android-cli|^[[:space:]]*$' \
+    "$err" >&2 || true
+  rm -f "$err"
+  return "$status"
+}
+
+# Installe des paquets : Android CLI d'abord, sdkmanager en repli.
+# Les chemins de paquets acceptent les deux écritures (« platforms;android-36 »
+# et « platforms/android-36 »).
+install_packages_in() {
+  local dir="$1" android_cli="$2" sdkmanager="$3"
+  shift 3
+  if [ -n "$android_cli" ]; then
+    if ANDROID_HOME="$dir" "$android_cli" --sdk "$dir" sdk install "$@" \
+      --no-metrics; then
+      return 0
+    fi
+    warn "Android CLI en échec : repli sur sdkmanager (déprécié mais fonctionnel)"
+  fi
+  [ -n "$sdkmanager" ] || return 1
+  "$sdkmanager" --sdk_root="$dir" --install "$@"
+}
+
 sdkmanager_in() {
   local dir="$1" candidate
   for candidate in \
@@ -350,17 +392,21 @@ fi
 # Licences puis composants
 # ---------------------------------------------------------------------------
 
-log "acceptation des licences (oui à tout, dans $SDK_DIR)"
 # Un « y » par licence : sdkmanager en demande une poignée, et s'arrête à la
 # fin de l'entrée standard. (Pas de `yes |` : sous `pipefail`, le SIGPIPE
 # ferait échouer le pipeline alors que les licences sont acceptées.)
-if printf 'y\n%.0s' {1..60} |
-  "$SDKMANAGER" --sdk_root="$SDK_DIR" --licenses >/dev/null; then
-  ok "licences traitées"
+if [ -d "$SDK_DIR/licenses" ] &&
+  [ -n "$(find "$SDK_DIR/licenses" -maxdepth 1 -type f 2>/dev/null |
+    head -n 1)" ]; then
+  ok "licences déjà acceptées ($SDK_DIR/licenses)"
 else
-  warn "certaines licences n'ont pas été acceptées : relancer"
-  printf '    printf %s | %s --sdk_root=%s --licenses\n' \
-    "'y\\n' | head -60" "$SDKMANAGER" "$SDK_DIR"
+  log "acceptation des licences (oui à tout, dans $SDK_DIR)"
+  if run_licenses "$SDK_DIR" "$SDKMANAGER"; then
+    ok "licences traitées"
+  else
+    warn "certaines licences n'ont pas été acceptées : relancer"
+    printf '    tools/android-sdk-install.sh --sdk %s\n' "$SDK_DIR"
+  fi
 fi
 
 PACKAGES=(
@@ -377,7 +423,14 @@ if [ "${#EXTRA_PACKAGES[@]}" -gt 0 ]; then
 fi
 
 log "installation : ${PACKAGES[*]}"
-"$SDKMANAGER" --sdk_root="$SDK_DIR" --install "${PACKAGES[@]}"
+ANDROID_CLI="$(android_cli_in "$SDK_DIR" 2>/dev/null || true)"
+if [ -n "$ANDROID_CLI" ]; then
+  log "outil : $ANDROID_CLI (Android CLI ; sdkmanager est déprécié)"
+elif [ -n "$SDKMANAGER" ]; then
+  warn "Android CLI absent : utilisation de sdkmanager (déprécié, un"
+  warn "  avertissement s'affichera à chaque appel)"
+fi
+install_packages_in "$SDK_DIR" "$ANDROID_CLI" "$SDKMANAGER" "${PACKAGES[@]}"
 ok "composants installés"
 
 # ---------------------------------------------------------------------------

@@ -112,6 +112,35 @@ sdk_defaults
 # Inventaire
 # ---------------------------------------------------------------------------
 
+# Nouveau CLI Android (« android sdk install ») : remplace sdkmanager, qui
+# reste fourni et fonctionnel mais affiche un avertissement de dépréciation.
+android_cli_in() {
+  local dir="$1" candidate
+  for candidate in \
+    "$dir/cmdline-tools/latest/bin/android" \
+    "$dir"/cmdline-tools/*/bin/android; do
+    [ -x "$candidate" ] && printf '%s\n' "$candidate" && return 0
+  done
+  command -v android 2>/dev/null || return 1
+}
+
+# Installe des paquets : Android CLI d'abord, sdkmanager en repli.
+# Les chemins de paquets acceptent les deux écritures (« platforms;android-36 »
+# et « platforms/android-36 »).
+install_packages_in() {
+  local dir="$1" android_cli="$2" sdkmanager="$3"
+  shift 3
+  if [ -n "$android_cli" ]; then
+    if ANDROID_HOME="$dir" "$android_cli" --sdk "$dir" sdk install "$@" \
+      --no-metrics; then
+      return 0
+    fi
+    warn "Android CLI en échec : repli sur sdkmanager (déprécié mais fonctionnel)"
+  fi
+  [ -n "$sdkmanager" ] || return 1
+  "$sdkmanager" --sdk_root="$dir" --install "$@"
+}
+
 sdkmanager_for() {
   local dir="$1" candidate
   for candidate in \
@@ -362,15 +391,21 @@ fi
 if [ "$MODE" = "fix" ]; then
   printf '\n'
   log "acceptation des licences (oui à tout, dans $BEST)"
+  err="$(mktemp)"
   if printf 'y\n%.0s' {1..60} |
-    "$SDKMANAGER" --sdk_root="$BEST" --licenses >/dev/null; then
+    "$SDKMANAGER" --sdk_root="$BEST" --licenses >/dev/null 2>"$err"; then
     ok "licences traitées"
   else
     warn "certaines licences n'ont pas été acceptées : relancer --fix"
   fi
+  # sdkmanager annonce sa dépréciation à chaque appel : sans intérêt ici.
+  grep -vE 'deprecated|replacement for .sdkmanager|android-cli|^[[:space:]]*$' \
+    "$err" >&2 || true
+  rm -f "$err"
 
   log "installation des composants attendus"
-  "$SDKMANAGER" --sdk_root="$BEST" --install \
+  ANDROID_CLI="$(android_cli_in "$BEST" 2>/dev/null || true)"
+  install_packages_in "$BEST" "$ANDROID_CLI" "$SDKMANAGER" \
     "platform-tools" \
     "platforms;android-$COMPILE_SDK" \
     "build-tools;$COMPILE_SDK.0.0" \

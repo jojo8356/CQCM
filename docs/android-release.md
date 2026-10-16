@@ -361,6 +361,35 @@ si un autre NDK est déjà installé, le docteur le signale et indique la ligne
 `ndkVersion = …` à mettre dans `android/app/build.gradle.kts` pour l'utiliser
 tel quel et éviter le téléchargement.
 
+### `sdkmanager` est déprécié : le nouveau CLI Android
+
+Depuis les cmdline-tools récentes, `sdkmanager` affiche à chaque appel :
+
+```text
+WARNING: The SDK Manager CLI tool (sdkmanager) is deprecated.
+Android CLI will be used instead.
+```
+
+**Cet avertissement est sans conséquence** : `sdkmanager` est toujours fourni
+et fonctionnel, l'installation se poursuit normalement. Le remplaçant est le
+nouveau CLI Android, présent dans le même dossier :
+
+```bash
+~/Android/Sdk/cmdline-tools/latest/bin/android sdk install "build-tools;36.0.0"
+~/Android/Sdk/cmdline-tools/latest/bin/android sdk list --installed
+```
+
+`tools/android-sdk-install.sh` et `tools/android-sdk-doctor.sh --fix`
+détectent ce binaire et l'utilisent en priorité (`--sdk <dossier>`, sortie sans
+bruit), avec repli automatique sur `sdkmanager` s'il est absent ou échoue. Une
+exception : les **licences** passent encore par `sdkmanager --licenses` (le
+nouveau CLI n'a pas de sous-commande équivalente) — l'avertissement est alors
+filtré, et l'étape est sautée si les licences sont déjà acceptées.
+
+Android CLI sait aussi installer une application, piloter un appareil ou lire
+l'arbre d'interface (`android run`, `android device`, `android layout`) : utile
+pour automatiser, sans rapport avec le build Flutter lui-même.
+
 L'installeur indique enfin le `PATH` à utiliser pour que `adb` soit celui du
 SDK (plus récent que celui du système) — `tools/build-apk.sh` choisit de
 lui-même, parmi les adb trouvés, celui dont la version est la plus élevée.
