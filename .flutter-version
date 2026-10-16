@@ -1,0 +1,10 @@
+# Version de Flutter utilisée pour ce dépôt (voir tools/flutter-pinned.sh).
+#
+# Les minimums de Gradle / AGP / Kotlin viennent du SDK Flutter installé : figer
+# la version ici rend les builds reproductibles. Changer cette ligne est une
+# décision : relancer tools/android-stack-check.sh et flutter test ensuite.
+#
+# SDK attendu (l'état « HEAD détachée » est normal sur un tag) :
+#   git clone -b 3.47.5 --depth 1 \
+#     https://github.com/flutter/flutter.git ~/flutter-3.47.5
+3.47.5

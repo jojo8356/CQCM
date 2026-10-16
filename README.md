@@ -53,6 +53,34 @@ Résumé lisible (une ligne par fichier : `OK`, `OK (warning)`, `OK (error)`, `K
 dart run bin/test_summary.dart
 ```
 
+### Version de Flutter épinglée
+
+Les minimums de Gradle / AGP / Kotlin viennent du SDK Flutter **installé** : la
+version utilisée pour ce dépôt est écrite dans `.flutter-version` et tous les
+scripts passent par elle.
+
+```bash
+tools/flutter-pinned.sh --check                 # où est le SDK, quelle version
+tools/flutter-pinned.sh run -d linux            # flutter run avec ce SDK
+tools/flutter-pinned.sh test
+tools/flutter-pinned.sh --dart run bin/test_summary.dart
+```
+
+Le SDK attendu est un clone du dépôt à cette version :
+
+```bash
+git clone -b 3.47.5 --depth 1 \
+  https://github.com/flutter/flutter.git ~/flutter-3.47
+```
+
+L'état « HEAD détachée » affiché par git est normal sur un tag. Un SDK géré
+autrement (FVM, dossier personnel) se pointe avec
+`CQCM_FLUTTER_SDK=/chemin/du/sdk`. `tools/flutter-linux.sh` utilise
+automatiquement ce SDK épinglé ; `CQCM_FLUTTER` impose un autre binaire.
+
+Changer de version = modifier `.flutter-version`, puis relancer
+`tools/android-stack-check.sh` et `flutter test` (voir `docs/android-gradle.md`).
+
 Analyser le code :
 
 ```bash
@@ -230,6 +258,7 @@ Les scripts d'environnement (aucun privilège requis) :
 
 ```text
 tools/android-stack-check.sh   diagnostic Gradle / AGP / Kotlin / Java
+tools/flutter-pinned.sh        lance le SDK Flutter de .flutter-version
 tools/linux-desktop-deps.sh    sysroot GTK 3 personnel pour le bureau Linux
 tools/flutter-linux.sh         wrapper « source l'environnement puis flutter »
 ```

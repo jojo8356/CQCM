@@ -129,11 +129,10 @@ leviers le rendent gérable, du plus efficace au plus anecdotique.
 
 1. **Figer la version du SDK Flutter.** C'est le levier principal : les
    minimums viennent du SDK, donc un SDK qui ne bouge pas ne fait pas bouger le
-   plancher. Avec FVM (`fvm use 3.47.5`, fichier `.fvmrc` versionné) ou, sans
-   outil supplémentaire, un clone dédié du SDK (`git clone -b 3.47.5
-   --depth 1 https://github.com/flutter/flutter.git ~/flutter-3.47`) utilisé
-   via `PATH` ou un alias. Les montées deviennent alors une décision, avec
-   `tools/android-stack-check.sh` et `flutter test` comme garde-fous.
+   plancher. C'est la version écrite dans `.flutter-version`, utilisée par
+   `tools/flutter-pinned.sh` (voir § 7) : les montées de Flutter deviennent une
+   décision, avec `tools/android-stack-check.sh` et `flutter test` comme
+   garde-fous.
 2. **Un diagnostic avant chaque build** (§ 6) : après un `flutter upgrade`, il
    dit en deux secondes si le plancher a monté, et quelles lignes corriger.
 3. **Le masquage assumé** (`skipDependencyChecks=true`, § 3) : utile pour ne
@@ -177,3 +176,42 @@ variantes historique (`applicationVariants`, `libraryVariants`…) dans le plugi
 Gradle du SDK installé. Code de sortie : `0` tout va bien, `1` un minimum n'est
 pas atteint, `2` SDK ou dépôt introuvable — utilisable tel quel dans un script
 de build ou un hook git.
+
+## 7. SDK Flutter épinglé
+
+`.flutter-version` contient la version utilisée pour le dépôt (3.47.5) et
+`tools/flutter-pinned.sh` lance ce SDK quel que soit le `flutter` du `PATH` :
+
+```bash
+tools/flutter-pinned.sh --check                       # version, racine, binaires
+tools/flutter-pinned.sh run -d linux
+tools/flutter-pinned.sh test
+tools/flutter-pinned.sh --dart run bin/test_summary.dart
+```
+
+Le SDK attendu est un clone du dépôt à la version épinglée :
+
+```bash
+git clone -b 3.47.5 --depth 1 \
+  https://github.com/flutter/flutter.git ~/flutter-3.47
+```
+
+L'« HEAD détachée » affichée par git est normale sur un tag : il n'y a rien à
+réparer, et inutile de créer une branche, sauf pour modifier le SDK lui-même.
+Emplacements essayés : `$CQCM_FLUTTER_SDK`, puis `~/flutter-<version>`,
+`~/flutter-<majeure.mineure>` (donc `~/flutter-3.47` convient), puis
+`~/.cqcm/flutter/<version>`, puis `/opt/flutter-<version>`. Un SDK FVM se pointe
+avec `CQCM_FLUTTER_SDK=~/fvm/versions/3.47.5`.
+
+Deux précautions après un changement d'un SDK à l'autre :
+
+```bash
+flutter clean            # purge build/ (compilé par l'autre SDK)
+rm -rf .dart_tool android/.gradle
+tools/flutter-pinned.sh pub get
+```
+
+`pubspec.lock` et `.dart_tool/package_config.json` mémorisent des chemins de SDK
+et d'artefacts : `pub get` les régénère. `tools/flutter-linux.sh` (bureau Linux
+sans root) utilise ce SDK épinglé par défaut, et `CQCM_FLUTTER` force un autre
+binaire au besoin.

@@ -363,6 +363,19 @@ tools/android-stack-check.sh --json
 Sortie 0 si tout est au-dessus des minimums, 1 sinon (à relancer après chaque
 `flutter upgrade`, puisque `skipDependencyChecks` masque ces messages).
 
+La version de Flutter utilisée est épinglée dans `.flutter-version` et
+`tools/flutter-pinned.sh` lance ce SDK quel que soit le `flutter` du `PATH` :
+
+```bash
+tools/flutter-pinned.sh --check     # version, racine du SDK, binaires
+tools/flutter-pinned.sh run
+tools/flutter-pinned.sh --dart run bin/test_summary.dart
+```
+
+SDK attendu : un clone du dépôt à cette version (`git clone -b 3.47.5
+--depth 1 … ~/flutter-3.47`), ou un autre emplacement via `CQCM_FLUTTER_SDK`.
+Détails et précautions après un changement de SDK : `docs/android-gradle.md` § 7.
+
 ## Build release
 
 Compiler un APK release :

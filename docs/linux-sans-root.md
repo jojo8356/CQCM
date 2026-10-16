@@ -85,7 +85,8 @@ Après un échec de configuration CMake, `flutter clean` est conseillé : le
 dossier `build/` conserve la configuration fautive.
 
 Ou, en une commande, avec le wrapper fourni (il source l'environnement à votre
-place et transmet tous les arguments à `flutter`) :
+place, utilise le SDK Flutter épinglé de `.flutter-version` s'il est présent, et
+transmet tous les arguments à `flutter`) :
 
 ```bash
 tools/flutter-linux.sh run -d linux
