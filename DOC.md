@@ -249,7 +249,9 @@ Documentation complète : `docs/mode-recopier-texte.md`.
 Points clés :
 
 - tirage des phrases **au hasard** dans la séance (les phrases dues d'abord) ;
-- 1 token = 1 mot ; ponctuation, casse, accents et élisions sont neutralisés ;
+- 1 token = 1 mot ; ponctuation, casse et accents sont neutralisés ;
+- chiffres et lettres séparés (`14h` = `14` + `h`) ; élision ramenée à son mot
+  complet avec ou sans apostrophe (`d'acheter` = `d acheter` = `de acheter`) ;
 - score de validation = mots justes / mots attendus, seuil **95 %** ;
 - statut par mot : juste, manquant, en trop, faute de frappe ;
 - structure de user story vérifiée (« En tant que… », « Je veux… », « Afin de… ») ;

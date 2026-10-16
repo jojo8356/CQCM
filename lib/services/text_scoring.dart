@@ -237,15 +237,24 @@ class TextScorer {
   static const double passThreshold = 0.95;
 
   /// Découpe un texte en mots normalisés : minuscules, sans accents,
-  /// sans ponctuation. « L'étudiant » → [l, etudiant].
+  /// sans ponctuation. « L'étudiant » → [le, etudiant].
+  ///
+  /// Un token est **un mot** : les chiffres et les lettres sont séparés
+  /// (« 14h » → 14 puis h, « 2TD » → 2 puis td), et une élision est ramenée à
+  /// son mot complet qu'elle soit écrite avec apostrophe (« afin d'acheter »)
+  /// ou avec une espace (« afin d acheter »).
   static List<String> tokenize(String text) {
     final words = <String>[];
     final buffer = StringBuffer();
 
     void flush() {
-      if (buffer.isNotEmpty) {
-        words.add(buffer.toString());
-        buffer.clear();
+      if (buffer.isEmpty) return;
+      final word = buffer.toString();
+      buffer.clear();
+      // Élision sans apostrophe : « d acheter » se lit comme « d'acheter ».
+      final expanded = _elisions[word] ?? word;
+      for (final match in _wordRuns.allMatches(expanded)) {
+        words.add(match.group(0)!);
       }
     }
 
@@ -253,13 +262,7 @@ class TextScorer {
       final char = String.fromCharCode(rune);
 
       if (char == "'" || char == '\u2019') {
-        // Élision : « qu'étudiant » ou « d'acheter » se recopient avec ou
-        // sans apostrophe, on ramène tout à la forme complète.
-        final expansion = _elisions[buffer.toString()];
-        if (expansion != null) {
-          buffer.clear();
-          buffer.write(expansion);
-        }
+        // Élision : « qu'étudiant » ou « d'acheter ».
         flush();
         continue;
       }
@@ -276,6 +279,9 @@ class TextScorer {
   }
 
   static final RegExp _wordChar = RegExp(r'^[a-z0-9]+$');
+
+  /// Suites de lettres ou de chiffres à l'intérieur d'un mot (cf. « 14h »).
+  static final RegExp _wordRuns = RegExp(r'[a-z]+|[0-9]+');
 
   /// Formes élidées ramenées à leur mot complet.
   static const Map<String, String> _elisions = {

@@ -13,6 +13,7 @@
 library;
 
 import 'package:cqcm/main.dart';
+import 'package:cqcm/widgets/revision_reminder_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -34,14 +35,27 @@ Future<void> pumpApp(WidgetTester tester) async {
 
 /// Attend que le menu ait chargé la progression : son bandeau de rappel est
 /// alors affiché, et un plan est disponible pour les écrans suivants.
+///
+/// On attend le widget (et non un texte) : le bandeau change de libellé selon
+/// qu'il reste des phrases à revoir ou non.
 Future<void> waitForMenuPlan(WidgetTester tester) async {
-  await pumpUntilFound(tester, find.textContaining('phrases à réviser'));
+  await pumpUntilFound(tester, find.byType(RevisionReminderBanner));
 }
 
 /// Menu d'accueil prêt à naviguer.
 Future<void> openMenu(WidgetTester tester) async {
   await pumpApp(tester);
   await waitForMenuPlan(tester);
+}
+
+/// Restreint un finder au sous-arbre d'un écran.
+///
+/// **Indispensable** dès qu'une route en recouvre une autre : les écrans
+/// couverts restent présents dans l'arbre et leurs textes sont trouvés par
+/// `find.text` (le même énoncé peut donc apparaître deux fois, une fois dans
+/// la liste du programme et une fois dans la fiche ouverte).
+Finder withinScreen(Type screen, Finder finder) {
+  return find.descendant(of: find.byType(screen), matching: finder);
 }
 
 /// Rend [finder] cliquable sans avertissement de hit test : défilement

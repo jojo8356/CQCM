@@ -1,9 +1,8 @@
 import 'dart:convert';
 
-import 'package:flutter/services.dart';
-
 import '../models/revision.dart';
 import '../models/revision_progress.dart';
+import 'asset_text.dart';
 import 'revision_scheduler.dart';
 import 'revision_store.dart';
 import 'text_scoring.dart';
@@ -38,9 +37,7 @@ class RevisionService {
   static const String catalogueAsset = 'assets/data/revision-decks.json';
 
   Future<RevisionCatalog> loadCatalog() async {
-    final catalogueJson = json.decode(
-      await rootBundle.loadString(catalogueAsset),
-    );
+    final catalogueJson = json.decode(await loadAssetText(catalogueAsset));
     final decks = ((catalogueJson as Map<String, dynamic>)['decks'] as List)
         .map((entry) => RevisionDeck.fromJson(entry as Map<String, dynamic>))
         .toList();
@@ -55,7 +52,7 @@ class RevisionService {
 
   Future<List<RevisionItem>> loadItems(RevisionDeck deck) async {
     final deckJson = json.decode(
-      await rootBundle.loadString('assets/data/${deck.fileName}'),
+      await loadAssetText('assets/data/${deck.fileName}'),
     );
     final items = ((deckJson as Map<String, dynamic>)['items'] as List)
         .map((entry) => RevisionItem.fromJson(entry as Map<String, dynamic>))

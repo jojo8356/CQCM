@@ -7,7 +7,11 @@ import 'package:path_provider/path_provider.dart';
 
 import '../models/revision_progress.dart';
 
-Future<String?>? _cachedDefaultDirectory;
+/// Dossier résolu, gardé en **valeur** (jamais un `Future`) : un `Future`
+/// mémorisé dans un contexte puis attendu dans un autre ne se termine plus
+/// (cas typique des tests de widgets, où chaque test a sa propre zone).
+String? _resolvedDefaultDirectory;
+bool _defaultDirectoryResolved = false;
 
 /// Dossier de données de révision. Surchargeable par la variable
 /// d'environnement `CQCM_REVISION_DIR` (desktop, CLI, tests).
@@ -29,8 +33,16 @@ Future<String?> resolveRevisionDataDirectory(String? directoryPath) async {
     return configured;
   }
 
-  _cachedDefaultDirectory ??= _resolveDefaultDirectory();
-  return _cachedDefaultDirectory;
+  if (_defaultDirectoryResolved) {
+    return _resolvedDefaultDirectory;
+  }
+
+  final resolved = await _resolveDefaultDirectory();
+  if (resolved != null) {
+    _resolvedDefaultDirectory = resolved;
+    _defaultDirectoryResolved = true;
+  }
+  return resolved;
 }
 
 Future<String?> _resolveDefaultDirectory() async {
@@ -40,12 +52,15 @@ Future<String?> _resolveDefaultDirectory() async {
     );
     return '${supportDirectory.path}/cqcm-revision-data';
   } on MissingPluginException {
+    // Plugin absent (tests, plateforme sans stockage) : réponse définitive,
+    // la progression reste en mémoire pour la session en cours.
+    _resolvedDefaultDirectory = null;
+    _defaultDirectoryResolved = true;
     return null;
   } on TimeoutException {
+    // Réponse indéterminée : on retentera au prochain appel.
     return null;
   } catch (_) {
-    // Plugin indisponible (tests, plateforme sans stockage persistant) :
-    // la progression reste en mémoire pour la session en cours.
     return null;
   }
 }

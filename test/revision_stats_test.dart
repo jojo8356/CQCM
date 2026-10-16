@@ -60,14 +60,23 @@ void main() {
     progress = attempt(progress, 0.9, day1);
     progress = attempt(progress, 1.0, day1.add(const Duration(days: 1)));
 
-    expect(RevisionStats.from([progress], now: day1).streakDays, 2);
+    // Le jour de la deuxième tentative : deux jours d'affilée.
     expect(
       RevisionStats.from(
         [progress],
-        now: day1.add(const Duration(days: 1, hours: 20)),
+        now: day1.add(const Duration(days: 1)),
       ).streakDays,
       2,
     );
+    // Le lendemain sans réviser : la série est encore valable (finie hier).
+    expect(
+      RevisionStats.from(
+        [progress],
+        now: day1.add(const Duration(days: 2)),
+      ).streakDays,
+      2,
+    );
+    // Cinq jours plus tard sans réviser : la série est perdue.
     expect(
       RevisionStats.from(
         [progress],

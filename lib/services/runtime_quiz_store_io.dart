@@ -8,7 +8,10 @@ import 'package:path_provider/path_provider.dart';
 import '../models/question.dart';
 import '../models/quiz.dart';
 
-Future<String?>? _cachedDefaultDirectory;
+/// Dossier résolu, gardé en **valeur** (jamais un `Future`) : voir
+/// `revision_store_io.dart`.
+String? _resolvedDefaultDirectory;
+bool _defaultDirectoryResolved = false;
 
 String? defaultRuntimeDataDirectory() {
   final configured = Platform.environment['CQCM_DATA_DIR'];
@@ -23,8 +26,16 @@ Future<String?> resolveRuntimeDataDirectory(String? directoryPath) async {
     return directoryPath;
   }
 
-  _cachedDefaultDirectory ??= _resolveDefaultDirectory();
-  return _cachedDefaultDirectory;
+  if (_defaultDirectoryResolved) {
+    return _resolvedDefaultDirectory;
+  }
+
+  final resolved = await _resolveDefaultDirectory();
+  if (resolved != null) {
+    _resolvedDefaultDirectory = resolved;
+    _defaultDirectoryResolved = true;
+  }
+  return resolved;
 }
 
 Future<String?> _resolveDefaultDirectory() async {
@@ -34,8 +45,12 @@ Future<String?> _resolveDefaultDirectory() async {
     );
     return '${supportDirectory.path}/cqcm-runtime-data';
   } on MissingPluginException {
+    _resolvedDefaultDirectory = null;
+    _defaultDirectoryResolved = true;
     return null;
   } on TimeoutException {
+    return null;
+  } catch (_) {
     return null;
   }
 }

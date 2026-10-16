@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:cqcm/screens/revision_session_screen.dart';
+import 'package:cqcm/screens/text_revision_screen.dart';
+import 'package:cqcm/services/asset_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/widget_helpers.dart';
@@ -132,7 +134,7 @@ class _ItemFixture {
 
 Future<_DeckFixture> _loadDeck() async {
   final raw = json.decode(
-    await rootBundle.loadString('assets/data/revision-gp-us.json'),
+    await loadAssetText('assets/data/revision-gp-us.json'),
   ) as Map<String, dynamic>;
   final items = (raw['items'] as List).cast<Map<String, dynamic>>();
 
@@ -160,7 +162,10 @@ Future<void> _openGpScreen(WidgetTester tester) async {
 
 /// Lance la séance proposée par l'écran GP.
 Future<void> _startSession(WidgetTester tester) async {
-  final button = find.textContaining('Réviser ');
+  final button = withinScreen(
+    TextRevisionScreen,
+    find.textContaining('Réviser '),
+  );
   await reveal(tester, button);
   await tester.tap(button);
 }
@@ -171,15 +176,29 @@ Future<void> _openPhrase(
   _ItemFixture item, {
   required int index,
 }) async {
-  final finder = find.text(item.prompt).at(index);
+  // Deux phrases du programme partagent le même énoncé : [index] choisit la
+  // fiche voulue dans la liste de l'écran GP.
+  final finder = withinScreen(
+    TextRevisionScreen,
+    find.text(item.prompt),
+  ).at(index);
   await reveal(tester, finder);
   await tester.tap(finder);
 }
 
 /// Phrase actuellement affichée dans la séance (l'ordre est aléatoire).
+///
+/// La recherche est limitée à l'écran de séance : l'écran du programme, resté
+/// sous la route ouverte, contient les douze énoncés et serait sinon pris
+/// pour la phrase en cours.
 _ItemFixture _visibleItem(_DeckFixture deck) {
   final candidates = deck.items
-      .where((item) => find.text(item.prompt).evaluate().isNotEmpty)
+      .where(
+        (item) => withinScreen(
+          RevisionSessionScreen,
+          find.text(item.prompt),
+        ).evaluate().isNotEmpty,
+      )
       .toList();
 
   if (candidates.isEmpty) {
@@ -189,12 +208,24 @@ _ItemFixture _visibleItem(_DeckFixture deck) {
     return candidates.single;
   }
 
-  // Deux énoncés identiques : la contrainte affichée permet de trancher.
+  // Deux énoncés identiques : la contrainte affichée sur la fiche permet de
+  // trancher. Dans le programme, une seule des deux phrases en porte une.
   for (final candidate in candidates) {
     final hasChip = candidate.constraints.any(
-      (constraint) => find.text(constraint).evaluate().isNotEmpty,
+      (constraint) => withinScreen(
+        RevisionSessionScreen,
+        find.text(constraint),
+      ).evaluate().isNotEmpty,
     );
     if (hasChip) return candidate;
+  }
+
+  // Aucune contrainte affichée : la phrase en cours est celle qui n'en a pas.
+  final withoutConstraints = candidates
+      .where((candidate) => candidate.constraints.isEmpty)
+      .toList();
+  if (withoutConstraints.length == 1) {
+    return withoutConstraints.single;
   }
   return candidates.first;
 }

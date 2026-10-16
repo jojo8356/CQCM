@@ -10,9 +10,8 @@ library;
 
 import 'dart:convert';
 
-import 'package:flutter/services.dart';
-
 import '../models/notification_settings.dart';
+import 'asset_text.dart';
 import 'revision_store.dart';
 
 class NotificationSettingsBundle {
@@ -100,7 +99,7 @@ class NotificationSettingsStore {
 
   static Future<String> _loadDefaultsJson() async {
     try {
-      return await rootBundle.loadString(assetPath);
+      return await loadAssetText(assetPath);
     } catch (_) {
       // Asset absent : on retombe sur les valeurs codées par défaut.
       return '${const JsonEncoder.withIndent('  ').convert(

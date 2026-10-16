@@ -1,7 +1,8 @@
 import 'dart:convert';
-import 'package:flutter/services.dart';
+
 import '../models/quiz.dart';
 import '../models/question.dart';
+import 'asset_text.dart';
 import 'runtime_quiz_store.dart';
 
 class QuizService {
@@ -15,7 +16,7 @@ class QuizService {
     final resolvedRuntimeDataDirectory = runtimeDataDirectory == null
         ? null
         : await resolveRuntimeDataDirectory(runtimeDataDirectory);
-    final jsonString = await rootBundle.loadString('assets/data/data.json');
+    final jsonString = await loadAssetText('assets/data/data.json');
     final data = json.decode(jsonString) as Map<String, dynamic>;
     final quizzes = (data['quizzes'] as List)
         .map((q) => Quiz.fromJson(q as Map<String, dynamic>))
@@ -47,7 +48,7 @@ class QuizService {
       return runtimeQuestions;
     }
 
-    final jsonString = await rootBundle.loadString('assets/data/$fileName');
+    final jsonString = await loadAssetText('assets/data/$fileName');
     final data = json.decode(jsonString) as List;
     return data
         .map((q) => Question.fromJson(q as Map<String, dynamic>))

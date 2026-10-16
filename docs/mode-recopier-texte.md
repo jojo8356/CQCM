@@ -39,8 +39,11 @@ flowchart LR
 `lib/services/text_scoring.dart` définit **un token = un mot**.
 
 - Normalisation : minuscules, accents ignorés (`récupérer` = `recuperer`),
-  ponctuation et retours à la ligne ignorés, élisions ramenées à la forme
-  complète (`qu'étudiant` = `que etudiant`, `d'acheter` = `de acheter`).
+  ponctuation et retours à la ligne ignorés.
+- Chiffres et lettres forment des **mots séparés** : `14h` = `14` + `h`,
+  `2TD` = `2` + `td`.
+- Élisions ramenées à la forme complète, avec ou sans apostrophe :
+  `qu'étudiant` = `que etudiant`, `d'acheter` = `d acheter` = `de acheter`.
 - Alignement : plus longue sous-séquence commune (LCS) entre la copie et la
   réponse de référence.
 - Statut de chaque mot : juste, manquant, en trop, faute de frappe
