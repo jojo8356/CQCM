@@ -6,13 +6,17 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('CQCM app flow', () {
-    testWidgets('launches, loads categories, and opens a quiz from home', (
-      tester,
-    ) async {
+    testWidgets('ouvre le catalogue QCM depuis le menu', (tester) async {
       await tester.pumpWidget(const CQCMApp());
-      await _pumpUntilFound(tester, find.byType(Scrollable));
+      await _pumpUntilFound(tester, find.text('QCM'));
 
       expect(find.text('CQCM'), findsOneWidget);
+      expect(find.text('Recopier texte'), findsOneWidget);
+      expect(find.text('Que veux-tu réviser ?'), findsOneWidget);
+
+      await tester.tap(find.text('QCM'));
+      await _pumpUntilFound(tester, find.byType(Scrollable));
+
       await tester.scrollUntilVisible(
         find.text('Qualité dev – Tests et JUnit'),
         500,
@@ -24,6 +28,21 @@ void main() {
       await _pumpUntilFound(tester, find.text('Qualité dev – Tests et JUnit'));
 
       expect(find.text('Qualité dev – Tests et JUnit'), findsWidgets);
+    });
+
+    testWidgets('revient au menu depuis le mode recopier texte', (tester) async {
+      await tester.pumpWidget(const CQCMApp());
+      await _pumpUntilFound(tester, find.text('Recopier texte'));
+
+      await tester.tap(find.text('Recopier texte'));
+      await _pumpUntilFound(tester, find.text('GP:'));
+
+      expect(find.text('Recopier texte'), findsOneWidget);
+
+      await tester.pageBack();
+      await _pumpUntilFound(tester, find.text('Que veux-tu réviser ?'));
+
+      expect(find.text('QCM'), findsOneWidget);
     });
   });
 }

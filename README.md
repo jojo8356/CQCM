@@ -1,15 +1,28 @@
 # CQCM
 
-CQCM est une application Flutter de quiz QCM. Elle embarque un catalogue de quiz dans `assets/data/` et permet aussi d'importer des quiz JSON à l'exécution, sans reconstruire l'application.
+CQCM est une application Flutter de révision. L'écran d'accueil est un menu à deux entrées :
+
+- **QCM** : quiz à choix unique ou multiple, avec correction et score ;
+- **Recopier texte** : récitation de phrases au mot près (programme **GP** – user stories),
+  avec pourcentage de validation, courbe d'apprentissage, révisions espacées et rappels.
+
+Le catalogue de quiz est embarqué dans `assets/data/` et peut aussi être importé en JSON à
+l'exécution, sans reconstruire l'application.
 
 ## Fonctionnalités
 
+- Menu d'accueil avec choix du mode (QCM ou recopier texte).
 - Catalogue de quiz groupé par catégorie.
 - Questions à choix unique et choix multiples.
 - Explications après validation d'une réponse.
 - Écran de résultats avec score et correction question par question.
 - Rendu Markdown pour les questions et explications.
-- Import de quiz JSON depuis l'écran d'accueil.
+- Import de quiz JSON depuis le catalogue QCM.
+- Mode « Recopier texte » : comparaison mot à mot, pourcentage de validation,
+  structure de user story et contraintes d'énoncé vérifiées.
+- Révisions espacées (intervalles 1, 3, 7 jours puis × facteur de facilité) et
+  courbe d'apprentissage dans l'écran GP.
+- Rappels in-app : pastille, bandeau et prochaine échéance par programme.
 - CLI d'administration pour préparer, valider et ajouter des quiz runtime.
 
 ## Démarrage
@@ -50,11 +63,30 @@ APK attendu :
 build/app/outputs/flutter-apk/app-release.apk
 ```
 
+## Mode recopier texte (GP)
+
+Depuis le menu d'accueil :
+
+1. Cliquer sur **Recopier texte**.
+2. L'écran **GP :** affiche les 12 cas de user stories, la courbe d'apprentissage et
+   le rappel du jour.
+3. Choisir la taille de la séance (3, 5, 10 ou tout) puis **Réviser** : les phrases
+   à réviser sont tirées **au hasard** à chaque séance.
+4. Recopier la user story, valider, et lire la correction mot à mot.
+
+Seuil de validation : **95 % des mots attendus** (ponctuation, majuscules, accents et
+élisions ne comptent pas). Chaque phrase est ensuite replanifiée : J+1 après une première
+réussite, puis 3, 7 jours, puis intervalle × facteur de facilité. Une phrase ratée revient
+le jour même.
+
+Progression stockée dans `revision-progress.json` (dossier de support de l'application ou
+`CQCM_REVISION_DIR`). Documentation détaillée : `docs/mode-recopier-texte.md`.
+
 ## Importer un quiz JSON
 
-Depuis l'application :
+Depuis le catalogue QCM (bouton **QCM** du menu) :
 
-1. Ouvrir l'écran d'accueil.
+1. Ouvrir l'écran QCM.
 2. Cliquer sur le bouton d'import dans la barre du haut.
 3. Sélectionner un fichier JSON au format package CQCM.
 4. Vérifier que le quiz apparaît dans la liste.
@@ -131,16 +163,17 @@ Documentation détaillée :
 
 - `DOC.md`
 - `docs/quiz-cli.md`
+- `docs/mode-recopier-texte.md`
 
 ## Structure utile
 
 ```text
 lib/
-  models/       Modèles Quiz et Question
-  screens/      Accueil, quiz, résultats
-  services/     Chargement assets, runtime et import JSON
-  widgets/      Cartes, options, progression, Markdown
-assets/data/    Catalogue et questions embarqués
+  models/       Quiz, Question, paquets de révision et progression
+  screens/      Menu, catalogue QCM, quiz, résultats, programme GP, séance de recopie
+  services/     Chargement assets, runtime, import JSON, scoring, planificateur
+  widgets/      Cartes, options, progression, Markdown, courbe, diff mot à mot
+assets/data/    Catalogue et questions embarqués + programmes de révision
 bin/            CLI cqcm_quiz.dart
 docs/           Documentation spécialisée
 test/           Tests unitaires, services, widgets et parcours

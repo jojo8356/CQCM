@@ -1,0 +1,14 @@
+{
+  "decks": [
+    {
+      "id": "gp-us",
+      "title": "GP – User stories",
+      "shortLabel": "GP",
+      "subtitle": "Programme de révision des US",
+      "description": "12 cas à recopier au mot près : projet boulangerie, notes des étudiants, EDT.",
+      "icon": "📝",
+      "itemCount": 12,
+      "fileName": "revision-gp-us.json"
+    }
+  ]
+}

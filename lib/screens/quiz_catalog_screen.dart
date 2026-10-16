@@ -6,14 +6,17 @@ import '../services/runtime_quiz_store.dart';
 import '../widgets/quiz_card.dart';
 import 'quiz_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+/// Catalogue des QCM, regroupé par catégorie.
+///
+/// Accessible depuis le bouton « QCM » du menu d'accueil.
+class QuizCatalogScreen extends StatefulWidget {
+  const QuizCatalogScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<QuizCatalogScreen> createState() => _QuizCatalogScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _QuizCatalogScreenState extends State<QuizCatalogScreen> {
   QuizService _quizService = QuizService();
   late Future<List<Quiz>> _quizzesFuture;
   bool _isImporting = false;
@@ -28,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('CQCM'),
+        title: const Text('QCM'),
         centerTitle: true,
         actions: [
           IconButton(

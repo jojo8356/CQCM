@@ -1,0 +1,115 @@
+{
+  "id": "gp-us",
+  "title": "GP – User stories",
+  "items": [
+    {
+      "id": "us-boulangerie-1",
+      "project": "Projet boulangerie",
+      "prompt": "Un client achète du pain en payant en carte bancaire sans contact",
+      "constraints": [],
+      "answers": [
+        "En tant que client\nJe veux payer en carte bancaire sans contact\nAfin d'acheter rapidement mon pain"
+      ]
+    },
+    {
+      "id": "us-boulangerie-2",
+      "project": "Projet boulangerie",
+      "prompt": "Un client achète du pain en payant en carte bancaire sans contact",
+      "constraints": ["ne pas utiliser le verbe payer"],
+      "answers": [
+        "En tant que client\nJe veux lire le montant à payer sur le TPE, poser ma carte de paiement ou mon téléphone sur le lecteur de carte TPE\nAfin d'acheter rapidement mon pain"
+      ]
+    },
+    {
+      "id": "us-boulangerie-3",
+      "project": "Projet boulangerie",
+      "prompt": "Un client achète du pain et des pâtisseries en payant en carte bancaire",
+      "constraints": [],
+      "answers": [
+        "En tant que client\nJe veux payer en carte bancaire\nAfin d'acheter du pain et des pâtisseries"
+      ]
+    },
+    {
+      "id": "us-boulangerie-4",
+      "project": "Projet boulangerie",
+      "prompt": "Un client achète du pain et des pâtisseries en payant en carte bancaire",
+      "constraints": ["détailler les actions", "ne pas utiliser le verbe payer"],
+      "answers": [
+        "En tant que client\nJe veux lire le montant à payer sur le TPE, insérer ma carte bancaire, saisir mon code secret, demander un ticket, retirer ma carte bancaire\nAfin d'acheter mon pain"
+      ]
+    },
+    {
+      "id": "us-boulangerie-5",
+      "project": "Projet boulangerie",
+      "prompt": "Un client achète du pain en payant en espèces au monnayeur automatique",
+      "constraints": ["ne pas utiliser le verbe payer"],
+      "answers": [
+        "En tant que client\nJe veux mettre (insérer) mes espèces dans le monnayeur automatique, récupérer ma monnaie (la différence)\nAfin d'acheter du pain\n\nEn tant que boulanger\nJe veux valider le paiement du client dans le monnayeur automatique\nAfin d'enregistrer les paiements"
+      ]
+    },
+    {
+      "id": "us-boulangerie-6",
+      "project": "Projet boulangerie",
+      "prompt": "Un client achète du pain en payant en espèces au boulanger",
+      "constraints": [],
+      "answers": [
+        "En tant que boulanger\nJe veux encaisser les espèces du client\nAfin d'enregistrer les paiements"
+      ]
+    },
+    {
+      "id": "us-notes-1",
+      "project": "Projet notes des étudiants",
+      "prompt": "Un professeur gère les notes de ses étudiants",
+      "constraints": ["ne pas utiliser le verbe gérer"],
+      "answers": [
+        "En tant que professeur\nJe veux saisir, modifier, consulter les notes de mes étudiants ; calculer et consulter leurs moyennes\nAfin de les communiquer aux étudiants et de préparer les jury des étudiants"
+      ]
+    },
+    {
+      "id": "us-notes-2",
+      "project": "Projet notes des étudiants",
+      "prompt": "Un professeur gère les notes de ses étudiants sur ScoDoc",
+      "constraints": ["ne pas utiliser le verbe gérer"],
+      "answers": [
+        "En tant que professeur\nJe veux me connecter à ScoDoc, saisir, modifier, consulter et publier les notes de mes étudiants\nAfin de les communiquer aux étudiants et de préparer les jury des étudiants"
+      ]
+    },
+    {
+      "id": "us-notes-3",
+      "project": "Projet notes des étudiants",
+      "prompt": "Un étudiant demande au secrétariat de lui imprimer son relevé de notes et son avis de poursuite d'études",
+      "constraints": [],
+      "answers": [
+        "En tant que secrétaire\nJe veux accéder à, et, imprimer le relevé de notes d'un étudiant ainsi que son avis de poursuite d'études\nAfin de donner le relevé de notes et l'avis de PE à l'étudiant"
+      ]
+    },
+    {
+      "id": "us-notes-4",
+      "project": "Projet notes des étudiants",
+      "prompt": "Un étudiant demande à un professeur de modifier une note et lui communiquer par email sa nouvelle moyenne",
+      "constraints": [],
+      "answers": [
+        "En tant que professeur\nJe veux modifier la note d'un étudiant, calculer sa nouvelle moyenne et communiquer sa nouvelle moyenne par email\nAfin de répondre à la demande de modification de note d'un étudiant"
+      ]
+    },
+    {
+      "id": "us-edt-1",
+      "project": "Projet EDT",
+      "prompt": "Un étudiant consulte son EDT",
+      "constraints": [],
+      "answers": [
+        "En tant qu'étudiant\nJe veux me connecter et consulter mon EDT\nAfin de voir mon EDT et venir en cours"
+      ]
+    },
+    {
+      "id": "us-edt-2",
+      "project": "Projet EDT",
+      "prompt": "Un professeur demande au secrétariat de changer le jour et l'heure d'un de ses TD la semaine prochaine",
+      "constraints": [],
+      "answers": [
+        "En tant que secrétaire\nJe veux changer les jours et heures des TD d'un professeur\nAfin de répondre à sa demande de changement de son EDT",
+        "En tant que secrétaire\nJe veux changer les jours et heures des TD des professeurs\nAfin de gérer l'EDT"
+      ]
+    }
+  ]
+}

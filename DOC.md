@@ -2,7 +2,10 @@
 
 ## Vue d'ensemble
 
-CQCM est une application Flutter de quiz. L'utilisateur choisit un quiz, répond aux questions, valide ses réponses, puis consulte un score et une correction détaillée.
+CQCM est une application Flutter de révision. L'écran d'accueil est un menu proposant deux modes :
+
+- **QCM** : l'utilisateur choisit un quiz, répond aux questions, valide ses réponses, puis consulte un score et une correction détaillée ;
+- **Recopier texte** : l'utilisateur recopie une phrase au mot près (programme GP – user stories), obtient un pourcentage de validation, et la phrase est replanifiée selon une courbe d'apprentissage.
 
 Le projet supporte deux sources de données :
 
@@ -11,7 +14,7 @@ Le projet supporte deux sources de données :
 
 ```mermaid
 flowchart LR
-  A[Accueil] --> B[Quiz sélectionné]
+  A[Menu d'accueil] -->|QCM| B[Quiz sélectionné]
   B --> C[Questions]
   C --> D[Validation réponse]
   D --> E[Explication]
@@ -19,6 +22,13 @@ flowchart LR
   F -- Non --> C
   F -- Oui --> G[Résultats]
   G --> A
+
+  A -->|Recopier texte| H[GP : programme des US]
+  H --> I[Recopie mot à mot]
+  I --> J[Pourcentage de validation]
+  J --> K[Courbe d'apprentissage]
+  J --> L[Prochaine échéance / rappel]
+  L --> H
 ```
 
 ## Architecture
@@ -29,20 +39,36 @@ lib/
   models/
     quiz.dart
     question.dart
+    revision.dart
+    revision_progress.dart
   screens/
-    home_screen.dart
+    main_menu_screen.dart
+    quiz_catalog_screen.dart
     quiz_screen.dart
     result_screen.dart
+    text_revision_screen.dart
+    revision_session_screen.dart
   services/
     quiz_service.dart
     runtime_quiz_store.dart
     runtime_quiz_store_io.dart
     runtime_quiz_store_stub.dart
+    text_scoring.dart
+    revision_scheduler.dart
+    revision_service.dart
+    revision_plan.dart
+    revision_stats.dart
+    revision_store.dart
+    revision_store_io.dart
+    revision_store_stub.dart
   widgets/
     markdown_text.dart
     option_tile.dart
     progress_bar.dart
     quiz_card.dart
+    revision_chart.dart
+    revision_reminder_banner.dart
+    word_diff_view.dart
 ```
 
 ### Responsabilités
@@ -53,7 +79,19 @@ lib/
 
 `runtime_quiz_store_stub.dart` fournit une version neutre pour les plateformes où `dart:io` n'est pas disponible.
 
-`HomeScreen` affiche le catalogue, groupe les quiz par catégorie et expose le bouton d'import JSON.
+`MainMenuScreen` est l'écran d'accueil : il propose les deux modes et affiche le rappel de révision (nombre de phrases dues, prochaine échéance).
+
+`QuizCatalogScreen` affiche le catalogue, groupe les quiz par catégorie et expose le bouton d'import JSON.
+
+`text_scoring.dart` compare une copie et une réponse de référence mot à mot (normalisation, LCS, fautes de frappe, contraintes d'énoncé, structure de user story).
+
+`revision_scheduler.dart` planifie les révisions espacées (intervalles, facteur de facilité, échéances).
+
+`revision_plan.dart` assemble catalogue, progression et décisions de séance, et construit les rappels (`RevisionReminder`).
+
+`revision_store_io.dart` / `revision_store_stub.dart` persistent la progression (`revision-progress.json`) selon la plateforme.
+
+`TextRevisionScreen` (écran « GP : ») affiche la courbe d'apprentissage, les statistiques et la liste des phrases ; `RevisionSessionScreen` pilote la recopie, la correction et le bilan de séance.
 
 `QuizScreen` pilote la sélection, la validation et l'avancement dans les questions.
 
@@ -81,6 +119,20 @@ Chaque entrée de catalogue pointe vers un fichier de questions :
   "icon": "🧪"
 }
 ```
+
+### Programmes de recopie
+
+Les programmes de révision suivent le même principe :
+
+```text
+assets/data/revision-decks.json    catalogue des programmes
+assets/data/revision-gp-us.json    phrases du programme GP (user stories)
+```
+
+Un programme contient des phrases (`items`) avec un énoncé (`prompt`), des contraintes
+éventuelles (`constraints`) et une ou plusieurs réponses de référence (`answers`). La
+progression n'est pas embarquée : elle est écrite dans le stockage local (voir
+`docs/mode-recopier-texte.md`).
 
 Ces fichiers sont déclarés dans `pubspec.yaml` :
 
@@ -185,6 +237,30 @@ dart run bin/cqcm_quiz.dart --dir cqcm-runtime-data add-question \
   --correct-index 0
 ```
 
+## Mode recopier texte
+
+Documentation complète : `docs/mode-recopier-texte.md`.
+
+Points clés :
+
+- tirage des phrases **au hasard** dans la séance (les phrases dues d'abord) ;
+- 1 token = 1 mot ; ponctuation, casse, accents et élisions sont neutralisés ;
+- score de validation = mots justes / mots attendus, seuil **95 %** ;
+- statut par mot : juste, manquant, en trop, faute de frappe ;
+- structure de user story vérifiée (« En tant que… », « Je veux… », « Afin de… ») ;
+- contraintes d'énoncé lues automatiquement (« ne pas utiliser le verbe X ») ;
+- révisions espacées : J+1, J+3, J+7 puis intervalle × facteur de facilité (max 180 jours) ;
+- échec : série remise à zéro, phrase à revoir le jour même ;
+- rappels in-app : pastille sur le bouton du menu, bandeau avec bouton « Réviser »,
+  prochaine échéance affichée.
+
+### Notifications
+
+Les rappels sont calculés par `RevisionReminder` et affichés dans l'application
+(`RevisionReminderBanner`, `ReminderBadge`). Aucun plugin de notification système n'est
+requis. Pour notifier hors application, brancher `flutter_local_notifications` et
+consommer `RevisionReminder` (`shouldNotify`, `title`, `detail`, `nextDueAt`).
+
 ## Tests
 
 Lancer toute la suite :
@@ -200,7 +276,13 @@ Couverture fonctionnelle actuelle :
 - cohérence entre `questionCount` et fichiers JSON ;
 - chargement runtime ;
 - composants UI principaux ;
-- parcours accueil vers quiz.
+- parcours menu vers catalogue puis quiz ;
+- tokenisation et comparaison au mot près (`text_scoring_test.dart`) ;
+- planification des révisions et statistiques (`revision_scheduler_test.dart`,
+  `revision_stats_test.dart`) ;
+- chargement du programme GP, enregistrement et persistance (`revision_plan_test.dart`) ;
+- widgets du mode texte (`revision_widgets_test.dart`) ;
+- parcours complet recopie depuis le menu (`revision_flow_test.dart`).
 
 ## Build release
 
@@ -229,6 +311,19 @@ Les assets donnent un catalogue de base fiable, disponible hors ligne et version
 ### Pourquoi ajouter un runtime store ?
 
 Le runtime store permet d'ajouter ou remplacer des quiz sans rebuild. L'app garde donc un socle embarqué, mais peut évoluer localement.
+
+### Pourquoi un seuil de validation à 95 % ?
+
+La consigne est de recopier « au mot près ». Un seuil à 100 % serait décourageant
+(une seule faute de frappe invaliderait la phrase), un seuil à 90 % laisserait passer
+l'oubli de plusieurs mots. À 95 %, une phrase de 17 mots tolère un mot manquant ou
+erroné, mais pas deux.
+
+### Pourquoi une notification in-app ?
+
+Le rappel doit fonctionner sur toutes les plateformes sans dépendance supplémentaire.
+`RevisionReminder` produit déjà tout le contenu (phrases dues, échéance) : affiché dans
+l'application, il reste directement réutilisable par un plugin de notification système.
 
 ### Limite mobile
 

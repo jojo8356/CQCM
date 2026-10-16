@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
+import 'screens/main_menu_screen.dart';
 
 void main() {
   runApp(const CQCMApp());
@@ -18,7 +18,7 @@ class CQCMApp extends StatelessWidget {
         useMaterial3: true,
         brightness: Brightness.light,
       ),
-      home: const HomeScreen(),
+      home: const MainMenuScreen(),
     );
   }
 }
