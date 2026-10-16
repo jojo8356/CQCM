@@ -92,7 +92,7 @@ Future<void> reveal(
     // test ni à la route au premier plan.
     _resetLists();
     await tester.pump();
-    _alignVisible(tester, finder);
+    await _alignVisible(tester, finder);
     return;
   }
 
@@ -108,7 +108,7 @@ Future<void> reveal(
     await tester.pump();
   }
 
-  _alignVisible(tester, finder);
+  await _alignVisible(tester, finder);
 }
 
 /// Remet en haut du contenu toutes les listes de l'arbre.
