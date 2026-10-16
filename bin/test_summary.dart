@@ -56,18 +56,18 @@ Future<void> main(List<String> args) async {
       .transform(const LineSplitter())
       .listen(raw.add);
 
-  final exitCode = await process.exitCode;
+  final result = await process.exitCode;
   await stdoutSubscription.cancel();
   await stderrSubscription.cancel();
 
   if (!report.hasData) {
     stdout.writeln(raw.join('\n'));
     stderr.writeln('Aucun rapport JSON reçu de « flutter test ».');
-    exit(exitCode == 0 ? 1 : exitCode);
+    exit(result == 0 ? 1 : result);
   }
 
   report.printSummary(details: details, raw: raw);
-  exit(exitCode == 0 ? 0 : 1);
+  exit(result == 0 ? 0 : 1);
 }
 
 enum _Status {
@@ -80,18 +80,12 @@ enum _Status {
 
   final String label;
 
-  int get order {
-    switch (this) {
-      case _Status.failed:
-        return 0;
-      case _Status.error:
-        return 1;
-      case _Status.warning:
-        return 2;
-      case _Status.ok:
-        return 3;
-    }
-  }
+  int get order => switch (this) {
+    _Status.failed => 0,
+    _Status.error => 1,
+    _Status.warning => 2,
+    _Status.ok => 3,
+  };
 }
 
 class _FileReport {
@@ -125,7 +119,7 @@ class _FileReport {
 
 class _Report {
   final Map<int, String> _suitePaths = {};
-  final Map<int, _FileReport> _files = {};
+  final Map<String, _FileReport> _files = {};
   final Map<int, _FileReport> _testFile = {};
   final Map<int, String> _testNames = {};
   final List<String> _failureDetails = [];
