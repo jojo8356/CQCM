@@ -1,15 +1,13 @@
 /// Outils partagés par les tests de widgets.
 ///
-/// Deux principes, pour que la sortie de `flutter test` reste propre : seuls
-/// les vrais échecs s'affichent.
+/// Objectif : que la sortie de `flutter test` ne montre que les vrais échecs.
+/// Règles appliquées ici :
 ///
-/// 1. La fenêtre de test est agrandie ([useLargeSurface]) : tout le contenu
-///    tient à l'écran, donc plus besoin de faire défiler à l'aveugle (un
-///    défilement sur une liste qui ne défile pas produit un avertissement de
-///    hit test dans la sortie de test).
-/// 2. Un écran n'est ouvert que lorsque l'écran précédent a fini de charger
-///    ([openMenu]) : les écrans reçoivent un plan déjà chargé et s'affichent
-///    au premier rendu, au lieu de courir après un chargement d'assets.
+/// 1. fenêtre agrandie (`useLargeSurface`) plutôt que défilements inutiles ;
+/// 2. écran précédent attendu avant de naviguer (`openMenu`, `settleNavigation`) ;
+/// 3. finders limités à l'écran concerné (`withinScreen`) ;
+/// 4. défilement jamais envoyé à une liste qui ne défile pas ou qui n'est pas
+///    l'écran courant (`reveal`).
 library;
 
 import 'package:cqcm/main.dart';
@@ -58,8 +56,19 @@ Finder withinScreen(Type screen, Finder finder) {
   return find.descendant(of: find.byType(screen), matching: finder);
 }
 
-/// Rend [finder] cliquable sans avertissement de hit test : défilement
-/// seulement si le widget n'est pas déjà affiché.
+/// Rend [finder] cliquable sans avertissement de hit test.
+///
+/// Le défilement est fait à la main plutôt qu'avec `scrollUntilVisible` :
+///
+/// * `scrollUntilVisible` dérive l'origine du geste du centre de la liste et
+///   n'accepte pas `warnIfMissed: false` ; si la liste n'est pas cliquable à
+///   cet endroit (liste vide, écran recouvert, route en cours de fermeture),
+///   `flutter test` imprime un long avertissement de hit test ;
+/// * `find.byType(Scrollable).last` peut désigner la liste d'une route en
+///   train d'être retirée : on ne défile que sur un `Scrollable` réellement
+///   affiché ([_visibleScrollable]) ;
+/// * une liste dont le contenu tient à l'écran (`maxScrollExtent == 0`) n'a
+///   rien à faire défiler : aucun geste n'est envoyé.
 ///
 /// [delta] est le pas de défilement : positif vers le bas, négatif vers le
 /// haut (pour retrouver un en-tête quand une liste est restée défilée).
@@ -68,18 +77,41 @@ Future<void> reveal(
   Finder finder, {
   double delta = 300,
 }) async {
-  if (finder.evaluate().isEmpty) {
-    await tester.scrollUntilVisible(
-      finder,
-      delta,
-      scrollable: find.byType(Scrollable).last,
-    );
+  if (finder.evaluate().isNotEmpty) {
+    await tester.ensureVisible(finder.first);
     await tester.pump();
     return;
   }
 
-  await tester.ensureVisible(finder.first);
-  await tester.pump();
+  final scrollable = _visibleScrollable();
+  if (scrollable == null) return;
+
+  final position = tester.state<ScrollableState>(scrollable).position;
+
+  for (var step = 0; step < 30; step++) {
+    if (finder.evaluate().isNotEmpty) break;
+    // Contenu entièrement visible : rien à faire défiler.
+    if (position.maxScrollExtent <= 0) break;
+    await tester.drag(scrollable, Offset(0, -delta), warnIfMissed: false);
+    await tester.pump();
+  }
+
+  if (finder.evaluate().isNotEmpty) {
+    await tester.ensureVisible(finder.first);
+    await tester.pump();
+  }
+}
+
+/// Liste réellement affichée (et cliquable) de l'écran courant.
+Finder? _visibleScrollable() {
+  final hitTestable = find.byType(Scrollable).hitTestable();
+  if (hitTestable.evaluate().isNotEmpty) {
+    return hitTestable.last;
+  }
+
+  final any = find.byType(Scrollable);
+  if (any.evaluate().isEmpty) return null;
+  return any.last;
 }
 
 /// Pompe jusqu'à ce que [finder] trouve quelque chose.
@@ -103,8 +135,10 @@ Future<void> pumpUntilFound(
   );
 }
 
-/// Laisse la transition de route se terminer.
+/// Laisse la transition de route se terminer (et la route sortante quitter
+/// l'arbre : le rendu reste sinon « offstage » et fausse les finders).
 Future<void> settleNavigation(WidgetTester tester) async {
+  await tester.pump(const Duration(milliseconds: 400));
   await tester.pump(const Duration(milliseconds: 400));
 }
 
