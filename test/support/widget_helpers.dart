@@ -33,14 +33,31 @@ Future<void> pumpApp(WidgetTester tester) async {
   await pumpUntilFound(tester, find.text('Que veux-tu réviser ?'));
 }
 
-/// Attend que le menu ait chargé la progression : son bandeau de rappel est
-/// alors affiché, et un plan est disponible pour les écrans suivants.
+/// Attend que le menu ait chargé la progression : un plan est alors disponible
+/// pour les écrans suivants.
 ///
-/// On attend le widget (et non un texte) : le bandeau change de libellé selon
+/// On attend un widget (et non un texte) : le bandeau change de libellé selon
 /// qu'il reste des phrases à revoir ou non.
+///
+/// Deux signaux sont acceptés, le premier qui apparaît suffit :
+///
+/// * le bandeau de rappel (fin de la liste) ;
+/// * la pastille du nombre de phrases à réviser (haut de la carte
+///   « Recopier texte »).
+///
+/// Sur un écran de téléphone étroit, le bandeau peut rester sous la ligne de
+/// flottaison — et une liste ne construit pas ses éléments hors écran : sans la
+/// pastille, l'attente échouerait alors que la progression est bien chargée.
+/// Quand tout est à jour, il n'y a pas de pastille ; le bandeau « Tout est à
+/// jour » prend le relais, les deux cas sont donc couverts.
 Future<void> waitForMenuPlan(WidgetTester tester) async {
-  await pumpUntilFound(tester, find.byType(RevisionReminderBanner));
+  await pumpUntilFound(tester, _menuPlanSignal);
 }
+
+/// Bandeau de rappel ou pastille : la progression du menu est chargée.
+final Finder _menuPlanSignal = find.byWidgetPredicate(
+  (widget) => widget is RevisionReminderBanner || widget is ReminderBadge,
+);
 
 /// Menu d'accueil prêt à naviguer.
 Future<void> openMenu(WidgetTester tester) async {

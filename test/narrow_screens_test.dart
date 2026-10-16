@@ -1,4 +1,5 @@
 import 'package:cqcm/screens/text_revision_screen.dart';
+import 'package:cqcm/widgets/option_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -85,8 +86,43 @@ void main() {
         expect(tester.takeException(), isNull, reason: 'bilan de la séance');
       });
     }
+
+    testWidgets('catalogue et quiz QCM sans débordement sur 360 dp', (
+      tester,
+    ) async {
+      _usePhoneSurface(tester, _quizSurface);
+
+      await openMenu(tester);
+      final qcm = find.text('QCM');
+      await reveal(tester, qcm);
+      await tester.tap(qcm);
+      await pumpUntilFound(tester, find.text(_quizTitle));
+      await settleNavigation(tester);
+      expect(tester.takeException(), isNull, reason: 'catalogue QCM');
+
+      await tester.tap(find.text(_quizTitle));
+      await pumpUntilFound(tester, find.textContaining('Question 1/'));
+      await settleNavigation(tester);
+      expect(tester.takeException(), isNull, reason: 'première question');
+
+      // Une réponse, puis la correction : la carte d'explication s'ajoute sous
+      // les options, c'est là que la mise en page est la plus tendue.
+      final option = find.byType(OptionTile).first;
+      await reveal(tester, option);
+      await tester.tap(option);
+      await tester.pump();
+
+      final validate = find.text('Valider');
+      await reveal(tester, validate);
+      await tester.tap(validate);
+      await tester.pump(const Duration(milliseconds: 300));
+      expect(tester.takeException(), isNull, reason: 'correction de la question');
+    });
   });
 }
+
+/// Quiz du catalogue embarqué utilisé par `app_flow_test`.
+const _quizTitle = 'Qualité dev – Tests et JUnit';
 
 /// Largeurs du parcours complet. Le menu d'accueil est en plus testé seul à
 /// 320 dp (largeur qui a révélé son débordement) : le parcours entier reste
@@ -95,6 +131,10 @@ const _journeySizes = <Size>[
   Size(360, 740),
   Size(411, 891),
 ];
+
+/// Catalogue QCM : une seule largeur suffit, le parcours GP couvre déjà le
+/// reste des écrans étroits.
+const _quizSurface = Size(360, 740);
 
 /// Fenêtre de test à la taille d'un téléphone (1 pixel logique = 1 pixel).
 void _usePhoneSurface(WidgetTester tester, Size size) {

@@ -333,9 +333,14 @@ Couverture fonctionnelle actuelle :
 La plupart des tests de widgets agrandissent la fenêtre (`useLargeSurface`,
 1200 x 2400) pour éviter les défilements : un débordement de mise en page sur un
 téléphone y est donc invisible. `test/narrow_screens_test.dart` rejoue le menu
-(320 dp) et le parcours complet GP (360 et 411 dp) sur des largeurs de
-téléphone ; un `RenderFlex overflowed` y fait échouer le test avec le nom de
-l'écran fautif.
+(320 dp), le parcours complet GP (360 et 411 dp) puis le catalogue et le quiz
+QCM (360 dp) sur des largeurs de téléphone ; un `RenderFlex overflowed` y fait
+échouer le test avec le nom de l'écran fautif.
+
+`waitForMenuPlan` accepte deux signaux équivalents — le bandeau de rappel (bas
+de la liste) ou la pastille du nombre de phrases à réviser (haut de la carte) —
+parce que sur un écran étroit le bandeau peut rester sous la ligne de
+flottaison, et qu'une liste ne construit pas ses éléments hors écran.
 
 Règle pour les nouveaux écrans : éviter une `Row` dont les enfants sont tous de
 taille libre (titres, étiquettes, boutons) — passer par `Flexible`/`Expanded`
