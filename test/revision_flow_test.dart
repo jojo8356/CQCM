@@ -122,10 +122,17 @@ void main() {
       );
 
       await tester.tap(find.text('Retour au programme'));
-      await pumpUntilFound(tester, find.text('GP:'));
+      await settleNavigation(tester);
+
+      // L'écran du programme est resté défilé jusqu'à la fiche ouverte : son
+      // titre et son bandeau de rappel ne sont plus construits, il faut
+      // remonter la liste pour les retrouver.
+      await reveal(tester, find.text('GP:'), delta: -300);
+      expect(find.text('GP:'), findsOneWidget);
 
       // La tentative est enregistrée : le rappel la compte comme « à revoir ».
-      await pumpUntilFound(tester, find.textContaining('1 à revoir'));
+      await reveal(tester, find.textContaining('1 à revoir'), delta: -300);
+      expect(find.textContaining('1 à revoir'), findsOneWidget);
     });
   });
 }

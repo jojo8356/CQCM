@@ -60,11 +60,18 @@ Finder withinScreen(Type screen, Finder finder) {
 
 /// Rend [finder] cliquable sans avertissement de hit test : défilement
 /// seulement si le widget n'est pas déjà affiché.
-Future<void> reveal(WidgetTester tester, Finder finder) async {
+///
+/// [delta] est le pas de défilement : positif vers le bas, négatif vers le
+/// haut (pour retrouver un en-tête quand une liste est restée défilée).
+Future<void> reveal(
+  WidgetTester tester,
+  Finder finder, {
+  double delta = 300,
+}) async {
   if (finder.evaluate().isEmpty) {
     await tester.scrollUntilVisible(
       finder,
-      300,
+      delta,
       scrollable: find.byType(Scrollable).last,
     );
     await tester.pump();
@@ -90,7 +97,9 @@ Future<void> pumpUntilFound(
 
   fail(
     'Élément introuvable après $maxPumps pompages : $finder\n'
-    'Texte visible : ${visibleTexts(tester)}',
+    'Texte visible : ${visibleTexts(tester)}\n'
+    'Rappel : dans une liste défilée, les widgets hors écran ne sont pas '
+    'construits (utiliser reveal, avec un delta négatif pour remonter).',
   );
 }
 
