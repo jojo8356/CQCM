@@ -94,6 +94,7 @@ pas sans elle.
 | `tools/build-apk.sh --clean` | `flutter clean` avant de compiler |
 | `tools/build-apk.sh --any-flutter` | accepter un SDK autre que l'épinglé |
 | `tools/build-apk.sh --reinstall` | désinstaller l'application avant d'installer (signature différente) |
+| `tools/build-apk.sh --analyze-size` | rapport de poids du code Dart (JSON + DevTools) |
 
 À la fin, le script affiche le chemin, la taille et le `sha256` de chaque APK.
 
@@ -542,12 +543,80 @@ laisser le NDK pour plus tard (Gradle le réclamera au premier build).
 
 Après réparation : `tools/build-apk.sh --install --symbols`.
 
-## 9. Dépannage
+## 9. Mesurer la taille de l'application
+
+Trois tailles différentes, à ne pas confondre :
+
+| Mesure | Où | Ordre de grandeur (CQCM, arm64 seul) |
+| --- | --- | --- |
+| Fichier APK | PC | **20 Mo** (`build/app/outputs/flutter-apk/app-release.apk`) |
+| Installé sur le téléphone | appareil | ~20-21 Mo (APK + compilation ; les bibliothèques Flutter ne sont pas extraites) |
+| Données de l'app | appareil | quelques centaines de Ko (progression, réglages, QCM importés) |
+
+Le script de build affiche déjà la taille de l'APK et son `sha256`. Pour le
+détail :
+
+```bash
+tools/apk-size.sh                 # APK + répartition interne + téléphone
+tools/apk-size.sh --top 20        # 20 plus gros fichiers de l'APK
+tools/apk-size.sh --split         # bibliothèques natives et dex en détail
+tools/apk-size.sh --no-device     # seulement la partie locale
+```
+
+Il affiche : taille du fichier, taille de téléchargement (via `apkanalyzer`,
+sinon estimation gzip), répartition par dossier de l'APK (blocs natifs, dex,
+assets), plus gros fichiers, et — si le téléphone est branché — `versionName`
+installée, code, données et cache du paquet `com.cqcm.cqcm` (lus dans
+`dumpsys diskstats`, tous formats d'Android 8 à 14).
+
+### Répartition fine du code Dart
+
+```bash
+tools/build-apk.sh --abi arm64 --analyze-size
+```
+
+Le build affiche un tableau (taille par paquet Dart, assets, bibliothèques) et
+écrit un rapport :
+
+```text
+~/.flutter-devtools/apk-code-size-analysis_XX.json
+```
+
+À ouvrir dans DevTools (l'onglet « App Size ») :
+
+```bash
+~/flutter-3.47/bin/dart devtools --appSizeBase=~/.flutter-devtools/apk-code-size-analysis_XX.json
+```
+
+`--analyze-size` exige un seul APK : incompatible avec `--split-per-abi` (le
+script refuse la combinaison et l'explique).
+
+### À la main, sans les scripts
+
+```bash
+ls -lh build/app/outputs/flutter-apk/app-release.apk          # taille du fichier
+du -sh build/app/outputs/flutter-apk/app-release.apk
+
+# ce que pèse l'application sur le téléphone
+adb shell pm path com.cqcm.cqcm                                # chemin de l'APK installé
+adb shell dumpsys diskstats | grep -A 4 "com.cqcm.cqcm"        # code / données / cache
+```
+
+Sur Android 13+, `dumpsys diskstats` présente des listes indexées
+(`Package Names: [...]`, `App Sizes: [...]`) : les lignes se lisent colonne par
+colonne. `tools/apk-size.sh` gère les deux présentations.
+
+Le plus simple reste l'interface du téléphone : **Paramètres → Applications →
+CQCM** affiche « Taille de l'application », « Données utilisateur » et
+« Cache ».
+
+## 10. Dépannage
 
 | Message | Cause | Remède |
 | --- | --- | --- |
 | `INSTALL_FAILED_NO_MATCHING_ABIS` | APK compilé pour une autre architecture | relancer `tools/build-apk.sh` (détection automatique) ou `--abi` |
 | `INSTALL_FAILED_UPDATE_INCOMPATIBLE` | application déjà installée, autre signature | `tools/build-apk.sh --install --reinstall` (§5) |
+| Besoin de connaître les tailles | — | `tools/apk-size.sh` (§9) : APK, répartition interne, téléphone |
 | `INSTALL_FAILED_INSUFFICIENT_STORAGE` | espace libre | libérer de la place sur le téléphone |
 | `device unauthorized` | autorisation USB non accordée | accepter « Autoriser le débogage USB » sur le téléphone |
 | `insufficient permissions for device` | règles udev (Linux) | §7 : débogage sans fil, règle udev, ou transfert manuel de l'APK |

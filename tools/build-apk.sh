@@ -22,6 +22,8 @@
 #   tools/build-apk.sh --any-flutter      # accepter un SDK autre que l'épinglé
 #   tools/build-apk.sh --reinstall        # désinstaller avant d'installer
 #                                         # (signature différente)
+#   tools/build-apk.sh --analyze-size     # rapport de poids du code Dart
+#                                         # (JSON + DevTools)
 #
 # Options d'architecture (--abi) : auto (défaut), arm64, arm, x64.
 #
@@ -58,6 +60,7 @@ OBFUSCATE=0
 CLEAN=0
 ANY_FLUTTER=0
 REINSTALL=0
+ANALYZE_SIZE=0
 EXTRA=()
 
 while [ $# -gt 0 ]; do
@@ -80,6 +83,7 @@ while [ $# -gt 0 ]; do
     --clean) CLEAN=1 ;;
     --any-flutter) ANY_FLUTTER=1 ;;
     --reinstall) REINSTALL=1 ;;
+    --analyze-size) ANALYZE_SIZE=1 ;;
     --build-name | --build-number | --dart-define | --flavor)
       [ $# -ge 2 ] || die "$1 attend une valeur"
       EXTRA+=("$1" "$2")
@@ -426,7 +430,15 @@ if [ "$BUNDLE" = "1" ]; then
 fi
 
 BUILD_ARGS=(build apk --release --target-platform "$TARGET")
-[ "$SPLIT" = "1" ] && BUILD_ARGS+=(--split-per-abi)
+if [ "$SPLIT" = "1" ]; then
+  [ "$ANALYZE_SIZE" = "1" ] &&
+    die "--analyze-size ne fonctionne pas avec --split-per-abi : Flutter veut
+un seul APK à analyser (retirer l'un des deux)"
+  BUILD_ARGS+=(--split-per-abi)
+fi
+if [ "$ANALYZE_SIZE" = "1" ]; then
+  BUILD_ARGS+=(--analyze-size)
+fi
 BUILD_ARGS+=("${EXTRA[@]}")
 
 run_flutter_build "${BUILD_ARGS[@]}"
@@ -449,6 +461,28 @@ for apk in "${APKS[@]}"; do
   printf '    %s  (%s)\n' "$apk" "$(du -h "$apk" | cut -f1)"
   printf '    %s\n' "sha256 : $(sha256sum "$apk" | cut -d' ' -f1)"
 done
+
+# ---------------------------------------------------------------------------
+# Rapport de taille (--analyze-size)
+# ---------------------------------------------------------------------------
+
+if [ "$ANALYZE_SIZE" = "1" ]; then
+  REPORT="$(find "$HOME/.flutter-devtools" -maxdepth 1     -name 'apk-code-size-analysis*.json' -printf '%T@ %p\n' 2>/dev/null |
+    sort -rn | head -n 1 | cut -d' ' -f2- || true)"
+  printf '\n'
+  if [ -n "$REPORT" ]; then
+    ok "rapport de poids : $REPORT"
+    printf '    %s\n' "détail par paquet Dart et par asset"
+    DART_BIN="$(dirname "$FLUTTER_BIN")/dart"
+    if [ -x "$DART_BIN" ]; then
+      printf '    %s\n' "visualiser : $DART_BIN devtools \
+--appSizeBase=$REPORT"
+    fi
+  else
+    warn "rapport introuvable dans ~/.flutter-devtools (build échoué ?)"
+  fi
+  printf '    %s\n' "détail de l'APK et du téléphone : tools/apk-size.sh"
+fi
 
 # ---------------------------------------------------------------------------
 # Installation
