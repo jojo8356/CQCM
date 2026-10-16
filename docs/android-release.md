@@ -418,6 +418,25 @@ Marche à suivre si l'espace manque, avec ses limites :
 - `tools/android-sdk-doctor.sh` signale ces marqueurs (`(marqueur)`) pour
   qu'ils ne passent pas inaperçus.
 
+**Si Gradle réclame quand même le vrai NDK malgré le marqueur** (un plugin
+compile du code natif), deux sorties :
+
+```bash
+# 1. le NDK après la ligne de Flutter (Flutter le connaît : il signale la
+#    version manquante exactement)
+sed -n '/^android {/,/^}/p' android/app/build.gradle.kts | head          # ndkVersion = flutter.ndkVersion
+#    remplacer par la version du message d'erreur, ex. :
+#    ndkVersion = "27.1.11552264"
+
+# 2. le vrai NDK à la place du marqueur
+rm -rf ~/Android/Sdk/ndk/28.2.13676358
+tools/android-sdk-install.sh --sdk ~/Android/Sdk          # NDK complet (~1 Go)
+```
+
+Le chemin `1` est le plus rapide quand un NDK existe déjà ailleurs sur la
+machine (celui d'un ancien Android Studio, par exemple) : aucune version de NDK
+n'est « la bonne » ici, Flutter n'en veut qu'une présente.
+
 `--no-ndk` est le troisième choix : installer tout le reste maintenant et
 laisser le NDK pour plus tard (Gradle le réclamera au premier build).
 
