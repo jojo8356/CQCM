@@ -361,6 +361,10 @@ si un autre NDK est déjà installé, le docteur le signale et indique la ligne
 `ndkVersion = …` à mettre dans `android/app/build.gradle.kts` pour l'utiliser
 tel quel et éviter le téléchargement.
 
+L'installeur indique enfin le `PATH` à utiliser pour que `adb` soit celui du
+SDK (plus récent que celui du système) — `tools/build-apk.sh` choisit de
+lui-même, parmi les adb trouvés, celui dont la version est la plus élevée.
+
 Après réparation : `tools/build-apk.sh --install --symbols`.
 
 ### Partir d'un SDK vide (aucun cmdline-tools sur la machine)
@@ -371,15 +375,19 @@ rien y installer, et le build échoue sur le NDK. Le remède est un **SDK
 utilisateur complet**, sans root et sans toucher au SDK système :
 
 ```bash
-# 1. télécharger le zip des outils en ligne de commande
-#    developer.android.com/studio → « Command line tools only » (Linux)
-#    (fichier du genre commandlinetools-linux-<numéro>_latest.zip)
-
-# 2. créer le SDK et tout installer
-tools/android-sdk-install.sh --zip ~/Téléchargements/commandlinetools-linux-*.zip
-#    ou directement, avec le lien copié sur la page :
-tools/android-sdk-install.sh --url 'https://dl.google.com/android/repository/…zip'
+tools/android-sdk-install.sh
 ```
+
+Sans option, le script cherche un zip déjà téléchargé dans `~/Téléchargements`,
+`~/Downloads` puis `~`, et sinon **retrouve le lien courant tout seul** : il
+interroge l'index du dépôt Android
+(`dl.google.com/android/repository/repository2-3.xml`) et prend le zip le plus
+récent, avec repli sur la page `developer.android.com/studio`. Inutile donc de
+recopier un lien — ceux des exemples et des vieux tutoriels finissent par
+renvoyer un 404.
+
+Variantes : `--url '<lien>'` ou `--zip <fichier>` pour forcer une version
+précise, `--sdk <dossier>` pour un autre emplacement que `~/Android/Sdk`.
 
 Ce que fait l'installeur : extraction des `cmdline-tools` dans
 `<sdk>/cmdline-tools/latest`, acceptation des licences, puis installation de

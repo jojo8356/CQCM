@@ -6,19 +6,20 @@
 # sans cmdline-tools ni licences : Gradle ne peut alors rien y installer et le
 # build Flutter échoue sur « licences have not been accepted » / « ndk;… ».
 #
-# Usage (le premier lancement a besoin du zip des cmdline-tools) :
-#   tools/android-sdk-install.sh --url '<lien du zip cmdline-tools>'
+# Usage (le premier lancement récupère les cmdline-tools) :
+#   tools/android-sdk-install.sh                              # recommandé
 #   tools/android-sdk-install.sh --zip ~/Téléchargements/commandlinetools-linux-*.zip
+#   tools/android-sdk-install.sh --url 'https://dl.google.com/…zip'
 #   tools/android-sdk-install.sh --sdk ~/android-sdk          # autre dossier
 #   tools/android-sdk-install.sh --no-ndk                     # NDK plus tard
 #   tools/android-sdk-install.sh --fake-ndk                   # marqueur au lieu
 #                                                             # du NDK (1 Go)
-#   tools/android-sdk-install.sh                              # SDK déjà amorcé
 #
-# Le lien du zip se trouve sur developer.android.com/studio, section
-# « Command line tools only » (fichier commandlinetools-linux-*_latest.zip).
-# Il peut aussi être déjà téléchargé : --zip, ou laisser le script le chercher
-# dans ~/Téléchargements et ~/Downloads.
+# Sans option, le script cherche un zip déjà téléchargé dans ~/Téléchargements,
+# ~/Downloads et ~, puis sinon retrouve le lien courant tout seul sur
+# dl.google.com (index du dépôt Android, avec repli sur la page
+# developer.android.com/studio). --url et --zip servent à forcer un fichier
+# précis (poste sans accès réseau, version particulière).
 #
 # Dossier par défaut : ~/Android/Sdk — c'est celui que Flutter cherche tout seul
 # sous Linux, aucun réglage n'est donc nécessaire ensuite.
@@ -94,6 +95,19 @@ done
 
 SDK_DIR="${SDK_DIR/#\~/$HOME}"
 
+# Un lien recopié depuis un exemple ne doit pas partir en 404 silencieux.
+if [ -n "$URL" ]; then
+  case "$URL" in
+    *…* | *'...'* | *'<lien'* | *'<'* | *COLLER* | *'VOTRE'* | *'votre_lien'*)
+      die "ce lien est un exemple, pas un vrai lien : $URL
+  le vrai lien peut être trouvé automatiquement : lancer sans --url
+  ou récupérer le zip : developer.android.com/studio → « Command line tools only »"
+      ;;
+    http://* | https://*) ;;
+    *) die "--url attend un lien http(s) (…zip) : $URL" ;;
+  esac
+fi
+
 # ---------------------------------------------------------------------------
 # Flutter épinglé : versions attendues (compileSdk, ndkVersion)
 # ---------------------------------------------------------------------------
@@ -167,6 +181,58 @@ sdkmanager_in() {
 
 SDKMANAGER="$(sdkmanager_in "$SDK_DIR" 2>/dev/null || true)"
 
+# ---------------------------------------------------------------------------
+# Trouver le lien du zip des cmdline-tools
+# ---------------------------------------------------------------------------
+
+REPO_BASE="https://dl.google.com/android/repository"
+REPO_XML="$REPO_BASE/repository2-3.xml"
+STUDIO_PAGE="https://developer.android.com/studio"
+
+# Depuis un contenu (index du dépôt ou page HTML) sur l'entrée standard :
+# le nom du zip le plus récent, d'après son numéro de build.
+pick_cmdline_tools() {
+  local picked
+  picked="$(grep -oE 'commandlinetools-linux-[0-9]+_latest\.zip' 2>/dev/null |
+    sort -u |
+    sed 's/^commandlinetools-linux-\([0-9]*\)_latest\.zip$/\1 &/' |
+    sort -k1,1n | tail -n 1 | cut -d' ' -f2 || true)"
+  [ -n "$picked" ] || return 1
+  printf '%s\n' "$picked"
+}
+
+fetch_page() {
+  case "$1" in
+    curl) curl -fsSL --connect-timeout 20 --max-time 60 "$2" 2>/dev/null || true ;;
+    wget) wget -qO- --timeout=60 "$2" 2>/dev/null || true ;;
+  esac
+}
+
+# Retourne l'URL complète du zip, ou rien.
+discover_cmdline_tools_url() {
+  local tool picked
+  for tool in curl wget; do
+    command -v "$tool" >/dev/null 2>&1 || continue
+
+    # a) index du dépôt Android : il liste toutes les révisions publiées.
+    picked="$(fetch_page "$tool" "$REPO_XML" | pick_cmdline_tools || true)"
+    if [ -n "$picked" ]; then
+      printf '%s/%s\n' "$REPO_BASE" "$picked"
+      return 0
+    fi
+
+    # b) page de téléchargement d'Android Studio (mise en page HTML).
+    picked="$(fetch_page "$tool" "$STUDIO_PAGE" |
+      grep -oE 'https://dl\.google\.com/android/repository/commandlinetools-linux-[0-9]+_latest\.zip' |
+      sed 's|.*/||' | pick_cmdline_tools || true)"
+    if [ -n "$picked" ]; then
+      printf '%s/%s\n' "$REPO_BASE" "$picked"
+      return 0
+    fi
+  done
+  return 1
+}
+
 unpack_cmdline_tools() {
   local file="$1" work="$2"
   if command -v unzip >/dev/null 2>&1; then
@@ -191,29 +257,65 @@ if [ -z "$SDKMANAGER" ]; then
     done
 
   if [ -z "$ZIP" ] && [ -z "$URL" ]; then
-    warn "aucun zip de cmdline-tools trouvé"
-    printf '    télécharger « Command line tools only » :\n'
-    printf '      https://developer.android.com/studio  (section Command line tools)\n'
-    printf '    puis relancer avec le fichier ou le lien :\n'
-    printf '      tools/android-sdk-install.sh --zip ~/Téléchargements/commandlinetools-linux-*.zip\n'
-    printf '      tools/android-sdk-install.sh --url <lien copié depuis la page>\n'
-    exit 1
+    log "recherche d'un zip déjà téléchargé (~/Téléchargements, ~/Downloads, ~)"
+    for candidate in "$HOME/Téléchargements"/commandlinetools-linux-*.zip \
+      "$HOME/Downloads"/commandlinetools-linux-*.zip \
+      "$HOME"/commandlinetools-linux-*.zip; do
+      if [ -f "$candidate" ]; then
+        ZIP="$candidate"
+        ok "zip trouvé : $ZIP"
+        break
+      fi
+    done
   fi
 
-  if [ -n "$URL" ]; then
-    command -v curl >/dev/null 2>&1 || command -v wget >/dev/null 2>&1 ||
-      die "ni curl ni wget pour télécharger $URL"
-    ZIP="$HOME/Téléchargements/$(basename "${URL%%\?*}")"
-    mkdir -p "$(dirname "$ZIP")"
-    log "téléchargement de $URL"
-    if command -v curl >/dev/null 2>&1; then
-      curl -L --fail --progress-bar -o "$ZIP" "$URL"
+  if [ -z "$ZIP" ] && [ -z "$URL" ]; then
+    log "recherche du lien courant sur dl.google.com"
+    URL="$(discover_cmdline_tools_url || true)"
+    if [ -n "$URL" ]; then
+      ok "lien retenu : $URL"
     else
-      wget -O "$ZIP" "$URL"
+      warn "lien introuvable automatiquement (réseau coupé, ou page modifiée)"
+      printf '    à la main : %s\n' "$STUDIO_PAGE"
+      printf '      section « Command line tools only » → Linux → noter le lien\n'
+      printf '    puis relancer :\n'
+      printf '      tools/android-sdk-install.sh --url <lien copié>\n'
+      printf '      tools/android-sdk-install.sh --zip ~/Téléchargements/commandlinetools-linux-*.zip\n'
+      exit 1
     fi
   fi
 
+  if [ -n "$URL" ]; then
+    ZIP="$HOME/Téléchargements/$(basename "${URL%%\?*}")"
+    mkdir -p "$(dirname "$ZIP")"
+    log "téléchargement de $URL"
+    download_ok=0
+    if command -v curl >/dev/null 2>&1; then
+      curl -fL --connect-timeout 30 --retry 2 --progress-bar -o "$ZIP" "$URL" &&
+        download_ok=1
+    elif command -v wget >/dev/null 2>&1; then
+      wget -O "$ZIP" "$URL" && download_ok=1
+    else
+      die "ni curl ni wget pour télécharger $URL"
+    fi
+    if [ "$download_ok" != "1" ]; then
+      rm -f "$ZIP"
+      die "téléchargement en échec : $URL
+  lien périmé ? relancer sans --url pour le retrouver automatiquement
+  (le script interroge $REPO_XML puis $STUDIO_PAGE)"
+    fi
+    ok "téléchargé : $ZIP ($(du -h "$ZIP" | cut -f1))"
+  fi
+
   [ -f "$ZIP" ] || die "fichier introuvable : $ZIP"
+
+  # Archive intacte ? Un téléchargement tronqué donnerait une erreur obscure.
+  if command -v unzip >/dev/null 2>&1; then
+    unzip -tq "$ZIP" >/dev/null 2>&1 ||
+      die "archive illisible (téléchargement incomplet ?) : $ZIP
+  supprimer le fichier et relancer pour le retélécharger"
+  fi
+
   log "extraction de $(basename "$ZIP")"
 
   WORK="$(mktemp -d)"
@@ -319,6 +421,8 @@ fi
 printf '\n'
 log "vérification"
 printf '    tools/android-sdk-doctor.sh\n'
+log "adb : utiliser celui du SDK (plus récent que celui du système)"
+printf '    export PATH="%s/platform-tools:$PATH"\n' "$SDK_DIR"
 log "construire l'APK"
 printf '    adb devices                     # téléphone autorisé ?\n'
 printf '    tools/build-apk.sh --install --symbols\n'

@@ -137,17 +137,42 @@ fi
 [ -n "$FLUTTER_BIN" ] ||
   die "flutter introuvable : installer le SDK épinglé, puis relancer"
 
-ADB_BIN="$(command -v adb || true)"
-if [ -z "$ADB_BIN" ]; then
-  for candidate in \
-    "$HOME/platform-tools/adb" \
-    "$HOME/.cqcm/platform-tools/adb" \
-    "${ANDROID_HOME:-}/platform-tools/adb" \
-    "${ANDROID_SDK_ROOT:-}/platform-tools/adb" \
-    "$HOME/android-sdk/platform-tools/adb" \
-    "$HOME/Android/Sdk/platform-tools/adb"; do
-    [ -n "$candidate" ] && [ -x "$candidate" ] && ADB_BIN="$candidate" && break
-  done
+# Majeure de platform-tools d'un adb (« Version 36.0.2 » → 36), 0 si inconnue.
+adb_major_version() {
+  local bin="$1" version
+  version="$("$bin" version 2>/dev/null |
+    sed -n 's/.*Version \([0-9][0-9]*\)\..*/\1/p' | head -n 1 || true)"
+  [ -n "$version" ] || version=0
+  printf '%s\n' "$version"
+}
+
+# Parmi tous les adb disponibles, garder le plus récent : celui du système est
+# souvent plus vieux (par exemple sans `adb pair`, ajouté en 30.0.0) que celui
+# du SDK Android installé pour le projet.
+ADB_BIN=""
+ADB_MAJOR=-1
+consider_adb() {
+  local candidate="$1" version
+  [ -n "$candidate" ] || return 0
+  [ -x "$candidate" ] || return 0
+  version="$(adb_major_version "$candidate")"
+  if [ "$version" -gt "$ADB_MAJOR" ]; then
+    ADB_MAJOR="$version"
+    ADB_BIN="$candidate"
+  fi
+}
+consider_adb "$(command -v adb 2>/dev/null || true)"
+for candidate in \
+  "$HOME/platform-tools/adb" \
+  "$HOME/.cqcm/platform-tools/adb" \
+  "${ANDROID_HOME:-}/platform-tools/adb" \
+  "${ANDROID_SDK_ROOT:-}/platform-tools/adb" \
+  "$HOME/android-sdk/platform-tools/adb" \
+  "$HOME/Android/Sdk/platform-tools/adb"; do
+  consider_adb "$candidate"
+done
+if [ -n "$ADB_BIN" ] && [ "$ADB_MAJOR" != "0" ]; then
+  log "adb : $ADB_BIN (platform-tools $ADB_MAJOR)"
 fi
 
 # ---------------------------------------------------------------------------
