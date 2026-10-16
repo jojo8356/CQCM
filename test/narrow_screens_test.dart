@@ -6,14 +6,14 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'support/widget_helpers.dart';
 
-/// Les autres tests utilisent une fenêtre large (1200 x 2400) : un débordement
-/// de mise en page sur un vrai téléphone y échappe forcément. Ce fichier rejoue
-/// les écrans sur des largeurs de téléphone réelles.
+/// Les autres tests utilisent une fenêtre large (1200 x 2400) : un
+/// débordement de mise en page sur un vrai téléphone y échappe forcément. Ce
+/// fichier rejoue les écrans sur des largeurs de téléphone réelles.
 ///
-/// Un `RenderFlex overflowed` lève une exception de rendu : `flutter test` fait
-/// échouer le test, et `takeException` sert à nommer l'écran fautif (c'est
-/// ainsi qu'a été trouvé le débordement du menu d'accueil : titre « Recopier
-/// texte » + pastille des phrases à réviser sur une ligne).
+/// Un `RenderFlex overflowed` lève une exception de rendu : le test échoue, et
+/// `takeException` sert à nommer l'écran fautif (c'est ainsi qu'a été trouvé
+/// le débordement du menu d'accueil : titre « Recopier texte » + pastille des
+/// phrases à réviser sur une ligne).
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -122,7 +122,11 @@ void main() {
       await reveal(tester, validate);
       await tester.tap(validate);
       await tester.pump(const Duration(milliseconds: 300));
-      expect(tester.takeException(), isNull, reason: 'correction de la question');
+      expect(
+        tester.takeException(),
+        isNull,
+        reason: 'correction de la question',
+      );
     });
   });
 }
