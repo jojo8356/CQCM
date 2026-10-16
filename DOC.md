@@ -327,6 +327,21 @@ Couverture fonctionnelle actuelle :
 - plan de rappels système, gabarits et plafond (`notification_plan_test.dart`) ;
 - écran Rappels depuis le menu (`notifications_screen_test.dart`).
 
+## Développement Linux sans droits root
+
+`flutter doctor` réclame `libgtk-3-dev`, installable seulement avec `sudo`.
+`tools/linux-desktop-deps.sh` récupère les `.deb` nécessaires (`apt-get
+download`, sans privilège), les extrait dans `~/.cqcm/linux-deps/sysroot` et
+écrit un fichier d'environnement qui rend `gtk+-3.0` visible à `pkg-config` et
+à CMake. `tools/flutter-linux.sh` enchaîne les deux :
+
+```bash
+tools/linux-desktop-deps.sh
+tools/flutter-linux.sh run -d linux
+```
+
+Documentation complète : `docs/linux-sans-root.md`.
+
 ## Build release
 
 Compiler un APK release :

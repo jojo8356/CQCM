@@ -100,6 +100,19 @@ permet l'autorisation, la synchronisation et un envoi de test.
 
 Détails et configuration Android/iOS : `docs/notifications.md`.
 
+## Linux desktop sans droits root
+
+`flutter run -d linux` exige les en-têtes GTK 3 (`libgtk-3-dev`), normalement
+installés avec `sudo`. Sur une machine sans droits d'administration, extraire le
+nécessaire dans un dossier personnel suffit :
+
+```bash
+tools/linux-desktop-deps.sh          # télécharge les .deb et les extrait
+tools/flutter-linux.sh run -d linux  # wrapper : source l'environnement puis flutter
+```
+
+Détails, options et dépannage : `docs/linux-sans-root.md`.
+
 ## Importer un quiz JSON
 
 Depuis le catalogue QCM (bouton **QCM** du menu) :
@@ -183,6 +196,7 @@ Documentation détaillée :
 - `docs/quiz-cli.md`
 - `docs/mode-recopier-texte.md`
 - `docs/notifications.md`
+- `docs/linux-sans-root.md`
 
 ## Structure utile
 
