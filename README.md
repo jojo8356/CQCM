@@ -259,8 +259,19 @@ Les scripts d'environnement (aucun privilège requis) :
 ```text
 tools/android-stack-check.sh   diagnostic Gradle / AGP / Kotlin / Java
 tools/flutter-pinned.sh        lance le SDK Flutter de .flutter-version
+tools/dev-disk-report.sh       rapport d'occupation disque (n'efface rien)
 tools/linux-desktop-deps.sh    sysroot GTK 3 personnel pour le bureau Linux
 tools/flutter-linux.sh         wrapper « source l'environnement puis flutter »
+```
+
+Le rapport disque liste les postes qui pèsent sur une machine Flutter/Android
+(`~/.gradle`, `~/android-sdk`, `~/.pub-cache`, `~/.cache`…) et imprime les
+commandes de nettoyage prêtes à copier, avec leur coût réel — il ne supprime
+jamais rien :
+
+```bash
+tools/dev-disk-report.sh              # rapport complet
+tools/dev-disk-report.sh --commands   # seulement les commandes de nettoyage
 ```
 
 ## Notes de production
