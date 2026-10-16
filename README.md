@@ -23,6 +23,8 @@ l'exécution, sans reconstruire l'application.
 - Révisions espacées (intervalles 1, 3, 7 jours puis × facteur de facilité) et
   courbe d'apprentissage dans l'écran GP.
 - Rappels in-app : pastille, bandeau et prochaine échéance par programme.
+- Notifications système programmées par `flutter_local_notifications`, réglées en
+  JSON (`assets/data/notifications.json`) et pilotables depuis l'écran « Rappels ».
 - CLI d'administration pour préparer, valider et ajouter des quiz runtime.
 
 ## Démarrage
@@ -81,6 +83,16 @@ le jour même.
 
 Progression stockée dans `revision-progress.json` (dossier de support de l'application ou
 `CQCM_REVISION_DIR`). Documentation détaillée : `docs/mode-recopier-texte.md`.
+
+## Notifications
+
+Les échéances calculées par la courbe d'apprentissage sont programmées comme
+notifications système (heure, fuseau, mode exact/approximatif, textes : tout est
+dans `assets/data/notifications.json`, surchargeable par un `notifications.json`
+local). L'écran **Rappels** de l'application affiche les réglages et le plan,
+permet l'autorisation, la synchronisation et un envoi de test.
+
+Détails et configuration Android/iOS : `docs/notifications.md`.
 
 ## Importer un quiz JSON
 
@@ -164,6 +176,7 @@ Documentation détaillée :
 - `DOC.md`
 - `docs/quiz-cli.md`
 - `docs/mode-recopier-texte.md`
+- `docs/notifications.md`
 
 ## Structure utile
 

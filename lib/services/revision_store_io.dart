@@ -58,6 +58,64 @@ Future<String?> revisionProgressFilePath(String? directoryPath) async {
   return '$directory/progress.json';
 }
 
+/// Chemin d'un fichier du dossier de données de révision (null si aucun
+/// dossier n'est disponible).
+Future<String?> revisionDataFilePath(
+  String fileName, {
+  String? directoryPath,
+}) async {
+  final directory = await resolveRevisionDataDirectory(directoryPath);
+  if (directory == null || directory.trim().isEmpty) {
+    return null;
+  }
+  return '$directory/$fileName';
+}
+
+/// Lit un fichier JSON du dossier de données (surcharge de configuration).
+Future<String?> readRevisionDataFile(
+  String fileName, {
+  String? directoryPath,
+}) async {
+  final path = await revisionDataFilePath(fileName, directoryPath: directoryPath);
+  if (path == null) {
+    return null;
+  }
+  final file = File(path);
+  if (!await file.exists()) {
+    return null;
+  }
+  try {
+    return await file.readAsString();
+  } catch (_) {
+    return null;
+  }
+}
+
+/// Écrit un fichier JSON dans le dossier de données (sans écraser un fichier
+/// existant quand [overwrite] vaut false).
+Future<bool> writeRevisionDataFile(
+  String fileName,
+  String contents, {
+  String? directoryPath,
+  bool overwrite = true,
+}) async {
+  final path = await revisionDataFilePath(fileName, directoryPath: directoryPath);
+  if (path == null) {
+    return false;
+  }
+  final file = File(path);
+  if (!overwrite && await file.exists()) {
+    return false;
+  }
+  try {
+    await file.parent.create(recursive: true);
+    await file.writeAsString(contents);
+    return true;
+  } catch (_) {
+    return false;
+  }
+}
+
 Future<Map<String, RevisionProgress>> loadRevisionProgress({
   String? directoryPath,
 }) async {

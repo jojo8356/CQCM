@@ -1,4 +1,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Rappels de révision (flutter_local_notifications) :
+         - POST_NOTIFICATIONS : affichage des notifications (Android 13+),
+         - VIBRATE : retour haptique,
+         - RECEIVE_BOOT_COMPLETED : reprogrammation après un redémarrage,
+         - SCHEDULE_EXACT_ALARM : heure exacte (l'utilisateur peut la refuser,
+           l'application retombe alors sur des rappels approximatifs).
+         Remplacer SCHEDULE_EXACT_ALARM par USE_EXACT_ALARM évite la demande
+         d'autorisation mais restreint la publication sur les stores. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+
     <application
         android:label="cqcm"
         android:name="${applicationName}"
@@ -25,6 +38,21 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <!-- flutter_local_notifications : diffuse les rappels programmés. -->
+        <receiver
+            android:exported="false"
+            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
+        <!-- ... et les reprogramme après un redémarrage ou une mise à jour. -->
+        <receiver
+            android:exported="false"
+            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+            </intent-filter>
+        </receiver>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

@@ -95,18 +95,21 @@ Affichage :
 - étiquette « à réviser » sur chaque phrase concernée ;
 - bandeau de fin de séance indiquant la prochaine date de révision.
 
-Ces rappels sont **in-app** : aucun plugin de notification système n'est
-nécessaire. Pour une notification hors application, brancher
-`flutter_local_notifications` et appeler `RevisionReminder` au démarrage (ou
-depuis une tâche planifiée) : `reminder.shouldNotify`, `reminder.title`,
-`reminder.detail` et `reminder.nextDueAt` fournissent tout le contenu.
+Ces rappels sont **in-app**, mais ils sont complétés par de vraies
+**notifications système** programmées avec `flutter_local_notifications` :
+`NotificationPlan` transforme les échéances en rappels datés et
+`ReminderNotifications` les enregistre auprès du système à l'heure définie dans
+`assets/data/notifications.json`. La synchronisation a lieu au chargement du menu
+d'accueil et après chaque séance, et reste débrayable depuis l'écran **Rappels**
+(cloche de la barre de titre). Configuration des plateformes et limites :
+`docs/notifications.md`.
 
 ## Persistance
 
 La progression est enregistrée dans un fichier JSON :
 
-- `revision-progress.json` dans le dossier de support de l'application
-  (`cqcm-revision-data`) ;
+- `revision-progress.json` et `notifications.json` dans le dossier de support de
+  l'application (`cqcm-revision-data`) ;
 - surchargeable par la variable d'environnement `CQCM_REVISION_DIR`
   (desktop, CLI, tests) ;
 - sur les plateformes sans `dart:io` (web), la progression reste en mémoire

@@ -7,10 +7,15 @@ plugins {
 
 android {
     namespace = "com.cqcm.cqcm"
-    compileSdk = flutter.compileSdkVersion
+    // flutter_local_notifications 19.x exige compileSdk >= 35 ; on garde le
+    // défaut de Flutter quand il est plus récent.
+    compileSdk = maxOf(35, flutter.compileSdkVersion)
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
+        // Requis par flutter_local_notifications (desugaring des API java.time
+        // utilisées par le planificateur de rappels).
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
@@ -28,6 +33,8 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        // Plus de 64 K méthodes une fois le plugin de notifications ajouté.
+        multiDexEnabled = true
     }
 
     buildTypes {
@@ -37,6 +44,11 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+}
+
+dependencies {
+    // Desugaring demandé par flutter_local_notifications (AGP >= 8.6.0).
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 }
 
 flutter {

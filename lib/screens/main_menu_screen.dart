@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../services/notification_service.dart';
 import '../services/revision_plan.dart';
 import '../widgets/revision_reminder_banner.dart';
+import 'notifications_screen.dart';
 import 'quiz_catalog_screen.dart';
 import 'text_revision_screen.dart';
 
@@ -33,6 +35,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
         _isLoading = false;
         _error = null;
       });
+      await _syncSystemReminders(plan);
     } catch (error) {
       if (!mounted) return;
       setState(() {
@@ -41,6 +44,28 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
         _error = 'Rappels indisponibles : $error';
       });
     }
+  }
+
+  /// Reprogramme les rappels système à partir de la progression enregistrée.
+  /// Les erreurs de plugin ne doivent jamais bloquer l'accueil.
+  Future<void> _syncSystemReminders(RevisionPlan plan) async {
+    if (plan.catalog.decks.isEmpty) return;
+    try {
+      await ReminderNotifications.syncRevisionReminders(
+        plan: plan,
+        deck: plan.catalog.decks.first,
+      );
+    } catch (_) {
+      // Plugin indisponible : les rappels in-app restent affichés.
+    }
+  }
+
+  Future<void> _openNotifications() async {
+    final plan = _plan;
+    await Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => NotificationsScreen(plan: plan)),
+    );
+    await _loadReminder();
   }
 
   RevisionReminder? get _reminder {
@@ -71,7 +96,17 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
     final reminder = _reminder;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('CQCM'), centerTitle: true),
+      appBar: AppBar(
+        title: const Text('CQCM'),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            tooltip: 'Rappels',
+            onPressed: _openNotifications,
+            icon: const Icon(Icons.notifications_none),
+          ),
+        ],
+      ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 24, 20, 32),
         children: [

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../models/revision.dart';
 import '../models/revision_progress.dart';
+import '../services/notification_service.dart';
 import '../services/revision_plan.dart';
 import '../services/revision_stats.dart';
 import '../widgets/revision_chart.dart';
 import '../widgets/revision_reminder_banner.dart';
+import 'notifications_screen.dart';
 import 'revision_session_screen.dart';
 
 /// Écran « Recopier texte » : programme GP, progression et courbe
@@ -68,6 +70,29 @@ class _TextRevisionScreenState extends State<TextRevisionScreen> {
       ),
     );
     await _load();
+    await _syncSystemReminders();
+  }
+
+  /// Les échéances ont changé : on reprogramme les rappels système.
+  Future<void> _syncSystemReminders() async {
+    final plan = _plan;
+    if (plan == null || plan.catalog.decks.isEmpty) return;
+    try {
+      await ReminderNotifications.syncRevisionReminders(
+        plan: plan,
+        deck: plan.catalog.decks.first,
+      );
+    } catch (_) {
+      // Plugin indisponible : les rappels in-app restent affichés.
+    }
+  }
+
+  Future<void> _openNotifications() async {
+    final plan = _plan;
+    await Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => NotificationsScreen(plan: plan)),
+    );
+    await _load();
   }
 
   Future<void> _confirmReset(RevisionPlan plan, RevisionDeck deck) async {
@@ -103,6 +128,11 @@ class _TextRevisionScreenState extends State<TextRevisionScreen> {
       appBar: AppBar(
         title: const Text('Recopier texte'),
         actions: [
+          IconButton(
+            tooltip: 'Rappels',
+            onPressed: _openNotifications,
+            icon: const Icon(Icons.notifications_none),
+          ),
           IconButton(
             tooltip: 'Recharger',
             onPressed: _plan == null ? null : _load,

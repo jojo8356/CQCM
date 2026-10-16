@@ -56,6 +56,9 @@ lib/
     text_scoring.dart
     revision_scheduler.dart
     revision_service.dart
+    notification_plan.dart
+    notification_service.dart
+    notification_settings_store.dart
     revision_plan.dart
     revision_stats.dart
     revision_store.dart
@@ -89,7 +92,9 @@ lib/
 
 `revision_plan.dart` assemble catalogue, progression et décisions de séance, et construit les rappels (`RevisionReminder`).
 
-`revision_store_io.dart` / `revision_store_stub.dart` persistent la progression (`revision-progress.json`) selon la plateforme.
+`revision_store_io.dart` / `revision_store_stub.dart` persistent la progression (`revision-progress.json`) et la configuration de notifications selon la plateforme.
+
+`notification_plan.dart` transforme les échéances en rappels (`ReminderNotification`) datés ; `notification_service.dart` parle au plugin `flutter_local_notifications` (initialisation, autorisations, `zonedSchedule`, annulation) ; `notification_settings_store.dart` lit `assets/data/notifications.json` puis la surcharge locale.
 
 `TextRevisionScreen` (écran « GP : ») affiche la courbe d'apprentissage, les statistiques et la liste des phrases ; `RevisionSessionScreen` pilote la recopie, la correction et le bilan de séance.
 
@@ -252,14 +257,29 @@ Points clés :
 - révisions espacées : J+1, J+3, J+7 puis intervalle × facteur de facilité (max 180 jours) ;
 - échec : série remise à zéro, phrase à revoir le jour même ;
 - rappels in-app : pastille sur le bouton du menu, bandeau avec bouton « Réviser »,
-  prochaine échéance affichée.
+  prochaine échéance affichée ;
+- rappels système : notifications programmées aux dates dues (`docs/notifications.md`).
 
 ### Notifications
 
-Les rappels sont calculés par `RevisionReminder` et affichés dans l'application
-(`RevisionReminderBanner`, `ReminderBadge`). Aucun plugin de notification système n'est
-requis. Pour notifier hors application, brancher `flutter_local_notifications` et
-consommer `RevisionReminder` (`shouldNotify`, `title`, `detail`, `nextDueAt`).
+Deux niveaux cohabitent :
+
+1. **In-app** — `RevisionReminder` alimente `RevisionReminderBanner` et la pastille
+   du menu (phrases dues, prochaine échéance).
+2. **Système** — `NotificationPlan` regroupe les phrases dues par jour et
+   `ReminderNotifications` programme les rappels via `flutter_local_notifications`
+   (`zonedSchedule`), à l'heure fixée dans `assets/data/notifications.json`.
+
+La configuration est **entièrement JSON** : défauts embarqués
+(`assets/data/notifications.json`), surcharge locale
+(`notifications.json` dans `<dossier de données>/cqcm-revision-data/`, ou
+`CQCM_REVISION_DIR`), charge utile JSON attachée à chaque notification. L'écran
+**Rappels** (cloche de la barre de titre) montre les réglages effectifs, le plan
+calculé, les rappels enregistrés dans le système et permet de tester/synchroniser.
+
+Synchronisation automatique : au chargement du menu d'accueil et après chaque
+séance de révision. Détails, configuration Android/iOS et limites :
+`docs/notifications.md`.
 
 ## Tests
 
@@ -319,11 +339,15 @@ La consigne est de recopier « au mot près ». Un seuil à 100 % serait décour
 l'oubli de plusieurs mots. À 95 %, une phrase de 17 mots tolère un mot manquant ou
 erroné, mais pas deux.
 
-### Pourquoi une notification in-app ?
+### Pourquoi des notifications système en plus du bandeau in-app ?
 
-Le rappel doit fonctionner sur toutes les plateformes sans dépendance supplémentaire.
-`RevisionReminder` produit déjà tout le contenu (phrases dues, échéance) : affiché dans
-l'application, il reste directement réutilisable par un plugin de notification système.
+Le bandeau ne sert que si l'application est ouverte : pour suivre la courbe
+d'apprentissage, le rappel doit arriver même quand elle est fermée.
+`flutter_local_notifications` est donc branché, mais uniquement derrière
+`ReminderNotifications` : tous les appels sont encapsulés dans des `try/catch` et
+la configuration vient d'un fichier JSON, si bien que l'application fonctionne
+(avec les seuls rappels in-app) sur les plateformes non gérées — Linux pour la
+planification, web — ou si le plugin échoue.
 
 ### Limite mobile
 
