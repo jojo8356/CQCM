@@ -154,14 +154,16 @@ class ReminderNotifications {
       }
 
       if (defaultTargetPlatform == TargetPlatform.android) {
-        return _requestAndroidPermission(settings: settings);
+        // `await` obligatoire : sans lui, une erreur de la plateforme
+        // remonterait au lieu d'être capturée par le `catch` ci-dessous.
+        return await _requestAndroidPermission(settings: settings);
       }
 
       if (defaultTargetPlatform == TargetPlatform.iOS ||
           defaultTargetPlatform == TargetPlatform.macOS) {
         // iOS/macOS ne redemandent pas si l'utilisateur a déjà refusé :
         // la ré-initialisation déclenche la demande au premier lancement.
-        return initialize(settings: settings, requestPermission: true);
+        return await initialize(settings: settings, requestPermission: true);
       }
       return null;
     } catch (error) {
