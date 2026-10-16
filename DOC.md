@@ -397,10 +397,24 @@ Détails et précautions après un changement de SDK : `docs/android-gradle.md` 
 
 ## Build release
 
-Compiler un APK release :
+Compiler l'APK de production pour son téléphone (release, architecture du
+téléphone, installation) :
 
 ```bash
-flutter build apk --release
+tools/build-apk.sh --install
+```
+
+Sans téléphone branché :
+
+```bash
+tools/build-apk.sh --abi arm64            # ou --split, --bundle, --symbols
+```
+
+À la main :
+
+```bash
+adb shell getprop ro.product.cpu.abi      # ex. arm64-v8a
+flutter build apk --release --target-platform android-arm64
 ```
 
 Artefact attendu :
@@ -408,6 +422,13 @@ Artefact attendu :
 ```text
 build/app/outputs/flutter-apk/app-release.apk
 ```
+
+Artefact pour le Play Store (App Bundle) :
+`build/app/outputs/bundle/release/app-release.aab` (`--bundle`).
+
+Signature stable par keystore (`android/key.properties`), optimisations
+(`--split-debug-info`, `--obfuscate`, `--analyze-size`) et dépannage
+d'installation : `docs/android-release.md`.
 
 ## Décisions techniques
 

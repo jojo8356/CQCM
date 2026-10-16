@@ -87,10 +87,23 @@ Analyser le code :
 flutter analyze
 ```
 
-Compiler une release Android :
+Compiler l'APK de production **pour son propre téléphone** (release, une seule
+architecture, installation directe) :
 
 ```bash
-flutter build apk --release
+tools/build-apk.sh --install
+```
+
+Le script lit `ro.product.cpu.abi` du téléphone connecté, compile en release
+avec `--target-platform` correspondant, puis installe l'APK par `adb install -r`.
+Sans téléphone branché : `tools/build-apk.sh --abi arm64`.
+
+À la main :
+
+```bash
+adb shell getprop ro.product.cpu.abi                    # ex. arm64-v8a
+flutter build apk --release --target-platform android-arm64
+adb install -r build/app/outputs/flutter-apk/app-release.apk
 ```
 
 APK attendu :
@@ -98,6 +111,10 @@ APK attendu :
 ```text
 build/app/outputs/flutter-apk/app-release.apk
 ```
+
+Signature stable (keystore de production), App Bundle pour le Play Store,
+options d'optimisation (`--split-debug-info`, `--obfuscate`) et dépannage
+d'installation : `docs/android-release.md`.
 
 La chaîne de compilation Android (Gradle 8.14.3, AGP 8.11.1, Kotlin 2.4.0,
 Java 17) est décrite dans `docs/android-gradle.md`, y compris le masquage des
@@ -238,6 +255,7 @@ Documentation détaillée :
 - `docs/mode-recopier-texte.md`
 - `docs/notifications.md`
 - `docs/android-gradle.md`
+- `docs/android-release.md`
 - `docs/linux-sans-root.md`
 
 ## Structure utile
@@ -258,6 +276,7 @@ Les scripts d'environnement (aucun privilège requis) :
 
 ```text
 tools/android-stack-check.sh   diagnostic Gradle / AGP / Kotlin / Java
+tools/build-apk.sh             APK release pour l'architecture du téléphone
 tools/flutter-pinned.sh        lance le SDK Flutter de .flutter-version
 tools/dev-disk-report.sh       rapport d'occupation disque (n'efface rien)
 tools/linux-desktop-deps.sh    sysroot GTK 3 personnel pour le bureau Linux

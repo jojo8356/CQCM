@@ -1,9 +1,37 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
+
+// Signature « release ».
+//
+// `android/key.properties` (non versionné, voir `android/.gitignore`) décrit
+// le keystore de production :
+//
+// ```properties
+// storeFile=/chemin/absolu/cqcm-release.jks
+// storePassword=…
+// keyAlias=cqcm
+// keyPassword=…
+// ```
+//
+// Sans ce fichier, la release reste signée avec la clé de débogage — pratique
+// pour tester, mais la signature change d'une machine à l'autre et l'APK ne
+// peut pas mettre à jour une installation existante d'une autre signature.
+// La procédure de création est dans `docs/android-release.md`.
+val keystorePropertiesFile = rootProject.file("key.properties")
+val keystoreProperties = Properties().apply {
+    if (keystorePropertiesFile.exists()) {
+        FileInputStream(keystorePropertiesFile).use { load(it) }
+    }
+}
+val hasReleaseKeystore = keystorePropertiesFile.exists() &&
+    keystoreProperties.getProperty("storeFile") != null
 
 android {
     namespace = "com.cqcm.cqcm"
@@ -34,11 +62,26 @@ android {
         multiDexEnabled = true
     }
 
+    signingConfigs {
+        if (hasReleaseKeystore) {
+            create("release") {
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = keystoreProperties.getProperty("keyPassword")
+                storeFile = file(keystoreProperties.getProperty("storeFile"))
+                storePassword = keystoreProperties.getProperty("storePassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            // Keystore de production s'il est configuré, clé de débogage sinon
+            // (installation personnelle, tests).
+            signingConfig = if (hasReleaseKeystore) {
+                signingConfigs.getByName("release")
+            } else {
+                signingConfigs.getByName("debug")
+            }
         }
     }
 }
