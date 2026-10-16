@@ -140,6 +140,8 @@ fi
 ADB_BIN="$(command -v adb || true)"
 if [ -z "$ADB_BIN" ]; then
   for candidate in \
+    "$HOME/platform-tools/adb" \
+    "$HOME/.cqcm/platform-tools/adb" \
     "${ANDROID_HOME:-}/platform-tools/adb" \
     "${ANDROID_SDK_ROOT:-}/platform-tools/adb" \
     "$HOME/android-sdk/platform-tools/adb" \
@@ -165,17 +167,31 @@ target_for_abi() {
 # Explique pourquoi adb ne peut pas parler au téléphone, au lieu de laisser
 # croire qu'aucun appareil n'est branché.
 adb_hint() {
-  local out
+  local out version
   out="$("${ADB[@]}" devices 2>&1 || true)"
+  # La liste brute : elle donne le numéro de série et l'état exact.
+  if [ -n "$out" ]; then
+    printf '%s\n' "$out" | sed 's/^/    | /' >&2
+  fi
   case "$out" in
     *"insufficient permissions"* | *"no permissions"*)
       warn "le téléphone est vu par adb mais Linux refuse l'accès (règles udev)"
-      warn "  sans root : activer le débogage SANS FIL sur le téléphone"
+      warn "  avec sudo : règle udev du fabricant (docs/android-release.md § 7b)"
+      warn "  sans root : débogage SANS FIL sur le téléphone"
       warn "    Options pour les développeurs → Débogage sans fil → activer,"
       warn "    « Associer l'appareil avec un code » → puis sur le PC :"
-      warn "    adb pair <ip>:<port_association>"
-      warn "    adb connect <ip>:<port_connexion>"
-      warn "  avec sudo : règle udev du fabricant (docs/android-release.md § 8)"
+      warn "    adb pair <ip>:<port_association>      (port d'ASSOCIATION)"
+      warn "    adb connect <ip>:<port_connexion>     (port de CONNEXION)"
+      version="$("$ADB_BIN" version 2>/dev/null |
+        sed -n 's/.*Version \([0-9][0-9]*\)\..*/\1/p' | head -n 1 || true)"
+      if [ -n "$version" ] && [ "$version" -lt 30 ]; then
+        warn "ce platform-tools est en $version : la commande adb pair"
+        warn "n'existe pas avant 30.0.0 — le mettre a jour :"
+        warn "  ${ANDROID_HOME:-~/android-sdk}/cmdline-tools/latest/"
+        warn "    bin/sdkmanager --install platform-tools"
+        warn "  ou dl.google.com → platform-tools-latest-linux.zip, extrait"
+        warn "    dans ~/platform-tools (le script le trouvera tout seul)"
+      fi
       ;;
     *unauthorized*)
       warn "téléphone non autorisé : accepter « Autoriser le débogage USB » \

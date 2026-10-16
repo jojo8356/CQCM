@@ -36,15 +36,17 @@ adb install -r build/app/outputs/flutter-apk/app-release.apk
 Sans `--target-platform`, Flutter compile **les trois** architectures dans un
 même APK : inutile pour un appareil précis, et sensiblement plus lourd.
 
-## 2. Le cas de l'Oukitel WP32
+## 2. Le cas de l'Oukitel WP32 / WP32 Pro
 
-Caractéristiques utiles pour le build (fiche technique du WP32) :
+Caractéristiques utiles pour le build (fiches techniques WP32 et WP32 Pro ;
+le numéro de série relevé par `adb devices` — `WP32Pro…` — indique la variante
+Pro) :
 
 | Élément | Valeur | Conséquence |
 | --- | --- | --- |
-| SoC | Unisoc T606 / UMS9230, 8 cœurs 64 bits (Cortex-A75 + A55) | `arm64-v8a` → `--target-platform android-arm64` |
-| Système | Android 13 (API 33) | `minSdk` 24 et `compileSdk` 36 du projet conviennent ; aucun réglage à changer |
-| Mémoire | 4 Go de RAM | écart debug/release très net : la release (AOT) est la seule version fluide |
+| SoC | Unisoc T606 / UMS9230, 8 cœurs **64 bits** (2×Cortex-A75 + 6×Cortex-A55) | `arm64-v8a` → `--target-platform android-arm64` |
+| Système | Android 14 (WP32 Pro) / Android 13 (WP32) | `minSdk` 24 et `compileSdk` 36 du projet conviennent ; aucun réglage à changer |
+| Mémoire | 6 Go (Pro) / 4 Go de RAM | écart debug/release très net : la release (AOT) est la seule version fluide |
 | Écran | 5,93" 720×1440, densité 320 dpi | 720 ÷ 2 = **360 dp de large** — exactement la largeur des tests « écrans étroits » (`test/narrow_screens_test.dart`) |
 
 Vérification des valeurs sur l'appareil (les mêmes commandes que le script) :
@@ -222,7 +224,7 @@ dans les règles installées par Android Studio. Trois issues, de la plus simple
 
 ### a) Débogage sans fil (aucun root, recommandé)
 
-Android 11+ le permet ; le WP32 est sous Android 13. Sur le téléphone :
+Android 11+ le permet ; le WP32 Pro est sous Android 14. Sur le téléphone :
 **Paramètres → Système → Options pour les développeurs → Débogage sans fil**
 → activer. Deux ports différents entrent en jeu : celui de l'**association** et
 celui de la **connexion** (affiché sur l'écran principal du débogage sans fil).
@@ -243,6 +245,28 @@ tools/build-apk.sh --install --symbols
 Le PC et le téléphone doivent être sur le même réseau Wi-Fi. Le port de
 connexion change à chaque réactivation du débogage sans fil ou redémarrage :
 refaire `adb connect`. L'appairage, lui, persiste.
+
+Prérequis : `adb pair` n'existe qu'à partir de **platform-tools 30.0.0**
+(`adb: unknown command pair` = outil trop ancien). Mise à jour, au choix :
+
+```bash
+# a) via le SDK Android déjà installé
+~/android-sdk/cmdline-tools/latest/bin/sdkmanager --install platform-tools
+
+# b) téléchargement direct (aucun SDK requis)
+cd ~ && curl -O \
+  https://dl.google.com/android/repository/platform-tools-latest-linux.zip
+unzip -q -o platform-tools-latest-linux.zip     # crée ~/platform-tools/
+~/platform-tools/adb version                    # 36.x
+export PATH="$HOME/platform-tools:$PATH"        # ou laisser faire le script :
+                                                # il cherche ~/platform-tools/adb
+```
+
+Attention à l'IP : celle des exemples (192.168.1.42) est fictive. Lire celle
+affichée par l'écran **Débogage sans fil** du téléphone, et vérifier que le PC
+est sur le même réseau (`ip -4 addr | grep 192.168`). `No route to host` =
+mauvaise IP, débogage sans fil désactivé, ou réseaux différents (certains
+Wi-Fi invités isolent les clients entre eux).
 
 ### b) Règle udev (si tu as sudo)
 
