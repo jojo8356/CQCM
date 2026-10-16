@@ -90,6 +90,7 @@ pas sans elle.
 | `tools/build-apk.sh --build-number 42` | numéro de version (sinon `pubspec.yaml`) |
 | `tools/build-apk.sh --device SERIAL` | plusieurs appareils branchés |
 | `tools/build-apk.sh --clean` | `flutter clean` avant de compiler |
+| `tools/build-apk.sh --any-flutter` | accepter un SDK autre que l'épinglé |
 
 À la fin, le script affiche le chemin, la taille et le `sha256` de chaque APK.
 
@@ -205,7 +206,74 @@ Pour tester le comportement exact de la version de production **avec** les logs
 et le hot reload, `flutter run --release` compile en release et le lance sur
 l'appareil branché.
 
-## 7. Dépannage
+## 7. Téléphone invisible pour adb sous Linux
+
+Symptôme, à chaque commande `adb` :
+
+```text
+error: insufficient permissions for device: user in plugdev group;
+are your udev rules wrong?
+```
+
+Le téléphone **est** branché et vu par Linux : ce sont les règles udev qui
+donnent l'accès USB à `root` seulement. Le fabricant du WP32 (Unisoc) n'est pas
+dans les règles installées par Android Studio. Trois issues, de la plus simple
+à la plus lourde.
+
+### a) Débogage sans fil (aucun root, recommandé)
+
+Android 11+ le permet ; le WP32 est sous Android 13. Sur le téléphone :
+**Paramètres → Système → Options pour les développeurs → Débogage sans fil**
+→ activer. Deux ports différents entrent en jeu : celui de l'**association** et
+celui de la **connexion** (affiché sur l'écran principal du débogage sans fil).
+
+```bash
+# 1. « Associer l'appareil avec un code d'association » sur le téléphone :
+#    noter IP:PORT et le code à 6 chiffres
+adb pair 192.168.1.42:39465         # port d'ASSOCIATION, le code est demandé
+
+# 2. se connecter au port de CONNEXION (celui de l'écran principal)
+adb connect 192.168.1.42:5555
+
+# 3. vérifier
+adb devices                         # 192.168.1.42:5555   device
+tools/build-apk.sh --install --symbols
+```
+
+Le PC et le téléphone doivent être sur le même réseau Wi-Fi. Le port de
+connexion change à chaque réactivation du débogage sans fil ou redémarrage :
+refaire `adb connect`. L'appairage, lui, persiste.
+
+### b) Règle udev (si tu as sudo)
+
+```bash
+lsusb | grep -iE 'unisoc|spreadtrum|oukitel'   # relever l'idVendor (1782 ?)
+echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="1782", MODE="0666", GROUP="plugdev"' \
+  | sudo tee /etc/udev/rules.d/51-android.rules
+sudo udevadm control --reload-rules && sudo udevadm trigger
+adb kill-server && adb devices
+```
+
+Si l'ajout au groupe `plugdev` est récent, une reconnexion de session est
+nécessaire (vérifier avec `groups | grep plugdev`).
+
+### c) Se passer complètement d'adb
+
+La compilation n'a pas besoin du téléphone : seule la détection de
+l'architecture et l'installation l'utilisent.
+
+```bash
+tools/build-apk.sh --abi arm64 --symbols       # APK arm64 seul, sans adb
+cd build/app/outputs/flutter-apk
+python3 -m http.server 8000                    # servir le dossier des APK
+# sur le téléphone (même Wi-Fi) : http://<ip-du-pc>:8000/app-release.apk
+# télécharger, puis installer depuis « Fichiers » (sources inconnues)
+```
+
+Autre transfert possible : câble USB en mode MTP (copie de fichier), sans
+règle udev ni débogage.
+
+## 8. Dépannage
 
 | Message | Cause | Remède |
 | --- | --- | --- |
@@ -213,6 +281,7 @@ l'appareil branché.
 | `INSTALL_FAILED_UPDATE_INCOMPATIBLE` | application déjà installée, autre signature | `adb uninstall com.cqcm.cqcm` puis réinstaller |
 | `INSTALL_FAILED_INSUFFICIENT_STORAGE` | espace libre | libérer de la place sur le téléphone |
 | `device unauthorized` | autorisation USB non accordée | accepter « Autoriser le débogage USB » sur le téléphone |
+| `insufficient permissions for device` | règles udev (Linux) | §7 : débogage sans fil, règle udev, ou transfert manuel de l'APK |
 | `adb: more than one device` | deux appareils branchés | `--device <serial>` (`adb devices` pour la liste) |
 | `No target device found` (`flutter install`) | téléphone non vu | `adb devices`, câble, mode développeur + débogage USB |
 | APK toujours lent | build debug/`flutter run` | compiler avec `tools/build-apk.sh` (release) |

@@ -19,6 +19,7 @@
 #   tools/build-apk.sh --build-number 42 --build-name 1.1.0
 #   tools/build-apk.sh --device SERIAL    # plusieurs appareils branchés
 #   tools/build-apk.sh --clean            # flutter clean avant compilation
+#   tools/build-apk.sh --any-flutter      # accepter un SDK autre que l'épinglé
 #
 # Options d'architecture (--abi) : auto (défaut), arm64, arm, x64.
 #
@@ -53,6 +54,7 @@ BUNDLE=0
 SYMBOLS=0
 OBFUSCATE=0
 CLEAN=0
+ANY_FLUTTER=0
 EXTRA=()
 
 while [ $# -gt 0 ]; do
@@ -73,6 +75,7 @@ while [ $# -gt 0 ]; do
     --symbols) SYMBOLS=1 ;;
     --obfuscate) OBFUSCATE=1 ;;
     --clean) CLEAN=1 ;;
+    --any-flutter) ANY_FLUTTER=1 ;;
     --build-name | --build-number | --dart-define | --flavor)
       [ $# -ge 2 ] || die "$1 attend une valeur"
       EXTRA+=("$1" "$2")
@@ -95,13 +98,44 @@ done
 # Outils : flutter et adb
 # ---------------------------------------------------------------------------
 
+PINNED="$(awk '
+  /^[[:space:]]*#/ { next }
+  /^[[:space:]]*$/ { next }
+  { print $1; exit }
+' .flutter-version 2>/dev/null || true)"
+
 FLUTTER_BIN=""
 if [ -x "$SCRIPT_DIR/flutter-pinned.sh" ]; then
   FLUTTER_BIN="$("$SCRIPT_DIR/flutter-pinned.sh" --print 2>/dev/null || true)"
 fi
-[ -n "$FLUTTER_BIN" ] || FLUTTER_BIN="$(command -v flutter || true)"
+
+if [ -z "$FLUTTER_BIN" ]; then
+  # Le SDK épinglé manque : laisser parler flutter-pinned.sh (liste des
+  # emplacements essayés + commande de clone), au lieu d'un message vague.
+  warn "SDK Flutter épinglé ${PINNED:-?} introuvable .flutter-version"
+  if [ -x "$SCRIPT_DIR/flutter-pinned.sh" ]; then
+    "$SCRIPT_DIR/flutter-pinned.sh" --check >&2 || true
+  fi
+  FLUTTER_BIN="$(command -v flutter || true)"
+  if [ -n "$FLUTTER_BIN" ]; then
+    HAVE="$("$FLUTTER_BIN" --version 2>/dev/null | head -n 1 |
+      awk '{print $2}' || true)"
+    warn "repli sur le flutter du PATH : $FLUTTER_BIN (${HAVE:-version inconnue})"
+    if [ -n "$PINNED" ] && [ "$HAVE" != "$PINNED" ]; then
+      if [ "$ANY_FLUTTER" = "1" ]; then
+        warn "version différente de l'épinglée ($PINNED) : --any-flutter demandé, \
+on continue"
+        warn "un SDK plus ancien échouera sur pubspec.yaml (Dart >= 3.9.2)"
+      else
+        die "SDK $HAVE alors que .flutter-version épingle $PINNED : \
+installer le SDK épinglé (voir ci-dessus), pointer CQCM_FLUTTER_SDK vers un \
+SDK $PINNED, ou forcer avec --any-flutter"
+      fi
+    fi
+  fi
+fi
 [ -n "$FLUTTER_BIN" ] ||
-  die "flutter introuvable : voir .flutter-version et tools/flutter-pinned.sh"
+  die "flutter introuvable : installer le SDK épinglé, puis relancer"
 
 ADB_BIN="$(command -v adb || true)"
 if [ -z "$ADB_BIN" ]; then
@@ -125,6 +159,33 @@ target_for_abi() {
     arm | armeabi-v7a | armeabi) printf 'android-arm' ;;
     x64 | x86_64) printf 'android-x64' ;;
     *) printf '' ;;
+  esac
+}
+
+# Explique pourquoi adb ne peut pas parler au téléphone, au lieu de laisser
+# croire qu'aucun appareil n'est branché.
+adb_hint() {
+  local out
+  out="$("${ADB[@]}" devices 2>&1 || true)"
+  case "$out" in
+    *"insufficient permissions"* | *"no permissions"*)
+      warn "le téléphone est vu par adb mais Linux refuse l'accès (règles udev)"
+      warn "  sans root : activer le débogage SANS FIL sur le téléphone"
+      warn "    Options pour les développeurs → Débogage sans fil → activer,"
+      warn "    « Associer l'appareil avec un code » → puis sur le PC :"
+      warn "    adb pair <ip>:<port_association>"
+      warn "    adb connect <ip>:<port_connexion>"
+      warn "  avec sudo : règle udev du fabricant (docs/android-release.md § 8)"
+      ;;
+    *unauthorized*)
+      warn "téléphone non autorisé : accepter « Autoriser le débogage USB » \
+sur l'écran du téléphone, puis relancer"
+      ;;
+    *offline*)
+      warn "téléphone hors ligne : débrancher/rebrancher le câble, ou \
+« adb kill-server »"
+      ;;
+    *) ;;
   esac
 }
 
@@ -164,8 +225,9 @@ if [ "$ABI" = "auto" ]; then
       DEVICE_ABI="$(device_getprop ro.product.cpu.abilist | cut -d, -f1)"
     fi
     if [ -z "$DEVICE_ABI" ]; then
-      warn "aucun téléphone détecté par adb (ou pas de réponse) : \
-utilise --abi, ou branche-le et accepte le débogage USB"
+      adb_hint
+      warn "aucun téléphone exploitable par adb : utilise --abi, ou branche-le \
+et accepte le débogage USB"
     else
       log "téléphone détecté : architecture $DEVICE_ABI"
       report_screen
@@ -262,9 +324,11 @@ if [ "$INSTALL" = "1" ]; then
 
   log "adb install -r $APK"
   if ! "${ADB[@]}" install -r "$APK"; then
-    warn "installation refusée. Cause la plus fréquente : l'application est \
-déjà installée avec une autre signature"
-    warn "remède : ${ADB[*]} uninstall com.cqcm.cqcm puis relancer"
+    adb_hint
+    warn "installation refusée. Deux causes fréquentes :"
+    warn "  1. l'application est déjà installée avec une autre signature"
+    warn "     → ${ADB[*]} uninstall com.cqcm.cqcm puis relancer"
+    warn "  2. le téléphone n'est pas accessible (voir messages ci-dessus)"
     exit 1
   fi
   ok "installé sur le téléphone"
