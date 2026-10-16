@@ -7,8 +7,9 @@
 /// 2. écran précédent attendu avant de naviguer (`openMenu`,
 ///    `settleNavigation`) ;
 /// 3. finders limités à l'écran concerné (`withinScreen`) ;
-/// 4. défilement jamais envoyé à une liste qui ne défile pas ou qui n'est pas
-///    l'écran courant (`reveal`).
+/// 4. défilement uniquement sur une liste affichée qui a de quoi défiler, et
+///    retour en haut par la position de défilement (jamais par un geste) :
+///    voir `reveal`.
 library;
 
 import 'package:cqcm/main.dart';
@@ -65,14 +66,15 @@ Finder withinScreen(Type screen, Finder finder) {
 ///   n'accepte pas `warnIfMissed: false` ; si la liste n'est pas cliquable à
 ///   cet endroit (liste vide, écran recouvert, route en cours de fermeture),
 ///   `flutter test` imprime un long avertissement de hit test ;
-/// * `find.byType(Scrollable).last` peut désigner la liste d'une route en
-///   train d'être retirée : on ne défile que sur un `Scrollable` réellement
-///   affiché ([_visibleScrollable]) ;
+/// * `find.byType(Scrollable).last` peut désigner la liste d'une autre route
+///   (celle qui se ferme, ou une liste trop courte pour défiler) : on ne
+///   défile que sur une liste affichée **capable** de défiler ;
 /// * une liste dont le contenu tient à l'écran (`maxScrollExtent == 0`) n'a
 ///   rien à faire défiler : aucun geste n'est envoyé.
 ///
-/// [delta] est le pas de défilement : positif vers le bas, négatif vers le
-/// haut (pour retrouver un en-tête quand une liste est restée défilée).
+/// [delta] indique de quel côté chercher : `delta < 0` pour une cible
+/// **au-dessus** (retour en haut : en-tête, bandeau de rappel), `delta > 0`
+/// (défaut) pour une cible plus bas (fiche, bouton).
 Future<void> reveal(
   WidgetTester tester,
   Finder finder, {
@@ -84,35 +86,57 @@ Future<void> reveal(
     return;
   }
 
-  final scrollable = _visibleScrollable();
+  if (delta < 0) {
+    // Cible au-dessus : on replace les listes en haut de leur contenu, par
+    // leur position de défilement. Aucun geste, donc aucune dépendance au hit
+    // test ni à la route au premier plan.
+    _resetLists();
+    await tester.pump();
+    _alignVisible(tester, finder);
+    return;
+  }
+
+  final scrollable = _scrollableToScroll(tester);
   if (scrollable == null) return;
 
   final position = tester.state<ScrollableState>(scrollable).position;
 
   for (var step = 0; step < 30; step++) {
     if (finder.evaluate().isNotEmpty) break;
-    // Contenu entièrement visible : rien à faire défiler.
-    if (position.maxScrollExtent <= 0) break;
+    if (position.pixels >= position.maxScrollExtent) break;
     await tester.drag(scrollable, Offset(0, -delta), warnIfMissed: false);
     await tester.pump();
   }
 
-  if (finder.evaluate().isNotEmpty) {
-    await tester.ensureVisible(finder.first);
-    await tester.pump();
+  _alignVisible(tester, finder);
+}
+
+/// Remet en haut du contenu toutes les listes de l'arbre.
+void _resetLists() {
+  for (final element in find.byType(Scrollable).evaluate().toList()) {
+    final state = (element as StatefulElement).state;
+    if (state is! ScrollableState) continue;
+    state.position.jumpTo(state.position.minScrollExtent);
   }
 }
 
-/// Liste réellement affichée (et cliquable) de l'écran courant.
-Finder? _visibleScrollable() {
-  final hitTestable = find.byType(Scrollable).hitTestable();
-  if (hitTestable.evaluate().isNotEmpty) {
-    return hitTestable.last;
+/// Dernière liste affichée qui a réellement de quoi défiler.
+Finder? _scrollableToScroll(WidgetTester tester) {
+  final candidates = find.byType(Scrollable).hitTestable().evaluate().toList();
+  for (final element in candidates.reversed) {
+    final state = (element as StatefulElement).state;
+    if (state is! ScrollableState) continue;
+    if (state.position.maxScrollExtent <= 0) continue;
+    return find.byWidget(state.widget);
   }
+  return null;
+}
 
-  final any = find.byType(Scrollable);
-  if (any.evaluate().isEmpty) return null;
-  return any.last;
+/// Recentre la cible si elle a été trouvée.
+Future<void> _alignVisible(WidgetTester tester, Finder finder) async {
+  if (finder.evaluate().isEmpty) return;
+  await tester.ensureVisible(finder.first);
+  await tester.pump();
 }
 
 /// Pompe jusqu'à ce que [finder] trouve quelque chose.
