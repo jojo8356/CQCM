@@ -73,7 +73,16 @@ build/app/outputs/flutter-apk/app-release.apk
 
 La chaîne de compilation Android (Gradle 8.14.3, AGP 8.11.1, Kotlin 2.4.0,
 Java 17) est décrite dans `docs/android-gradle.md`, y compris le masquage des
-deux avertissements de version et la bascule future vers AGP 9.
+deux avertissements de version et la bascule future vers AGP 9. Avant un build,
+le diagnostic complet tient en une commande :
+
+```bash
+tools/android-stack-check.sh
+```
+
+Il compare les versions du projet aux minimums du SDK Flutter installé (et dit
+si la bascule AGP 9 est déjà possible). À relancer après chaque
+`flutter upgrade`.
 
 ## Mode recopier texte (GP)
 
@@ -215,6 +224,14 @@ assets/data/    Catalogue et questions embarqués + programmes de révision
 bin/            CLI cqcm_quiz.dart, résumé des tests test_summary.dart
 docs/           Documentation spécialisée
 test/           Tests unitaires, services, widgets et parcours
+```
+
+Les scripts d'environnement (aucun privilège requis) :
+
+```text
+tools/android-stack-check.sh   diagnostic Gradle / AGP / Kotlin / Java
+tools/linux-desktop-deps.sh    sysroot GTK 3 personnel pour le bureau Linux
+tools/flutter-linux.sh         wrapper « source l'environnement puis flutter »
 ```
 
 ## Notes de production

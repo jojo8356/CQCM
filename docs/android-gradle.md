@@ -119,3 +119,61 @@ de variantes historique et que les paquets du projet n'appliqueront plus KGP —
 
 Rappel : `flutter clean`, `rm -rf android/.gradle` puis `flutter pub get` après
 une telle migration.
+
+## 5. Ne plus subir ces problèmes
+
+Le fond du problème est un décalage de trois horloges : le SDK Flutter relève
+ses minimums à chaque version, AGP/Gradle relèvent les leurs, et les paquets
+tiers suivent avec du retard. Aucun réglage ne supprime ce décalage ; cinq
+leviers le rendent gérable, du plus efficace au plus anecdotique.
+
+1. **Figer la version du SDK Flutter.** C'est le levier principal : les
+   minimums viennent du SDK, donc un SDK qui ne bouge pas ne fait pas bouger le
+   plancher. Avec FVM (`fvm use 3.47.5`, fichier `.fvmrc` versionné) ou, sans
+   outil supplémentaire, un clone dédié du SDK (`git clone -b 3.47.5
+   --depth 1 https://github.com/flutter/flutter.git ~/flutter-3.47`) utilisé
+   via `PATH` ou un alias. Les montées deviennent alors une décision, avec
+   `tools/android-stack-check.sh` et `flutter test` comme garde-fous.
+2. **Un diagnostic avant chaque build** (§ 6) : après un `flutter upgrade`, il
+   dit en deux secondes si le plancher a monté, et quelles lignes corriger.
+3. **Le masquage assumé** (`skipDependencyChecks=true`, § 3) : utile pour ne
+   plus voir deux avertissements à chaque build, à condition de faire le
+   diagnostic autrement — sinon une montée de minimum devient un échec Gradle
+   obscur.
+4. **Une surface Android minimale** : chaque greffon natif est une dépendance
+   de plus sur AGP/Kotlin, et un candidat de plus pour l'échec du Kotlin
+   intégré (`builtInKotlin=false`). Ici les quatre greffons utilisés
+   (`file_selector`, `path_provider`, `flutter_local_notifications`,
+   `url_launcher`) sont sobres : à garder en tête avant d'en ajouter un.
+5. **Un seul JDK**, celui que Flutter recommande (Java 17 aujourd'hui), avec
+   `flutter config --jdk-dir` si le `java` du `PATH` est plus ancien : un JDK 11
+   est l'autre cause classique d'échec, et elle n'a rien à voir avec AGP.
+
+Ce qui n'est **pas** une solution : monter AGP tout de suite (§ 4). On y gagne
+deux avertissements et on en récupère quatre, dont trois émis par le SDK
+Flutter lui-même.
+
+## 6. Diagnostic automatique
+
+```bash
+tools/android-stack-check.sh            # rapport lisible
+tools/android-stack-check.sh --json     # même rapport, exploitable par script
+tools/android-stack-check.sh --project AUTRE/DEPOT --flutter-root ~/flutter
+```
+
+Le script lit les versions déclarées dans `android/` (wrapper, `settings`,
+`app/build.gradle.kts`, `gradle.properties`, `java -version`) et les compare aux
+seuils du SDK Flutter **installé**, lus directement dans
+`packages/flutter_tools/gradle/src/main/kotlin/DependencyVersionChecker.kt` :
+
+| État affiché | Signification |
+| --- | --- |
+| `ok` | au-dessus du minimum *et* du seuil recommandé |
+| `[!]` | au-dessus du minimum, sous le seuil recommandé : avertissement |
+| `KO` | sous un minimum : le build échouera, même avec le masquage |
+
+Il indique aussi si la bascule AGP 9 est devenue possible, en cherchant l'API de
+variantes historique (`applicationVariants`, `libraryVariants`…) dans le plugin
+Gradle du SDK installé. Code de sortie : `0` tout va bien, `1` un minimum n'est
+pas atteint, `2` SDK ou dépôt introuvable — utilisable tel quel dans un script
+de build ou un hook git.

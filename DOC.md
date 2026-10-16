@@ -352,6 +352,17 @@ masqués par `skipDependencyChecks=true` (`android/gradle.properties`).
 Documentation complète (versions, masquage, bascule AGP 9 et ses conséquences) :
 `docs/android-gradle.md`.
 
+Diagnostic avant build — compare le projet aux minimums et aux versions
+recommandées du SDK Flutter installé, et dit si la bascule AGP 9 est possible :
+
+```bash
+tools/android-stack-check.sh
+tools/android-stack-check.sh --json
+```
+
+Sortie 0 si tout est au-dessus des minimums, 1 sinon (à relancer après chaque
+`flutter upgrade`, puisque `skipDependencyChecks` masque ces messages).
+
 ## Build release
 
 Compiler un APK release :
