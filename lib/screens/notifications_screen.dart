@@ -78,7 +78,16 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     String successMessage = 'Rappels synchronisés.',
   }) async {
     setState(() => _isBusy = true);
-    final error = await action();
+
+    // Une erreur du plugin (plateforme absente, permission refusée, test
+    // automatique) est affichée comme un message : jamais propagée.
+    String? error;
+    try {
+      error = await action();
+    } catch (failure) {
+      error = '$failure';
+    }
+
     if (!mounted) return;
     setState(() {
       _isBusy = false;

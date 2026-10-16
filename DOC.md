@@ -289,6 +289,23 @@ Lancer toute la suite :
 flutter test
 ```
 
+Sortie lisible, une ligne par fichier, pour ne garder que ce qui compte :
+
+```bash
+dart run bin/test_summary.dart                    # toute la suite
+dart run bin/test_summary.dart --details           # messages connus affichés
+dart run bin/test_summary.dart test/app_flow_test.dart
+```
+
+Le script relance `flutter test --reporter json` et classe chaque fichier :
+
+| Statut | Signification |
+| --- | --- |
+| `OK` | tout passe, aucun message |
+| `OK (warning)` | tout passe, des messages connus ont été écrits (résumés, pas affichés) |
+| `OK (error)` | tout passe, des erreurs attendues ont été signalées puis traitées par les tests |
+| `KO` | au moins un échec — seul cas où le détail (erreur + test) est affiché |
+
 Couverture fonctionnelle actuelle :
 
 - modèles `Quiz` et `Question` ;
@@ -302,7 +319,11 @@ Couverture fonctionnelle actuelle :
   `revision_stats_test.dart`) ;
 - chargement du programme GP, enregistrement et persistance (`revision_plan_test.dart`) ;
 - widgets du mode texte (`revision_widgets_test.dart`) ;
-- parcours complet recopie depuis le menu (`revision_flow_test.dart`).
+- parcours complet recopie depuis le menu (`revision_flow_test.dart`) ;
+- réglages JSON des rappels et fusion des surcharges
+  (`notification_settings_test.dart`) ;
+- plan de rappels système, gabarits et plafond (`notification_plan_test.dart`) ;
+- écran Rappels depuis le menu (`notifications_screen_test.dart`).
 
 ## Build release
 

@@ -47,6 +47,12 @@ Lancer les tests :
 flutter test
 ```
 
+Résumé lisible (une ligne par fichier : `OK`, `OK (warning)`, `OK (error)`, `KO`) :
+
+```bash
+dart run bin/test_summary.dart
+```
+
 Analyser le code :
 
 ```bash
@@ -187,7 +193,7 @@ lib/
   services/     Chargement assets, runtime, import JSON, scoring, planificateur
   widgets/      Cartes, options, progression, Markdown, courbe, diff mot à mot
 assets/data/    Catalogue et questions embarqués + programmes de révision
-bin/            CLI cqcm_quiz.dart
+bin/            CLI cqcm_quiz.dart, résumé des tests test_summary.dart
 docs/           Documentation spécialisée
 test/           Tests unitaires, services, widgets et parcours
 ```

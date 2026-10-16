@@ -1,5 +1,6 @@
-import 'package:cqcm/main.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import 'support/widget_helpers.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -8,11 +9,11 @@ void main() {
     testWidgets('la cloche du menu ouvre la configuration JSON', (
       tester,
     ) async {
-      await tester.pumpWidget(const CQCMApp());
-      await _pumpUntilFound(tester, find.text('QCM'));
+      useLargeSurface(tester);
+      await openMenu(tester);
 
       await tester.tap(find.byTooltip('Rappels'));
-      await _pumpUntilFound(tester, find.text('Configuration JSON'));
+      await pumpUntilFound(tester, find.text('Configuration JSON'));
 
       expect(find.text('Rappels'), findsWidgets);
       expect(find.text('Rappels activés (09:00)'), findsOneWidget);
@@ -24,11 +25,11 @@ void main() {
     });
 
     testWidgets('la synchronisation ne casse pas l ecran', (tester) async {
-      await tester.pumpWidget(const CQCMApp());
-      await _pumpUntilFound(tester, find.text('QCM'));
+      useLargeSurface(tester);
+      await openMenu(tester);
 
       await tester.tap(find.byTooltip('Rappels'));
-      await _pumpUntilFound(tester, find.text('Synchroniser'));
+      await pumpUntilFound(tester, find.text('Synchroniser'));
 
       await tester.tap(find.text('Synchroniser'));
       await tester.pump(const Duration(milliseconds: 100));
@@ -41,11 +42,11 @@ void main() {
     });
 
     testWidgets('la liste des rappels calcules est affichee', (tester) async {
-      await tester.pumpWidget(const CQCMApp());
-      await _pumpUntilFound(tester, find.text('QCM'));
+      useLargeSurface(tester);
+      await openMenu(tester);
 
       await tester.tap(find.byTooltip('Rappels'));
-      await _pumpUntilFound(tester, find.text('Rappels programmés'));
+      await pumpUntilFound(tester, find.text('Rappels programmés'));
 
       expect(find.text('Rappels programmés'), findsOneWidget);
       // Les 12 phrases du programme GP sont a reviser : rapport avec la
@@ -53,19 +54,4 @@ void main() {
       expect(find.textContaining('Commence par :'), findsWidgets);
     });
   });
-}
-
-Future<void> _pumpUntilFound(
-  WidgetTester tester,
-  Finder finder, {
-  int maxPumps = 40,
-}) async {
-  for (var i = 0; i < maxPumps; i++) {
-    await tester.pump(const Duration(milliseconds: 100));
-    if (finder.evaluate().isNotEmpty) {
-      return;
-    }
-  }
-
-  fail('Timed out waiting for $finder');
 }
