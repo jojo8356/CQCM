@@ -313,7 +313,57 @@ python3 -m http.server 8000                    # servir le dossier des APK
 Autre transfert possible : câble USB en mode MTP (copie de fichier), sans
 règle udev ni débogage.
 
-## 8. Dépannage
+## 8. Le SDK Android que Gradle utilise
+
+Avec plusieurs SDK sur la machine (celui du paquet de la distribution dans
+`/usr/lib/android-sdk`, celui d'Android Studio, un SDK téléchargé à la main),
+Gradle peut travailler dans le mauvais. Symptôme typique, avec un SDK sans
+`cmdline-tools` ni licences acceptées :
+
+```text
+Warning: License for package NDK (Side by side) 28.2.13676358 not accepted.
+com.android.builder.sdk.LicenceNotAcceptedException:
+Failed to install the following Android SDK packages as some licences have not
+been accepted.  ndk;28.2.13676358
+  Using Android SDK: /usr/lib/android-sdk
+```
+
+Pourquoi le NDK est demandé : le plugin Gradle de Flutter **impose un NDK** à
+tout projet d'application — il configure un CMake factice uniquement pour
+qu'AGP le télécharge (voir `FlutterPluginUtils.forceNdkDownload`). Ce projet
+n'ayant aucun code natif, le NDK ne sert à rien ici : il est une exigence de
+l'outillage Flutter, pas du code. S'il est déjà installé dans le SDK utilisé, il
+n'y a aucun téléchargement.
+
+### Quel SDK est utilisé
+
+Ordre de résolution (le premier trouvé gagne) :
+
+1. `flutter config --android-sdk …` (réglage `android-sdk`) ;
+2. `ANDROID_HOME`, puis `ANDROID_SDK_ROOT` ;
+3. `~/Android/Sdk` (défaut de Flutter sous Linux).
+
+Flutter écrit ce chemin dans `android/local.properties` (`sdk.dir`, non
+versionné) à chaque build, et le transmet à Gradle.
+
+### Diagnostic et réparation
+
+```bash
+tools/android-sdk-doctor.sh                  # inventorie les SDK, dit lequel sert
+tools/android-sdk-doctor.sh --set ~/android-sdk   # imposer le bon SDK à Flutter
+tools/android-sdk-doctor.sh --fix            # licences + composants manquants
+```
+
+`--fix` accepte les licences et installe `platform-tools`,
+`platforms;android-36`, `build-tools;36.0.0` et `ndk;28.2.13676358` (versions
+lues dans le SDK Flutter épinglé). Le NDK pèse environ 1 Go à télécharger :
+si un autre NDK est déjà installé, le docteur le signale et indique la ligne
+`ndkVersion = …` à mettre dans `android/app/build.gradle.kts` pour l'utiliser
+tel quel et éviter le téléchargement.
+
+Après réparation : `tools/build-apk.sh --install --symbols`.
+
+## 9. Dépannage
 
 | Message | Cause | Remède |
 | --- | --- | --- |
@@ -322,6 +372,9 @@ règle udev ni débogage.
 | `INSTALL_FAILED_INSUFFICIENT_STORAGE` | espace libre | libérer de la place sur le téléphone |
 | `device unauthorized` | autorisation USB non accordée | accepter « Autoriser le débogage USB » sur le téléphone |
 | `insufficient permissions for device` | règles udev (Linux) | §7 : débogage sans fil, règle udev, ou transfert manuel de l'APK |
+| `LicenceNotAcceptedException` / `not been accepted` | SDK sans `cmdline-tools` ou licences non acceptées | `tools/android-sdk-doctor.sh --fix` (§8) |
+| `ndk;28.2.13676358` manquant | le plugin Flutter impose un NDK | idem — ou pointer `ndkVersion` sur un NDK déjà installé (§8) |
+| `Using Android SDK: /usr/lib/android-sdk` alors que le SDK est ailleurs | SDK de la distribution prioritaire | `tools/android-sdk-doctor.sh --set <bon SDK>` (§8) |
 | `adb: more than one device` | deux appareils branchés | `--device <serial>` (`adb devices` pour la liste) |
 | `No target device found` (`flutter install`) | téléphone non vu | `adb devices`, câble, mode développeur + débogage USB |
 | APK toujours lent | build debug/`flutter run` | compiler avec `tools/build-apk.sh` (release) |

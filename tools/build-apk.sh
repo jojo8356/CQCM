@@ -292,9 +292,53 @@ fi
 # Compilation
 # ---------------------------------------------------------------------------
 
+# Explique l'échec à partir du journal de compilation, au lieu de laisser
+# l'utilisateur seul devant la sortie de Gradle.
+report_build_failure() {
+  local logfile="$1" sdk
+  sdk="$(sed -n 's/.*Using Android SDK: *//p' "$logfile" | head -n 1)"
+
+  if grep -qE "not been accepted|LicenceNotAcceptedException" "$logfile"; then
+    warn "des composants du SDK Android ne peuvent pas être installés : \
+licences non acceptées"
+    [ -n "$sdk" ] && warn "  SDK concerné : $sdk"
+    warn "  inventaire : tools/android-sdk-doctor.sh"
+    warn "  réparation : tools/android-sdk-doctor.sh --fix${sdk:+ $sdk}"
+  fi
+  if grep -q "ndk;" "$logfile"; then
+    warn "le plugin Gradle de Flutter impose un NDK pour tout projet \
+d'application (il configure un CMake factice pour le forcer)"
+    warn "  ce projet n'a aucun code natif : le NDK n'est là que pour Flutter"
+    warn "  il doit être installé dans le SDK utilisé par Gradle — \
+tools/android-sdk-doctor.sh --fix s'en charge"
+  fi
+  if grep -qE "Gradle version .* is lower|requires Gradle" "$logfile"; then
+    warn "version de Gradle trop ancienne : tools/android-stack-check.sh, \
+puis docs/android-gradle.md"
+  fi
+  if grep -qE "Unsupported class file major version|requires Java" "$logfile"; then
+    warn "problème de version de Java : tools/android-stack-check.sh"
+  fi
+}
+
+# Lance la commande Flutter en gardant la sortie dans un journal (utile pour
+# diagnostiquer, et affiché en direct).
+run_flutter_build() {
+  local logfile
+  logfile="$(mktemp -t cqcm-build-XXXXXX.log)"
+  log "flutter $*"
+  if "$FLUTTER_BIN" "$@" 2>&1 | tee "$logfile"; then
+    rm -f "$logfile"
+    return 0
+  fi
+  printf '\n'
+  report_build_failure "$logfile"
+  warn "journal de compilation conservé : $logfile"
+  exit 1
+}
+
 if [ "$BUNDLE" = "1" ]; then
-  log "flutter build appbundle --release"
-  "$FLUTTER_BIN" build appbundle --release "${EXTRA[@]}"
+  run_flutter_build build appbundle --release "${EXTRA[@]}"
   ARTIFACT="build/app/outputs/bundle/release/app-release.aab"
   [ -f "$ARTIFACT" ] || die "App Bundle attendu introuvable : $ARTIFACT"
   ok "App Bundle : $ARTIFACT ($(du -h "$ARTIFACT" | cut -f1))"
@@ -306,8 +350,7 @@ BUILD_ARGS=(build apk --release --target-platform "$TARGET")
 [ "$SPLIT" = "1" ] && BUILD_ARGS+=(--split-per-abi)
 BUILD_ARGS+=("${EXTRA[@]}")
 
-log "flutter ${BUILD_ARGS[*]}"
-"$FLUTTER_BIN" "${BUILD_ARGS[@]}"
+run_flutter_build "${BUILD_ARGS[@]}"
 
 APK_DIR="build/app/outputs/flutter-apk"
 APKS=()
