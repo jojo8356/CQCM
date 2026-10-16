@@ -393,9 +393,17 @@ Pkg.Revision = $NDK_EXPECTED
 EOF
   warn "marqueur de NDK posé : $MARKER/source.properties"
   warn "  le plugin Gradle de Flutter exige un NDK pour tout projet"
-  warn "  d'application ; ce projet ne compile aucun code natif, donc le NDK"
-  warn "  n'est jamais utilisé — ce fichier suffit et évite ~1 Go de"
-  warn "  téléchargement (et ~4 Go sur le disque)"
+  warn "  d'application ; ce fichier évite ~1 Go de téléchargement (et ~4 Go"
+  warn "  sur le disque) TANT QU'aucun paquet ne compile de code natif."
+  if grep -qE '^  (jni|jni_flutter):' pubspec.lock 2>/dev/null; then
+    warn "  ATTENTION : ce projet en a (jni, via path_provider_android >= 2.3.0)."
+    warn "  Il faut donc le vrai NDK, ou épingler path_provider_android 2.2.23 :"
+    warn "    dependency_overrides:"
+    warn "      path_provider_android: 2.2.23"
+    warn "  puis flutter pub get ; le marqueur devient alors inutile."
+  else
+    warn "  Vérifier : grep -E '^  (jni|jni_flutter):' pubspec.lock"
+  fi
   warn "  si un plugin natif est ajouté un jour : supprimer ce dossier, puis"
   warn "  tools/android-sdk-install.sh --sdk '$SDK_DIR' (NDK complet)"
 elif [ "$INSTALL_NDK" = "1" ]; then

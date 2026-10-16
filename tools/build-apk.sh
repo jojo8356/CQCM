@@ -301,10 +301,47 @@ if grep -qE '^[[:space:]]*shrink[[:space:]]*=[[:space:]]*false' \
 ressources sont désactivés, l'APK sera plus lourd"
 fi
 
+# Pre-vol : un paquet du projet compile du code natif, et le NDK du SDK n'est
+# qu'un marqueur ? Autant le dire avant deux minutes de compilation.
+preflight_native_ndk() {
+  local native_pkgs=() sdk_dir ndk_dir marker="" version
+  for pkg in jni jni_flutter; do
+    if grep -q "^  $pkg:" pubspec.lock 2>/dev/null; then
+      native_pkgs+=("$pkg")
+    fi
+  done
+  [ "${#native_pkgs[@]}" -gt 0 ] || return 0
+
+  sdk_dir="$(sed -n 's/^sdk\.dir=//p' android/local.properties 2>/dev/null |
+    head -n 1)"
+  [ -n "$sdk_dir" ] || sdk_dir="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-}}"
+  [ -n "$sdk_dir" ] || sdk_dir="$HOME/Android/Sdk"
+  ndk_dir="$sdk_dir/ndk"
+  [ -d "$ndk_dir" ] || return 0
+
+  for version in $(find "$ndk_dir" -maxdepth 1 -mindepth 1 -type d \
+    -printf '%f\n' 2>/dev/null || true); do
+    [ -d "$ndk_dir/$version/toolchains" ] || marker="$marker $version"
+  done
+  [ -n "$marker" ] || return 0
+
+  warn "${native_pkgs[*]} compile(nt) du code natif (CMake) mais le NDK de"
+  warn "  $sdk_dir n'est qu'un marqueur :$marker"
+  warn "  le build va echouer sur « Could not find toolchain file »"
+  warn "  1. vrai NDK :"
+  for version in $marker; do
+    warn "       rm -rf $ndk_dir/$version"
+  done
+  warn "       tools/android-sdk-install.sh --sdk $sdk_dir"
+  warn "  2. ou epingler path_provider_android 2.2.23 dans pubspec.yaml"
+}
+
 if [ "$CLEAN" = "1" ]; then
   log "flutter clean"
   "$FLUTTER_BIN" clean
 fi
+
+preflight_native_ndk
 
 if [ "$SYMBOLS" = "1" ] || [ "$OBFUSCATE" = "1" ]; then
   EXTRA+=(--split-debug-info=build/symbols)
@@ -336,6 +373,19 @@ d'application (il configure un CMake factice pour le forcer)"
     warn "  ce projet n'a aucun code natif : le NDK n'est là que pour Flutter"
     warn "  il doit être installé dans le SDK utilisé par Gradle — \
 tools/android-sdk-doctor.sh --fix s'en charge"
+  fi
+  if grep -qE "Could not find toolchain file|configureCMake" "$logfile"; then
+    warn "un paquet du projet compile du code natif (CMake) : le NDK COMPLET"
+    warn "  est requis, pas seulement un marqueur"
+    warn "  chaine habituelle : path_provider -> path_provider_android >= 2.3.0"
+    warn "  -> jni, qui compile du C pour Android"
+    warn "  deux sorties :"
+    warn "    1. installer le vrai NDK (~1 Go, ~4 Go installes) :"
+    warn "         rm -rf ~/Android/Sdk/ndk/<version>"
+    warn "         tools/android-sdk-install.sh --sdk ~/Android/Sdk"
+    warn "    2. garder le disque libre : epingler le paquet natif"
+    warn "         dependency_overrides: path_provider_android: 2.2.23"
+    warn "       (derniere version avant la migration JNI, puis flutter pub get)"
   fi
   if grep -qE "Gradle version .* is lower|requires Gradle" "$logfile"; then
     warn "version de Gradle trop ancienne : tools/android-stack-check.sh, \

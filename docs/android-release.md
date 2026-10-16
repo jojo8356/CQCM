@@ -418,8 +418,54 @@ Marche à suivre si l'espace manque, avec ses limites :
 - `tools/android-sdk-doctor.sh` signale ces marqueurs (`(marqueur)`) pour
   qu'ils ne passent pas inaperçus.
 
-**Si Gradle réclame quand même le vrai NDK malgré le marqueur** (un plugin
-compile du code natif), deux sorties :
+**Le marqueur ne suffit pas toujours : `jni` compile vraiment du C.** Certains
+paquets bâtissent du code natif à la compilation, et CMake exige alors le
+fichier de chaîne d'outils du NDK
+(`<ndk>/build/cmake/android.toolchain.cmake`) — un marqueur ne peut pas le
+remplacer. C'est le cas de **`path_provider_android` à partir de 2.3.0**, passé
+aux appels JNI directs, qui apporte `jni` et `jni_flutter` :
+
+```bash
+# le projet compile-t-il du code natif ?
+grep -E '^  (jni|jni_flutter):' pubspec.lock
+# qui l'apporte ?
+tools/flutter-pinned.sh pub deps --style=compact | grep -i jni
+```
+
+Symptôme dans le build : `Execution failed for task ':jni:configureCMake…'`
+puis `CMake Error … Could not find toolchain file`. Deux sorties, à choisir
+selon la place sur le disque :
+
+**(a) Installer le vrai NDK** (~1 Go à télécharger, ~4 Go installés) :
+
+```bash
+rm -rf ~/Android/Sdk/ndk/28.2.13676358
+tools/android-sdk-install.sh --sdk ~/Android/Sdk     # NDK complet
+tools/build-apk.sh --install --symbols
+```
+
+**(b) Garder les 4 Go : revenir à `path_provider_android` 2.2.23** — la
+dernière version avant la migration JNI (mêmes fonctions, canaux de plateforme
+classiques). Le marqueur de NDK suffit alors :
+
+```yaml
+# pubspec.yaml
+dependency_overrides:
+  path_provider_android: 2.2.23
+```
+
+```bash
+tools/flutter-pinned.sh pub get
+tools/build-apk.sh --install --symbols
+```
+
+L'application n'utilise `path_provider` que pour `getApplicationSupportDirectory`
+(dossier de progression et de QCM importés) : 2.2.23 fait exactement le même
+travail. Pour revenir en arrière plus tard, il suffira de supprimer le bloc
+`dependency_overrides` et d'installer le vrai NDK.
+
+**Autre cas : un plugin compile du code natif** pour une raison différente
+(paquet ajouté plus tard). Deux sorties également :
 
 ```bash
 # 1. le NDK après la ligne de Flutter (Flutter le connaît : il signale la

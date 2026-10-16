@@ -248,6 +248,44 @@ log "SDK utilisé par ce projet : $EFFECTIVE"
 [ -f android/local.properties ] &&
   printf '    (lu dans android/local.properties — écrit par Flutter à chaque build)\n'
 
+# Le projet compile-t-il du code natif ? (jni, apporté par
+# path_provider_android >= 2.3.0). Si oui, un marqueur de NDK ne suffit pas :
+# CMake exige <ndk>/build/cmake/android.toolchain.cmake.
+NATIVE_PKGS=()
+for pkg in jni jni_flutter; do
+  if grep -q "^  $pkg:" pubspec.lock 2>/dev/null; then
+    NATIVE_PKGS+=("$pkg")
+  fi
+done
+MARKERS=""
+if [ -d "$EFFECTIVE/ndk" ]; then
+  for version in $(find "$EFFECTIVE/ndk" -maxdepth 1 -mindepth 1 -type d \
+    -printf '%f\n' 2>/dev/null || true); do
+    if [ ! -d "$EFFECTIVE/ndk/$version/toolchains" ]; then
+      MARKERS="$MARKERS $version"
+    fi
+  done
+fi
+if [ -n "$MARKERS" ]; then
+  if [ "${#NATIVE_PKGS[@]}" -gt 0 ]; then
+    warn "NDK marqueur$MARKERS dans $EFFECTIVE, or le projet compile du code"
+    warn "  natif (${NATIVE_PKGS[*]}) : le build échouera sur"
+    warn "  « Could not find toolchain file ». Deux sorties :"
+    warn "    a) vrai NDK (~1 Go, ~4 Go installés) :"
+    for marker_version in $MARKERS; do
+      warn "         rm -rf $EFFECTIVE/ndk/$marker_version"
+    done
+    warn "         tools/android-sdk-install.sh --sdk $EFFECTIVE"
+    warn "    b) garder le disque libre : épingler path_provider_android 2.2.23"
+    warn "         dependency_overrides:"
+    warn "           path_provider_android: 2.2.23"
+    warn "       puis flutter pub get (le marqueur devient inutile)"
+  else
+    warn "NDK marqueur$MARKERS dans $EFFECTIVE : suffisant tant qu'aucun paquet"
+    warn "  ne compile de code natif (aucun jni dans pubspec.lock)"
+  fi
+fi
+
 # Le bon candidat : celui avec cmdline-tools ET licences.
 BEST=""
 for dir in "${CANDIDATES[@]}"; do
@@ -308,8 +346,6 @@ for candidate in $NDK_ALL; do
     NDK_INSTALLED="$NDK_INSTALLED $candidate"
   else
     warn "NDK $candidate dans $BEST : marqueur (aucun binaire, pas de toolchains/)"
-    warn "  suffisant tant qu'aucun plugin ne compile de code natif ; pour un"
-    warn "  vrai NDK : supprimer $BEST/ndk/$candidate puis --fix"
   fi
 done
 NDK_INSTALLED="$(printf '%s\n' $NDK_INSTALLED | tr -s '\n' ' ' |
