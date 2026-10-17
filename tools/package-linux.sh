@@ -20,7 +20,8 @@
 #
 # Options :
 #   --release | --debug   mode de compilation Flutter (release par défaut)
-#   --version 1.2.3       version Debian (défaut : celle de pubspec.yaml)
+#   --version 1.2.3       version Debian (défaut : celle de pubspec.yaml,
+#                         numéro de build compris : 1.0.0+2)
 #   --revision 2          révision Debian (défaut : 1)
 #   --arches "amd64 arm64" architectures visées par le .deb (défaut : machine)
 #   --out DIR             dossier de sortie (défaut : build/packages)
@@ -29,8 +30,11 @@
 # Mise en production :
 #   --maintainer "Nom <email>"  responsable du paquet (défaut : git config, ou
 #                               CQCM_MAINTAINER)
-#   --strip                réduit la taille installée (strip --strip-unneeded)
+#   --strip                retire les symboles de la copie empaquetée
+#                          (gain faible : le bundle release est déjà allégé)
 #   --lintian              contrôle le .deb avec lintian, s'il est installé
+#   --install              installe le .deb produit (sudo apt install) et
+#                          vérifie l'état avec dpkg
 #
 # Répartition, dans les deux cas :
 #   EMBARQUÉ   → moteur Flutter, code AOT, assets, icônes, .desktop
@@ -78,6 +82,7 @@ OUT_DIR="build/packages"
 KEEP=0
 STRIP=0
 RUN_LINTIAN=0
+DO_INSTALL=0
 MAINTAINER_ARG=""
 
 while [ $# -gt 0 ]; do
@@ -111,6 +116,7 @@ while [ $# -gt 0 ]; do
     --keep) KEEP=1 ;;
     --strip) STRIP=1 ;;
     --lintian) RUN_LINTIAN=1 ;;
+    --install) DO_INSTALL=1 ;;
     --maintainer)
       shift
       [ $# -gt 0 ] || die "--maintainer attend « Nom <email> »"
@@ -140,13 +146,16 @@ case "$(uname -m)" in
 esac
 [ -n "$ARCHES" ] || ARCHES="$HOST_ARCH"
 
+# Version : celle de pubspec.yaml, numéro de build compris (1.0.0+2), pour que
+# incrémenter le « +n » de Flutter suffise à produire une version plus récente
+# aux yeux d'apt. Debian accepte + et ~ dans la version amont.
 if [ -z "$VERSION" ]; then
-  VERSION="$(sed -n 's/^version: *\([0-9][^-+ ]*\).*/\1/p' pubspec.yaml |
+  VERSION="$(sed -n 's/^version: *\([0-9][0-9.+~]*\).*/\1/p' pubspec.yaml |
     head -n 1)"
   [ -n "$VERSION" ] || die "version introuvable : passer --version"
 fi
 case "$VERSION" in
-  *[!0-9.]* | .* | *.) die "version Debian invalide : $VERSION" ;;
+  *[!0-9.+~]* | .* | *. | *+ | *~) die "version Debian invalide : $VERSION" ;;
 esac
 
 # Responsable du paquet : la valeur explicite d'abord, sinon l'identité git du
@@ -592,6 +601,29 @@ strip_tree() { # strip_tree <racine>
 # .deb
 # ---------------------------------------------------------------------------
 
+# Installe le paquet avec apt (résolution des dépendances), puis relit l'état.
+# sudo est demandé au moment de l'installation seulement : la compilation reste
+# sans privilèges.
+install_deb() { # install_deb <fichier .deb>
+  local deb="$1"
+  [ -f "$deb" ] || die "paquet introuvable : $deb"
+  command -v apt >/dev/null 2>&1 ||
+    die "apt absent : installer avec « sudo dpkg -i $deb »"
+
+  local prefix=()
+  if [ "$(id -u)" != "0" ]; then
+    command -v sudo >/dev/null 2>&1 ||
+      die "sudo absent : installer avec « dpkg -i $deb » en root"
+    prefix=(sudo)
+  fi
+
+  log "installation : ${prefix[*]:+${prefix[*]} }apt install $deb"
+  "${prefix[@]}" apt install -y "$deb" || die "installation refusée"
+  dpkg -s "$APP_NAME" 2>/dev/null |
+    sed -n 's/^\(Status\|Version\|Architecture\):/    \1:/p'
+  ok "installé : lancer « $APP_NAME » ou le menu Applications"
+}
+
 build_deb() { # build_deb <architecture dpkg>
   command -v dpkg-deb >/dev/null 2>&1 ||
     die "dpkg-deb absent : installer dpkg (Debian/Ubuntu)"
@@ -714,6 +746,10 @@ EOF
   printf '    %-22s %s\n' "dépendances" "${depends:-aucune}"
   [ -n "$glibc" ] && printf '    %-22s %s\n' "glibc minimal" "$glibc"
   printf '    %-22s sudo apt install ./%s\n' "installer" "$(basename "$debfile")"
+
+  if [ "$DO_INSTALL" = "1" ]; then
+    install_deb "$debfile"
+  fi
 
   if [ "$RUN_LINTIAN" = "1" ]; then
     if command -v lintian >/dev/null 2>&1; then

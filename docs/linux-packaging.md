@@ -206,6 +206,7 @@ tailles en découleront. `ImageMagick` n'est utilisé qu'en repli s'il est prés
 | `FUSE` / `libfuse.so.2` | FUSE absent (conteneur) | `APPIMAGE_EXTRACT_AND_RUN=1`, ou `--appimage-extract` |
 | L'icône du menu est vide | cache non rafraîchi | `sudo gtk-update-icon-cache -f /usr/share/icons/hicolor` |
 | `appimagetool: command not found` | binaire absent | laissé à faire par le script, voir ci-dessus |
+| `Le fichier donné … n'est pas compris sur la ligne de commande` | le chemin n'existe pas (mauvais numéro de version dans le nom) | `ls build/packages/` puis relancer avec le nom affiché, ou utiliser `--version` pour le maîtriser |
 | L'app se ferme aussitôt | plantage natif ou fenêtre fermée | lancer `./build/linux/x64/release/bundle/cqcm` et lire l'erreur (§8) |
 | `flutter : commande introuvable` | SDK hors `PATH` | `CQCM_FLUTTER_SDK=~/flutter-3.47 tools/package-linux.sh --all` (§0) |
 
@@ -237,38 +238,57 @@ des paquets, pas une copie à la main).
 
 ### La séquence complète
 
+La version vient de `pubspec.yaml`, numéro de build compris : avec
+`version: 1.0.0+2`, le paquet s'appelle `cqcm_1.0.0+2-1_amd64.deb`. Incrémenter
+le `+n` suffit donc à produire une version plus récente aux yeux d'`apt` — mais
+il faut le faire **avant** de construire.
+
+Tout en une commande, avec une version explicite (le paquet est construit puis
+installé, `sudo` n'étant demandé qu'à la fin) :
+
 ```bash
-# 1. numéro de version : dans pubspec.yaml
-#    version: 1.0.1+2     (le +2 est le numéro de build Flutter)
+tools/package-linux.sh --deb --strip --install --version 1.0.1
+```
 
-# 2. paquet release, allégé et contrôlé
-tools/package-linux.sh --deb --strip --lintian
+L'équivalent en trois temps :
 
-# 3. installation (apt résout les dépendances, contrairement à dpkg -i)
+```bash
+tools/package-linux.sh --deb --strip --version 1.0.1
 sudo apt install ./build/packages/cqcm_1.0.1-1_amd64.deb
-
-# 4. vérification
 dpkg -s cqcm | grep -E 'Status|Version|Depends'
 ```
+
+Sans `--version`, le script reprend `pubspec.yaml` : le nom du fichier change
+avec la version, il ne faut donc pas le recopier à la main d'une fois sur
+l'autre. `ls build/packages/` donne le nom exact.
 
 L'application apparaît alors dans le menu (entrée « CQCM ») et se lance aussi
 par la commande `cqcm`. Le paquet est enregistré : `apt remove` le retire
 proprement, `apt list --installed | grep cqcm` le montre comme n'importe quelle
 application.
 
-### Ce que change `--strip`
+### Ce que change `--strip` (peu, en pratique)
 
-Les binaires Flutter sont livrés avec leurs symboles, soit plusieurs Mo utiles
-au débogage seulement. `--strip` les retire de la **copie empaquetée** (jamais
-du bundle d'origine) :
+Le bundle **release** de Flutter est déjà allégé : mesuré sur ce projet,
+`--strip` retire 24 Ko sur 26,8 Mo installés. C'est une ceinture de sécurité,
+pas une optimisation — elle ne produit un gain net que si le build a été fait
+avec des informations de débogage (`--debug`, ou un profil de compilation
+particulier).
 
-| | sans `--strip` | avec `--strip` |
-| --- | --- | --- |
-| `.deb` | ~7,8 Mo | ~7,0 Mo |
-| installé | ~26,8 Mo | ~19 Mo |
+Les 26,8 Mo se répartissent autrement :
 
-À garder de côté si tu veux analyser un jour un plantage natif : sans
-symboles, une trace `gdb` ne dit plus rien.
+| Élément | Poids installé approximatif |
+| --- | --- |
+| `libflutter_linux_gtk.so` (moteur Flutter) | ~20 Mo |
+| `data/icudtl.dat` (données Unicode) | ~10 Mo selon version |
+| `data/flutter_assets/` (code AOT, assets, JSON) | quelques Mo |
+| `cqcm` (le runner) | ~100 Ko |
+
+Le `.deb` de 7,9 Mo contient les mêmes fichiers **compressés** : c'est le
+téléchargement, pas l'occupation disque.
+
+Conserver les symboles aide à analyser un plantage natif avec `gdb` : sans eux,
+une trace ne donne que des adresses.
 
 ### Ce que contrôle `lintian`
 
@@ -295,8 +315,7 @@ tools/package-linux.sh --deb --maintainer "Prénom Nom <vous@exemple.fr>" --lint
 Rebâtir avec un numéro plus élevé puis réinstaller :
 
 ```bash
-tools/package-linux.sh --deb --strip
-sudo apt install ./build/packages/cqcm_1.0.2-1_amd64.deb
+tools/package-linux.sh --deb --strip --install --version 1.0.2
 ```
 
 `apt` remplace l'ancienne version. **Les données sont conservées** : elles ne
