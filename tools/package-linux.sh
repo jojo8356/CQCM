@@ -140,12 +140,48 @@ esac
 
 BUNDLE="build/linux/$(uname -m)/$MODE/bundle"
 
-if [ "$DO_BUILD" = "1" ]; then
+# Résolution du SDK, dans l'ordre :
+#   1. CQCM_FLUTTER           (chemin explicite de l'exécutable)
+#   2. tools/flutter-linux.sh (SDK épinglé + sysroot GTK local, si préparé)
+#   3. SDK épinglé            (tools/flutter-pinned.sh --print)
+#   4. flutter du PATH
+FLUTTER_CMD=()
+LINUX_DEPS_ENV="${CQCM_LINUX_DEPS_DIR:-$HOME/.cqcm/linux-deps}/env.sh"
+
+if [ -n "${CQCM_FLUTTER:-}" ] && [ -x "${CQCM_FLUTTER}" ]; then
+  FLUTTER_CMD=("${CQCM_FLUTTER}")
+elif [ -x tools/flutter-linux.sh ] && [ -f "$LINUX_DEPS_ENV" ]; then
+  # Le sysroot local est prêt : il fournit les en-têtes GTK sans root.
   FLUTTER_CMD=(tools/flutter-linux.sh)
-  [ -x "$FLUTTER_CMD[0]" ] || FLUTTER_CMD=(flutter)
+elif [ -x tools/flutter-pinned.sh ] &&
+  PINNED_BIN="$(tools/flutter-pinned.sh --print 2>/dev/null)" &&
+  [ -n "$PINNED_BIN" ]; then
+  FLUTTER_CMD=("$PINNED_BIN")
+elif command -v flutter >/dev/null 2>&1; then
+  FLUTTER_CMD=("$(command -v flutter)")
+fi
+
+if [ "$DO_BUILD" = "1" ]; then
+  if [ "${#FLUTTER_CMD[@]}" = "0" ]; then
+    warn "flutter introuvable"
+    if [ -x tools/flutter-pinned.sh ]; then
+      tools/flutter-pinned.sh --check >&2 || true
+    fi
+    die "aucun SDK Flutter utilisable. Solutions :
+  1. mettre le SDK dans le PATH (ajouter à ~/.zshrc ou ~/.bashrc) :
+       export PATH=\"\$HOME/flutter-3.47/bin:\$PATH\"
+  2. ou pointer un SDK existant, sans toucher au PATH :
+       CQCM_FLUTTER_SDK=\$HOME/flutter-3.47 tools/package-linux.sh --all
+  3. ou préparer l'environnement Linux sans root, puis relancer :
+       tools/linux-desktop-deps.sh"
+  fi
   log "compilation : ${FLUTTER_CMD[*]} build linux --$MODE"
   if ! "${FLUTTER_CMD[@]}" build linux "--$MODE"; then
-    die "compilation Flutter échouée (voir docs/linux-sans-root.md)"
+    die "compilation Flutter échouée :
+  - prérequis Linux (clang, cmake, ninja, pkg-config, GTK 3) :
+      tools/linux-desktop-deps.sh puis tools/flutter-linux.sh build linux --release
+  - diagnostic détaillé : tools/flutter-linux.sh doctor
+  - dépannage : docs/linux-sans-root.md"
   fi
 fi
 [ -d "$BUNDLE" ] || die "bundle introuvable : $BUNDLE (compiler d'abord)"

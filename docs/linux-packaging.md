@@ -1,5 +1,33 @@
 # Livrer CQCM sur Linux : .deb et AppImage
 
+## 0. Prérequis : trouver Flutter
+
+Le script cherche le SDK dans cet ordre, et le dit dans son message de build :
+
+1. `CQCM_FLUTTER=/chemin/vers/flutter` (exécutable explicite) ;
+2. `tools/flutter-linux.sh`, si `~/.cqcm/linux-deps/env.sh` existe (SDK épinglé
+   plus en-têtes GTK extraits sans root) ;
+3. **le SDK épinglé** de `.flutter-version`, cherché par
+   `tools/flutter-pinned.sh` dans `~/flutter-<version>`, `~/flutter-<majeure.mineure>`,
+   `~/.cqcm/flutter/<version>`, `/opt/flutter-<version>` ;
+4. `flutter` du `PATH`.
+
+Autrement dit, pas besoin de `PATH` : un clone dans `~/flutter-3.47` suffit
+(c'est le dossier « sans le correctif », reconnu pour la version 3.47.5).
+Si vraiment le `PATH` est préféré :
+
+```bash
+line='export PATH="$HOME/flutter-3.47/bin:$PATH"'
+for rc in ~/.zshrc ~/.bashrc; do
+  grep -qF 'flutter-3.47/bin' "$rc" 2>/dev/null || printf '%s\n' "$line" >> "$rc"
+done
+```
+
+Puis ouvrir un nouveau terminal (`source ~/.zshrc` ou `source ~/.bashrc`
+suffit dans celui-ci). À noter : `flutter` n'est qu'un script ; ce sont
+`flutter build linux` et `flutter doctor` qui signalent les prérequis system
+manquants (clang, cmake, ninja, pkg-config, GTK 3).
+
 Deux formats, deux philosophies. Le `.deb` est **petit** parce qu'il déclare ses
 dépendances ; l'AppImage est **autonome** parce qu'elle embarque tout ce qu'elle
 peut. Un seul script produit les deux :
@@ -7,6 +35,13 @@ peut. Un seul script produit les deux :
 ```bash
 cd ~/Documents/Projets/CQCM
 tools/package-linux.sh --all
+```
+
+Si Flutter n'est pas dans le `PATH` (cas normal), rien à faire : le SDK épinglé
+est trouvé tout seul. Pour en imposer un :
+
+```bash
+CQCM_FLUTTER_SDK=~/flutter-3.47 tools/package-linux.sh --all
 ```
 
 Sortie dans `build/packages/` :
@@ -161,6 +196,7 @@ tailles en découleront. `ImageMagick` n'est utilisé qu'en repli s'il est prés
 | `FUSE` / `libfuse.so.2` | FUSE absent (conteneur) | `APPIMAGE_EXTRACT_AND_RUN=1`, ou `--appimage-extract` |
 | L'icône du menu est vide | cache non rafraîchi | `sudo gtk-update-icon-cache -f /usr/share/icons/hicolor` |
 | `appimagetool: command not found` | binaire absent | laissé à faire par le script, voir ci-dessus |
+| `flutter : commande introuvable` | SDK hors `PATH` | `CQCM_FLUTTER_SDK=~/flutter-3.47 tools/package-linux.sh --all` (§0) |
 
 Après installation, les journaux du lanceur :
 
