@@ -288,6 +288,7 @@ tools/android-sdk-doctor.sh    SDK Android utilisé, licences, NDK
 tools/android-sdk-install.sh   créer un SDK Android utilisateur complet
 tools/build-apk.sh             APK release pour l'architecture du téléphone
 tools/apk-size.sh              taille de l'app (APK, interne, téléphone)
+tools/package-linux.sh         .deb et AppImage pour Linux
 tools/flutter-pinned.sh        lance le SDK Flutter de .flutter-version
 tools/dev-disk-report.sh       rapport d'occupation disque (n'efface rien)
 tools/linux-desktop-deps.sh    sysroot GTK 3 personnel pour le bureau Linux
