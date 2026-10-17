@@ -26,6 +26,8 @@ l'exécution, sans reconstruire l'application.
 - Notifications système programmées par `flutter_local_notifications`, réglées en
   JSON (`assets/data/notifications.json`) et pilotables depuis l'écran « Rappels ».
 - CLI d'administration pour préparer, valider et ajouter des quiz runtime.
+- Zoom de l'interface : Ctrl + `+` / `-` par pas de 5 %, Ctrl + `0` pour
+  100 %, Ctrl + molette ; niveau mémorisé dans `ui.json` (`docs/zoom.md`).
 
 ## Démarrage
 
@@ -264,6 +266,8 @@ Documentation détaillée :
 - `docs/android-gradle.md`
 - `docs/android-release.md`
 - `docs/linux-sans-root.md`
+- `docs/linux-packaging.md`
+- `docs/zoom.md`
 
 ## Structure utile
 

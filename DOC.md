@@ -461,6 +461,23 @@ la configuration vient d'un fichier JSON, si bien que l'application fonctionne
 (avec les seuls rappels in-app) sur les plateformes non gérées — Linux pour la
 planification, web — ou si le plugin échoue.
 
+### Pourquoi le zoom passe-t-il par une taille virtuelle ?
+
+Agrandir le rendu avec un `Transform` aurait laissé la mise en page intacte :
+le texte serait devenu flou et les boutons auraient débordé de la fenêtre.
+`UiZoomScope` donne donc aux écrans une taille virtuelle (fenêtre ÷ zoom), puis
+agrandit le rendu à la taille réelle avec un `FittedBox`. Les écrans refluent
+comme dans un navigateur : à 150 %, un écran de téléphone se comporte comme un
+écran de 240 dp de large. Le facteur est borné à 50–200 % et mémorisé dans
+`ui.json` (même dossier que `progress.json`).
+
+Les raccourcis passent par `CallbackShortcuts`, placé dans
+`MaterialApp.builder` : il n'a pas besoin de prendre le focus, car la route
+courante en possède toujours un — le zoom vaut donc aussi pour les écrans
+empilés. La molette est lue par un `Listener` sur `PointerScrollEvent` quand
+Ctrl est enfoncé, avec un seuil de 30 px pour ne pas transformer un geste de
+pavé tactile en dix crans de zoom.
+
 ### Limite mobile
 
 Sur Android et iOS, une CLI locale ne peut pas modifier facilement les fichiers privés d'une application installée. Le bouton d'import intégré est donc le chemin recommandé pour les appareils mobiles.
