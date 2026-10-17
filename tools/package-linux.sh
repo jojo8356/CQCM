@@ -314,8 +314,21 @@ elf_arch() {
 }
 
 # Un fichier est-il un objet ELF ? (évite de lire les icônes et le .desktop)
+# readelf renvoie 1 sur tout ce qui n'est pas ELF : pas besoin de lire les
+# quatre octets magiques, ce qui déclenchait « octet nul ignoré » sur icudtl.dat.
 elf_magic() {
-  [ -f "$1" ] && [ "$(dd if="$1" bs=1 count=4 2>/dev/null)" = $'\x7fELF' ]
+  [ -f "$1" ] && readelf -h "$1" >/dev/null 2>&1
+}
+
+# Nom d'architecture AppImage (assets GitHub) depuis celui de dpkg.
+appimage_arch() {
+  case "$1" in
+    amd64) echo x86_64 ;;
+    arm64) echo aarch64 ;;
+    armhf) echo armhf ;;
+    i386) echo i686 ;;
+    *) echo "$1" ;;
+  esac
 }
 
 # Noms des bibliothèques partagées dont dépend un fichier.
@@ -344,6 +357,12 @@ libc_provided_lib() {
       ;;
   esac
   return 1
+}
+
+# Une bibliothèque livrée DANS le bundle (moteur Flutter, plugins du projet) :
+# le runner la référence par son nom, mais elle voyage avec l'application.
+bundle_lib() {
+  [ -n "$BUNDLE" ] && [ -e "$BUNDLE/lib/$1" ]
 }
 
 # Recherche une bibliothèque fournie par le système (pour l'AppImage : on la
@@ -469,6 +488,8 @@ collect_deps() { # collect_deps <fichier de sortie>
     libc_provided_lib "$lib" && continue
     # libc6 est déjà ajouté ci-dessus avec sa version minimale.
     [ "$lib" = "libc.so.6" ] && continue
+    # Moteur Flutter et plugins : expédiés avec l'application.
+    bundle_lib "$lib" && continue
     local path pkg
     path="$(find_system_lib "$lib" || true)"
     if [ -z "$path" ]; then
@@ -642,27 +663,40 @@ get_appimagetool() {
   fi
   local dir="$HOME/.cache/cqcm-tools"
   mkdir -p "$dir"
-  local out="$dir/appimagetool-$HOST_ARCH.AppImage"
-  if [ ! -x "$out" ]; then
-    local url="https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-$HOST_ARCH.AppImage"
-    log "téléchargement d'appimagetool ($HOST_ARCH)" >&2
-    if command -v curl >/dev/null 2>&1; then
-      curl -fL --retry 2 -o "$out" "$url" 2>/dev/null || {
-        rm -f "$out"
-        return 1
-      }
-      curl -fsL -o "$out.sha256" "$url.sha256" 2>/dev/null || true
-    elif command -v wget >/dev/null 2>&1; then
-      wget -q -O "$out" "$url" || {
-        rm -f "$out"
-        return 1
-      }
-    else
-      warn "ni curl ni wget : appimagetool à fournir avec APPIMAGETOOL=..." >&2
-      return 1
-    fi
-    chmod +x "$out"
+  # Les assets du dépôt AppImage/appimagetool sont nommés comme l'architecture
+  # AppImage (x86_64, aarch64, armhf, i686), pas comme dpkg (amd64, arm64).
+  local ai_arch out
+  ai_arch="$(appimage_arch "$HOST_ARCH")"
+  out="$dir/appimagetool-$ai_arch.AppImage"
+  if [ -x "$out" ]; then
+    echo "$out"
+    return 0
   fi
+
+  local url="https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-$ai_arch.AppImage"
+  local log="$dir/download.log"
+  : > "$log"
+  log "téléchargement d'appimagetool ($ai_arch)" >&2
+
+  local ok_dl=0
+  if command -v curl >/dev/null 2>&1; then
+    curl -fL --retry 2 --connect-timeout 20 -o "$out" "$url" >>"$log" 2>&1 ||
+      ok_dl=1
+  elif command -v wget >/dev/null 2>&1; then
+    wget -O "$out" "$url" >>"$log" 2>&1 || ok_dl=1
+  else
+    warn "ni curl ni wget pour télécharger appimagetool" >&2
+    warn "installer curl, ou fournir APPIMAGETOOL=/chemin/appimagetool" >&2
+    return 1
+  fi
+
+  if [ "$ok_dl" != "0" ] || [ ! -s "$out" ]; then
+    warn "téléchargement d'appimagetool impossible : $url" >&2
+    sed -n '1,3p' "$log" | sed 's/^/      /' >&2
+    rm -f "$out"
+    return 1
+  fi
+  chmod +x "$out"
   echo "$out"
 }
 
@@ -696,6 +730,8 @@ bundle_shared_libs() { # bundle_shared_libs <AppDir>
       if appimage_skip_lib "$lib"; then
         continue
       fi
+      # Déjà dans le bundle : rien à copier ni à signaler.
+      [ -e "$libdir/$lib" ] && continue
       local src
       src="$(find_system_lib "$lib" || true)"
       if [ -z "$src" ]; then
@@ -785,7 +821,10 @@ EOF
   local tool
   tool="$(get_appimagetool || true)"
   if [ -z "$tool" ]; then
-    warn "appimagetool indisponible : AppDir prête dans $appdir"
+    warn "appimagetool indisponible : AppDir conservée dans $appdir"
+    warn "l'AppDir est une application fonctionnelle : ./AppRun la lance"
+    warn "pour produire l'AppImage, fournir appimagetool :"
+    warn "  APPIMAGETOOL=/chemin/vers/appimagetool tools/package-linux.sh --appimage --no-build"
     KEEP=1
     return 1
   fi

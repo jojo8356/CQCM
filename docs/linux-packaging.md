@@ -59,6 +59,7 @@ CQCM-1.0.0-amd64.AppImage       # exécutable portable, ~25 Mo
 | Code AOT, assets, JSON | embarqué | embarqué |
 | Icônes + entrée de menu | oui (hicolor 16→512) | oui |
 | Bibliothèques GTK et leurs dépendances | **déclarées** (`Depends`) | embarquées |
+| Moteur et plugins Flutter (`libflutter_linux_gtk.so`, `lib*_linux_plugin.so`) | embarqués | embarqués |
 | glibc, libstdc++, libz, X11, pilotes graphiques | fournis par le système | **laissés au système** |
 
 C'est exactement la demande « .deb optimisé juste pour les bibliothèques et
@@ -161,6 +162,10 @@ trois niveaux, et ajoute les greffons `gdk-pixbuf`/`gtk-3.0` s'ils existent.
 
 `appimagetool` est téléchargé automatiquement dans
 `~/.cache/cqcm-tools/` (dépôt `AppImage/appimagetool`, version `continuous`).
+Le nom du fichier suit l'architecture AppImage, pas celle de Debian :
+`appimagetool-x86_64.AppImage` sur un PC `amd64`, `appimagetool-aarch64.AppImage`
+sur un `arm64`. En cas d'échec, le script imprime l'URL et la réponse du
+serveur au lieu d'un simple « indisponible ».
 Il est lancé avec `APPIMAGE_EXTRACT_AND_RUN=1`, donc **FUSE n'est pas
 nécessaire** pour construire.
 
@@ -199,7 +204,7 @@ tailles en découleront. `ImageMagick` n'est utilisé qu'en repli s'il est prés
 | --- | --- | --- |
 | `dpkg: dependency problems` | paquet GTK absent | `sudo apt --fix-broken install` |
 | `error while loading shared libraries` (AppImage) | bibliothèque non embarquée ni système | relancer le script en verbose, vérifier `excludelist` |
-| `appimagetool indisponible` | téléchargement bloqué | `APPIMAGETOOL=/chemin/appimagetool` |
+| `appimagetool indisponible` | téléchargement bloqué | lire le message : le script affiche l'URL et l'erreur ; `java`-free : `APPIMAGETOOL=/chemin/appimagetool` |
 | `FUSE` / `libfuse.so.2` | FUSE absent (conteneur) | `APPIMAGE_EXTRACT_AND_RUN=1`, ou `--appimage-extract` |
 | L'icône du menu est vide | cache non rafraîchi | `sudo gtk-update-icon-cache -f /usr/share/icons/hicolor` |
 | `appimagetool: command not found` | binaire absent | laissé à faire par le script, voir ci-dessus |
