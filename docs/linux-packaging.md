@@ -116,6 +116,13 @@ plus vieille distribution visée (Debian 12, Ubuntu 22.04).
 
 ### Version, révision, architecture
 
+Le script lit l'architecture réelle du binaire (`readelf -h`) et refuse
+d'étiqueter un binaire ARM en `amd64` : un tel paquet s'installerait sans
+erreur pour échouer au lancement. Il reconnaît aussi le nom de dossier produit
+par Flutter 3.47 (`build/linux/x64/…`) comme l'ancien (`x86_64`), ainsi que
+`arm64`/`aarch64`.
+
+
 ```bash
 tools/package-linux.sh --deb --version 1.2.0 --revision 2
 tools/package-linux.sh --deb --arches amd64

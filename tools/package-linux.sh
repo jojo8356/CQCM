@@ -138,8 +138,6 @@ esac
 # Compilation
 # ---------------------------------------------------------------------------
 
-BUNDLE="build/linux/$(uname -m)/$MODE/bundle"
-
 # Résolution du SDK, dans l'ordre :
 #   1. CQCM_FLUTTER           (chemin explicite de l'exécutable)
 #   2. tools/flutter-linux.sh (SDK épinglé + sysroot GTK local, si préparé)
@@ -184,8 +182,32 @@ if [ "$DO_BUILD" = "1" ]; then
   - dépannage : docs/linux-sans-root.md"
   fi
 fi
-[ -d "$BUNDLE" ] || die "bundle introuvable : $BUNDLE (compiler d'abord)"
-[ -x "$BUNDLE/$BIN_NAME" ] || die "exécutable introuvable : $BUNDLE/$BIN_NAME"
+# Nom du dossier d'architecture : Flutter 3.47 écrit « x64 » là où les versions
+# précédentes écrivaient « x86_64 » (et « arm64 » vs « aarch64 »). On accepte
+# les deux, et on préfère le dossier réellement produit pour la machine.
+BUNDLE=""
+for alt in "x64:x86_64" "arm64:aarch64" "x86_64:x64" "aarch64:arm64"; do
+  first="${alt%%:*}"
+  second="${alt##*:}"
+  for name in "$first" "$second"; do
+    candidate="build/linux/$name/$MODE/bundle"
+    if [ -x "$candidate/$BIN_NAME" ]; then
+      BUNDLE="$candidate"
+      break 2
+    fi
+  done
+done
+
+if [ -z "$BUNDLE" ]; then
+  # Dernier recours : n'importe quel dossier <mode>/bundle contenant le binaire.
+  BUNDLE="$(find build/linux -maxdepth 3 -type d -name bundle 2>/dev/null |
+    while IFS= read -r d; do
+      [ -x "$d/$BIN_NAME" ] && echo "$d" && break
+    done | head -n 1)"
+fi
+[ -n "$BUNDLE" ] ||
+  die "bundle introuvable dans build/linux/*/$MODE/bundle (compiler d'abord)"
+ok "bundle : $BUNDLE"
 
 # Un binaire de release ne doit pas pointer vers les bibliothèques locales du
 # SDK : vérifié, car ce serait un plantage chez l'utilisateur.
@@ -275,6 +297,20 @@ elf_max_version() { # elf_max_version <fichier> <préfixe>
   readelf -V "$1" 2>/dev/null |
     sed -n "s/.*Name: ${2}\([0-9][0-9.]*\).*/\1/p" |
     sort -V | tail -n 1
+}
+
+# Architecture de l'ELF, au format dpkg (amd64, arm64…), vide si indéterminée.
+elf_arch() {
+  local machine
+  machine="$(readelf -h "$1" 2>/dev/null |
+    sed -n 's/.*Machine:[[:space:]]*\(.*\)$/\1/p' | head -n 1)"
+  case "$machine" in
+    *X86-64*) echo amd64 ;;
+    *AArch64*) echo arm64 ;;
+    *ARM*) echo armhf ;;
+    80386* | *i386*) echo i386 ;;
+    *) echo "" ;;
+  esac
 }
 
 # Un fichier est-il un objet ELF ? (évite de lire les icônes et le .desktop)
@@ -472,6 +508,15 @@ build_deb() { # build_deb <architecture dpkg>
     die "dpkg-deb absent : installer dpkg (Debian/Ubuntu)"
   local arch="$1"
   local stem="${APP_NAME}_${VERSION}-${REVISION}_${arch}"
+
+  # Étiqueter un binaire ARM en amd64 produirait un paquet qui ne démarre pas.
+  local real_arch
+  real_arch="$(elf_arch "$BUNDLE/$BIN_NAME")"
+  if [ -n "$real_arch" ] && [ "$real_arch" != "$arch" ]; then
+    die "le binaire est compilé pour $real_arch, pas $arch :
+$([ "$real_arch" = "armhf" ] && echo "sous Debian, ARM 32 bits = armhf" || true)
+relancer la compilation sur une machine $arch (compilation croisée non gérée)"
+  fi
   local root="$WORK/deb-$arch"
   local debfile="$OUT_DIR/${stem}.deb"
 
@@ -729,7 +774,14 @@ EOF
 
   bundle_shared_libs "$appdir"
 
-  local out="$OUT_DIR/${APP_TITLE}-${VERSION}-${HOST_ARCH}.AppImage"
+  local image_arch image_label
+  image_arch="$(elf_arch "$BUNDLE/$BIN_NAME")"
+  image_label="${image_arch:-$HOST_ARCH}"
+  if [ -n "$image_arch" ] && [ "$image_arch" != "$HOST_ARCH" ]; then
+    warn "binaire $image_arch sur une machine $HOST_ARCH : AppImage pour $image_arch"
+    warn "appimagetool est lancé avec ARCH=$image_label (binaire $HOST_ARCH requis)"
+  fi
+  local out="$OUT_DIR/${APP_TITLE}-${VERSION}-${image_label}.AppImage"
   local tool
   tool="$(get_appimagetool || true)"
   if [ -z "$tool" ]; then
@@ -740,7 +792,7 @@ EOF
 
   # APPIMAGE_EXTRACT_AND_RUN évite le besoin de FUSE (absent en conteneur et
   # fréquent sur les machines sans noyau FUSE activé).
-  APPIMAGE_EXTRACT_AND_RUN=1 ARCH="$HOST_ARCH" "$tool" --no-appstream \
+  APPIMAGE_EXTRACT_AND_RUN=1 ARCH="$image_label" "$tool" --no-appstream \
     "$appdir" "$out" >"$WORK/appimagetool.log" 2>&1 || {
     sed -n '1,20p' "$WORK/appimagetool.log" >&2
     die "appimagetool a échoué (journal : $WORK/appimagetool.log)"
