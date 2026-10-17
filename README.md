@@ -26,6 +26,8 @@ l'exécution, sans reconstruire l'application.
 - Notifications système programmées par `flutter_local_notifications`, réglées en
   JSON (`assets/data/notifications.json`) et pilotables depuis l'écran « Rappels ».
 - CLI d'administration pour préparer, valider et ajouter des quiz runtime.
+- Installation Linux en `.deb` production : `apt install ./…deb`, mise à jour
+  en place, données conservées (`docs/linux-packaging.md`).
 - Zoom de l'interface : Ctrl + `+` / `-` par pas de 5 %, Ctrl + `0` pour
   100 %, Ctrl + molette ; niveau mémorisé dans `ui.json` (`docs/zoom.md`).
 

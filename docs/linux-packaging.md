@@ -76,14 +76,12 @@ Les embarquer rendrait l'AppImage plus fragile que la machine hôte.
 
 ```bash
 tools/package-linux.sh --deb            # compile puis empaquette
-sudo dpkg -i build/packages/cqcm_1.0.0-1_amd64.deb
+sudo apt install ./build/packages/cqcm_1.0.0-1_amd64.deb
 ```
 
-Si une dépendance manque (machine minimale) :
-
-```bash
-sudo apt --fix-broken install
-```
+`apt install ./fichier.deb` installe aussi les dépendances manquantes, là où
+`dpkg -i` s'arrête en laissant le paquet à moitié configuré. Si cela arrive
+quand même : `sudo apt --fix-broken install` répare l'état.
 
 Arborescence posée par le paquet :
 
@@ -208,6 +206,7 @@ tailles en découleront. `ImageMagick` n'est utilisé qu'en repli s'il est prés
 | `FUSE` / `libfuse.so.2` | FUSE absent (conteneur) | `APPIMAGE_EXTRACT_AND_RUN=1`, ou `--appimage-extract` |
 | L'icône du menu est vide | cache non rafraîchi | `sudo gtk-update-icon-cache -f /usr/share/icons/hicolor` |
 | `appimagetool: command not found` | binaire absent | laissé à faire par le script, voir ci-dessus |
+| L'app se ferme aussitôt | plantage natif ou fenêtre fermée | lancer `./build/linux/x64/release/bundle/cqcm` et lire l'erreur (§8) |
 | `flutter : commande introuvable` | SDK hors `PATH` | `CQCM_FLUTTER_SDK=~/flutter-3.47 tools/package-linux.sh --all` (§0) |
 
 Après installation, les journaux du lanceur :
@@ -230,7 +229,142 @@ Pour l'AppImage :
 ./CQCM-*.AppImage --appimage-extract >/dev/null && ls squashfs-root
 ```
 
-## 8. Ce qui n'est pas fait
+## 8. Mettre en production
+
+Un `.deb` de production réunit trois choses : un bundle **release**, des
+métadonnées justes, et une installation qui passe par `apt` (donc par la base
+des paquets, pas une copie à la main).
+
+### La séquence complète
+
+```bash
+# 1. numéro de version : dans pubspec.yaml
+#    version: 1.0.1+2     (le +2 est le numéro de build Flutter)
+
+# 2. paquet release, allégé et contrôlé
+tools/package-linux.sh --deb --strip --lintian
+
+# 3. installation (apt résout les dépendances, contrairement à dpkg -i)
+sudo apt install ./build/packages/cqcm_1.0.1-1_amd64.deb
+
+# 4. vérification
+dpkg -s cqcm | grep -E 'Status|Version|Depends'
+```
+
+L'application apparaît alors dans le menu (entrée « CQCM ») et se lance aussi
+par la commande `cqcm`. Le paquet est enregistré : `apt remove` le retire
+proprement, `apt list --installed | grep cqcm` le montre comme n'importe quelle
+application.
+
+### Ce que change `--strip`
+
+Les binaires Flutter sont livrés avec leurs symboles, soit plusieurs Mo utiles
+au débogage seulement. `--strip` les retire de la **copie empaquetée** (jamais
+du bundle d'origine) :
+
+| | sans `--strip` | avec `--strip` |
+| --- | --- | --- |
+| `.deb` | ~7,8 Mo | ~7,0 Mo |
+| installé | ~26,8 Mo | ~19 Mo |
+
+À garder de côté si tu veux analyser un jour un plantage natif : sans
+symboles, une trace `gdb` ne dit plus rien.
+
+### Ce que contrôle `lintian`
+
+Installé par `sudo apt install lintian`, il vérifie la conformité Debian :
+permissions, fichiers obligatoires, champs de contrôle, dépendances inutiles.
+Les remarques les plus fréquentes et leur sens :
+
+| Remarque | Sens |
+| --- | --- |
+| `maintainer-address-is-on-localhost` | renseigner `git config user.email` |
+| `no-manual-page` | l'application n'a pas de page `man` (non bloquant) |
+| `embedded-library` | une bibliothèque embarquée existe aussi en paquet Debian |
+| `package-name-doesnt-match-sonames` | sans objet ici (application, pas bibliothèque) |
+
+Le script utilise l'identité git du dépôt comme responsable (`Maintainer`) et
+l'URL de `origin` comme `Homepage`. Pour forcer :
+
+```bash
+tools/package-linux.sh --deb --maintainer "Prénom Nom <vous@exemple.fr>" --lintian
+```
+
+### Mises à jour
+
+Rebâtir avec un numéro plus élevé puis réinstaller :
+
+```bash
+tools/package-linux.sh --deb --strip
+sudo apt install ./build/packages/cqcm_1.0.2-1_amd64.deb
+```
+
+`apt` remplace l'ancienne version. **Les données sont conservées** : elles ne
+sont pas dans le paquet mais dans le dossier personnel.
+
+### Où vivent les données
+
+```text
+~/.local/share/com.cqcm.cqcm/cqcm-revision-data/
+├── progress.json        progression de révision
+├── notifications.json   surcharge des rappels
+├── ui.json              zoom de l'interface
+└── data.json            quiz importés
+```
+
+C'est le même dossier qu'avec `flutter run` (même identifiant d'application
+`com.cqcm.cqcm`, `linux/CMakeLists.txt`), donc passer du lancement par Flutter à
+l'application installée ne perd rien. Sauvegarde :
+
+```bash
+tar czf cqcm-donnees.tgz -C ~/.local/share/com.cqcm.cqcm cqcm-revision-data
+```
+
+Désinstallation en gardant les données (c'est le cas normal) :
+
+```bash
+sudo apt remove cqcm
+```
+
+### Distribuer à d'autres machines : le dépôt APT
+
+`apt install ./fichier.deb` suffit pour une machine. Pour que d'autres fassent
+`sudo apt install cqcm` et reçoivent les mises à jour, il faut un **dépôt
+signé** — ce n'est pas fourni par le script, car cela demande une clé GPG et un
+hébergement :
+
+1. ranger les `.deb` dans un dossier servi en HTTP ;
+2. générer l'index : `dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz` ;
+3. signer : `gpg --batch --yes --detach-sign -o InRelease Packages.gz` (ou
+   `apt-ftparchive release .` pour le fichier `Release` complet) ;
+4. côté client : `deb [signed-by=/chemin/cle.gpg] https://… stable main` dans
+   `/etc/apt/sources.list.d/cqcm.list`.
+
+Tant que ce dépôt n'existe pas, `apt update` ignore le paquet : la distribution
+reste manuelle, fichier par fichier.
+
+### L'application se ferme aussitôt
+
+`Lost connection to device` dans `flutter run` signifie simplement que le
+processus de l'application s'est arrêté — souvent parce que la fenêtre a été
+fermée, parfois à cause d'un plantage. Pour trancher, lancer le binaire à la
+main : ses messages d'erreur s'affichent alors en clair dans le terminal.
+
+```bash
+./build/linux/x64/release/bundle/cqcm
+```
+
+Si le message parle d'OpenGL, de Wayland ou de pilote, essayer successivement :
+
+```bash
+GDK_BACKEND=x11 ./build/linux/x64/release/bundle/cqcm
+LIBGL_ALWAYS_SOFTWARE=1 ./build/linux/x64/release/bundle/cqcm
+```
+
+À noter : l'option `--no-enable-impeller` de `flutter run` **est ignorée sur
+Linux** (elle ne concerne qu'Android et iOS) ; inutile de la chercher.
+
+## 9. Ce qui n'est pas fait
 
 - **Pas de dépôt APT** : le `.deb` s'installe à la main. Pour une distribution
   large, il faudrait signer un `Release`/`InRelease` et héberger `Packages`.

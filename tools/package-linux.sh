@@ -26,6 +26,12 @@
 #   --out DIR             dossier de sortie (défaut : build/packages)
 #   --keep                conserve le dossier de travail
 #
+# Mise en production :
+#   --maintainer "Nom <email>"  responsable du paquet (défaut : git config, ou
+#                               CQCM_MAINTAINER)
+#   --strip                réduit la taille installée (strip --strip-unneeded)
+#   --lintian              contrôle le .deb avec lintian, s'il est installé
+#
 # Répartition, dans les deux cas :
 #   EMBARQUÉ   → moteur Flutter, code AOT, assets, icônes, .desktop
 #   DÉCLARÉ    → tout le reste des NEEDED, nommé dans « Depends » (.deb)
@@ -70,7 +76,9 @@ REVISION="1"
 ARCHES=""
 OUT_DIR="build/packages"
 KEEP=0
-KEEP_ARG=""
+STRIP=0
+RUN_LINTIAN=0
+MAINTAINER_ARG=""
 
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -101,6 +109,13 @@ while [ $# -gt 0 ]; do
       OUT_DIR="$1"
       ;;
     --keep) KEEP=1 ;;
+    --strip) STRIP=1 ;;
+    --lintian) RUN_LINTIAN=1 ;;
+    --maintainer)
+      shift
+      [ $# -gt 0 ] || die "--maintainer attend « Nom <email> »"
+      MAINTAINER_ARG="$1"
+      ;;
     -h | --help)
       usage
       exit 0
@@ -133,6 +148,39 @@ fi
 case "$VERSION" in
   *[!0-9.]* | .* | *.) die "version Debian invalide : $VERSION" ;;
 esac
+
+# Responsable du paquet : la valeur explicite d'abord, sinon l'identité git du
+# dépôt (celle qui signe les commits), sinon un repli neutre. Debian attend un
+# couple « Nom <email> » ; une adresse en localhost est refusée par lintian.
+MAINTAINER="${MAINTAINER_ARG:-${CQCM_MAINTAINER:-}}"
+if [ -z "$MAINTAINER" ]; then
+  git_name="$(git config user.name 2>/dev/null || true)"
+  git_email="$(git config user.email 2>/dev/null || true)"
+  if [ -n "$git_email" ]; then
+    MAINTAINER="${git_name:-CQCM} <$git_email>"
+  else
+    MAINTAINER="CQCM <cqcm@localhost>"
+    warn "aucune identité git : responsable du paquet = $MAINTAINER"
+    warn "renseigner : git config --global user.email \"vous@exemple.fr\""
+  fi
+fi
+case "$MAINTAINER" in
+  *@localhost* | *@localhost.localdomain*)
+    warn "adresse en localhost : lintian le signalera (défaut acceptable en local)"
+    ;;
+esac
+
+# Page du projet : déduite du dépôt git, pour que le paquet la déclare.
+HOMEPAGE=""
+if git rev-parse --git-dir >/dev/null 2>&1; then
+  origin_url="$(git config --get remote.origin.url 2>/dev/null || true)"
+  case "$origin_url" in
+    git@github.com:*) HOMEPAGE="https://github.com/${origin_url#git@github.com:}" ;;
+    ssh://git@github.com/*) HOMEPAGE="https://github.com/${origin_url#ssh://git@github.com/}" ;;
+    https://*) HOMEPAGE="$origin_url" ;;
+  esac
+  HOMEPAGE="${HOMEPAGE%.git}"
+fi
 
 # ---------------------------------------------------------------------------
 # Compilation
@@ -520,6 +568,26 @@ collect_deps() { # collect_deps <fichier de sortie>
   } > "$1"
 }
 
+# Réduction de la taille installée : les symboles inutiles partent, les
+# symboles dynamiques (utilisés par le chargeur) restent. Le bundle d'origine
+# n'est pas modifié, seule la copie empaquetée l'est.
+strip_tree() { # strip_tree <racine>
+  local root="$1" f before after
+  command -v strip >/dev/null 2>&1 || {
+    warn "strip absent : paquet non allégé (binutils)"
+    return 0
+  }
+  before="$(du -sk "$root" | cut -f1)"
+  while IFS= read -r -d '' f; do
+    elf_magic "$f" || continue
+    strip --strip-unneeded "$f" 2>/dev/null || true
+  done < <(find "$root" -type f -print0)
+  after="$(du -sk "$root" | cut -f1)"
+  if [ "$before" -gt "$after" ]; then
+    ok "strip : $((before - after)) Ko de symboles en moins"
+  fi
+}
+
 # ---------------------------------------------------------------------------
 # .deb
 # ---------------------------------------------------------------------------
@@ -544,6 +612,7 @@ relancer la compilation sur une machine $arch (compilation croisée non gérée)
   log "assemblage du .deb ($arch)"
   rm -rf "$root"
   install_tree "$root"
+  [ "$STRIP" = "1" ] && strip_tree "$root"
 
   # Icônes et entrée de menu.
   local icons="$root/usr/share/icons/hicolor"
@@ -596,8 +665,9 @@ EOF
     echo "Section: education"
     echo "Priority: optional"
     echo "Architecture: $arch"
-    echo "Maintainer: CQCM <cqcm@localhost>"
+    echo "Maintainer: $MAINTAINER"
     echo "Installed-Size: $installed_kb"
+    [ -n "$HOMEPAGE" ] && echo "Homepage: $HOMEPAGE"
     [ -n "$depends" ] && echo "Depends: $depends"
     echo "Description: $APP_TITLE — QCM et révision de user stories"
     echo " Application de révision : questionnaires à choix multiples, recopie de"
@@ -643,7 +713,22 @@ EOF
   printf '    %-22s %s\n' "installé" "$(human $((installed_kb * 1024)))"
   printf '    %-22s %s\n' "dépendances" "${depends:-aucune}"
   [ -n "$glibc" ] && printf '    %-22s %s\n' "glibc minimal" "$glibc"
-  printf '    %-22s dpkg -i %s\n' "installer" "$(basename "$debfile")"
+  printf '    %-22s sudo apt install ./%s\n' "installer" "$(basename "$debfile")"
+
+  if [ "$RUN_LINTIAN" = "1" ]; then
+    if command -v lintian >/dev/null 2>&1; then
+      local report
+      report="$(lintian --no-cfg "$debfile" 2>/dev/null || true)"
+      if [ -z "$report" ]; then
+        ok "lintian : aucun défaut"
+      else
+        warn "lintian : $(printf '%s\n' "$report" | wc -l) remarque(s)"
+        printf '%s\n' "$report" | sed -n '1,12p' | sed 's/^/    /'
+      fi
+    else
+      warn "lintian absent : sudo apt install lintian"
+    fi
+  fi
 }
 
 # ---------------------------------------------------------------------------
